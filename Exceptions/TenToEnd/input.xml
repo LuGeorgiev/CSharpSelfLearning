@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="..\performance.xsl"?>
+<mw_link key="MWLink_3" name="MWLink_3">
+	<perf key="Performance" name="MWLink_3 Performance">
+		<mw_channel key="UserValue_V" name="UserValue_V (Slot No1)">
+			<utr2 key="UTR" name="UTR">
+				<headers>
+					<scheme>Scheme</scheme>
+					<utr_rain>UTR Rain (Ratio)_p_Annual / Worst Month</utr_rain>
+					<utr_multipath>UTR Multipath (Ratio)_p_Annual / Worst Month</utr_multipath>
+					<utr_refraction>UTR Refraction (Ratio)_p_Annual / Worst Month</utr_refraction>
+					<utr_hardware>UTR Hardware (Ratio)</utr_hardware>
+					<utr_total>UTR Total (Ratio)_p_Annual / Worst Month</utr_total>
+					<utr_objective>UTR Objective (Ratio)</utr_objective>
+				</headers>
+				<radio_data name="4FSK_8E1_12.4_Mhz_0" unit="4FSK_8E1_12.4_Mhz_0">
+					<scheme>4FSK_8E1_12.4_Mhz_0</scheme>
+					<utr_rain>AB: 0.000E+000 / 0.000E+000_p_BA: 0.000E+000 / 0.000E+000</utr_rain>
+					<utr_multipath>AB: 2.229E-008 / 2.674E-007_p_BA: 2.229E-008 / 2.674E-007</utr_multipath>
+					<utr_refraction>Not computed</utr_refraction>
+					<utr_hardware>AB: -_p_BA: -</utr_hardware>
+					<utr_total>AB: 0.000E+000 / 0.000E+000_p_BA: 0.000E+000 / 0.000E+000</utr_total>
+					<utr_objective>AB: 2.000E-003_p_BA: 2.000E-003</utr_objective>
+				</radio_data>
+			</utr2>
+			<esr key="ESR" name="ESR">
+				<headers>
+					<scheme>Scheme</scheme>
+					<esr_rain>ESR Rain (Ratio)_p_Annual / Worst Month</esr_rain>
+					<esr_multipath>ESR Multipath (Ratio)_p_Annual / Worst Month</esr_multipath>
+					<empty>-</empty>
+					<empty2>-</empty2>
+					<esr_total>ESR Total (Ratio)_p_Annual / Worst Month</esr_total>
+					<esr_objective>ESR Objective (Ratio)</esr_objective>
+				</headers>
+				<radio_data name="4FSK_8E1_12.4_Mhz_0" unit="4FSK_8E1_12.4_Mhz_0">
+					<scheme>4FSK_8E1_12.4_Mhz_0_p_(Missing radio parameters for Q&amp;A calculation)</scheme>
+					<esr_rain>Not computed</esr_rain>
+					<esr_multipath>Not computed</esr_multipath>
+					<empty>-</empty>
+					<empty2>-</empty2>
+					<esr_total>Not computed</esr_total>
+					<esr_objective>AB: 7.500E-002_p_BA: 7.500E-002</esr_objective>
+				</radio_data>
+			</esr>
+			<sesr key="SESR" name="SESR">
+				<headers>
+					<scheme>Scheme</scheme>
+					<sesr_rain>SESR Rain (Ratio)_p_Annual / Worst Month</sesr_rain>
+					<sesr_multipath>SESR Multipath (Ratio)_p_Annual / Worst Month</sesr_multipath>
+					<empty>-</empty>
+					<empty2>-</empty2>
+					<sesr_total>SESR Total (Ratio)_p_Annual / Worst Month</sesr_total>
+					<sesr_objective>SESR Objective (Ratio)</sesr_objective>
+				</headers>
+				<radio_data name="4FSK_8E1_12.4_Mhz_0" unit="4FSK_8E1_12.4_Mhz_0">
+					<scheme>4FSK_8E1_12.4_Mhz_0_p_(Missing radio parameters for Q&amp;A calculation)</scheme>
+					<sesr_rain>Not computed</sesr_rain>
+					<sesr_multipath>Not computed</sesr_multipath>
+					<empty>-</empty>
+					<empty2>-</empty2>
+					<sesr_total>Not computed</sesr_total>
+					<sesr_objective>AB: 2.000E-003_p_BA: 2.000E-003</sesr_objective>
+				</radio_data>
+			</sesr>
+			<bber key="BBER" name="BBER">
+				<headers>
+					<scheme>Scheme</scheme>
+					<bber_rain>BBER Rain (Ratio)_p_Annual / Worst Month</bber_rain>
+					<bber_multipath>BBER Multipath (Ratio)_p_Annual / Worst Month</bber_multipath>
+					<empty>-</empty>
+					<empty2>-</empty2>
+					<bber_total>BBER Total (Ratio)_p_Annual / Worst Month</bber_total>
+					<bber_objective>BBER Objective (Ratio)</bber_objective>
+				</headers>
+				<radio_data name="4FSK_8E1_12.4_Mhz_0" unit="4FSK_8E1_12.4_Mhz_0">
+					<scheme>4FSK_8E1_12.4_Mhz_0_p_(Missing radio parameters for Q&amp;A calculation)</scheme>
+					<bber_rain>Not computed</bber_rain>
+					<bber_multipath>Not computed</bber_multipath>
+					<empty>-</empty>
+					<empty2>-</empty2>
+					<bber_total>Not computed</bber_total>
+					<bber_objective>AB: 2.000E-004_p_BA: 2.000E-004</bber_objective>
+				</radio_data>
+			</bber>
+		</mw_channel>
+	</perf>
+	<utr key="utr_detail" name="MWLink_3 UTR Objectives (Unavailability Time Ratio)">
+		<mw_channel key="UserValue_V" name="UserValue_V">
+			<BER_10_6 key="BER 10-6" name="BER 10-6">
+				<headers>
+					<scheme>Scheme</scheme>
+					<utr_rain>UTR Rain (Ratio)_p_Annual / Worst Month</utr_rain>
+					<utr_multipath>UTR Multipath (Ratio)_p_Annual / Worst Month</utr_multipath>
+					<utr_refraction>UTR Refraction (Ratio)_p_Annual / Worst Month</utr_refraction>
+					<utr_hardware>UTR Hardware (Ratio)</utr_hardware>
+					<utr_total>UTR Total (Ratio)_p_Annual / Worst Month</utr_total>
+					<utr_objective>UTR Objective (Ratio)</utr_objective>
+				</headers>
+				<radio_data name="4FSK_8E1_12.4_Mhz_0" unit="4FSK_8E1_12.4_Mhz_0">
+					<scheme>4FSK_8E1_12.4_Mhz_0</scheme>
+					<utr_rain>AB: 0.000E+000 / 0.000E+000_p_BA: 0.000E+000 / 0.000E+000</utr_rain>
+					<utr_multipath>AB: 2.280E-004 / 1.062E-003_p_BA: 2.280E-004 / 1.062E-003</utr_multipath>
+					<utr_refraction>Not computed</utr_refraction>
+					<utr_hardware>AB: -_p_BA: -</utr_hardware>
+					<utr_total>AB: 2.280E-004 / 1.062E-003_p_BA: 2.280E-004 / 1.062E-003</utr_total>
+					<utr_objective>AB: 2.000E-003_p_BA: 2.000E-003</utr_objective>
+				</radio_data>
+			</BER_10_6>
+		</mw_channel>
+	</utr>
+</mw_link>
