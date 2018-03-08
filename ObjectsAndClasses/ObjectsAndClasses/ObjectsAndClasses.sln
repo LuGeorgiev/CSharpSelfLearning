@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectsAndClasses", "ObjectsAndClasses\ObjectsAndClasses.csproj", "{17D167DF-F677-4A9B-8598-18C368FE170A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TriangleSurface", "TriangleSurface\TriangleSurface.csproj", "{1D2D64C4-AB54-4626-AB5A-16AE6415D4BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Class07102017", "Class07102017\Class07102017.csproj", "{F406063E-DBC0-4A62-94BD-6CDACF45F01E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelericClassExplanation", "TelericClassExplanation\TelericClassExplanation.csproj", "{D4E610D9-3DF2-4F20-8ABE-087A376B6EB7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkingDays", "WorkingDays\WorkingDays.csproj", "{F14F1494-1EAD-4273-8F10-D0B9E5E12F6D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SumFromString", "SumFromString\SumFromString.csproj", "{6CCD4E18-6071-46C2-9BA4-44358E3053DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RandomAdvertisement", "RandomAdvertisement\RandomAdvertisement.csproj", "{AD19AA65-A8A7-47CA-962B-82E8B619E8C7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{17D167DF-F677-4A9B-8598-18C368FE170A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17D167DF-F677-4A9B-8598-18C368FE170A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17D167DF-F677-4A9B-8598-18C368FE170A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17D167DF-F677-4A9B-8598-18C368FE170A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D2D64C4-AB54-4626-AB5A-16AE6415D4BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D2D64C4-AB54-4626-AB5A-16AE6415D4BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D2D64C4-AB54-4626-AB5A-16AE6415D4BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D2D64C4-AB54-4626-AB5A-16AE6415D4BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F406063E-DBC0-4A62-94BD-6CDACF45F01E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F406063E-DBC0-4A62-94BD-6CDACF45F01E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F406063E-DBC0-4A62-94BD-6CDACF45F01E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F406063E-DBC0-4A62-94BD-6CDACF45F01E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4E610D9-3DF2-4F20-8ABE-087A376B6EB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4E610D9-3DF2-4F20-8ABE-087A376B6EB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4E610D9-3DF2-4F20-8ABE-087A376B6EB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4E610D9-3DF2-4F20-8ABE-087A376B6EB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F14F1494-1EAD-4273-8F10-D0B9E5E12F6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F14F1494-1EAD-4273-8F10-D0B9E5E12F6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F14F1494-1EAD-4273-8F10-D0B9E5E12F6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F14F1494-1EAD-4273-8F10-D0B9E5E12F6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CCD4E18-6071-46C2-9BA4-44358E3053DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CCD4E18-6071-46C2-9BA4-44358E3053DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CCD4E18-6071-46C2-9BA4-44358E3053DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CCD4E18-6071-46C2-9BA4-44358E3053DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD19AA65-A8A7-47CA-962B-82E8B619E8C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD19AA65-A8A7-47CA-962B-82E8B619E8C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD19AA65-A8A7-47CA-962B-82E8B619E8C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD19AA65-A8A7-47CA-962B-82E8B619E8C7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {79A2091F-BD7D-4F00-9E8A-CAC804D66D4C}
+	EndGlobalSection
+EndGlobal
