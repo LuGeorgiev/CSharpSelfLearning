@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MatrixMethods", "MatrixMethods\MatrixMethods.csproj", "{E9864DF2-9796-4152-903A-0A483556C3ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumbersMethods", "NumbersMethods\NumbersMethods.csproj", "{88017ACF-0EC9-47FD-A685-8A57633DFD1C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArrayMethods", "ArrayMethods\ArrayMethods.csproj", "{2A5DA73E-2DB9-4900-B968-EB0D1647A3DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddExtremelyBigIntegers", "AddExtremelyBigIntegers\AddExtremelyBigIntegers.csproj", "{E536DD81-F03D-4110-A79B-3E1B19A62DD8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolynominalCalculations", "PolynominalCalculations\PolynominalCalculations.csproj", "{ED2E5DDB-A280-455F-92D8-404CFD3EBC98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShitMatrixTelerik", "ShitMatrixTelerik\ShitMatrixTelerik.csproj", "{D2C4CC2E-BA85-42C2-8B66-B434005B2A65}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E9864DF2-9796-4152-903A-0A483556C3ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9864DF2-9796-4152-903A-0A483556C3ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9864DF2-9796-4152-903A-0A483556C3ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9864DF2-9796-4152-903A-0A483556C3ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88017ACF-0EC9-47FD-A685-8A57633DFD1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88017ACF-0EC9-47FD-A685-8A57633DFD1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88017ACF-0EC9-47FD-A685-8A57633DFD1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88017ACF-0EC9-47FD-A685-8A57633DFD1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A5DA73E-2DB9-4900-B968-EB0D1647A3DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A5DA73E-2DB9-4900-B968-EB0D1647A3DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A5DA73E-2DB9-4900-B968-EB0D1647A3DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A5DA73E-2DB9-4900-B968-EB0D1647A3DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E536DD81-F03D-4110-A79B-3E1B19A62DD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E536DD81-F03D-4110-A79B-3E1B19A62DD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E536DD81-F03D-4110-A79B-3E1B19A62DD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E536DD81-F03D-4110-A79B-3E1B19A62DD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED2E5DDB-A280-455F-92D8-404CFD3EBC98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED2E5DDB-A280-455F-92D8-404CFD3EBC98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED2E5DDB-A280-455F-92D8-404CFD3EBC98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED2E5DDB-A280-455F-92D8-404CFD3EBC98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2C4CC2E-BA85-42C2-8B66-B434005B2A65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2C4CC2E-BA85-42C2-8B66-B434005B2A65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2C4CC2E-BA85-42C2-8B66-B434005B2A65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2C4CC2E-BA85-42C2-8B66-B434005B2A65}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E825D5BF-C27E-4AF7-A48F-AB2FDF341C4B}
+	EndGlobalSection
+EndGlobal
