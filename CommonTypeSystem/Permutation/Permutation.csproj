@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2E83899A-7674-4A36-A3E5-2A71C3DDAAB7}</ProjectGuid>
+    <ProjectGuid>{13256733-C792-4E3F-A582-0E7E1DD88CD6}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>BinaryToDecimalHorner</RootNamespace>
-    <AssemblyName>BinaryToDecimalHorner</AssemblyName>
+    <RootNamespace>Permutation</RootNamespace>
+    <AssemblyName>Permutation</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -42,7 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Permutation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
