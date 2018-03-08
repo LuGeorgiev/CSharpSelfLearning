@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumberSystems", "NumberSystems\NumberSystems.csproj", "{DA3879D3-9A38-4C6D-8183-55561DE9E948}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Temp", "Temp\Temp.csproj", "{27060A18-CCBE-47D4-BF4A-DEDF9352A474}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinaryToDecimalHorner", "BinaryToDecimalHorner\BinaryToDecimalHorner.csproj", "{2E83899A-7674-4A36-A3E5-2A71C3DDAAB7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RomanToArabic", "RomanToArabic\RomanToArabic.csproj", "{600B31EB-3C6B-4BC1-A735-3649FCD5814C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArabicToRoman", "ArabicToRoman\ArabicToRoman.csproj", "{5AF177F6-302A-4425-9810-E8BF15BB8567}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumberConversionMethods", "NumberConversionMethods\NumberConversionMethods.csproj", "{3DDEFDF0-1DC1-4F9D-8FB4-14FFABA119D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinaryToHexidecimal", "BinaryToHexidecimal\BinaryToHexidecimal.csproj", "{50C1B921-74D0-4164-A60C-B5F05D8F0D1F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DA3879D3-9A38-4C6D-8183-55561DE9E948}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA3879D3-9A38-4C6D-8183-55561DE9E948}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA3879D3-9A38-4C6D-8183-55561DE9E948}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA3879D3-9A38-4C6D-8183-55561DE9E948}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27060A18-CCBE-47D4-BF4A-DEDF9352A474}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27060A18-CCBE-47D4-BF4A-DEDF9352A474}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27060A18-CCBE-47D4-BF4A-DEDF9352A474}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27060A18-CCBE-47D4-BF4A-DEDF9352A474}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E83899A-7674-4A36-A3E5-2A71C3DDAAB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E83899A-7674-4A36-A3E5-2A71C3DDAAB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E83899A-7674-4A36-A3E5-2A71C3DDAAB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E83899A-7674-4A36-A3E5-2A71C3DDAAB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{600B31EB-3C6B-4BC1-A735-3649FCD5814C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{600B31EB-3C6B-4BC1-A735-3649FCD5814C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{600B31EB-3C6B-4BC1-A735-3649FCD5814C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{600B31EB-3C6B-4BC1-A735-3649FCD5814C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AF177F6-302A-4425-9810-E8BF15BB8567}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AF177F6-302A-4425-9810-E8BF15BB8567}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AF177F6-302A-4425-9810-E8BF15BB8567}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AF177F6-302A-4425-9810-E8BF15BB8567}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DDEFDF0-1DC1-4F9D-8FB4-14FFABA119D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DDEFDF0-1DC1-4F9D-8FB4-14FFABA119D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DDEFDF0-1DC1-4F9D-8FB4-14FFABA119D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DDEFDF0-1DC1-4F9D-8FB4-14FFABA119D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50C1B921-74D0-4164-A60C-B5F05D8F0D1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50C1B921-74D0-4164-A60C-B5F05D8F0D1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50C1B921-74D0-4164-A60C-B5F05D8F0D1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50C1B921-74D0-4164-A60C-B5F05D8F0D1F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2950641D-7519-40C6-A0CF-EE7169D597FB}
+	EndGlobalSection
+EndGlobal
