@@ -1,0 +1,3 @@
+﻿Replace startin with fini and finish not replace.
+Start with small letter to be replaced only.
+Before finish.

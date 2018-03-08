@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lecture", "Lecture\Lecture.csproj", "{BE31AB89-783E-472A-9481-F9B9F43FF9E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tasker.Test", "Tasker.Test\Tasker.Test.csproj", "{5FBDED4D-749E-42E0-9105-9D24269D39B5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BE31AB89-783E-472A-9481-F9B9F43FF9E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE31AB89-783E-472A-9481-F9B9F43FF9E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE31AB89-783E-472A-9481-F9B9F43FF9E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE31AB89-783E-472A-9481-F9B9F43FF9E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FBDED4D-749E-42E0-9105-9D24269D39B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FBDED4D-749E-42E0-9105-9D24269D39B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FBDED4D-749E-42E0-9105-9D24269D39B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FBDED4D-749E-42E0-9105-9D24269D39B5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {91C222DD-B6AF-468B-9664-62073A0CF61C}
+	EndGlobalSection
+EndGlobal
