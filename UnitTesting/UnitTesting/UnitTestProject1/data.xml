@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Rows>    
+  <Row>
+    <A>5</A>  
+    <B>5</B>  
+  <Expected>10</Expected>
+  </Row>
+  <Row>
+    <A>0</A>  
+    <B>5</B>  
+  <Expected>5</Expected>
+  </Row>
+  <Row>
+    <A>0</A>  
+    <B>-5</B>  
+  <Expected>-5</Expected>
+  </Row>
+  <Row>
+    <A>10</A>  
+    <B>1</B> 
+  <Expected>11</Expected>
+  </Row>
+</Rows>    
