@@ -74,7 +74,8 @@ namespace TargetPractice
             {
                 for (int j = 0; j < matrix.GetLength(1); j++)
                 {
-                    var distanceToShot = Math.Abs(shotRow - i) + Math.Abs(shotCol - j);
+                    //next line is important
+                    var distanceToShot = Math.Sqrt((shotRow - i)* (shotRow - i) + (shotCol - j)* (shotCol - j));
                     if (distanceToShot<=shotPower)
                     {
                         matrix[i, j] = ' ';

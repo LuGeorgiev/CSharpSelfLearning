@@ -20,6 +20,13 @@ namespace HeiganDance
             var currentSpell = Console.ReadLine();
             while (true)
             {
+                matrix = ApplyEruptionSecondTime(matrix);
+                if (personHealth <= 0)
+                {
+                    PrintHeganVictory(currentSpell);
+                    break;
+                }
+
                 heiganHealth -= personDmg;
                 if (heiganHealth<=0)
                 {
@@ -27,12 +34,6 @@ namespace HeiganDance
                     break;
                 }
 
-                matrix = ApplyEruptionSecondTime(matrix);
-                if (personHealth <= 0)
-                {
-                    PrintHeganVictory(currentSpell);
-                    break;
-                }
 
                 matrix = ApplySpell(matrix, currentSpell);
                 MovePerson(matrix);

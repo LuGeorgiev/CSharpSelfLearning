@@ -21,7 +21,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MutantBunnies", "MutantBunn
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crossfire", "Crossfire\Crossfire.csproj", "{F08BE1B3-D3AD-41D5-A64D-83CF5AB5EDDD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeiganDance", "HeiganDance\HeiganDance.csproj", "{49C05EA3-B6F9-4D39-9551-3BB936367EA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HeiganDance", "HeiganDance\HeiganDance.csproj", "{49C05EA3-B6F9-4D39-9551-3BB936367EA7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkingSystem", "ParkingSystem\ParkingSystem.csproj", "{D6E7B269-1805-4B50-ACD3-654ED10048EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MatrixRorartion", "MatrixRorartion\MatrixRorartion.csproj", "{10156E1C-BDE9-416D-BBD1-959BFBC6F77A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +73,14 @@ Global
 		{49C05EA3-B6F9-4D39-9551-3BB936367EA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49C05EA3-B6F9-4D39-9551-3BB936367EA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49C05EA3-B6F9-4D39-9551-3BB936367EA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6E7B269-1805-4B50-ACD3-654ED10048EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6E7B269-1805-4B50-ACD3-654ED10048EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6E7B269-1805-4B50-ACD3-654ED10048EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6E7B269-1805-4B50-ACD3-654ED10048EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10156E1C-BDE9-416D-BBD1-959BFBC6F77A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10156E1C-BDE9-416D-BBD1-959BFBC6F77A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10156E1C-BDE9-416D-BBD1-959BFBC6F77A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10156E1C-BDE9-416D-BBD1-959BFBC6F77A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

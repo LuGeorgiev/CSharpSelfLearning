@@ -9,7 +9,7 @@ namespace RubiksMartix
         static void Main(string[] args)
         {
             var matrixDiemnsions = Console.ReadLine()
-                .Split(' ')
+                .Split(new[] { ' ' },StringSplitOptions.RemoveEmptyEntries)
                 .Select(int.Parse)
                 .ToArray();
             var row = matrixDiemnsions[0];
