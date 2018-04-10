@@ -5,6 +5,9 @@ using System.Linq;
 
     public class StartIntersecting
     {
+        // Currently 80/100
+        // TODO have to check if one of the rectangles is INSIDE the other
+        // This is check have to be implemented
         static void Main(string[] args)
         {
             var input = Console.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries);
