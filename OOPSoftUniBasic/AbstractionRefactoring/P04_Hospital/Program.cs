@@ -8,49 +8,34 @@ namespace P04_Hospital
     {
         public static void Main()
         {
-            Dictionary<string, List<string>> doktori = new Dictionary<string, List<string>>();
-            Dictionary<string, List<List<string>>> departments = new Dictionary<string, List<List<string>>>();
 
+            var listOfDoctors = new List<Doctor>();
+            var listOfDepartments = new List<Department>();
 
             string command = Console.ReadLine();
             while (command != "Output")
             {
-                string[] jetoni = command.Split();
-                var departament = jetoni[0];
-                var purvoIme = jetoni[1];
-                var vtoroIme = jetoni[2];
-                var pacient = jetoni[3];
-                var cqloIme = purvoIme + vtoroIme;
+                string[] tokens = command.Split();
+                var departament = tokens[0];
+                var firstName = tokens[1];
+                var SecondName = tokens[2];
+                var patientName = tokens[3];
+                var doctorName = firstName + SecondName;
 
-                if (!doktori.ContainsKey(purvoIme + vtoroIme))
+                if (!listOfDoctors.Any(x=>x.Name== doctorName))
                 {
-                    doktori[cqloIme] = new List<string>();
+                    listOfDoctors.Add(new Doctor(doctorName));
                 }
-                if (!departments.ContainsKey(departament))
+                if (!listOfDepartments.Any(x => x.departmentName == departament))
                 {
-                    departments[departament] = new List<List<string>>();
-                    for (int stai = 0; stai < 20; stai++)
-                    {
-                        departments[departament].Add(new List<string>());
-                    }
+                    listOfDepartments.Add(new Department(departament));
                 }
 
-                bool imaMqsto = departments[departament].SelectMany(x => x).Count() < 60;
-                if (imaMqsto)
-                {
-                    int staq = 0;
-                    doktori[cqloIme].Add(pacient);
-                    for (int st = 0; st < departments[departament].Count; st++)
-                    {
-                        if (departments[departament][st].Count < 3)
-                        {
-                            staq = st;
-                            break;
-                        }
-                    }
-                    departments[departament][staq].Add(pacient);
-                }
-
+                var doctorFound = listOfDoctors.FirstOrDefault(x => x.Name == doctorName);
+                doctorFound.AddPatient(patientName);
+                var departmentFound = listOfDepartments.FirstOrDefault(x => x.departmentName == departament);
+                departmentFound.AddPatient(patientName);              
+                
                 command = Console.ReadLine();
             }
 
@@ -62,15 +47,33 @@ namespace P04_Hospital
 
                 if (args.Length == 1)
                 {
-                    Console.WriteLine(string.Join("\n", departments[args[0]].Where(x => x.Count > 0).SelectMany(x => x)));
+                    var findDepartment = listOfDepartments
+                        .FirstOrDefault(x => x.departmentName == args[0]);
+                    if (findDepartment!=null)
+                    {
+                        findDepartment.PrintPatients();
+                    }
                 }
-                else if (args.Length == 2 && int.TryParse(args[1], out int staq))
+                else if (args.Length == 2 && 48<=args[1][0]&& args[1][0]<=57)
                 {
-                    Console.WriteLine(string.Join("\n", departments[args[0]][staq - 1].OrderBy(x => x)));
+                    int roomNumber = int.Parse(args[1])-1;
+                    string department = args[0];
+
+                    var findDepartment = listOfDepartments
+                        .FirstOrDefault(x => x.departmentName == args[0]);
+                    if (findDepartment != null)
+                    {
+                        findDepartment.PrintPatientInRoom(roomNumber);
+                    }
                 }
                 else
                 {
-                    Console.WriteLine(string.Join("\n", doktori[args[0] + args[1]].OrderBy(x => x)));
+                    string doctorFullName = args[0] + args[1];
+                    var findDoctor = listOfDoctors.FirstOrDefault(x => x.Name == doctorFullName);
+                    if (findDoctor!=null)
+                    {
+                        findDoctor.PrintPatiets();
+                    }                    
                 }
                 command = Console.ReadLine();
             }

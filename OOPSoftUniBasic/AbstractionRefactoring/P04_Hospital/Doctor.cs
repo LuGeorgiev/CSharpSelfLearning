@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace P04_Hospital
@@ -18,6 +19,18 @@ namespace P04_Hospital
         public void AddPatient(string name)
         {
             this.Patients.Add(new Patient(name));
+        }
+
+        public void PrintPatiets()
+        {
+            var sortedPatients = this.Patients
+                .OrderBy(x => x.Name);
+
+            foreach (var patient in sortedPatients)
+            {
+                Console.WriteLine(patient.Name);
+            }
+                
         }
     }
 }
