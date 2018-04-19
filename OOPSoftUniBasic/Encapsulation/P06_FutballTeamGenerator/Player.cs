@@ -23,7 +23,7 @@ namespace P06_FutballTeamGenerator
                 {
                     throw new ArgumentException("A name should not be empty.");
                 }
-                Name = value;
+                name = value;
             }
         }
         public int Shooting
@@ -87,7 +87,7 @@ namespace P06_FutballTeamGenerator
         private int CalculateAverage()
         {
             //or Math.Truncate for int part only
-            return (int)((Endurance + Sprint + Dribble + passing + Shooting) / 5.0);
+            return (int)Math.Round((Endurance + Sprint + Dribble + passing + Shooting) / 5.0);
         }
 
         private void IsValid(int value, string stat)

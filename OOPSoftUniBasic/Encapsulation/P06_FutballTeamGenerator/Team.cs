@@ -19,7 +19,7 @@ namespace P06_FutballTeamGenerator
                 {
                     throw new ArgumentException("A name should not be empty.");
                 }
-                Name = value;
+                name = value;
             }
         }
 
@@ -51,12 +51,13 @@ namespace P06_FutballTeamGenerator
 
         public void PrintTeam()
         {
-            int rating = (int)(this.Players.Average(x => x.AvgStats));
+            if (this.Players.Count==0)
+            {
+                throw new ArgumentException($"{this.Name} - 0");
+            }
 
-            //foreach (var player in this.Players)
-            //{
-            //    rating += player.AvgStats;
-            //}
+            int rating = (int)Math.Round(this.Players.Average(x => x.AvgStats));
+            
             Console.WriteLine($"{this.Name} - {rating}");
         }
 
