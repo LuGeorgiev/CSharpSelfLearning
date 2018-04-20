@@ -71,17 +71,15 @@ namespace P02_BookShop
             bool isValid = true;
 
             var names = value.Split();
-            if (names.Length<2)
+            if (names.Length==2)
             {
-                isValid = false;
-            }
-
-            char firstOfSecondName = names[1][0];
-            if (48<=firstOfSecondName&&firstOfSecondName<=57)
-            {
-                isValid = false;
-            }
-
+                char firstOfSecondName = names[1][0];
+                if (48<=firstOfSecondName&&firstOfSecondName<=57)
+                {
+                    isValid = false;
+                }                
+            }         
+            
             return isValid;
         }
     }
