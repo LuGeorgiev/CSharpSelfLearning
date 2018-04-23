@@ -4,31 +4,42 @@ using System.Text;
 
 namespace P03_Mankind
 {
-    class Human
+    public class Human
     {
         private string firstName;
         private string lastName;
 
-        public string LastName
-        {
-            get { return lastName; }
-            protected set { lastName = value; }
-        }
-
         public string FirstName
         {
             get { return firstName; }
+
             protected set
             {
                 if (value.Length<=3)
                 {
                     throw new ArgumentException("Expected length at least 4 symbols! Argument: firstName");
                 }
-                if (!Char.IsUpper(value[0]))
+                if (Char.IsLower(value[0]))
                 {
                     throw new ArgumentException("Expected upper case letter! Argument: firstName");
                 }
                 firstName = value;
+            }
+        }
+        public string LastName
+        {
+            get { return lastName; }
+            protected set
+            {
+                if (value.Length<=2)
+                {
+                    throw new ArgumentException("Expected length at least 3 symbols! Argument: lastName");
+                }
+                if (Char.IsLower(value[0]))
+                {
+                    throw new ArgumentException("Expected upper case letter! Argument: lastName");
+                }
+                lastName = value;
             }
         }
 
@@ -40,7 +51,12 @@ namespace P03_Mankind
 
         public override string ToString()
         {
-            return $"{this.FirstName} {this.LastName}";
+            var builder = new StringBuilder();
+            builder.AppendLine($"First Name: {this.FirstName}");
+            builder.AppendLine($"Last Name: {this.LastName}");
+
+            return builder.ToString().TrimEnd();
         }
+       
     }
 }

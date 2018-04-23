@@ -4,7 +4,7 @@ using System.Text;
 
 namespace P03_Mankind
 {
-    class Worker : Human
+    public class Worker : Human
     {
         private decimal weekSalary;
         private decimal workHoursPerDay;
@@ -12,14 +12,27 @@ namespace P03_Mankind
         public decimal WorkHoursPerDay
         {
             get { return workHoursPerDay; }
-            private set { workHoursPerDay = value; }
+            private set
+            {
+                if (value<1 || 12<value)
+                {
+                    throw new ArgumentException("Expected value mismatch! Argument: workHoursPerDay");
+                }
+                workHoursPerDay = value;
+            }
         }
-
 
         public decimal WeekSalary
         {
             get { return weekSalary; }
-            private set { weekSalary = value; }
+            private set
+            {
+                if (value <= 10)
+                {
+                    throw new ArgumentException("Expected value mismatch! Argument: weekSalary");
+                }
+                weekSalary = value;
+            }
         }
 
         public Worker(string first, string last, decimal salary, decimal hours) : base(first, last)
@@ -31,15 +44,15 @@ namespace P03_Mankind
         public override string ToString()
         {
             var workerInfo = new StringBuilder();
-            workerInfo.AppendLine($"First Name: {this.FirstName}");
-            workerInfo.AppendLine($"Last Name: {this.LastName}");
+            workerInfo.AppendLine(base.ToString());
             workerInfo.AppendLine($"Week Salary: {this.WeekSalary:F2}");
             workerInfo.AppendLine($"Hours per day: {this.WorkHoursPerDay:F2}");
 
             var salaryPerHour = this.WeekSalary / (this.WorkHoursPerDay * 5m);
+
             workerInfo.AppendLine($"Salary per hour: {salaryPerHour:F2}");
 
-            return workerInfo.ToString();
+            return workerInfo.ToString().TrimEnd();
         }
     }
 }
