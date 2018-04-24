@@ -6,6 +6,6 @@ namespace P08_MilitaryElite
     {
         string FirstName { get; }
         string LastName { get; }
-        string Id { get; }
+        int Id { get; }
     }
 }

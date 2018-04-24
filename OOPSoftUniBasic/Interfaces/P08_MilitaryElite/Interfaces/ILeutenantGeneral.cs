@@ -6,9 +6,9 @@ namespace P08_MilitaryElite.Interfaces
 {
     public interface ILeutenantGeneral
     {
-        IReadOnlyCollection<IPrivate> Privates { get; }
+        IReadOnlyCollection<ISoldier> Privates { get; }
 
-        void AddPrivate(IPrivate soldier);
-        void RemovePrivate(IPrivate soldier);
+        void AddPrivate(ISoldier soldier);
+        void RemovePrivate(ISoldier soldier);
     }
 }

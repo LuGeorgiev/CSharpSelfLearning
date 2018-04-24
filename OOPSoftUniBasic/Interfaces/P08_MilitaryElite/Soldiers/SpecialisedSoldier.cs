@@ -24,22 +24,24 @@ namespace P08_MilitaryElite.Soldiers
             }
         }
 
-        public SpecialisedSoldier(string id, string firstName, string lastName, double salary, string corpOfSoldier)
+        public SpecialisedSoldier(int id, string firstName, string lastName, double salary, string corpOfSoldier)
             : base(id, firstName, lastName, salary)
         {
-            if (corpOfSoldier == "Airforce")
+            ParsedCorps(corpOfSoldier);
+
+        }
+
+        private void ParsedCorps(string corpOfSoldier)
+        {
+            bool validCorp = Enum.TryParse(typeof(Corps), corpOfSoldier, out object outCorps);
+            if (validCorp)
             {
-                this.SoldierCorps = Corps.Airforce;
-            }
-            else if (corpOfSoldier == "Marine")
-            {
-                this.SoldierCorps = Corps.Marines;
+                this.SoldierCorps = (Corps)outCorps;
             }
             else
             {
-                this.SoldierCorps = Corps.Invalid;
-            }            
-
+                throw new ArgumentException("Invalic Corps!");
+            }
         }
 
         public override string ToString()
@@ -47,7 +49,7 @@ namespace P08_MilitaryElite.Soldiers
             var sb = new StringBuilder();
 
             sb.AppendLine(base.ToString());
-            sb.AppendLine($"Corps:{this.SoldierCorps.ToString()}");
+            sb.AppendLine($"Corps: {this.SoldierCorps.ToString()}");
             return sb.ToString().TrimEnd();
         }
     }

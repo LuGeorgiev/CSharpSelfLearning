@@ -6,11 +6,11 @@ namespace P08_MilitaryElite
 {
     public abstract class Soldier:ISoldier
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Id { get; set; }
+        public string FirstName { get; private set; }
+        public string LastName { get; private set; }
+        public int Id { get; private set; }
 
-        public Soldier(string id, string firstName, string lastName)
+        public Soldier(int id, string firstName, string lastName)
         {
             this.FirstName = firstName;
             this.LastName = lastName;

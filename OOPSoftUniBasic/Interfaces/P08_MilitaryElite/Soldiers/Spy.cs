@@ -9,7 +9,7 @@ namespace P08_MilitaryElite.Soldiers
     {
         public int CodeNumber { get; private set; }
 
-        public Spy(string id, string firstName, string lastName,int codeNumber) 
+        public Spy(int id, string firstName, string lastName,int codeNumber) 
             : base(id, firstName, lastName)
         {
             this.CodeNumber = codeNumber;

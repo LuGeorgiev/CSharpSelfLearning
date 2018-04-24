@@ -4,7 +4,7 @@ using System;
 
 namespace P08_MilitaryElite.Soldiers.Utilities
 {
-    public enum Status { inProgress, Finished, Invalid};
+    public enum Status { inProgress, Finished};
 
     public class Mission: IMission
     {
@@ -14,20 +14,26 @@ namespace P08_MilitaryElite.Soldiers.Utilities
         public Mission(string missionName, string missionStatus)
         {
             this.MissionName = missionName;
-            try
-            {
-                this.MissionStatus = (Status)Enum.Parse(typeof(Status), missionStatus);
-            }
-            catch (Exception)
-            {
-                this.MissionStatus = (Status)2;
-            }                    
+            ParseMissionStatus(missionStatus);                   
             
+        }
+
+        private void ParseMissionStatus(string missionStatus)
+        {
+            bool validStatus = Enum.TryParse(typeof(Status), missionStatus, out object status);
+            if (validStatus)
+            {
+                this.MissionStatus = (Status)status;
+            }
+            else
+            {
+                throw new ArgumentException("Invalid mission Status!");
+            }
         }
 
         public void CompleteMission()
         {
-            this.MissionStatus = (Status)1;
+            this.MissionStatus = Status.Finished;
         }
 
         public override string ToString()

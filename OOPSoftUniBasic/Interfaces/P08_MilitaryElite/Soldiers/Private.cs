@@ -15,13 +15,13 @@ namespace P08_MilitaryElite.Soldiers
             {
                 if (value<=0)
                 {
-                    throw new ArgumentException("Salary have to eb positive!");
+                    throw new ArgumentException("Salary have to be positive!");
                 }
                 salary = value;
             }
         }
 
-        public Private(string id, string firstName, string lastName,double salary) : base(id, firstName, lastName)
+        public Private(int id, string firstName, string lastName,double salary) : base(id, firstName, lastName)
         {
             this.Salary = salary;
         }

@@ -8,23 +8,23 @@ namespace P08_MilitaryElite.Soldiers
 {
     class LeutenantGeneral : Private,ILeutenantGeneral
     {
-        private List<IPrivate> privates;
-        public List<IPrivate> Privates
+        private ICollection<ISoldier> privates;
+        public IReadOnlyCollection<ISoldier> Privates
         {
-            get { return privates; }
-            private set { privates = value; }
+            get { return (IReadOnlyCollection<ISoldier>)this.privates; }
+            
         }
 
-        public LeutenantGeneral(string id, string firstName, string lastName, double salary) : base(id, firstName, lastName, salary)
+        public LeutenantGeneral(int id, string firstName, string lastName, double salary) : base(id, firstName, lastName, salary)
         {
-            this.Privates = new List<IPrivate>();
+            this.privates = new List<ISoldier>();
         }
 
-        public void AddPrivate(IPrivate soldier)
+        public void AddPrivate(ISoldier soldier)
         {
-            this.Privates.Add(soldier);
+            this.privates.Add(soldier);
         }
-        public void RemovePrivate(IPrivate soldier)
+        public void RemovePrivate(ISoldier soldier)
         {
             var soldierFound = this.Privates
                 .FirstOrDefault(x => x == soldier);
@@ -34,7 +34,7 @@ namespace P08_MilitaryElite.Soldiers
             }
             else
             {
-                this.Privates.Remove(soldier);
+                this.privates.Remove(soldier);
             }
         }
         public override string ToString()
@@ -46,7 +46,7 @@ namespace P08_MilitaryElite.Soldiers
 
             foreach (var soldier in this.Privates)
             {
-                sb.AppendLine(soldier.ToString());
+                sb.AppendLine($"  {soldier.ToString()}");
             }
             
             return sb.ToString().TrimEnd();
