@@ -10,11 +10,25 @@ namespace Vehicles.Vechicles
         private double fuelAvailable;
         private double fuelConsumption;
 
-        public Vehicle(double fuelAvailable,double fuelConsumption)
+        public Vehicle(double tankCapacity, double fuelAvailable,double fuelConsumption)
         {
-            this.FuelAvailable = fuelAvailable;
-            this.FuelConsumption = fuelConsumption;
+            if (fuelAvailable> tankCapacity)
+            {
+                fuelAvailable = 0;
+            }
+                this.TankCapacity = tankCapacity;
+                this.FuelConsumption = fuelConsumption;
+            try
+            {
+                this.FuelAvailable = fuelAvailable;
+            }
+            catch (ArgumentException ex)
+            {
+
+                Console.WriteLine(ex.Message);
+            }
         }
+
         public double TankCapacity { get; set; }
 
         public virtual double FuelAvailable
@@ -25,6 +39,10 @@ namespace Vehicles.Vechicles
             }
             set
             {
+                if ( value > this.TankCapacity)
+                {
+                    throw new ArgumentException($"Cannot fit {value:0.##} fuel in the tank");
+                }               
                 this.fuelAvailable = value;
             }
         }
@@ -41,7 +59,18 @@ namespace Vehicles.Vechicles
             }
         }
 
-        public abstract void AddFuel(double litters);
+        public virtual void AddFuel(double value)
+        {
+            if (value <= 0)
+            {
+                throw new ArgumentException($"Fuel must be a positive number");
+            }
+            else if (this.FuelAvailable+ value > this.TankCapacity)
+            {
+                throw new ArgumentException($"Cannot fit {value:0.##} fuel in the tank");
+            }
+            this.FuelAvailable += value;
+        }
 
         public virtual void TravellDistance(double kilometers)
         {

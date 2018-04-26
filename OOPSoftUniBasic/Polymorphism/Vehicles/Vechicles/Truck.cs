@@ -7,45 +7,25 @@ namespace Vehicles.Vechicles
     public class Truck : Vehicle
     {
         private const double FUEL_SUMMER_INCREASE = 1.6;
-        private const double FUEL_LEACKAGE_REDUCTION = 0.95;
+        private const double FUEL_LEACKAGE_REDUCTION = 0.95;        
 
-        private double fuelAvailable;
-        private double fuelConsumption;
-
-        public Truck(double initialFuel, double litterPerKm):base(initialFuel,litterPerKm)
-        {
-            this.FuelConsumption = litterPerKm + FUEL_SUMMER_INCREASE;
-            this.FuelAvailable = initialFuel;
+        public Truck(double tankCapacity,double initialFuel, double litterPerKm):base(tankCapacity,initialFuel,litterPerKm)
+        {            
+            this.FuelConsumption = litterPerKm + FUEL_SUMMER_INCREASE;            
         }
+        
 
-        public override double FuelAvailable
+        public override void AddFuel(double value)
         {
-            get
+            if (value <= 0)
             {
-                return this.fuelAvailable;
+                Console.WriteLine($"Fuel must be a positive number");
             }
-            set
+            else if (this.FuelAvailable + value > this.TankCapacity)
             {
-                this.fuelAvailable = value;
+                throw new ArgumentException($"Cannot fit {value:0.###} fuel in the tank");
             }
-        }
-
-        public override double FuelConsumption
-        {
-            get
-            {
-                return this.fuelConsumption;
-            }
-            set
-            {
-                this.fuelConsumption = value;
-            }
-        }
-       
-
-        public override void AddFuel(double litters)
-        {
-            this.FuelAvailable += litters * FUEL_LEACKAGE_REDUCTION;
+            this.FuelAvailable += value * FUEL_LEACKAGE_REDUCTION;
         }
        
     }
