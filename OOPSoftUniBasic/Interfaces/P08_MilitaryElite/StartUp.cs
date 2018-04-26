@@ -97,7 +97,7 @@ namespace P08_MilitaryElite
                 //Console.WriteLine(s);
 
                 // to get the correct ToString if not working from Interface
-                var soldiertype = s.GetType();
+                Type soldiertype = s.GetType();
                 var actualSoldier = Convert.ChangeType(s, soldiertype);
                 Console.WriteLine(actualSoldier);
             }
