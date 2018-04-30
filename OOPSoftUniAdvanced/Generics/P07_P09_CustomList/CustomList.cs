@@ -1,69 +1,87 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace P07_P09_CustomList
 {
-    public class CustomList<T>:ICustomList<T>
-        where T:IComparable<T>
+    public class CustomList<T>:IEnumerable<T>
+        where T : IComparable<T>
     {
-        private IList<T> items;
+        private T[] data;
 
         public CustomList()
         {
-            this.items = new List<T>();
+            this.data = new T[4];
+            this.Count = 0;
         }
-        
-        public IReadOnlyCollection<T> Items
+        public CustomList(int initialSize)
+        {
+            this.data = new T[initialSize];
+            this.Count = 0;
+        }
+
+        public bool IsEmpty => this.Count == 0;
+
+        public int InnerArraySize => this.data.Length;
+
+        public int Count { get; private set; }
+
+        //This way we put index on our collection
+        public T this[int index]
         {
             get
             {
-                return (IReadOnlyCollection<T>)this.items;
+                return this.data[index];
+            }
+            private set
+            {
+                this.data[index] = value;
             }
         }
 
         public void Add(T item)
         {
-            this.items.Add(item);
-        }
 
-        public void Swap(int firstIndex, int secondIndex)
-        {
-            T temp = items[firstIndex];
-
-            items[firstIndex] = items[secondIndex];
-            items[secondIndex] = temp;
-        }
-
-        public int CountGreaterThan(T compareWith)
-        {
-            int greaterCount = 0;
-            foreach (var item in this.Items)
+            this.Count++;
+            if (this.Count > this.InnerArraySize)
             {
-                if (item.CompareTo(compareWith) > 0)
-                {
-                    greaterCount++;
-                }
+                T[] newData = new T[this.InnerArraySize * 2];
+                Array.Copy(this.data, newData, this.InnerArraySize);
+                this.data = newData;
             }
-            return greaterCount;
+            this.data[this.Count - 1] = item;
         }
 
         public T Remove(int index)
         {
-            T result = this.items[index];
-            this.items.RemoveAt(index);
+            this.ValidateIndex(index);
+            T element = this.data[index];
+            this.Count--;
 
-            return result;
+            for (int i = index; i < this.Count; i++)
+            {
+                this.data[i] = this.data[i + 1];
+            }
+            this.data[this.Count] = default(T);
+
+            if (this.Count < this.InnerArraySize / 3)
+            {
+                T[] newData = new T[this.InnerArraySize / 2];
+                Array.Copy(this.data, newData, this.Count);
+                this.data = newData;
+            }
+            return element;
         }
 
         public bool Contains(T element)
         {
             var isContained = false;
 
-            foreach (var item in this.Items)
+            for (int i = 0; i < this.Count; i++)
             {
-                if (item.Equals(element))
+                if (data[i].Equals(element))
                 {
                     isContained = true;
                     break;
@@ -72,26 +90,56 @@ namespace P07_P09_CustomList
             return isContained;
         }
 
+        public void Swap(int firstIndex, int secondIndex)
+        {
+            this.ValidateIndex(firstIndex);
+            this.ValidateIndex(secondIndex);
+            
+            T temp = data[firstIndex];
+
+            data[firstIndex] = data[secondIndex];
+            data[secondIndex] = temp;
+        }
+
+        public int CountGreaterThan(T compareWith)
+        {
+            int greaterCount = 0;
+
+            for (int i = 0; i < this.Count; i++)
+            {
+                if (data[i].CompareTo(compareWith) > 0)
+                {
+                    greaterCount++;
+                }
+            }
+            return greaterCount;
+        }
+
         public T Max()
         {
-            T maximum = this.items[0];
-            foreach (var item in this.Items)
+            T maximum = this.data[0];
+            for (int i=1; i<this.Count;i++)
             {
-                if (item.CompareTo(maximum)>0)
+                if (data[i].CompareTo(maximum)>0)
                 {
-                    maximum = item;
+                    maximum = data[i];
                 }
             }
             return maximum;
         }
+        public void Sort(IComparer<T> comparer= null)
+        {
+            Array.Sort(this.data,0,this.Count, comparer);
+        }
+
         public T Min()
         {
-            T maximum = this.items[0];
-            foreach (var item in this.Items)
+            T maximum = this.data[0];
+            for (int i = 1; i < this.Count; i++)
             {
-                if (item.CompareTo(maximum) < 0)
+                if (data[i].CompareTo(maximum) < 0)
                 {
-                    maximum = item;
+                    maximum = data[i];
                 }
             }
             return maximum;
@@ -99,9 +147,31 @@ namespace P07_P09_CustomList
 
         public void Print()
         {
-            foreach (var item in this.Items)
+            for (int i = 0; i < this.Count; i++)
             {
-                Console.WriteLine(item);
+                Console.WriteLine(data[i]);
+
+            }           
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            for (int i = 0; i < this.Count; i++)
+            {
+                yield return this.data[i];
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this.GetEnumerator();
+        }
+
+        public void ValidateIndex(int index)
+        {
+            if (index<0||this.Count< index)
+            {
+                throw new IndexOutOfRangeException();
             }
         }
     }

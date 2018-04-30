@@ -6,7 +6,7 @@ namespace P07_P09_CustomList
     {
         public static void Main(string[] args)
         {
-            ICustomList<string> custom = new CustomList<string>();
+            var custom = new CustomList<string>();
             var input = "";
             while ((input=Console.ReadLine())!="END")
             {
@@ -15,7 +15,7 @@ namespace P07_P09_CustomList
             
         }
 
-        private static void ParseCommands(string input, ICustomList<string> custom)
+        private static void ParseCommands(string input, CustomList<string> custom)
         {
             var commandInput = input.Split();
             var action = commandInput[0];
@@ -56,7 +56,11 @@ namespace P07_P09_CustomList
             else if (action == "Print")
             {
                 custom.Print();
-            }            
+            }
+            else if (action == "Sort")
+            {
+                custom.Sort();
+            }
         }
     }
 }
