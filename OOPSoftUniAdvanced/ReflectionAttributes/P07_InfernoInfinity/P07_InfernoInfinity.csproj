@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Contracts\Jem\**" />
+    <Compile Remove="Contracts\Weapon\**" />
+    <EmbeddedResource Remove="Contracts\Jem\**" />
+    <EmbeddedResource Remove="Contracts\Weapon\**" />
+    <None Remove="Contracts\Jem\**" />
+    <None Remove="Contracts\Weapon\**" />
+  </ItemGroup>
+
+</Project>

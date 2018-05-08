@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P02_BlackBoxInteger", "P02_
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P03_BarracksWars", "P03_BarracksWars\P03_BarracksWars.csproj", "{408C0F85-1B22-47FF-9A7D-7AFA38B8FAAB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P06_TrafficLights", "P06_TrafficLights\P06_TrafficLights.csproj", "{A90A6465-65A0-41E4-BEA0-C82D5EE246EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P07_InfernoInfinity", "P07_InfernoInfinity\P07_InfernoInfinity.csproj", "{9827DD65-0363-4043-9846-75AB8A2FE3A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{408C0F85-1B22-47FF-9A7D-7AFA38B8FAAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{408C0F85-1B22-47FF-9A7D-7AFA38B8FAAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{408C0F85-1B22-47FF-9A7D-7AFA38B8FAAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A90A6465-65A0-41E4-BEA0-C82D5EE246EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A90A6465-65A0-41E4-BEA0-C82D5EE246EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A90A6465-65A0-41E4-BEA0-C82D5EE246EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A90A6465-65A0-41E4-BEA0-C82D5EE246EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9827DD65-0363-4043-9846-75AB8A2FE3A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9827DD65-0363-4043-9846-75AB8A2FE3A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9827DD65-0363-4043-9846-75AB8A2FE3A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9827DD65-0363-4043-9846-75AB8A2FE3A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
