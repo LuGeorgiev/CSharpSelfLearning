@@ -6,8 +6,8 @@ namespace P02_ListIterator
     {
         bool HasNext();
         bool MoveTo();
-        void Print();
-        void PrintAll();
+        string Print();
+        string PrintAll();
 
         IReadOnlyCollection<T> Elements { get; }
         int Index { get; }

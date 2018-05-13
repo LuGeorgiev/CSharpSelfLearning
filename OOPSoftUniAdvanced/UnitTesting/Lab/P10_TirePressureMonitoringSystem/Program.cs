@@ -6,7 +6,8 @@ namespace P10_TirePressureMonitoringSystem
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            IRandomPsi rand = new GenerateRandomPsi();
+            
         }
     }
 }

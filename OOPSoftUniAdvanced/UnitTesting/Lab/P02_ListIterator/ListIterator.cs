@@ -44,13 +44,13 @@ namespace P02_ListIterator
             return this.index < elements?.Count;
         }
 
-        public void Print()
+        public string Print()
         {
             if (this.index >= elements?.Count)
             {
                 throw new InvalidOperationException("Invalid Operation!");
             }
-            Console.WriteLine(elements[index]);
+            return elements[index].ToString();
         }
 
         public bool HasNext()
@@ -59,13 +59,15 @@ namespace P02_ListIterator
             return nextIndex < elements?.Count;
         }
 
-        public void PrintAll()
+        public string PrintAll()
         {
+            var sb = new StringBuilder();
             foreach (var element in this.elements)
             {
-                Console.Write(element + " ");
+                sb.Append(element + " ");
             }
-            Console.WriteLine();
+
+            return $"{sb.ToString().Trim()}";
         }
 
         public IEnumerator<T> GetEnumerator()
@@ -80,5 +82,6 @@ namespace P02_ListIterator
         {
             return GetEnumerator();
         }
+
     }
 }

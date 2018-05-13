@@ -13,7 +13,7 @@ namespace P01_Database
         {
             this.MyArr = new int[16];
         }
-        public Database(params int[] intArr)
+        public Database(params int[] intArr):base()
         {
             this.MyArr = new int[16];
             if (intArr.Length>16)

@@ -53,5 +53,24 @@ namespace P02_ListIteratorTests
 
             Assert.That(() => sut.MoveTo(), Is.True);
         }
+        [Test]
+        public void PrintMethod_PrintTheCurrentElementInCollection()
+        {
+            var stringArr = new[] { "a", "b" };
+            var firstElemet = "a"; 
+            IListyItaerator<string> sut = new ListyItaerator<string>(stringArr);
+
+            Assert.That(() => sut.Print(), Is.EqualTo(firstElemet));
+        }
+        [Test]
+        public void PrintAllMethod_PrintsAllElementsInCollection()
+        {
+            var stringArr = new[] { "a", "b", "c" };
+            var elements = "a b c";
+            IListyItaerator<string> sut = new ListyItaerator<string>(stringArr);
+
+            Assert.That(() => sut.PrintAll(), Is.EqualTo(elements));
+        }
+
     }
 }

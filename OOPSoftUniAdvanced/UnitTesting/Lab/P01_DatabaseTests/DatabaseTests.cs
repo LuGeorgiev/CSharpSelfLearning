@@ -1,6 +1,9 @@
 ﻿using NUnit.Framework;
 using P01_Database;
+using System.Linq;
 using System;
+using System.Reflection;
+using System.Collections.Generic;
 
 namespace P01_DatabaseTests
 {
@@ -8,12 +11,22 @@ namespace P01_DatabaseTests
     public class DatabaseTests
     {
         [Test]
-        public void DatabaseConstructor_ShouldSetCorrectlyLessThanSexteenValues()
+        [TestCase(new int[] {4,5,6,7})]
+        [TestCase(new int[] {})]
+        [TestCase(new int[] {-10})]
+        public void DatabaseConstructor_ShouldSetCorrectlyLessThanSexteenValues(int[] values)
         {
-            var initialArr = new int[] { 1, 2, 3 };
-            var sut = new Database(initialArr);
+            
+            var sut = new Database(values);
 
-            Assert.That(sut.MyArr[2], Is.EqualTo(initialArr[2]));
+            FieldInfo fieldInfo = typeof(Database)
+                .GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
+                .First(fi => fi.FieldType == typeof(int[]));
+
+            IEnumerable<int> actualValues = ((int[])fieldInfo.GetValue(sut)).Take(values.Length);
+
+            Assert.That(actualValues, Is.EquivalentTo(values));
+            //Assert.That(sut.MyArr[2], Is.EqualTo(initialArr[2]));
         }
 
         [Test]        

@@ -6,7 +6,11 @@ namespace P02_ListIterator
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var iter = new ListyItaerator<string>("a", "b", "c");
+            var writer = new ConsoleWriter();
+
+            writer.WriteLine(iter.Print());
+            
         }
     }
 }
