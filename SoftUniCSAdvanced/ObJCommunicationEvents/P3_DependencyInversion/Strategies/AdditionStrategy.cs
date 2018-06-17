@@ -1,6 +1,8 @@
-﻿namespace P03_DependencyInversion
+﻿using P3_DependencyInversion.Contracts;
+
+namespace P3_DependencyInversion.Strategies
 {
-	public class AdditionStrategy
+	public class AdditionStrategy : ICalculationStrategy
     {
         public int Calculate(int firstOperand, int secondOperand)
         {

@@ -1,37 +1,25 @@
-﻿namespace P03_DependencyInversion
+﻿using P3_DependencyInversion.Strategies;
+using P3_DependencyInversion.Contracts;
+
+namespace P3_DependencyInversion
 {
     public class PrimitiveCalculator
     {
-        private bool isAddition;
-        private AdditionStrategy additionStrategy;
-        private SubtractionStrategy subtractionStrategy;
+        private ICalculationStrategy calculationStrategy;
 
-        public PrimitiveCalculator()
+        public PrimitiveCalculator(ICalculationStrategy calculationStrategy)
         {
-            this.additionStrategy = new AdditionStrategy();
-            this.subtractionStrategy = new SubtractionStrategy();
-            this.isAddition = true;
+            this.ChangeStrategy(calculationStrategy);
         }
 
-        public void changeStrategy(char @operator)
+        public void ChangeStrategy(ICalculationStrategy calculationStrategy)
         {
-            switch (@operator){
-            case '+': this.isAddition = true;
-                break;
-            case '-':this.isAddition = false;
-                break;
-            }
+            this.calculationStrategy = calculationStrategy;
         }
 
-        public int performCalculation(int firstOperand, int secondOperand)
+        public int PerformCalculation(int firstOperand, int secondOperand)
         {
-            if (this.isAddition)
-            {
-                return additionStrategy.Calculate(firstOperand, secondOperand);
-            }
-            else {
-                return subtractionStrategy.Calculate(firstOperand, secondOperand);
-            }
+            return this.calculationStrategy.Calculate(firstOperand, secondOperand);
         }
     }
 }
