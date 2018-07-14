@@ -2,6 +2,7 @@
 {
 	using Models;
     using Contracts;
+    using System;
 
     public class LogInMenu : Menu
     {
@@ -10,10 +11,19 @@
 		private bool error;
 
 		private ILabelFactory labelFactory;
+        private ICommandFactory commandFactory;
+        private IForumReader forumReader;
 
-		//TODO: Inject Dependencies
-		
-		private string UsernameInput => this.Buttons[0].Text.TrimStart();
+        public LogInMenu(ILabelFactory labelFactory, ICommandFactory commandFactory, IForumReader forumReader)
+        {
+            this.labelFactory = labelFactory;
+            this.commandFactory = commandFactory;
+            this.forumReader = forumReader;
+
+            Open();
+        }
+
+        private string UsernameInput => this.Buttons[0].Text.TrimStart();
 
 		private string PasswordInput => this.Buttons[1].Text.TrimStart();
 
@@ -65,7 +75,30 @@
 
 		public override IMenu ExecuteCommand()
 		{
-			throw new System.NotImplementedException();
-		}
+            t if (this.CurrentOption.IsField)
+            {
+                string fieldInput = " " + this.forumReader.ReadLine(this.CurrentOption.Position.Left + 1, this.CurrentOption.Position.Top);
+
+                this.Buttons[this.currentIndex] = this.labelFactory.CreateButton(fieldInput, this.CurrentOption.Position, this.CurrentOption.IsHidden, this.CurrentOption.IsField);
+
+                return this;
+            }
+
+            try
+            {
+                string commandName = string.Join("", this.CurrentOption.Text.Split());
+                ICommand command = this.commandFactory.CreateCommand(commandName);
+                IMenu view = command.Execute(this.UsernameInput, this.PasswordInput);
+
+                return view;
+            }
+            catch (Exception e)
+            {
+
+                this.error = true;                
+                this.Open();
+                return this;
+            }
+        }
 	}
 }

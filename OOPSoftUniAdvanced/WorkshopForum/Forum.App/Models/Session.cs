@@ -2,40 +2,64 @@
 {
 	using Contracts;
 	using DataModels;
+    using System.Collections.Generic;
+    using System.Linq;
 
-	public class Session : ISession
+    public class Session : ISession
 	{
-		public string Username => throw new System.NotImplementedException();
+        private User user;
+        private Stack<IMenu> history;
 
-		public int UserId => throw new System.NotImplementedException();
+        public Session()
+        {
+            this.history = new Stack<IMenu>();
+        }
 
-		public bool IsLoggedIn => throw new System.NotImplementedException();
+		public string Username => this.user?.Username;
 
-		public IMenu CurrentMenu => throw new System.NotImplementedException();
+		public int UserId => this.user?.Id ?? 0;
+
+		public bool IsLoggedIn => this.user!=null;
+
+		public IMenu CurrentMenu => this.history.Peek();
 
 		public IMenu Back()
 		{
-			throw new System.NotImplementedException();
+            if (this.history.Count>1)
+            {
+                this.history.Pop();
+            }
+
+            IMenu previousMenu = this.history.Peek();
+            previousMenu.Open();
+
+            return previousMenu;
 		}
 
 		public void LogIn(User user)
 		{
-			throw new System.NotImplementedException();
+            this.user = user;
 		}
 
 		public void LogOut()
 		{
-			throw new System.NotImplementedException();
+            this.user = null;
 		}
 
 		public bool PushView(IMenu view)
 		{
-			throw new System.NotImplementedException();
+            if (!this.history.Any()||this.history.Peek()!=view)
+            {
+                this.history.Push(view);
+                return true;
+            }
+            return false;
 		}
 
 		public void Reset()
 		{
-			throw new System.NotImplementedException();
+            this.history = new Stack<IMenu>();
+            this.user = null;
 		}
 	}
 }

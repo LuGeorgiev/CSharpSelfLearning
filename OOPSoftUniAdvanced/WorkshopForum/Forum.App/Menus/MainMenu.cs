@@ -7,12 +7,13 @@
     {
 		private ISession session;
 		private ILabelFactory labelFactory;
+        private ICommandFactory commandFactory;
 
 		public MainMenu(ISession session, ILabelFactory labelFactory, ICommandFactory commandFactory)
         {
             this.session = session;
 			this.labelFactory = labelFactory;
-
+            this.commandFactory = commandFactory;
             this.Open();
         }
 
@@ -69,7 +70,12 @@
 
 		public override IMenu ExecuteCommand()
 		{
-			throw new System.NotImplementedException();
+            string commandName = string.Join("", this.CurrentOption.Text.Split()) + "Menu";
+
+            ICommand command = commandFactory.CreateCommand(commandName);
+
+            IMenu view = command.Execute();
+            return view;
 		}
     }
 }

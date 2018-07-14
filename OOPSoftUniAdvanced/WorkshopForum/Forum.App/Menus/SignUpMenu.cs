@@ -2,6 +2,7 @@
 {
 	using Models;
 	using Contracts;
+    using System;
 
     public class SignUpMenu : Menu
     {
@@ -11,8 +12,18 @@
 		private bool error;
 
 		private ILabelFactory labelFactory;
+        private ICommandFactory commandFactory;
+        private IForumReader forumReader;
 
-		//TODO: Inject Dependencies
+        public SignUpMenu(ILabelFactory labelFactory, ICommandFactory commandFactory, IForumReader forumReader)
+        {
+            this.labelFactory = labelFactory;
+            this.commandFactory = commandFactory;
+            this.forumReader = forumReader;
+
+            Open();
+        }
+        
 		
 		private string UsernameInput => this.Buttons[0].Text.TrimStart();
 
@@ -68,7 +79,31 @@
 
 		public override IMenu ExecuteCommand()
 		{
-			throw new System.NotImplementedException();
+            if (this.CurrentOption.IsField)
+            {
+                string fieldInput = " " + this.forumReader.ReadLine(this.CurrentOption.Position.Left + 1, this.CurrentOption.Position.Top);
+
+                this.Buttons[this.currentIndex] = this.labelFactory.CreateButton(fieldInput, this.CurrentOption.Position, this.CurrentOption.IsHidden, this.CurrentOption.IsField);
+
+                return this;
+            }
+
+            try
+            {
+                string commandName = string.Join("", this.CurrentOption.Text.Split());
+                ICommand command = this.commandFactory.CreateCommand(commandName);
+                IMenu view = command.Execute(this.UsernameInput, this.PasswordInput);
+
+                return view;
+            }
+            catch (Exception e)
+            {
+
+                this.error = true;
+                this.ErrorMessage = e.Message;
+                this.Open();
+                return this;
+            }
 		}
 	}
 }
