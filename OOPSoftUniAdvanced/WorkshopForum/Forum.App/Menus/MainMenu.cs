@@ -14,6 +14,7 @@
             this.session = session;
 			this.labelFactory = labelFactory;
             this.commandFactory = commandFactory;
+
             this.Open();
         }
 
@@ -70,7 +71,7 @@
 
 		public override IMenu ExecuteCommand()
 		{
-            string commandName = string.Join("", this.CurrentOption.Text.Split()) + "Menu";
+            string commandName = string.Join("", this.CurrentOption.Text.Split())+"Menu" ;//Menu is not needed
 
             ICommand command = commandFactory.CreateCommand(commandName);
 

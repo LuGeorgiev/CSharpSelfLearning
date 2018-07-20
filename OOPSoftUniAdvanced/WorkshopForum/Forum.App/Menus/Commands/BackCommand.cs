@@ -10,6 +10,7 @@ namespace Forum.App.Menus.Commands
         {
             this.session = session;
         }
+
         public IMenu Execute(params string[] args)
         {
             IMenu menu = this.session.Back();

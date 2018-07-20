@@ -115,6 +115,7 @@
             ICommand command = null;
             int actualIndex = this.currentIndex * 10 + this.currentIndex - 1;
             string postId = null;
+
             if (this.currentIndex>0&&this.currentIndex<10)
             {
                 postId = this.posts[actualIndex].Id.ToString();
@@ -125,7 +126,7 @@
                 command = this.commandFactory.CreateCommand(string.Join("", this.CurrentOption.Text.Split()) + "Menu") ;
             }
 
-            return command.Execute(postId); // NOt sure weather argument is correct????
+            return command.Execute(postId); 
 		}
 
 		public void ChangePage(bool forward = true)

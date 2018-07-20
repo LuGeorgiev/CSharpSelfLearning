@@ -5,7 +5,7 @@ using Forum.DataModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+
 
 namespace Forum.App.Services
 {
@@ -18,7 +18,7 @@ namespace Forum.App.Services
         public PostService(ForumData forumData, ISession session, IUserService userService)
         {
             this.forumData = forumData;
-            this.session = session;
+            this.session = session; // Not according to manual
             this.userService = userService;
         }
 
@@ -56,7 +56,8 @@ namespace Forum.App.Services
                 .FirstOrDefault(c => c.Name == postCategory);
             if (category==null)
             {
-                this.forumData.Categories.Add(new Category(postCategory));
+                int categoryId = forumData.Categories.Any() ? forumData.Categories.Last().Id + 1 : 1;
+                this.forumData.Categories.Add(new Category(categoryId, postCategory, new List<int>()));
                 this.forumData.SaveChanges();
 
                 return this.forumData.Categories
@@ -68,7 +69,17 @@ namespace Forum.App.Services
 
         public void AddReplyToPost(int postId, string replyContents, int userId)
         {
-            throw new NotImplementedException();
+            Post post = this.forumData
+                .Posts
+                .Find(p => p.Id == postId);
+            User author = this.userService
+                .GetUserById(userId);
+            int replyId = this.forumData.Replies.LastOrDefault()?.Id + 1 ?? 1;
+            Reply reply = new Reply(replyId,replyContents,userId,postId);
+
+            this.forumData.Replies.Add(reply);
+            post.Replies.Add(replyId);
+            this.forumData.SaveChanges();
         }
 
         public IEnumerable<ICategoryInfoViewModel> GetAllCategories()
@@ -88,7 +99,7 @@ namespace Forum.App.Services
 
             if (categoryName==null)
             {
-                throw new AggregateException($"Category with id {categoryId} not found!");
+                throw new ArgumentException($"Category with id {categoryId} not found!");
             }
             return categoryName;
         }

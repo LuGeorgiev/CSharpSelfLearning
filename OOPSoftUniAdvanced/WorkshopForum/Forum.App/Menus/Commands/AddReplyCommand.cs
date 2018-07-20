@@ -5,13 +5,13 @@ using System.Text;
 
 namespace Forum.App.Menus.Commands
 {
-    class AddPostMenuCommand : NavigationCommand
+    public class AddReplyCommand : ICommand
     {
         private IMenuFactory menuFactory;
 
-        public AddPostMenuCommand(IMenuFactory menuFactory)
-            :base(menuFactory)
-        {           
+        public AddReplyCommand(IMenuFactory menuFactory)
+        {
+            this.menuFactory = menuFactory;
         }
         public IMenu Execute(params string[] args)
         {
@@ -19,6 +19,11 @@ namespace Forum.App.Menus.Commands
             string menuName = commandName.Substring(0, commandName.Length - "Command".Length);
 
             IMenu menu = this.menuFactory.CreateMenu(menuName);
+            if (menu is IIdHoldingMenu idHoldingMenu)
+            {
+                int postId = int.Parse(args[0]);
+                idHoldingMenu.SetId(postId);
+            }
 
             return menu;
         }

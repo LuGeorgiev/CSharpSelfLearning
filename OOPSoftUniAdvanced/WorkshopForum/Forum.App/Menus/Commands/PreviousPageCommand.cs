@@ -17,13 +17,13 @@ namespace Forum.App.Menus.Commands
 
         public IMenu Execute(params string[] args)
         {
-            IMenu previousMenu = this.session.Back();
-            if (previousMenu is IPaginatedMenu paginatedMenu)
+            IMenu currentMenu = this.session.CurrentMenu;
+            if (currentMenu is IPaginatedMenu paginatedMenu)
             {
-                paginatedMenu.ChangePage();
+                paginatedMenu.ChangePage(false);
             }
 
-            return previousMenu;
+            return currentMenu;
         }
     }
 }

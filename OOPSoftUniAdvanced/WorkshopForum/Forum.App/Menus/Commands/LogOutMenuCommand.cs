@@ -4,12 +4,12 @@ using System;
 
 namespace Forum.App.Menus.Commands
 {
-    class LogOutCommand : ICommand
+    class LogOutMenuCommand : ICommand
     {
         private ISession session;
         private IMenuFactory menuFactory;
 
-        public LogOutCommand(ISession session, IMenuFactory menuFactory)
+        public LogOutMenuCommand(ISession session, IMenuFactory menuFactory)
         {
             this.session = session;
             this.menuFactory = menuFactory;

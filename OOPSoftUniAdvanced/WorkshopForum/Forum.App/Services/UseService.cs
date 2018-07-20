@@ -2,13 +2,11 @@
 using Forum.Data;
 using Forum.DataModels;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Forum.App.Services
 {
-    class UseService : IUserService
+    public class UseService : IUserService
     {
         private ForumData forumData;
         private ISession session;
@@ -18,6 +16,7 @@ namespace Forum.App.Services
             this.forumData = forumData;
             this.session = session;
         }
+
         public User GetUserById(int userId)
         {
             User user = this.forumData.Users
@@ -71,15 +70,16 @@ namespace Forum.App.Services
 
             bool userAlraedyExists = this.forumData.Users
                 .Any(u => u.Username == username);
-            if (!userAlraedyExists)
+            if (userAlraedyExists)
             {
+
                 throw new InvalidOperationException("Username taken!");
             }
 
             int userId = forumData.Users.LastOrDefault()?.Id + 1 ?? 1;
             User user = new User(userId, username, password);
-            forumData.Users.Add(user);
-            forumData.SaveChanges();
+            this.forumData.Users.Add(user);
+            this.forumData.SaveChanges();
 
             this.TryLogInUser(username, password);
 

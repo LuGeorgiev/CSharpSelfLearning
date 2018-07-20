@@ -11,12 +11,12 @@ namespace Forum.App.ViewModels
 
         public ContentViewModel(string conntent)
         {
-            this.Content = this.Getlines(conntent);
+            this.Content = this.GetLines(conntent);
         }
 
         public string[] Content { get; }
 
-        private string[] Getlines(string content)
+        private string[] GetLines(string content)
         {
             char[] contentChars = content.ToCharArray();
             ICollection<string> lines = new List<string>();

@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Forum.App.Factories
 {
-    class MenuFactory : IMenuFactory
+    public class MenuFactory : IMenuFactory
     {
         private IServiceProvider serviceProvider;
         public MenuFactory(IServiceProvider serviceProvider)
@@ -20,15 +20,15 @@ namespace Forum.App.Factories
             Assembly assembly = Assembly.GetExecutingAssembly();
             Type menuType = assembly
                 .GetTypes()
-                .FirstOrDefault(x => x.Name.Equals($"{menuName}Menu", StringComparison.InvariantCultureIgnoreCase));
+                .FirstOrDefault(x => x.Name.Equals($"{menuName}", StringComparison.InvariantCultureIgnoreCase)); //TODO is adding Menu needed
             if (menuType==null)
             {
-                throw new InvalidProgramException("Menu not found!");
+                throw new ArgumentException("Menu not found!");
             }
 
             if (!typeof(IMenu).IsAssignableFrom(menuType))
             {
-                throw new InvalidOperationException($"{menuName} is not a menu!");
+                throw new InvalidOperationException($"{menuName} is not an IMenu!");
             }
 
             ParameterInfo[] ctorParams = menuType

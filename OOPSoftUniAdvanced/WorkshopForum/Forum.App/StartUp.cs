@@ -1,9 +1,7 @@
 ﻿namespace Forum.App
 {
 	using System;
-
 	using Microsoft.Extensions.DependencyInjection;
-
 	using Contracts;
 	using Factories;
     using Forum.Data;
@@ -16,7 +14,6 @@
 		{
             IServiceProvider serviceProvider = ConfigureServices();
             IMainController menu = serviceProvider.GetService<IMainController>();
-
 
 			Engine engine = new Engine(menu);
 			engine.Run();
@@ -40,7 +37,8 @@
             services.AddSingleton<IMainController, MenuController>();
 
             services.AddTransient<IForumReader, ForumConsoleReader>();
-
+            services.AddSingleton<IForumViewEngine, ForumViewEngine>();
+                        
             IServiceProvider serviceProvider = services.BuildServiceProvider();
 
             return serviceProvider;

@@ -15,18 +15,20 @@
 
 		public ICommand CreateCommand(string commandName)
 		{
-            var assembly = Assembly.GetExecutingAssembly();
-            var commandType = assembly.GetTypes()
+            var assembly = Assembly
+                .GetExecutingAssembly();
+            var commandType = assembly
+                .GetTypes()
                 .FirstOrDefault(t => t.Name.Equals($"{commandName}Command", StringComparison.InvariantCultureIgnoreCase));
 
             if (commandType==null)
             {
-                throw new InvalidOperationException("Command not found!");
+                throw new ArgumentException("Command not found!");
             }
 
-            if (!typeof(ICommand).IsInstanceOfType(commandType))
+            if (!typeof(ICommand).IsAssignableFrom(commandType))
             {
-                throw new InvalidOperationException($"{commandName} is not a command!");
+                throw new InvalidOperationException($"{commandName} is not an ICommand!");
             }
 
             ParameterInfo[] ctorParams = commandType

@@ -1,11 +1,9 @@
 ﻿using Forum.App.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Text;
+
 
 namespace Forum.App.Menus.Commands
 {
-    class NextPageCommand : ICommand
+    public class NextPageCommand : ICommand
     {
         private ISession session;
 
@@ -21,6 +19,7 @@ namespace Forum.App.Menus.Commands
             {
                 paginatedMenu.ChangePage();
             }
+
             return currentMenu;
         }
     }

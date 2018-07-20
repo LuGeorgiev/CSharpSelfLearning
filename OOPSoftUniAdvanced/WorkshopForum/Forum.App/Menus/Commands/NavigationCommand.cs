@@ -5,14 +5,14 @@ using System.Text;
 
 namespace Forum.App.Menus.Commands
 {
-    class AddPostMenuCommand : NavigationCommand
+    public abstract class NavigationCommand : ICommand
     {
         private IMenuFactory menuFactory;
-
-        public AddPostMenuCommand(IMenuFactory menuFactory)
-            :base(menuFactory)
-        {           
+        protected NavigationCommand(IMenuFactory menuFactory)
+        {
+            this.menuFactory = menuFactory;
         }
+
         public IMenu Execute(params string[] args)
         {
             string commandName = this.GetType().Name;

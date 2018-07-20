@@ -10,7 +10,6 @@
 	internal class MenuController : IMainController
 	{
 		private IServiceProvider serviceProvider;
-
 		private IForumViewEngine viewEngine;
 		private ISession session;
 		private ICommandFactory commandFactory;
@@ -21,16 +20,12 @@
             this.serviceProvider = serviceProvider;
             this.session = session;
             this.commandFactory = commandFactory;
-
-            //this.CurrentMenu = new MainMenu(null, labelFactory, null);
-            //this.RenderCurrentView();
-
+                      
             this.InitializeSession();
 		}
 
 		private string Username { get; set; }
-
-		//Replace CurrentMenu with this after implementing Session
+        		
 		private IMenu CurrentMenu => this.session.CurrentMenu;
         		
 

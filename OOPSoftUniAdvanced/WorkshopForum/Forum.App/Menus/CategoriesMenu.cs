@@ -115,17 +115,19 @@
 		{
             ICommand command = null;
             int actualIndex = this.currentPage * 10 + this.currentIndex;
+            string idString = null;
 
             if (this.currentIndex > 0&&this.currentIndex < 10)
             {
                 command = this.commandFactory.CreateCommand("ViewCategoryMenu");
+                idString = this.categories[actualIndex].Id.ToString();
             }
             else
             {
                 command = this.commandFactory.CreateCommand(string.Join("", this.CurrentOption.Text.Split()));
             }
 
-            return command.Execute(actualIndex.ToString());
+            return command.Execute(idString);
 		}
 
 		public void ChangePage(bool forward = true)

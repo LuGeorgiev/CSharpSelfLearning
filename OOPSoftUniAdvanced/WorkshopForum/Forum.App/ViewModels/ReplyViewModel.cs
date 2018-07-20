@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Forum.App.ViewModels
 {
-    class ReplyViewModel : ContentViewModel, IReplyViewModel
+    public class ReplyViewModel : ContentViewModel, IReplyViewModel
     {
         public ReplyViewModel(string author,string conntent) 
             : base(conntent)

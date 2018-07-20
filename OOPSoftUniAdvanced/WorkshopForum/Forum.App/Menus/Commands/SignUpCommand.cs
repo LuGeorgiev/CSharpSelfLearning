@@ -25,7 +25,7 @@ namespace Forum.App.Menus.Commands
 
             if (!success)
             {
-                throw new InvalidOperationException("Invalid login!");
+                throw new InvalidOperationException("Invalid username or password!");
             }
 
             return this.menuFactory.CreateMenu("MainMenu");

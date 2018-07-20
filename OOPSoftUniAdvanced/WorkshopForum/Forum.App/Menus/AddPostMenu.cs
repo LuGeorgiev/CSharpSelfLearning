@@ -92,24 +92,29 @@
             {
                 string fieldInput = " " + this.reader.ReadLine(this.CurrentOption.Position.Left + 1, this.CurrentOption.Position.Top);
 
-                this.Buttons[this.currentIndex] = this.labelFactory.CreateButton(fieldInput, this.CurrentOption.Position, this.CurrentOption.IsHidden, this.CurrentOption.IsField);
+                this.Buttons[this.currentIndex] = this.labelFactory.CreateButton(fieldInput, this.CurrentOption.Position, false, true);
 
                 return this;
             }
-
-            try
+            else
             {
-                string commandName = string.Join("", this.CurrentOption.Text.Split());
-                ICommand command = this.commandFactory.CreateCommand(commandName);
-                IMenu menu = command.Execute(this.TitleInput, this.CategoryInput, this.TextArea.Text);
-            }
-            catch (Exception e)
-            {
+                try
+                {
+                    string commandName = string.Join("", this.CurrentOption.Text.Split());
+                    ICommand command = this.commandFactory.CreateCommand(commandName);
+                    IMenu menu = command.Execute(this.TitleInput, this.CategoryInput, this.TextArea.Text);
 
-                this.error = true;
-                this.InitializeStaticLabels(Position.ConsoleCenter());
-                return this;
+                    return menu;
+                }
+                catch (Exception e)
+                {
+
+                    this.error = true;
+                    this.InitializeStaticLabels(Position.ConsoleCenter());
+                    return this;
+                }
             }
+
 		}
 	}
 }

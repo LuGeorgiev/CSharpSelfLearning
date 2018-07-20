@@ -22,6 +22,7 @@
 
 			ITextInputArea commandInstance = (ITextInputArea)Activator.CreateInstance(commandType, args);
 
+            // simple implementation WITHOUT reflection may be need
 			return commandInstance;
 		}
 	}
