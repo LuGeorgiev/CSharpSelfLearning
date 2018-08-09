@@ -23,7 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P02_ListIterator", "P02_Lis
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P02_ListIteratorTests", "P02_ListIteratorTests\P02_ListIteratorTests.csproj", "{A2D7D0E1-B80E-4997-9C30-5D341FCA453D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P10_TirePressureTests", "P10_TirePressureTests\P10_TirePressureTests.csproj", "{8333E724-C95B-48D2-BE90-76BD4D4DA29D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P10_TirePressureTests", "P10_TirePressureTests\P10_TirePressureTests.csproj", "{8333E724-C95B-48D2-BE90-76BD4D4DA29D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P08_CustomLinkedList.Tests", "P08_CustomLinkedList.Tests\P08_CustomLinkedList.Tests.csproj", "{D223D24E-BB7E-4178-86E5-546C4B65157B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +77,10 @@ Global
 		{8333E724-C95B-48D2-BE90-76BD4D4DA29D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8333E724-C95B-48D2-BE90-76BD4D4DA29D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8333E724-C95B-48D2-BE90-76BD4D4DA29D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D223D24E-BB7E-4178-86E5-546C4B65157B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D223D24E-BB7E-4178-86E5-546C4B65157B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D223D24E-BB7E-4178-86E5-546C4B65157B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D223D24E-BB7E-4178-86E5-546C4B65157B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

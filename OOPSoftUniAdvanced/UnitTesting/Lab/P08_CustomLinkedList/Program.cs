@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CustomLinkedList;
+using System;
 
 namespace P08_CustomLinkedList
 {
@@ -6,7 +7,17 @@ namespace P08_CustomLinkedList
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var linkedList = new DynamicList<String>();
+            
+            linkedList.Add("Ivan");
+            linkedList.Add("Petar");
+            linkedList.Add("Marin");
+
+            Console.WriteLine(linkedList[2]);
+            for (int i = 0; i < linkedList.Count; i++)
+            {                
+                Console.WriteLine(linkedList[i]);                    
+            }
         }
     }
 }

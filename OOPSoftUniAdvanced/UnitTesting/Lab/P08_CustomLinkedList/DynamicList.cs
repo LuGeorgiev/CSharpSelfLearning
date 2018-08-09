@@ -4,7 +4,7 @@
 namespace CustomLinkedList
 {
     /// <summary>Dynamic (linked) list class definition</summary>
-    public class DynamicList<T>
+    public class DynamicList<T> : IDynamicList<T>
     {
         private class ListNode
         {
