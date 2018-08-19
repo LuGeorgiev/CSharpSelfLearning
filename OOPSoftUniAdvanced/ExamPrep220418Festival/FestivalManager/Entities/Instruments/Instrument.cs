@@ -22,11 +22,21 @@ namespace FestivalManager.Entities.Instruments
 			}
 			private set
 			{
-				this.wear = Math.Min(Math.Max(value, 0), 100);
+                if (value<0)
+                {
+                    this.wear = 0;
+                }
+
+                if (value>100)
+                {
+                    this.wear = 100;
+                }
+
+                this.wear = value;
 			}
 		}
 
-		protected abstract int RepairAmount { get; }
+		protected abstract int RepairAmount { get;}
 
 		public void Repair() => this.Wear += this.RepairAmount;
 

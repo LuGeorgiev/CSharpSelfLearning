@@ -6,13 +6,14 @@
 	using System.Text;
 
 	using Contracts;
+    using FestivalManager.Core;
 
-	public abstract class ConcertSet
+    public abstract class Set:ISet
 	{
 		private readonly List<IPerformer> performers;
 		private readonly List<ISong> songs;
 
-		protected ConcertSet(string name, TimeSpan maxDuration)
+		protected Set(string name, TimeSpan maxDuration)
 		{
 			this.Name = name;
 			this.MaxDuration = maxDuration;
@@ -21,9 +22,9 @@
 			this.songs = new List<ISong>();
 		}
 
-		public string Name { get; }
+		public string Name { get; private set; }
 
-		public TimeSpan MaxDuration { get; }
+		public TimeSpan MaxDuration { get; protected set; }
 
 		public TimeSpan ActualDuration => new TimeSpan(this.Songs.Sum(s => s.Duration.Ticks));
 
@@ -43,7 +44,7 @@
 		{
 			if (song.Duration + this.ActualDuration > this.MaxDuration)
 			{
-				throw new InvalidOperationException("Song is over the set limit!");
+				throw new InvalidOperationException(Constants.SongOverLimit);
 			}
 
 			this.songs.Add(song);
@@ -61,6 +62,7 @@
 				return false;
 			}
 
+            
 			var allPerformersHaveInstruments = this.Performers.All(p => p.Instruments.Any());
 
 			if (!allPerformersHaveInstruments)
@@ -88,8 +90,8 @@
 			{
 				sb.AppendLine($"-- {song}");
 			}
-
-			var result = sb.ToString();
+            //Correction Trim
+			var result = sb.ToString().TrimEnd();
 			return result;
 		}
 	}

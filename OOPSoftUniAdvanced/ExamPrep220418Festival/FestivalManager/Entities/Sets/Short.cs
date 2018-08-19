@@ -2,10 +2,12 @@
 {
 	using System;
 
-	public class Short : ConcertSet
+	public class Short : Set
 	{
+        private static readonly TimeSpan MaxDuration = new TimeSpan(0, 15, 0);
+
 		public Short(string name) 
-			: base(name, new TimeSpan(0, 0b1111, 0))
+			: base(name, MaxDuration)
 		{
 		}
 	}
