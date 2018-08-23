@@ -1,5 +1,5 @@
 ﻿
-namespace CarDealer.Services.Models
+namespace CarDealer.Services.Models.Customers
 {
     using System;
 

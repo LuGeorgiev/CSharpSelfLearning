@@ -1,11 +1,12 @@
 ﻿
 namespace CarDealer.Services.Implementations
 {
-    using Models;
+    using Models.Customers;
     using Data;
     using System.Collections.Generic;
     using System.Linq;
     using System;
+    using Microsoft.EntityFrameworkCore;
 
     public class CustomerService : ICustomerService
     {
@@ -43,6 +44,29 @@ namespace CarDealer.Services.Implementations
                     IsYoungDriver=c.IsYoungDriver
                 })
                 .ToList();
+        }
+
+        public SalesByCustomer TotalSales(int id)
+        {
+            var customer = db.Customers
+                .Include(c=>c.Sales)
+                .ThenInclude(c=>c.Car)
+                .ThenInclude(c=>c.Parts) 
+                .ThenInclude(c=>c.Part)
+                .ThenInclude(c=>c.Cars)
+                .FirstOrDefault(c => c.Id == id);
+
+            if (customer ==null)
+            {
+                throw new ArgumentException($"Customer with Id: {id} was not found!");
+            }
+
+            return new SalesByCustomer
+            {
+                Name =customer.Name,
+                BoughtCars = customer.Sales.Count,
+                TotalSpentMoney = customer.Sales.Sum(c=>c.Car.Parts.Sum(p=>p.Part.Price)* (decimal)(1-c.Discount))
+            };            
         }
     }
 }

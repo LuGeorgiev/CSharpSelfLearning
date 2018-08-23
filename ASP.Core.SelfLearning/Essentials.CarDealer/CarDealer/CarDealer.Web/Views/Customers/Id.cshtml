@@ -1,0 +1,11 @@
+﻿@model CustomerSales
+
+@{
+    ViewData["Title"] = $"Customer {Model.Name} sales";
+}
+
+<h2>Customer by Id</h2>
+<div class=" bg-danger"> Name: @(Model.Name)</div>
+<div class="bg-info">Cars bough: @(Model.BoughtCars)</div>
+<div class="bg-warning">Total money spent: $ @(Model.TotalSpentMoney.ToString("F2"))</div>
+
