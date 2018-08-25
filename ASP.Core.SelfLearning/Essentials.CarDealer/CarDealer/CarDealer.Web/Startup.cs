@@ -12,6 +12,7 @@ namespace CarDealer.Web
     using CarDealer.Data;
     using Services;
     using Services.Implementations;
+    using Infrastructure.Extensions;
 
     public class Startup
     {
@@ -26,15 +27,19 @@ namespace CarDealer.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<CarDealerDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options
+                .UseLazyLoadingProxies()
+                .UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<CarDealerDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddTransient<ICustomerService, CustomerService>();
-            services.AddTransient<ICarService, CarService>();
-            services.AddTransient<ISupplierService, SupplierService>();
+            //services.AddTransient<ICustomerService, CustomerService>();
+            //services.AddTransient<ICarService, CarService>();
+            //services.AddTransient<ISupplierService, SupplierService>();
+            //services.AddTransient<ISaleService, SaleService>();
+            services.AddDomainServices(); // this way services will be registered automatically
 
             services.AddMvc();
         }

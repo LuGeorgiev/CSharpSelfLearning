@@ -26,6 +26,12 @@
     margin: 15px;
 }
 
+/*Purpose of this is to disabled previous page when we are on first or NEX when we are currently on last*/
+a.disabled {
+    color:grey;
+    pointer-events:none;
+}
+
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
     /* Hide captions */

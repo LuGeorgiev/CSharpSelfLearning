@@ -22,8 +22,8 @@
 
         [ForeignKey("Supplier")]
         public int SupplierId { get; set; }
-        public Supplier Supplier { get; set; }
+        public virtual Supplier Supplier { get; set; }
 
-        public ICollection<PartCar> Cars { get; set; } = new List<PartCar>();
+        public virtual ICollection<PartCar> Cars { get; set; } = new List<PartCar>();
     }
 }

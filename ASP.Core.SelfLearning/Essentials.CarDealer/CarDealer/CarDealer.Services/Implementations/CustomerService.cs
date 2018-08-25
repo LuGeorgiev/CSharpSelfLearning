@@ -7,6 +7,8 @@ namespace CarDealer.Services.Implementations
     using System.Linq;
     using System;
     using Microsoft.EntityFrameworkCore;
+    using CarDealer.Services.Models.Sales;
+    using CarDealer.Data.Models;
 
     public class CustomerService : ICustomerService
     {
@@ -16,6 +18,54 @@ namespace CarDealer.Services.Implementations
         {
             this.db = db;
         }
+
+        public CustomerModel ById(int id)
+        {
+            var customer = db.Customers
+                .Where(c => c.Id == id)
+                .Select(c=>new CustomerModel
+                {
+                    Id=c.Id,
+                    Name=c.Name,
+                    BirthDate=c.BirthDate,
+                    IsYoungDriver=c.IsYoungDriver                    
+                })
+                .FirstOrDefault();
+
+            return customer;
+        }
+
+        public void Create(string name, DateTime birthDate, bool isYoungDriver)
+        {
+            var customer = new Customer
+            {
+                Name=name,
+                BirthDate=birthDate,
+                IsYoungDriver=isYoungDriver
+            };
+
+            this.db.Customers.Add(customer);
+            this.db.SaveChanges();
+        }
+
+        public void Edit(int id,string name, DateTime birthDate, bool isYoungDriver)
+        {
+            var exisingCustomers = this.db.Customers.Find(id);
+
+            if (exisingCustomers==null)
+            {
+                return;
+            }
+
+            exisingCustomers.Name = name;
+            exisingCustomers.BirthDate = birthDate;
+            exisingCustomers.IsYoungDriver = isYoungDriver;
+
+            this.db.SaveChanges();
+        }
+
+        public bool Exists(int id)
+            => this.db.Customers.Any(c => c.Id == id);
 
         public IEnumerable<CustomerModel> Ordered(OrderDirection order)
         {
@@ -39,6 +89,7 @@ namespace CarDealer.Services.Implementations
             return customersQuery
                 .Select(c => new CustomerModel
                 {
+                    Id=c.Id,
                     Name=c.Name,
                     BirthDate=c.BirthDate,
                     IsYoungDriver=c.IsYoungDriver
@@ -46,26 +97,26 @@ namespace CarDealer.Services.Implementations
                 .ToList();
         }
 
-        public SalesByCustomer TotalSales(int id)
+        public CustomerTotalSalesModel TotalSalesById(int id)
         {
             var customer = db.Customers
-                .Include(c=>c.Sales)
-                .ThenInclude(c=>c.Car)
-                .ThenInclude(c=>c.Parts) 
-                .ThenInclude(c=>c.Part)
-                .ThenInclude(c=>c.Cars)
-                .FirstOrDefault(c => c.Id == id);
+                .Where(c=>c.Id==id)
+                .FirstOrDefault();
 
             if (customer ==null)
             {
                 throw new ArgumentException($"Customer with Id: {id} was not found!");
             }
 
-            return new SalesByCustomer
+            return new CustomerTotalSalesModel
             {
-                Name =customer.Name,
-                BoughtCars = customer.Sales.Count,
-                TotalSpentMoney = customer.Sales.Sum(c=>c.Car.Parts.Sum(p=>p.Part.Price)* (decimal)(1-c.Discount))
+                Name =customer.Name,                
+                IsYoungDriver=customer.IsYoungDriver,
+                BoughtCars = customer.Sales.Select(s=>new SaleModel
+                {
+                    Price=s.Car.Parts.Sum(p=>p.Part.Price),
+                    Discount=s.Discount
+                }).ToList()
             };            
         }
     }

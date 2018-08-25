@@ -1,7 +1,9 @@
 ﻿
-namespace CarDealer.Services.Models.Customers
+namespace CarDealer.Web.Models.Customers
 {
-    public class SalesByCustomer
+    using Services.Models.Customers;
+
+    public class CustomerSalesModel 
     {
         public string Name { get; set; }
 

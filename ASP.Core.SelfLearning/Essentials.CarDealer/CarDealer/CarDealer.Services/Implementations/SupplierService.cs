@@ -5,7 +5,7 @@ namespace CarDealer.Services.Implementations
     using System.Collections.Generic;
     using System.Linq;
     using CarDealer.Data;
-    using Models;
+    using Models.Suppliers;
 
     public class SupplierService : ISupplierService
     {
@@ -16,10 +16,21 @@ namespace CarDealer.Services.Implementations
             this.db = db;
         }
 
-        public IEnumerable<SupplierModel> All(bool isImporter)
+        public IEnumerable<SupplierModel> All()
+            => this.db.Suppliers
+            .OrderBy(s => s.Name)
+            .Select(s => new SupplierModel
+            {
+                Id = s.Id,
+                Name = s.Name
+            })
+            .ToList();
+
+        public IEnumerable<SupplierListingModel> AllListings(bool isImporter)
         => this.db.Suppliers
             .Where(s => s.IsImporter == isImporter)
-            .Select(s=> new SupplierModel
+            .OrderByDescending(s=>s.Id)
+            .Select(s=> new SupplierListingModel
             {
                 Id=s.Id,
                 Name=s.Name,

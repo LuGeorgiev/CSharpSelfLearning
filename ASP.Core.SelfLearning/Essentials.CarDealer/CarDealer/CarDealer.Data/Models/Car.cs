@@ -19,7 +19,7 @@
         [Range(typeof(long), "0", "9223372036854775807")]
         public long TravelledDistance { get; set; }
 
-        public ICollection<Sale> Sales { get; set; } = new List<Sale>();
-        public ICollection<PartCar> Parts { get; set; } = new List<PartCar>();
+        public virtual ICollection<Sale> Sales { get; set; } = new List<Sale>();
+        public virtual ICollection<PartCar> Parts { get; set; } = new List<PartCar>();
     }
 }

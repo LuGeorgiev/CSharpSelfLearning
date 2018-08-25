@@ -13,10 +13,10 @@
 
         [ForeignKey("Car")]
         public int CarId { get; set; }
-        public Car Car { get; set; }
+        public virtual Car Car { get; set; }
 
         [ForeignKey("Customer")]
         public int CustomerId { get; set; }
-        public Customer Customer { get; set; }
+        public virtual Customer Customer { get; set; }
     }
 }

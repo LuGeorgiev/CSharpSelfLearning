@@ -16,6 +16,6 @@
 
         public bool IsYoungDriver { get; set; }
 
-        public ICollection<Sale> Sales { get; set; } = new List<Sale>();
+        public virtual ICollection<Sale> Sales { get; set; } = new List<Sale>();
     }
 }

@@ -6,10 +6,10 @@
     {
         [ForeignKey("Part")]
         public int PartId { get; set; }
-        public Part Part { get; set; }
+        public virtual Part Part { get; set; }
 
         [ForeignKey("Car")]
         public int CarId { get; set; }
-        public Car Car { get; set; }
+        public virtual Car Car { get; set; }
     }
 }

@@ -1,11 +1,14 @@
-﻿@model CustomerSales
+﻿@model CustomerTotalSalesModel
 
 @{
-    ViewData["Title"] = $"Customer {Model.Name} sales";
+    ViewData["Title"] = $"Total sales for customer: {Model.Name}";
 }
 
-<h2>Customer by Id</h2>
-<div class=" bg-danger"> Name: @(Model.Name)</div>
-<div class="bg-info">Cars bough: @(Model.BoughtCars)</div>
-<div class="bg-warning">Total money spent: $ @(Model.TotalSpentMoney.ToString("F2"))</div>
+<h2>@ViewData["Title"]d</h2>
+
+@{ 
+    var totalCars = Model.BoughtCars.Count();
+}
+<p class="bg-info">@totalCars @(totalCars == 1?"Cars":"Car") Bought</p>
+<p class="bg-warning">Total money spent: $ @(Model.TotalSpentMoney.ToString("F2"))</p>
 

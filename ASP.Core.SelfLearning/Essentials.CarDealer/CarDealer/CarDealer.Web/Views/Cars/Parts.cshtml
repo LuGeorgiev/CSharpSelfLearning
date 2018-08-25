@@ -4,7 +4,11 @@
     ViewData["Title"] = "All Cars With Their Parts";
 }
 
-<h2>@ViewData["Title"]</h2>
+<h2>
+    @ViewData["Title"]
+    <a href="/cars/create/" class="btn btn-primary">Add Car</a>
+</h2>
+
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
@@ -18,17 +22,19 @@
         @foreach (var car in Model)
         {
         <tr>
-            <th>@car.Make</th>
-            <th>@car.Model</th>
-            <th>@(car.TravelledDistance/1000) KM</th>
-            <th> 
+            <td>
+                <a href="/cars/@car.Make">@car.Make</a>
+            </td>
+            <td>@car.Model</td>
+            <td>@(car.TravelledDistance/1000) KM</td>
+            <td> 
                 <ul>
                     @foreach (var part in car.Parts)
                     {
                          <li> @part.Name -$@part.Price.ToString("F2")</li>                        
                     }
                  </ul>
-            </th>
+            </td>
         </tr>
         }
     </tbody>
