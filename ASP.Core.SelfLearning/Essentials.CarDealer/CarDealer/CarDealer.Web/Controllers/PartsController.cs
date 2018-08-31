@@ -93,7 +93,7 @@ namespace CarDealer.Web.Controllers
 
         public IActionResult All(int page = 1)
         {
-            var partsOnList = this.parts.All(page,PageSize);
+            var partsOnList = this.parts.AllListings(page,PageSize);
 
             return View(new PartPageListingModel
             {

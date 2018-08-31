@@ -13,6 +13,7 @@ namespace CarDealer.Web
     using Services;
     using Services.Implementations;
     using Infrastructure.Extensions;
+    using Microsoft.AspNetCore.Mvc;
 
     public class Startup
     {
@@ -31,7 +32,14 @@ namespace CarDealer.Web
                 .UseLazyLoadingProxies()
                 .UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<User, IdentityRole>()
+            services
+                .AddIdentity<User, IdentityRole>(options=> 
+                {
+                    options.Password.RequireDigit = false;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireUppercase = false;
+                })
                 .AddEntityFrameworkStores<CarDealerDbContext>()
                 .AddDefaultTokenProviders();
 
@@ -41,7 +49,10 @@ namespace CarDealer.Web
             //services.AddTransient<ISaleService, SaleService>();
             services.AddDomainServices(); // this way services will be registered automatically
 
-            services.AddMvc();
+            services.AddMvc(options =>
+            {
+                options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

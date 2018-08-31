@@ -1,0 +1,20 @@
+﻿@model UserWithRolesViewModel
+
+@{
+    ViewData["Title"] = "User Roles";
+}
+
+<h2>Roles for user @Model.Email</h2>
+
+@if (!Model.Roles.Any())
+{
+    <h3>No roles for this user</h3>
+}
+
+<ul>
+    @foreach (var role in Model.Roles)
+    {
+        <li>@role</li>
+    }
+</ul>
+
