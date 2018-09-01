@@ -11,6 +11,7 @@ namespace CamaraBazar.Web.Controllers
     using Microsoft.Extensions.Logging;
     using CamaraBazar.Data.Models;
     using CamaraBazar.Web.Models.Account;
+    using CamaraBazar.Web.Infrastricture.Filters;
 
     [Authorize]
     [Route("[controller]/[action]")]
@@ -33,6 +34,7 @@ namespace CamaraBazar.Web.Controllers
         [TempData]
         public string ErrorMessage { get; set; }
 
+        [MeasureTime]
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> Login(string returnUrl = null)

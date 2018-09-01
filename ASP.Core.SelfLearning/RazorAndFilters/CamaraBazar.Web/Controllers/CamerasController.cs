@@ -6,6 +6,7 @@
     using Microsoft.AspNetCore.Identity;
     using Services;
     using Data.Models;
+    using CamaraBazar.Web.Infrastricture.Filters;
 
     public class CamerasController:Controller
     {
@@ -18,6 +19,7 @@
             this.userManager = userManager;
         }
 
+        [MeasureTime]
         [Authorize]        
         public IActionResult Add() => this.View();
 

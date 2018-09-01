@@ -1,0 +1,5 @@
+09/01/2018 3:12:44 PM - HomeController.Index - 00:00:03.9528417
+09/01/2018 3:12:47 PM - HomeController.Index - 00:00:00.0055352
+09/01/2018 3:12:47 PM - HomeController.Index - 00:00:00.0038220
+09/01/2018 3:12:50 PM - AccountController.Login - 00:00:00.8375528
+09/01/2018 3:13:03 PM - HomeController.Index - 00:00:00.0090291

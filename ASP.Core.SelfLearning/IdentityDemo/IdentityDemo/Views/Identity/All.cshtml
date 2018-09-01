@@ -4,7 +4,15 @@
 }
 
 <h2>@ViewData["Title"]</h2>
+@if (TempData["SuccessMessage"]!=null)
+{
+    <h2 class="text-success">@TempData["SuccessMessage"]</h2>
+}
 
+<div>
+    <a href="/identity/create" class="btn btn-danger ">Add User</a>
+</div>
+<br />
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
@@ -19,7 +27,11 @@
             <tr>
                 <td>@user.Username</td>
                 <td>@user.Email</td>
-                <td><a href="/identity/roles/@user.Id" class="btn btn-default">Roles</a></td>
+                <td>
+                    <a href="/identity/changepassword/@user.Id" class="btn btn-warning">Change Password</a>
+                    <a href="/identity/delete/@user.Id" class="btn btn-danger">Delete</a>
+                    <a href="/identity/roles/@user.Id" class="btn btn-default">Roles</a>
+                </td>
             </tr>
         }
     </tbody>

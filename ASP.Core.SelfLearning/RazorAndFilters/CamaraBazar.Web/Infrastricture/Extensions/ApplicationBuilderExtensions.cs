@@ -13,6 +13,7 @@
             {
                 serviceSope.ServiceProvider.GetService<CameraBazarDbContext>().Database.Migrate();                
             }
+
             return app;
         }
     }

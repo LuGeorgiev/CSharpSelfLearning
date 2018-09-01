@@ -13,6 +13,7 @@ namespace CamaraBazar.Web
     using CamaraBazar.Web.Infrastricture.Extensions;
     using CamaraBazar.Services;
     using CamaraBazar.Services.Implementation;
+    using CamaraBazar.Web.Infrastricture.Filters;
 
     public class Startup
     {
@@ -43,7 +44,11 @@ namespace CamaraBazar.Web
             //services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<ICameraService, CameraService>();
 
-            services.AddMvc();
+            //To add teh filter golobally not only to Home controller:
+            services.AddMvc( options=> 
+            {
+                options.Filters.Add<LogAttribute>();
+            });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

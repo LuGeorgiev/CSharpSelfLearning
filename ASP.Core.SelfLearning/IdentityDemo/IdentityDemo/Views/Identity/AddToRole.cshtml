@@ -1,0 +1,14 @@
+﻿@model IEnumerable<SelectListItem>
+
+@{
+    ViewData["Title"] = "Add To Role";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form  method="post">
+    <select name="role" asp-items="Model" class="form-control"></select>
+    <br />
+    <button type="submit" class="btn btn-primary">Save Role</button>
+</form>
+

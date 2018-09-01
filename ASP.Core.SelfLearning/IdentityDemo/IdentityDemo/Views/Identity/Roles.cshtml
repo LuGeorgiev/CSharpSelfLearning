@@ -6,6 +6,10 @@
 
 <h2>Roles for user @Model.Email</h2>
 
+<div>
+    <a href="/identity/addtorole/@Model.Id" class="btn btn-primary">Add to Role</a>
+</div>
+
 @if (!Model.Roles.Any())
 {
     <h3>No roles for this user</h3>
