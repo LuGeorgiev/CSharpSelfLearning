@@ -4,7 +4,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.Collections.Generic;
 
-    public class AddCameraViewModel
+    public class CameraFormModel
     {
         public CameraMakeType Make { get; set; }
 

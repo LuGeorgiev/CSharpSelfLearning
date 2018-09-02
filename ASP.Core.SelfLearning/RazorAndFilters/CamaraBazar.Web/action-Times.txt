@@ -3,3 +3,5 @@
 09/01/2018 3:12:47 PM - HomeController.Index - 00:00:00.0038220
 09/01/2018 3:12:50 PM - AccountController.Login - 00:00:00.8375528
 09/01/2018 3:13:03 PM - HomeController.Index - 00:00:00.0090291
+09/02/2018 1:07:20 PM - HomeController.Index - 00:00:05.6164626
+09/02/2018 1:07:32 PM - CamerasController.Add - 00:00:08.0610083

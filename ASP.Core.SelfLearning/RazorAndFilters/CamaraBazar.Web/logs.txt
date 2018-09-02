@@ -16,3 +16,6 @@
 09/01/2018 6:13:03 PM - ::1 - Anonymous - AccountController.Login
 09/01/2018 6:13:03 PM - ::1 - test - HomeController.Index
 09/01/2018 6:13:03 PM - ::1 - test - HomeController.Index
+09/02/2018 4:07:15 PM - ::1 - test - HomeController.Index
+09/02/2018 4:07:15 PM - ::1 - test - HomeController.Index
+09/02/2018 4:07:24 PM - ::1 - test - CamerasController.Add

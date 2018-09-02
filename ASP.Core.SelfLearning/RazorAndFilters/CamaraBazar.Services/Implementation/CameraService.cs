@@ -50,7 +50,7 @@ namespace CamaraBazar.Services.Implementation
                 MaxISO = maxIso,
                 IsFullFrame = isFullFramed,
                 VideoReslution = videoResolution,
-                LightMeterings = (LightMetering)lightMeterings.Cast<int>().Sum(),
+                LightMeterings = (LightMetering)lightMeterings.Cast<int>().DefaultIfEmpty().Sum(),
                 Description = description,
                 ImageUrl = imgUrl,
                 UserId = userId
@@ -59,5 +59,39 @@ namespace CamaraBazar.Services.Implementation
             this.db.Add(camera);
             this.db.SaveChanges();
         }
+
+        public bool Edit(int id,
+            CameraMakeType make,
+            string model, 
+            decimal price, 
+            int quantity, 
+            int minShuterSpeed, 
+            int maxShutterSpeed, 
+            MinISO minIso, 
+            int maxIso, 
+            bool 
+            isFullFramed, 
+            string videoResolution, 
+            IEnumerable<LightMetering> lightMeterings, 
+            string description, 
+            string imgUrl, 
+            string userId)
+        {
+            var camera = this.db.Cameras
+                .FirstOrDefault(x => x.Id == id && x.UserId == userId);
+
+            if (camera==null)
+            {
+                return false;
+            }
+
+            //ETC.
+
+            
+            return true;
+        }
+
+        public bool Exists(int id, string userId)
+            => this.db.Cameras.Any(c => c.Id == id && c.UserId == userId);
     }
 }
