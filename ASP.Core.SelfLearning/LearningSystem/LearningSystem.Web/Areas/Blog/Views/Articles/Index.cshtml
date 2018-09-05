@@ -12,7 +12,7 @@
             @foreach (var article in Model.Articles)
             {
                 <li class="list-group-item">
-                    <a asp-action="Details" asp-route-id="@article.Id">@article.Title</a>
+                    <a asp-action="Details" asp-route-id="@article.Id" asp-route-title="@article.Title.ToFriendlyUrl()">@article.Title</a>
                     <small>published By @article.Author on @article.PublisheDate.ToShortDateString()</small>
                 </li>
             }
@@ -25,15 +25,25 @@
     @* Changes in CSS for pagination li to be added pointer event:non*@
     <ul class="pagination">
         <li class="@(Model.CurrentPage==1?"disabled":string.Empty)">
-            <a  
-               asp-rout-page="@Model.PreviousPage" 
+            <a href="/blog/articles/index?page=@Model.PreviousPage"
+
+               @*asp-area="Blog"
+               asp-controller="Articles"
+               asp-action="Index"
+               asp-rout-page="@Model.PreviousPage"*@
+
                aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>
         <li class="@(Model.CurrentPage==Model.TotalPages ? "disabled":string.Empty)">
-            <a 
-               asp-rout-page="@Model.NextPage" 
+            <a href="/blog/articles/index?page=@Model.NextPage"
+
+               @*asp-area="Blog"
+               asp-controller="Articles"
+               asp-action="Index"
+               asp-rout-page="@Model.NextPage"*@ 
+
                aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
             </a>

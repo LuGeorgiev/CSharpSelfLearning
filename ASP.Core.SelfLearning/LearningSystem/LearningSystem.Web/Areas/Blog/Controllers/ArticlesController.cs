@@ -1,7 +1,8 @@
 ﻿
 namespace LearningSystem.Web.Areas.Blog.Controllers
 {
-    using Ganss.XSS;
+    
+    using Infrastructure.Extensions;
     using LearningSystem.Data.Models;
     using LearningSystem.Services.Blog;
     using LearningSystem.Services.Html;
@@ -11,6 +12,7 @@ namespace LearningSystem.Web.Areas.Blog.Controllers
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using System.Threading.Tasks;
+
     using static WebConstants;
 
     [Area(BlogArea)]
@@ -33,13 +35,17 @@ namespace LearningSystem.Web.Areas.Blog.Controllers
             =>View();
 
         [AllowAnonymous]
-        public async Task<IActionResult> Index(int page = 1)
+        public async Task<IActionResult> Index(int page=1)
             => View(new ArticleListingViewModel
             {
                 Articles= await this.articles.AllAsync(page),
                 TotalArticles= await this.articles.TotalAsync(),
                 CurrentPage=page
             });
+
+        [AllowAnonymous]
+        public async Task<IActionResult> Details(int id)
+            => this.ViewOrNotFound(await this.articles.ById(id));
 
         [HttpPost]
         [ValidateModelState]

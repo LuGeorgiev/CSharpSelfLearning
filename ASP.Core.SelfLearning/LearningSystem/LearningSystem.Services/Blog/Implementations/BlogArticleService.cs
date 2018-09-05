@@ -25,7 +25,7 @@ namespace LearningSystem.Services.Blog.Implementations
             this.mapper = mapper;
         }
 
-        public async Task<IEnumerable<BlogArticleListingServiceModel>> AllAsync(int page = 1)
+        public async Task<IEnumerable<BlogArticleListingServiceModel>> AllAsync(int page=1 )
         {
             var articles = await this.db.Articles
                 .OrderByDescending(a => a.PublisheDate)
@@ -36,6 +36,16 @@ namespace LearningSystem.Services.Blog.Implementations
             return mapper.Map<IEnumerable<BlogArticleListingServiceModel>>(articles);               
 
         }
+
+        public async Task<BlogArticleDetailsServiceModel> ById(int id)
+        {
+            var article = await db.Articles
+                .Where(s => s.Id == id)
+                .FirstOrDefaultAsync();
+
+            return mapper.Map<BlogArticleDetailsServiceModel>(article);
+        }
+
         public async Task CreateAsync(string title, string content, string authotId)
         {
             var article = new Article

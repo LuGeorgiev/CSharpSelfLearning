@@ -1,21 +1,17 @@
-﻿
+﻿using AutoMapper;
+using LearningSystem.Common.Mapping;
+using LearningSystem.Data.Models;
+using System;
+
 namespace LearningSystem.Services.Blog.Models
 {
-    using Common.Mapping;
-    using Data.Models;
-    using System.ComponentModel.DataAnnotations;
-    using System;
-
-    using static Data.DataConstants;
-    using AutoMapper;
-
-    public class BlogArticleListingServiceModel :IMapFrom<Article>,IHaveCustomMapping
+    public class BlogArticleDetailsServiceModel :IMapFrom<Article>, IHaveCustomMapping
     {
         public int Id { get; set; }
-              
+
         public string Title { get; set; }
 
-        //public string Content { get; set; }
+        public string Content { get; set; }
 
         public DateTime PublisheDate { get; set; }
 

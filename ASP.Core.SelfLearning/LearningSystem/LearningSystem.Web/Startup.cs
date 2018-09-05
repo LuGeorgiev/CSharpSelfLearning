@@ -43,6 +43,9 @@ namespace LearningSystem.Web
 
             services.AddDomainService();
 
+            //all URLs have to be with small letters
+            services.AddRouting(routing => routing.LowercaseUrls = true);
+
             services.AddMvc(options=> 
             {
                 options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
@@ -61,7 +64,7 @@ namespace LearningSystem.Web
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/home/error");
             }
 
             app.UseStaticFiles();
@@ -70,6 +73,11 @@ namespace LearningSystem.Web
 
             app.UseMvc(routes =>
             {
+                //because we need to have in the url title of the Article. Special routing is needed
+                routes.MapRoute(
+                    name:"blog",
+                    template:"blog/articles/{id}/{title}",
+                    defaults: new {area="Blog", controller="Articles", action="Details" });
                 
                 routes.MapRoute(
                   name: "areas",

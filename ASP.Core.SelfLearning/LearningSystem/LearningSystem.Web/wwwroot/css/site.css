@@ -33,6 +33,15 @@
 .pagination li.disabled a {
     pointer-events:none;
 }
+
+.home-jumbotrone {
+    margin-top:50px;
+}
+
+.home-page .img-responsive {
+    height: 200px !important;
+}
+
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
     /* Hide captions */
