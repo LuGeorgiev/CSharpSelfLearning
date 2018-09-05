@@ -60,7 +60,8 @@ namespace LearningSystem.Data.Migrations
 
                     b.Property<DateTime>("StartDate");
 
-                    b.Property<string>("TrainerId");
+                    b.Property<string>("TrainerId")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -258,7 +259,8 @@ namespace LearningSystem.Data.Migrations
                 {
                     b.HasOne("LearningSystem.Data.Models.User", "Trainer")
                         .WithMany("Trainings")
-                        .HasForeignKey("TrainerId");
+                        .HasForeignKey("TrainerId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("LearningSystem.Data.Models.StudentCourse", b =>

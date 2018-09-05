@@ -1,5 +1,5 @@
 ﻿
-namespace LearningSystem.Web.Infrastructure.Extensions
+namespace LearningSystem.Common.Mapping
 {
     using AutoMapper;
 

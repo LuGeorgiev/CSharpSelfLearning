@@ -1,13 +1,19 @@
-﻿using AutoMapper;
-using System;
-using System.Linq;
-
-namespace LearningSystem.Web.Infrastructure.Extensions
+﻿
+namespace LearningSystem.Web.Infrastructure.Mapping
 {
+    using AutoMapper;
+    using System;
+    using System.Linq;
+    using Common.Mapping;
+    using LearningSystem.Data.Models;
+    using LearningSystem.Services.Admin.Models;
+
     public class AutoMapperProfile :Profile
     {
         public AutoMapperProfile()
         {
+            //CreateMap<User, AdminUserListingServiceModel>().ReverseMap();
+
             var allTypes = AppDomain
                 .CurrentDomain
                 .GetAssemblies()
