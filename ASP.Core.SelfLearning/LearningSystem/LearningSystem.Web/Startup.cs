@@ -73,6 +73,11 @@ namespace LearningSystem.Web
 
             app.UseMvc(routes =>
             {
+                routes.MapRoute(
+                    name:"profile",
+                    template:"users/{username}",
+                    defaults:new { controller="Users", action="Profile"});
+
                 //because we need to have in the url title of the Article. Special routing is needed
                 routes.MapRoute(
                     name:"blog",

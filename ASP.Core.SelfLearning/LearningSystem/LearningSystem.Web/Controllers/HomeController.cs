@@ -18,7 +18,7 @@ namespace LearningSystem.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await this.courses.Active());
+            return View(await this.courses.ActiveAsync());
         }
 
         public IActionResult Error()

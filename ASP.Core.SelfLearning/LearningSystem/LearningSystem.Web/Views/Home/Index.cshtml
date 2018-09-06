@@ -13,7 +13,9 @@
         <div class="col-md-4">
             <div class="panel panel-default">
                 <div class="panel panel-heading">
-                    <h3 class="panel-title text-center">@course.Name</h3>
+                    <h3 class="panel-title text-center">
+                        <a asp-controller="Courses" asp-action="Details" asp-route-id="@course.Id">@course.Name</a>
+                    </h3>
                 </div>
                 <div class="panel-body">
                     @*At the end this Guid newGuid is for escape from browser caching the same cats*@
