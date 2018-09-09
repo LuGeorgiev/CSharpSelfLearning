@@ -9,6 +9,10 @@ namespace LearningSystem.Web.Controllers
     using Models.Courses;
     using Infrastructure.Extensions;
     using Microsoft.AspNetCore.Authorization;
+    using Services.Models;
+    using Microsoft.AspNetCore.Http;
+    using LearningSystem.Data;
+    using System.IO;
 
     public class CoursesController :Controller
     {
@@ -25,7 +29,7 @@ namespace LearningSystem.Web.Controllers
         {
             var model = new CourseDetailsViewModel
             {
-                Course = await this.courses.ByIdAsync(id)
+                Course = await this.courses.ByIdAsync<CourseDetailsServiceModel>(id)
             };
 
             if (model.Course==null)
@@ -41,6 +45,32 @@ namespace LearningSystem.Web.Controllers
             }
 
             return View(model);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> SubmitExam(int id, IFormFile exam)//the name of the imput file have to be the same as in input html
+        {
+            if (!exam.FileName.EndsWith(".zip")
+                || exam.Length > DataConstants.CourseExamSybmissionFileMaxLength)
+            {
+                TempData.AddErrorMessage("Your file should be '.zip' file with size lower than 2Mb!");
+
+                return RedirectToAction(nameof(Details), new { id });
+            }
+
+            var fileContent = await exam.ToByteArrayAsync();
+            var userId = this.userManger.GetUserId(User);
+
+            bool success = await this.courses.SaveExamSubmissionAsync(id, userId, fileContent);
+
+            if (!success)
+            {
+                return BadRequest();
+            }
+
+            TempData.AddSuccessMessage("Exam submission saved successfully!");
+            return RedirectToAction(nameof(Details), new { id }); ;
         }
 
         [Authorize]

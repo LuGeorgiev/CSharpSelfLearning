@@ -1,6 +1,7 @@
-﻿
-namespace LearningSystem.Data.Models
+﻿namespace LearningSystem.Data.Models
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class StudentCourse
     {
         public string  StudentId { get; set; }
@@ -10,5 +11,8 @@ namespace LearningSystem.Data.Models
         public Course Course { get; set; }
 
         public Grade? Grade { get; set; }
+
+        [MaxLength(DataConstants.CourseExamSybmissionFileMaxLength)]
+        public byte[] ExamSubmission { get; set; }
     }
 }

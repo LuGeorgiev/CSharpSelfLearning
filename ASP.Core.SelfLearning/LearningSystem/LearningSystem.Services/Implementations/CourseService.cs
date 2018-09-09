@@ -33,7 +33,21 @@ namespace LearningSystem.Services.Implementations
             return this.mapper.Map<IEnumerable<CourseListingServiceModel>>(courses);
         }
 
-        public async Task<CourseDetailsServiceModel> ByIdAsync(int id)
+        public async Task<IEnumerable<CourseListingServiceModel>> FindAsync(string searchText)
+        {
+            searchText = searchText ?? string.Empty;
+
+            var courses = await this.db
+                          .Courses
+                          .OrderByDescending(x => x.Id)
+                          .Where(c => c.Name.ToLower().Contains(searchText.ToLower()))
+                          .ToListAsync();
+
+            return this.mapper.Map<IEnumerable<CourseListingServiceModel>>(courses);
+        }
+
+        public async Task<TModel> ByIdAsync<TModel>(int id) 
+            where TModel : class
         {
             var course = await this.db
                 .Courses
@@ -42,9 +56,22 @@ namespace LearningSystem.Services.Implementations
                 .Include(x=>x.Trainer)
                 .FirstOrDefaultAsync();
 
-            return mapper.Map<CourseDetailsServiceModel>(course);               
+            return mapper.Map<TModel>(course);               
         }
 
+
+        // In order to use this in TrainersController also have to refactor to be used with Generic. Check above
+        //public async Task<CourseDetailsServiceModel> ByIdAsync(int id)
+        //{
+        //    var course = await this.db
+        //        .Courses
+        //        .Where(x => x.Id == id)
+        //        .Include(x => x.Stiudents)
+        //        .Include(x => x.Trainer)
+        //        .FirstOrDefaultAsync();
+
+        //    return mapper.Map<CourseDetailsServiceModel>(course);
+        //}
         public async Task<bool> SignOutStudentAsync(int courseId, string studentId)
         {
             var courseInfo =  await this.GetCourseStudentInfo(courseId, studentId);
@@ -100,5 +127,20 @@ namespace LearningSystem.Services.Implementations
                     StudentIsEnrolledInCourse = c.Stiudents.Any(s => s.StudentId == studentId)
                 })
                 .FirstOrDefaultAsync();
+
+        public async Task<bool> SaveExamSubmissionAsync(int courseId, string studentId, byte[] examSubmission)
+        {
+            var studentInCourse = await this.db
+                .FindAsync<StudentCourse>(courseId, studentId);
+
+            if (studentInCourse==null)
+            {
+                return false;
+            }
+
+            studentInCourse.ExamSubmission = examSubmission;
+            await this.db.SaveChangesAsync();
+            return true;
+        }
     }
 }

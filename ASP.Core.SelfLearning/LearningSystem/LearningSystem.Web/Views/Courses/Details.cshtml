@@ -12,6 +12,24 @@
 
 @if (User.Identity.IsAuthenticated)
 {
+
+    if (Model.Course.EndDate.Date == DateTime.UtcNow.Date 
+        && Model.UserIsEnrolledInCourse)
+    {
+        <form asp-action="SubmitExam" asp-route-id="@Model.Course.Id" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="All"></div>
+            <br />
+            Upload your exam(pnly .zip files allowed): 
+            <br />
+            <br />
+            <input type="file" name="exam" style="display:none" accept=".zip"/>
+            <button type="button" class="btn btn-default" onclick="document.getElementsByName('exam')[0].click()">Choose your file!</button>
+            <br />            
+            <br />            
+            <input type="submit" class="btn btn-primary" value="Upload Exam"/>
+        </form>      
+    }
+
     if (Model.Course.StartDate > DateTime.UtcNow)
     {
         if (Model.UserIsEnrolledInCourse)
@@ -30,7 +48,15 @@
     }
     else
     {
-        <span>This course has already started.</span>
+        @if (Model.Course.EndDate < DateTime.UtcNow)
+        {
+            <span>This course has already finshed!</span>
+        }
+        else
+        {
+            <span>This course has already started!</span>
+
+        }
     }
 }
 else

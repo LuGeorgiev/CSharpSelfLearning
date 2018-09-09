@@ -1,0 +1,36 @@
+﻿@model SearchViewModel
+
+@{
+    ViewData["Title"] = $"Search results for {Model.SearchedText}";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (Model.Courses.Any())
+{
+    <h3>Found Courses</h3>
+
+    <div class="row course-listings">
+         @await Html.PartialAsync("_CourseListingsPartial", Model.Courses);
+    </div>
+}
+else
+{
+    <h3>No courses to show.</h3>
+
+}
+<br />
+@if (Model.Users.Any())
+{
+    <h3>Found Users</h3>
+    <ul>
+        @foreach (var user in Model.Users)
+        { 
+           <li> <a asp-controller="Users" asp-action="Profile" asp-route-username="@user.Username">@user.Username - @user.Courses</a></li>
+        }
+    </ul>
+}
+else
+{
+    <h3>No users to show.</h3>
+}

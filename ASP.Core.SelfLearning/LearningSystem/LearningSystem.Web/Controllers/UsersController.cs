@@ -3,6 +3,7 @@ namespace LearningSystem.Web.Controllers
 {
     using LearningSystem.Data.Models;
     using LearningSystem.Services;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using System.Threading.Tasks;
@@ -28,7 +29,21 @@ namespace LearningSystem.Web.Controllers
             }
             var profile = await this.users.ProfileAsync(user.Id);
 
-            return View();
+            return View(profile);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> DownloadCertificate(int id)
+        {
+            var userId = this.userManager.GetUserId(User);
+            var certificateContents = await this.users
+                .GetPdfCertificate(id, userId);
+            if (certificateContents==null)
+            {
+                return BadRequest();
+            }
+
+            return File(certificateContents,"application/pfd", "Certificate.pdf");
         }
     }
 }

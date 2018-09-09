@@ -8,5 +8,10 @@ namespace LearningSystem.Web.Infrastructure.Extensions
         {
             tempData[WebConstants.TempDataSuccessMsgKey] = message;
         }
+
+        public static void AddErrorMessage(this ITempDataDictionary tempData, string message)
+        {
+            tempData[WebConstants.TempDataErrorMsgKey] = message;
+        }
     }
 }
