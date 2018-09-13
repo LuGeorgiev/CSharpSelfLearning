@@ -59,7 +59,6 @@ namespace LearningSystem.Services.Implementations
             return mapper.Map<TModel>(course);               
         }
 
-
         // In order to use this in TrainersController also have to refactor to be used with Generic. Check above
         //public async Task<CourseDetailsServiceModel> ByIdAsync(int id)
         //{
