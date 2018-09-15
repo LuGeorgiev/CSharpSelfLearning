@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Product>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@foreach (var product in Model)
+{ 
+    <p>
+        @product.Title - @product.Price
+        <a class="btn btn-primary" href="#" >Buy</a>
+    </p>
+    <br />
+    <br />
+    <br />
+
+}
