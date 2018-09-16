@@ -6,10 +6,12 @@ namespace ShoppingCartDemo.Services
 
     public interface IShoppingCartManager
     {
-        void AddToCart(string cartId, CartItem cartItem);
+        void AddToCart(string cartId, int productId);
 
         void RemoveFromCart(string cartId, int productId);
 
         IEnumerable<CartItem> GetItems(string cartId);
+
+        void Clear(string id);
     }
 }

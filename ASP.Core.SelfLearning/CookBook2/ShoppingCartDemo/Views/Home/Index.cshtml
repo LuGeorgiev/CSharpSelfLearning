@@ -8,7 +8,7 @@
 { 
     <p>
         @product.Title - @product.Price
-        <a class="btn btn-primary" href="#" >Buy</a>
+        <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-id="@product.Id" >Buy</a>
     </p>
     <br />
     <br />

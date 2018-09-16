@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using ShoppingCartDemo.Data;
 using ShoppingCartDemo.Models;
 using ShoppingCartDemo.Services;
+using ShoppingCartDemo.Services.Implementations;
 
 namespace ShoppingCartDemo
 {
@@ -35,6 +36,7 @@ namespace ShoppingCartDemo
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddSingleton<IShoppingCartManager, ShoppingCartManager>();
 
             services.AddSession();
 

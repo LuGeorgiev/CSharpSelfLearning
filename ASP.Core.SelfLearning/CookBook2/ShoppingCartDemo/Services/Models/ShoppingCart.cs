@@ -15,14 +15,24 @@
 
         public IEnumerable<CartItem> Items => new List<CartItem>(this.items);
 
-        public void AddToCard(CartItem item)
+        public void AddToCart(int productId)
         {
-            if (item==null)
-            {
-                throw new NullReferenceException("Item was not privided");
-            }
+            var cartItem = this.items
+                .FirstOrDefault(p => p.ProductId == productId);
 
-            this.items.Add(item);
+            if (cartItem == null)
+            {
+                cartItem = new CartItem
+                {
+                    ProductId = productId,
+                    Quantity = 1
+                };
+                this.items.Add(cartItem);
+            }
+            else
+            {
+                cartItem.Quantity++;
+            }
         }
 
         public void RemoveFromCart(int productId)
@@ -36,5 +46,9 @@
             }            
         }
 
+        public void Clear()
+        {
+            this.items.Clear();
+        }
     }
 }

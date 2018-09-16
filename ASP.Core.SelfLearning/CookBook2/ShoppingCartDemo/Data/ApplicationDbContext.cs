@@ -21,6 +21,16 @@ namespace ShoppingCartDemo.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<Order>()
+                .HasOne(o => o.User)
+                .WithMany(u => u.Orders)
+                .HasForeignKey(o => o.UserId);
+
+            builder.Entity<Order>()
+                .HasMany(o => o.Items)
+                .WithOne(i => i.Order)
+                .HasForeignKey(i => i.OrderId);
+
             base.OnModelCreating(builder);
         }
     }
