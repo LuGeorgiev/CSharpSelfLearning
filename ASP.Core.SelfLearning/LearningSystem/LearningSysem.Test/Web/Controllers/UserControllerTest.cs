@@ -5,14 +5,13 @@
     using Microsoft.AspNetCore.Authorization;
     using System.Linq;
     using Moq;
-    using System.Reflection;
     using System.Threading.Tasks;
     using Xunit;
-    using Microsoft.AspNetCore.Identity;
     using LearningSystem.Data.Models;
     using Microsoft.AspNetCore.Mvc;
     using LearningSystem.Services;
     using LearningSystem.Services.Models;
+    using LearningSysem.Test.Mocks;
 
     public class UserControllerTest
     {
@@ -37,7 +36,7 @@
         public async Task ProfileShouldReturNotFoundWithInvalidUserName()
         {
             //Arrange
-            var userManager = GetUserManagerMock();
+            var userManager = UserManagerMock.New;
             var controller = new UsersController(null, userManager.Object);
 
             //Act
@@ -57,7 +56,8 @@
             const string userId = "SomeId";
             const string userName = "Username";
 
-            var userManager = GetUserManagerMock();
+            var userManager = UserManagerMock.New;
+
             userManager
                 .Setup(u => u.FindByNameAsync(It.IsAny<string>())) //every time returns fake
                 .ReturnsAsync(new User { Id= userId });
@@ -81,9 +81,10 @@
                 .Match(m => m.As<UserProfileServiceModel>().UserName == userName);
         }
 
-        private Mock<UserManager<User>> GetUserManagerMock()
-            =>new Mock<UserManager<User>>(
-                Mock.Of<IUserStore<User>>(), null, null, null, null, null, null, null, null);
+        // TO BE used as static property 
+        //private Mock<UserManager<User>> GetUserManagerMock()
+        //    =>new Mock<UserManager<User>>(
+        //        Mock.Of<IUserStore<User>>(), null, null, null, null, null, null, null, null);
         
     }
 }
