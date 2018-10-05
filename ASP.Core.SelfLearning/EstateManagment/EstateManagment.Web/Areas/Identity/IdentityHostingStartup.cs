@@ -1,5 +1,5 @@
 ﻿using System;
-using EstateManagment.Web.Data;
+using EstateManagment.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;

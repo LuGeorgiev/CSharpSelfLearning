@@ -19,4 +19,9 @@
     <Folder Include="Areas\Identity\Services\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EstateManagment.Data\EstateManagment.Data.csproj" />
+    <ProjectReference Include="..\EstateManagment.Services\EstateManagment.Services.csproj" />
+  </ItemGroup>
+
 </Project>

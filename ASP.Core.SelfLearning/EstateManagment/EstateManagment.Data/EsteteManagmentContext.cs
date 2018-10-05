@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using EstateManagment.Data.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace EstateManagment.Web.Data
+namespace EstateManagment.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class EsteteManagmentContext : IdentityDbContext<User>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public EsteteManagmentContext(DbContextOptions<EsteteManagmentContext> options)
             : base(options)
         {
         }
