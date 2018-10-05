@@ -1,10 +1,9 @@
-﻿
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
+
 namespace EstateManagment.Data.Migrations
 {
-    using System;
-    using Microsoft.EntityFrameworkCore.Metadata;
-    using Microsoft.EntityFrameworkCore.Migrations;
-
     public partial class InitialUser : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
