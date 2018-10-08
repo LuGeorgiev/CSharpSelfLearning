@@ -3,6 +3,8 @@
     using Enums;
     using System.Collections.Generic;
 
+    using static DataConstants;
+
     public class Property
     {
         public int Id { get; set; }

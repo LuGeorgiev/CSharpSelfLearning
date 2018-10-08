@@ -3,6 +3,8 @@
     using System;
     using System.Collections.Generic;
 
+    using static DataConstants;
+
     public class MonthlyPaymentRent
     {
         public int Id { get; set; }
@@ -16,5 +18,9 @@
         public bool IsPaid { get; set; } = false;
 
         public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
+
+        public int RentAgreementId { get; set; }
+
+        public virtual RentAgreement RentAgreement { get; set; }
     }
 }

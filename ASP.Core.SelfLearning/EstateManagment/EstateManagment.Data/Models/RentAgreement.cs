@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
 
+    using static DataConstants;
     public class RentAgreement
     {
         public int Id { get; set; }

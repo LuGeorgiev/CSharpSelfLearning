@@ -1,5 +1,7 @@
 ﻿namespace EstateManagment.Data.Models
 {
+    using static DataConstants;
+
     public class PropertyRent
     {
         public int PropertyId { get; set; }

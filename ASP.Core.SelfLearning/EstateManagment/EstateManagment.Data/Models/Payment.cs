@@ -2,6 +2,8 @@
 {
     using System;
 
+    using static DataConstants;
+
     public class Payment
     {
         public int Id { get; set; }

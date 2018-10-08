@@ -4,6 +4,7 @@
     {
         Room = 1,
         Warehouse = 2,
-        Office = 3
+        Office = 3,
+        Other = 4
     }
 }

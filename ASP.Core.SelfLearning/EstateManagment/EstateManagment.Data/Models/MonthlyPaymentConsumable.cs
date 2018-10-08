@@ -1,7 +1,8 @@
 ﻿namespace EstateManagment.Data.Models
 {
     using System;
-    using System.Collections.Generic;
+
+    using static DataConstants;
 
     public class MonthlyPaymentConsumable
     {
@@ -28,5 +29,9 @@
         public virtual User User { get; set; }
 
         public DateTime? PaymentDate { get; set; }
+
+        public int RentAgreementId { get; set; }
+
+        public virtual RentAgreement RentAgreement { get; set; }
     }
 }
