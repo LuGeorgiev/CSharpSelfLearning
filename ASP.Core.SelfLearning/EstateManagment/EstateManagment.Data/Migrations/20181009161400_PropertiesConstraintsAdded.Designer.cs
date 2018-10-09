@@ -4,14 +4,16 @@ using EstateManagment.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EstateManagment.Data.Migrations
 {
     [DbContext(typeof(EsteteManagmentContext))]
-    partial class EsteteManagmentContextModelSnapshot : ModelSnapshot
+    [Migration("20181009161400_PropertiesConstraintsAdded")]
+    partial class PropertiesConstraintsAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,8 +56,7 @@ namespace EstateManagment.Data.Migrations
                         .HasMaxLength(500);
 
                     b.Property<string>("Telephone")
-                        .IsRequired()
-                        .HasMaxLength(20);
+                        .IsRequired();
 
                     b.HasKey("Id");
 

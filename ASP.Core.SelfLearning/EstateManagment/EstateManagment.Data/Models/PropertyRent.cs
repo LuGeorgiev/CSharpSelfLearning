@@ -1,5 +1,6 @@
 ﻿namespace EstateManagment.Data.Models
 {
+    using System.ComponentModel.DataAnnotations;
     using static DataConstants;
 
     public class PropertyRent
@@ -12,6 +13,8 @@
 
         public virtual RentAgreement RentAgreement { get; set; }
         
+        [Required]
+        [Range(typeof(decimal), MinPayment,MaxPayment)]
         public decimal MonthlyPrice { get; set; }
     }
 }

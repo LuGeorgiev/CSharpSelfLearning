@@ -45,6 +45,7 @@
 
         [Required]
         [RegularExpression(@"^\+?[\d\ -]+$")]
+        [MaxLength(20)]
         public string Telephone { get; set; }
 
         [MaxLength(DescriptionMaxLength)]

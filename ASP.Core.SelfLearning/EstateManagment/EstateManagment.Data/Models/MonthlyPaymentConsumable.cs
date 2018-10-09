@@ -1,23 +1,31 @@
 ﻿namespace EstateManagment.Data.Models
 {
     using System;
-
+    using System.ComponentModel.DataAnnotations;
     using static DataConstants;
 
     public class MonthlyPaymentConsumable
     {
         public int Id { get; set; }
 
+        [Range(0, int.MaxValue)]
         public int? WaterReport { get; set; }
 
+        [Required]
+        [Range(typeof(decimal), MinPayment, MaxPayment)]
         public decimal WaterPrice { get; set; }
 
+        [Range(0, int.MaxValue)]
         public int? ElectricityDay { get; set; }
 
+        [Range(0, int.MaxValue)]
         public int? ElectricityNight { get; set; }
 
+        [Range(0, int.MaxValue)]
         public int? ElectricityPeak { get; set; }
 
+        [Required]
+        [Range(typeof(decimal), MinPayment, MaxPayment)]
         public decimal ElectricityPrice { get; set; }
 
         public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
@@ -30,6 +38,7 @@
 
         public DateTime? PaymentDate { get; set; }
 
+        [Required]
         public int RentAgreementId { get; set; }
 
         public virtual RentAgreement RentAgreement { get; set; }

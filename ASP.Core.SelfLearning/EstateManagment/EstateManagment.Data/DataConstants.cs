@@ -11,8 +11,8 @@
         public const int PropertyNameMaxLength = 40;
         public const int PropertyAddressMinLength = 2;
         public const int PropertyAddressMaxLength = 200;
-        public const int PropertyAreaMinLength = 10;
-        public const int PropertyAreaMaxLength = 1000000;
+        public const int PropertyMinArea = 10;
+        public const int PropertyMaxArea = 1000000;
         public const decimal PropertyRentMinPrice = 0;
         public const decimal PropertyRentMaxPrice = 100000000;
 
@@ -34,6 +34,9 @@
         public const int RentDescriptionMaxLength = 1000;
 
         public const int ContractsFileMaxSize = 2 * 1024 * 1024;
+
+        public const string MinPayment = "0";
+        public const string MaxPayment = "1000000";
 
         public const string RegexLatinNames = @"^[A-za-z\u0400-\u044F]+$";
         public const string RegexTelephone = @"^\+?[0-9\ -]{5,20}$";
