@@ -13,6 +13,8 @@ using EstateManagment.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using EstateManagment.Data.Models;
+using EstateManagment.Services.Contracts;
+using EstateManagment.Services;
 
 namespace EstateManagment.Web
 {
@@ -42,6 +44,25 @@ namespace EstateManagment.Web
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<User>()
                 .AddEntityFrameworkStores<EsteteManagmentContext>();
+
+            //services.AddDefaultIdentity<IdentityUser>(options=>
+            //{
+            //    options.SignIn.RequireConfirmedEmail = true;
+            //});
+
+            services.Configure<IdentityOptions>(options=>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 4;
+                options.Password.RequiredUniqueChars = 1;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+
+                options.Lockout.MaxFailedAccessAttempts = 4;
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(20);
+            });
+
+            services.AddTransient<ICompaniesService, CompaniesService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
