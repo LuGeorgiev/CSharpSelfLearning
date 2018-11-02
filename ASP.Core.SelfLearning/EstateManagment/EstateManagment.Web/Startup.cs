@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using EstateManagment.Data;
@@ -17,6 +13,7 @@ using EstateManagment.Services.Contracts;
 using EstateManagment.Services;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using EstateManagment.Web.Areas.Identity.Services;
+using EstateManagment.Web.Common.Extensions;
 
 namespace EstateManagment.Web
 {
@@ -34,7 +31,6 @@ namespace EstateManagment.Web
         {
             services.Configure<CookiePolicyOptions>(options =>
             {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
@@ -44,9 +40,16 @@ namespace EstateManagment.Web
                 .UseLazyLoadingProxies()
                 .UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<User>()
-                .AddEntityFrameworkStores<EsteteManagmentContext>();
 
+            services.AddIdentity<User, IdentityRole>()
+                .AddDefaultUI()
+                .AddEntityFrameworkStores<EsteteManagmentContext>()
+                .AddDefaultTokenProviders();
+
+            //services.AddDefaultIdentity<User>()
+            //    .AddRoles<IdentityRole>()
+            //    .AddEntityFrameworkStores<EsteteManagmentContext>()
+            //    .AddDefaultTokenProviders();
 
             services.AddAuthentication()
                 .AddGoogle(options =>
@@ -72,12 +75,19 @@ namespace EstateManagment.Web
             services.AddTransient<ICompaniesService, CompaniesService>();
             services.AddSingleton<IEmailSender, SendGridEmailSender>();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .AddRazorPagesOptions(options =>
+                {
+                    options.AllowAreas = true;
+                    options.Conventions.AuthorizeAreaFolder("Identity", "/Account/Manage");
+                    options.Conventions.AuthorizeAreaPage("Identity", "/Account/Logout");
+                }); ;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {
+        {            
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -92,14 +102,22 @@ namespace EstateManagment.Web
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
             app.UseAuthentication();
+
+            app.SeedDatabase();
 
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+            });
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "areas",
+                    template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
