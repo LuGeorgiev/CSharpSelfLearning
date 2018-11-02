@@ -13,10 +13,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.4" PrivateAssets="All" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Areas\Identity\Services\" />
+    <PackageReference Include="Sendgrid" Version="9.10.0" />
   </ItemGroup>
 
   <ItemGroup>

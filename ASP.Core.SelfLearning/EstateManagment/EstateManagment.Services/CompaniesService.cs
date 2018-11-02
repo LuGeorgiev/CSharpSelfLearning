@@ -22,6 +22,7 @@ namespace EstateManagment.Services
         public async Task<IEnumerable<CompanyModel>> AllAsync()
             =>await this.db.Companies.Select(x => new CompanyModel
             {
+                Id=x.Id,
                 Name = x.Name,
                 Address = x.Address,
                 Bulstat = x.Bulstat

@@ -15,6 +15,8 @@ using Microsoft.Extensions.DependencyInjection;
 using EstateManagment.Data.Models;
 using EstateManagment.Services.Contracts;
 using EstateManagment.Services;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using EstateManagment.Web.Areas.Identity.Services;
 
 namespace EstateManagment.Web
 {
@@ -45,10 +47,13 @@ namespace EstateManagment.Web
             services.AddDefaultIdentity<User>()
                 .AddEntityFrameworkStores<EsteteManagmentContext>();
 
-            //services.AddDefaultIdentity<IdentityUser>(options=>
-            //{
-            //    options.SignIn.RequireConfirmedEmail = true;
-            //});
+
+            services.AddAuthentication()
+                .AddGoogle(options =>
+                {
+                    options.ClientId = "1063420242986-mlt82tc2vs03f5nncag0q76cbpujf3cn.apps.googleusercontent.com";
+                    options.ClientSecret = "ffBaNueqEIlnqnHSNTagE7nI";
+                });
 
             services.Configure<IdentityOptions>(options=>
             {
@@ -60,9 +65,12 @@ namespace EstateManagment.Web
 
                 options.Lockout.MaxFailedAccessAttempts = 4;
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(20);
-            });
+
+                //options.SignIn.RequireConfirmedEmail = true;
+            });            
 
             services.AddTransient<ICompaniesService, CompaniesService>();
+            services.AddSingleton<IEmailSender, SendGridEmailSender>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

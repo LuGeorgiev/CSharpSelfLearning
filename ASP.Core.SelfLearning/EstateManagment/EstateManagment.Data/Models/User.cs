@@ -8,7 +8,7 @@ namespace EstateManagment.Data.Models
 
     public class User :IdentityUser
     {
-        [Required]
+        
         [RegularExpression(RegexLatinNames)]
         [MinLength(ClientNameMinLength)]
         [MaxLength(ClientNameMaxLength)]
