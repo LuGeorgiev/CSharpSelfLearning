@@ -72,7 +72,9 @@ namespace EstateManagment.Web
             });            
 
             services.AddTransient<ICompaniesService, CompaniesService>();
+
             services.AddSingleton<IEmailSender, SendGridEmailSender>();
+            services.Configure<SendGridOptions>(this.Configuration.GetSection("SendGridSettings"));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                 .AddRazorPagesOptions(options =>
