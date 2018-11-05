@@ -10,6 +10,8 @@ namespace EstateManagment.Web.Areas.Identity.Services
 {
     public class SendGridEmailSender : IEmailSender
     {
+        private SendGridOptions
+
         public async Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
             var apiKey = "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";
