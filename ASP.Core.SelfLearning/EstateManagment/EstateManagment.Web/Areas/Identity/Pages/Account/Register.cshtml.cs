@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using EstateManagment.Data.Models;
@@ -58,7 +56,6 @@ namespace EstateManagment.Web.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
-            [Required]
             [RegularExpression(RegexLatinNames)]
             [MinLength(ClientNameMinLength)]
             [MaxLength(ClientNameMaxLength)]

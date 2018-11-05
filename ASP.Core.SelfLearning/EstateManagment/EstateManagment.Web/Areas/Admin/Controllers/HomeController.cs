@@ -8,10 +8,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EstateManagment.Web.Areas.Admin.Controllers
-{
-    [Route("Admin")]
-    //[Authorize(Roles =WebConstants.AdminRole)]
-    public class HomeController : Controller
+{   
+    public class HomeController : AdminController
     {
         private readonly UserManager<User> userManager;
 

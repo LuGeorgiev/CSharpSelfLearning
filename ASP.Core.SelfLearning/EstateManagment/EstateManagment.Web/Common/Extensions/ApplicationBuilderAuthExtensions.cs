@@ -8,9 +8,9 @@ namespace EstateManagment.Web.Common.Extensions
 {
     public static class ApplicationBuilderAuthExtensions
     {
-        private static string DefaultAdminPass = "admin1";
-        private static string DefaultAdminUsername = "adminAdmin";
-        private static string DefaultAdminEmail = "admin1@admin.bg";
+        private static string DefaultAdminPass = "admin2";
+        private static string DefaultAdminUsername = "admin2";
+        private static string DefaultAdminEmail = "admin2@admin.com";
 
         private static IdentityRole[] roles =
         {
@@ -19,7 +19,7 @@ namespace EstateManagment.Web.Common.Extensions
             new IdentityRole(WebConstants.AccountantRole)
         };
 
-        public static IApplicationBuilder SeedDatabase(this IApplicationBuilder app)
+        public static async void SeedDatabase(this IApplicationBuilder app)
         {
             var serviceFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
             var scope = serviceFactory.CreateScope();
@@ -29,8 +29,8 @@ namespace EstateManagment.Web.Common.Extensions
                 var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
                 var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
 
-                Task.Run(async () =>
-               {
+               // Task.Run(async () =>
+               //{
                    foreach (var role in roles)
                    {
                        if (!await roleManager.RoleExistsAsync(role.Name))
@@ -51,10 +51,10 @@ namespace EstateManagment.Web.Common.Extensions
                        var result = await userManager.CreateAsync(adminUser, DefaultAdminPass);
                        result = await userManager.AddToRoleAsync(adminUser, roles[0].Name);
                    }
-               })
-               .Wait();
+               //})
+               //.Wait();
             }
-            return app;
+            //return app;
         }
     }
 }

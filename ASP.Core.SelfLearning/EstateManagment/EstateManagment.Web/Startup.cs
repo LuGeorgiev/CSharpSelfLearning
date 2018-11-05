@@ -14,6 +14,7 @@ using EstateManagment.Services;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using EstateManagment.Web.Areas.Identity.Services;
 using EstateManagment.Web.Common.Extensions;
+using Microsoft.AspNetCore.Authentication.Google;
 
 namespace EstateManagment.Web
 {
@@ -46,17 +47,15 @@ namespace EstateManagment.Web
                 .AddEntityFrameworkStores<EsteteManagmentContext>()
                 .AddDefaultTokenProviders();
 
-            //services.AddDefaultIdentity<User>()
-            //    .AddRoles<IdentityRole>()
-            //    .AddEntityFrameworkStores<EsteteManagmentContext>()
-            //    .AddDefaultTokenProviders();
+           
 
             services.AddAuthentication()
                 .AddGoogle(options =>
                 {
-                    options.ClientId = "1063420242986-mlt82tc2vs03f5nncag0q76cbpujf3cn.apps.googleusercontent.com";
-                    options.ClientSecret = "ffBaNueqEIlnqnHSNTagE7nI";
+                    options.ClientId = this.Configuration.GetSection("ExternalAuthentication:Google:ClientId").Value;
+                    options.ClientSecret = this.Configuration.GetSection("ExternalAuthentication:Google:ClientSecret").Value;
                 });
+
 
             services.Configure<IdentityOptions>(options=>
             {
@@ -109,16 +108,17 @@ namespace EstateManagment.Web
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    name: "areaRoute",
+                    template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
             });
 
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "areas",
-                    template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
+
         }
     }
 }
