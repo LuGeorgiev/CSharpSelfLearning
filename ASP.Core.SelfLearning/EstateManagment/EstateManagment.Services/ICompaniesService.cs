@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EstateManagment.Services.Contracts
+namespace EstateManagment.Services
 {
     public interface ICompaniesService
     {

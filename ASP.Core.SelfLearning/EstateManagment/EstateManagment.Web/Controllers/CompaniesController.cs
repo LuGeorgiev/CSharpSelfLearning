@@ -1,4 +1,4 @@
-﻿using EstateManagment.Services.Contracts;
+﻿using EstateManagment.Services;
 using EstateManagment.Web.Models.Companies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

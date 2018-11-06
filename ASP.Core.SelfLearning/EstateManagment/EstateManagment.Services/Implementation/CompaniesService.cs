@@ -1,6 +1,6 @@
 ﻿using EstateManagment.Data;
 using EstateManagment.Data.Models;
-using EstateManagment.Services.Contracts;
+using EstateManagment.Services;
 using EstateManagment.Services.ServiceModels.Companies;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EstateManagment.Services
+namespace EstateManagment.Services.Implementation
 {
     public class CompaniesService : ICompaniesService
     {

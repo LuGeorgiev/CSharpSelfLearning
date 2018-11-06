@@ -9,12 +9,13 @@ using EstateManagment.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using EstateManagment.Data.Models;
-using EstateManagment.Services.Contracts;
+using EstateManagment.Services.Implementation;
 using EstateManagment.Services;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using EstateManagment.Web.Areas.Identity.Services;
 using EstateManagment.Web.Common.Extensions;
 using Microsoft.AspNetCore.Authentication.Google;
+using AutoMapper;
 
 namespace EstateManagment.Web
 {
@@ -72,9 +73,11 @@ namespace EstateManagment.Web
             });            
 
             services.AddTransient<ICompaniesService, CompaniesService>();
+            services.AddTransient<IUsersService, UsersService>();
 
             services.AddSingleton<IEmailSender, SendGridEmailSender>();
             services.Configure<SendGridOptions>(this.Configuration.GetSection("SendGridSettings"));
+            services.AddAutoMapper();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                 .AddRazorPagesOptions(options =>
