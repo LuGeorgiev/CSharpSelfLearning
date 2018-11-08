@@ -1,8 +1,32 @@
-﻿
+﻿@model IEnumerable<UserShortModel>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "All non-adminstrator users";
 }
 
-<h2>Index</h2>
+<h2>@ViewData["Title"]</h2>
 
-Horray
+<table class="table table-striped table-hover">
+    <thead  class="bg-info">
+        <tr>
+            <th scope="col">UserId</th>
+            <th scope="col">Username</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var person  in Model )
+        {
+            <tr>
+                <td>@person.Id</td>
+                <td>@person.Username</td>
+                <td>
+                    <a asp-area="Admin" asp-controller="Users" asp-action="MakeAccountant" asp-route-id="@person.Id" class="btn btn-basic">Make Accountant</a>
+                    <a asp-area="Admin" asp-controller="Users" asp-action="MakeManager" asp-route-id="@person.Id" class="btn btn-primary">Make Manager</a>
+                    <a asp-area="Admin" asp-controller="Users" asp-action="RemoveRole" asp-route-id="@person.Id" class="btn btn-warning">Remove Role</a>
+                    <a asp-area="Admin" asp-controller="Users" asp-action="MakeAdmin" asp-route-id="@person.Id" class="btn btn-danger">Make Admin</a>
+                    <a asp-area="Admin" asp-controller="Users" asp-action="Ban" asp-route-id="@person.Id" class="btn btn-danger">Ban</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

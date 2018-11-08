@@ -69,7 +69,7 @@ namespace EstateManagment.Web
                 options.Lockout.MaxFailedAccessAttempts = 4;
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(20);
 
-                //options.SignIn.RequireConfirmedEmail = true;
+                options.SignIn.RequireConfirmedEmail = true;
             });            
 
             services.AddTransient<ICompaniesService, CompaniesService>();
@@ -113,16 +113,13 @@ namespace EstateManagment.Web
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "areaRoute",
+                    name: "areas",
                     template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-            });
 
-            app.UseMvc(routes =>
-            {
                 routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
+                   name: "default",
+                   template: "{controller=Home}/{action=Index}/{id?}");
+            });           
 
         }
     }

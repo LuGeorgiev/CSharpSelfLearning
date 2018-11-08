@@ -40,8 +40,12 @@ namespace EstateManagment.Services.Implementation
             return model;
         }
 
-        public async Task<UserInfoModel> GetUserAsync(string userId)
-        {
+        public async Task<User> GetUserAsync(string userId)
+            => await this.db.Users.FirstOrDefaultAsync(x=>x.Id==userId);
+
+        public async Task<UserInfoModel> GetUserWithRolesAsync(string userId)
+        {           
+
             var user = await this.db.Users
                 .FirstOrDefaultAsync(x => x.Id == userId);
             if (user==null)
@@ -52,7 +56,7 @@ namespace EstateManagment.Services.Implementation
             var model = this.mapper.Map<UserInfoModel>(user);
             model.Roles = roles;
 
-            throw new NotImplementedException();
+            return model;
         }
     }
 }
