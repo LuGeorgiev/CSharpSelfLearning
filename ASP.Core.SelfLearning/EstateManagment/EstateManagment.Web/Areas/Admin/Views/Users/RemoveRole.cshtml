@@ -1,0 +1,37 @@
+﻿@model UserInfoModel
+@{
+    ViewData["Title"] = "Remove Role from User";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h3>Username : @Model.Username</h3>
+@if (Model.Roles.Count() > 0)
+{
+    <form asp-controller="Users" asp-action="DoRemoveRole" method="post">
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label for="Role">Role to Remove</label>
+                <select id="Role" name="Role" class="form-control">
+
+                    @foreach (var role in Model.Roles)
+                    {
+                        <option value="@role">@role</option>
+                    }
+
+                </select>
+                <input type="hidden" name="id" value="@Model.Id" />
+            </div>
+            <div class="col-md-9"><strong>Action</strong></div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-info">Remove a Rols</button>
+            </div>
+        </div>
+    </form>
+}
+else
+{
+    <h4>Mentioned above user has no Roles</h4>
+    <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="btn btn-info">Back to Admin page</a>
+}
+

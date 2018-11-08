@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EstateManagment.Data.Migrations
 {
-    [DbContext(typeof(EsteteManagmentContext))]
+    [DbContext(typeof(EstateManagmentContext))]
     [Migration("20181102132412_RequirementNicknameDelete")]
     partial class RequirementNicknameDelete
     {

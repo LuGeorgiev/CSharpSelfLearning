@@ -18,9 +18,9 @@
         {
             <tr>
                 <td>@person.Id</td>
-                <td>@person.Username</td>
+                <td><a asp-area="Admin" asp-controller="Users" asp-action="Details" asp-route-id="@person.Id" >@person.Username</a> </td>
                 <td>
-                    <a asp-area="Admin" asp-controller="Users" asp-action="MakeAccountant" asp-route-id="@person.Id" class="btn btn-basic">Make Accountant</a>
+                    <a asp-area="Admin" asp-controller="Users" asp-action="MakeAccountant" asp-route-id="@person.Id" class="btn btn-info">Make Accountant</a>
                     <a asp-area="Admin" asp-controller="Users" asp-action="MakeManager" asp-route-id="@person.Id" class="btn btn-primary">Make Manager</a>
                     <a asp-area="Admin" asp-controller="Users" asp-action="RemoveRole" asp-route-id="@person.Id" class="btn btn-warning">Remove Role</a>
                     <a asp-area="Admin" asp-controller="Users" asp-action="MakeAdmin" asp-route-id="@person.Id" class="btn btn-danger">Make Admin</a>

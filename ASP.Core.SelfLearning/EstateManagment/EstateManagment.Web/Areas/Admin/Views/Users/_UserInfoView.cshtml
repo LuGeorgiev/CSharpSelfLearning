@@ -1,0 +1,24 @@
+﻿@model UserInfoModel
+
+<p>Promoted User Id: @Model.Id</p>
+@if (Model.Nickname != null)
+{
+    <p>Nickname: @Model.Nickname</p>
+
+}
+<p>Username: <strong>@Model.Username</strong></p>
+<p> <strong>Roles:</strong></p>
+<ul>
+    <li>
+        User
+    </li>
+    @if (Model.Roles.Count() > 0)
+    {
+        foreach (var role in Model.Roles)
+        {
+            <li>
+                @role
+            </li>
+        }
+    }
+</ul>

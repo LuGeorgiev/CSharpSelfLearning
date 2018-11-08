@@ -1,0 +1,10 @@
+﻿@model UserInfoModel
+@{
+    ViewData["Title"] = "Manager Promotion";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<partial name="_UserInfoView" />
+
+<a asp-area="Admin" asp-controller="Home" asp-action="Index" class="btn btn-info">Back to Admin page</a>

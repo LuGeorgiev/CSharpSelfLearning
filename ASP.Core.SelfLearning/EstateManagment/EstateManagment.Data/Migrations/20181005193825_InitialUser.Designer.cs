@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EstateManagment.Data.Migrations
 {
-    [DbContext(typeof(EsteteManagmentContext))]
+    [DbContext(typeof(EstateManagmentContext))]
     [Migration("20181005193825_InitialUser")]
     partial class InitialUser
     {

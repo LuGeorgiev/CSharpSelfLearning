@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EstateManagment.Data
 {
-    public class EsteteManagmentContext : IdentityDbContext<User>
+    public class EstateManagmentContext : IdentityDbContext<User>
     {
-        public EsteteManagmentContext(DbContextOptions<EsteteManagmentContext> options)
+        public EstateManagmentContext(DbContextOptions<EstateManagmentContext> options)
             : base(options)
         {
         }

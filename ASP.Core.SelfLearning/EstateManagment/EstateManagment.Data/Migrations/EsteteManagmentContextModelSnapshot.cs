@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EstateManagment.Data.Migrations
 {
-    [DbContext(typeof(EsteteManagmentContext))]
+    [DbContext(typeof(EstateManagmentContext))]
     partial class EsteteManagmentContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

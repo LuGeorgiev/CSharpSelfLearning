@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EstateManagment.Data.Migrations
 {
-    [DbContext(typeof(EsteteManagmentContext))]
+    [DbContext(typeof(EstateManagmentContext))]
     [Migration("20181008171528_ForeignKeysAddedAndCollections")]
     partial class ForeignKeysAddedAndCollections
     {

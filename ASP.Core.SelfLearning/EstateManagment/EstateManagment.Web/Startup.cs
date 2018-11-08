@@ -37,15 +37,15 @@ namespace EstateManagment.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<EsteteManagmentContext>(options =>
+            services.AddDbContext<EstateManagmentContext>(options =>
                 options
                 .UseLazyLoadingProxies()
                 .UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<User, IdentityRole>()
-                .AddDefaultUI()
-                .AddEntityFrameworkStores<EsteteManagmentContext>()
+                //.AddDefaultUI()
+                .AddEntityFrameworkStores<EstateManagmentContext>()
                 .AddDefaultTokenProviders();
 
            
@@ -69,7 +69,7 @@ namespace EstateManagment.Web
                 options.Lockout.MaxFailedAccessAttempts = 4;
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(20);
 
-                options.SignIn.RequireConfirmedEmail = true;
+                //options.SignIn.RequireConfirmedEmail = true;
             });            
 
             services.AddTransient<ICompaniesService, CompaniesService>();

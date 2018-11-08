@@ -16,10 +16,10 @@ namespace EstateManagment.Services.Implementation
     public class UsersService : IUsersService
     {
         private readonly IMapper mapper;
-        private readonly EsteteManagmentContext db;
+        private readonly EstateManagmentContext db;
         private readonly UserManager<User> userManager;
 
-        public UsersService(IMapper mapper, EsteteManagmentContext db, UserManager<User> userManager)
+        public UsersService(IMapper mapper, EstateManagmentContext db, UserManager<User> userManager)
         {
             this.mapper = mapper;
             this.db = db;

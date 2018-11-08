@@ -12,9 +12,9 @@ namespace EstateManagment.Services.Implementation
 {
     public class CompaniesService : ICompaniesService
     {
-        private readonly EsteteManagmentContext db;
+        private readonly EstateManagmentContext db;
 
-        public CompaniesService(EsteteManagmentContext db)
+        public CompaniesService(EstateManagmentContext db)
         {
             this.db = db;
         }

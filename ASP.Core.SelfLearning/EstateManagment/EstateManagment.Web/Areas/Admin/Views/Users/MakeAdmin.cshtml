@@ -7,31 +7,11 @@
 
 <h3>Please, note that Administrator promotion is <strong class="bg-danger img-rounded">irreversible!</strong></h3>
 
-<p>User for promotion Id: @Model.Id</p>
-@if (Model.Nickname != null)
-{
-    <p>Nickname: @Model.Nickname</p>
+<partial name="_UserInfoView"/>
 
-}
-<p>Username: <strong>@Model.Username</strong></p>
-<p> <strong>Roles:</strong></p>
-<ul>
-    <li>
-        User
-    </li>
-    @if (Model.Roles.Count() > 0)
-    {
-        foreach (var role in Model.Roles)
-        {
-            <li>
-                @role
-            </li>
-        }
-    }
-</ul>
 <div class="row">
     <div class="col-lg-3">
-        <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="btn btn-primary">Refuse Admin Promotion</a>
+        <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="btn btn-success">Refuse Admin Promotion</a>
     </div> 
     <div class="col-lg-2">
         <a asp-area="Admin" asp-controller="Users" asp-action="ConfirmAdmin" asp-route-id="@Model.Id" class="btn btn-danger">Confirm Admin Promotion</a>

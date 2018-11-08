@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EstateManagment.Data.Migrations
 {
-    [DbContext(typeof(EsteteManagmentContext))]
+    [DbContext(typeof(EstateManagmentContext))]
     [Migration("20181029191746_RegexLatinNamesAddedSpace")]
     partial class RegexLatinNamesAddedSpace
     {

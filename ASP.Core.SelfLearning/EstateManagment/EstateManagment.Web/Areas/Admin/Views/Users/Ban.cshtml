@@ -1,0 +1,18 @@
+﻿@model UserInfoModel
+@{
+    ViewData["Title"] = "Confirm Ban of the user";
+}
+
+<h2>@ViewData["Title"]</h2>
+<h3>Please, note that <strong  class="bg-danger img-rounded">banning</strong> a user is <strong class="bg-danger img-rounded">irreversible!</strong></h3>
+
+<partial name="_UserInfoView" />
+
+<div class="row">
+    <div class="col-lg-3">
+        <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="btn btn-success">Cancel User Ban</a>
+    </div>
+    <div class="col-lg-2">
+        <a asp-area="Admin" asp-controller="Users" asp-action="ConfirmBan" asp-route-id="@Model.Id" class="btn btn-danger">Confirm User Ban</a>
+    </div>
+</div>
