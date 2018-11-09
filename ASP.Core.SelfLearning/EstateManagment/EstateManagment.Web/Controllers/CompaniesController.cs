@@ -58,9 +58,9 @@ namespace EstateManagment.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(CompanyDetailsModel model)
         {           
-            if (model == null)
+            if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return this.View(model.Id);
             }
 
             var result = await this.companies.EditSync(model.Id, model.Name, model.Bulstat, model.AccountablePerson, model.Address);

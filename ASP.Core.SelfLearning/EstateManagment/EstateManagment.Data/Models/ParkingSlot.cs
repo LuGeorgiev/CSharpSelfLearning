@@ -18,6 +18,8 @@
         [Required]
         public int CompanyId { get; set; }
 
+        public bool IsActual { get; set; } = true;
+
         public virtual Company Company { get; set; }
 
         public virtual ICollection<ParkingSlotRent> ParkingSlotRents { get; set; } = new HashSet<ParkingSlotRent>();

@@ -53,7 +53,7 @@
                         <td>@company.Address</td>
                         <td>
                             <a href="#" class="btn btn-default">Паркомясто</a>
-                            <a asp-controller="Properties" asp-action="Index" asp-route-id="@company.Id" class="btn btn-default">Парцел</a>
+                            <a asp-controller="Properties" asp-action="Create" asp-route-companyId="@company.Id" class="btn btn-default">Парцел</a>
                         </td>
                     </tr>
                 }

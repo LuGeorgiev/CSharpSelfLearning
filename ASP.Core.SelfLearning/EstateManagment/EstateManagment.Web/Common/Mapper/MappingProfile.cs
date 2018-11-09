@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using EstateManagment.Data.Models;
+using EstateManagment.Services.ServiceModels.Companies;
 using EstateManagment.Services.ServiceModels.Users;
 using EstateManagment.Web.Areas.Admin.Models.Users;
+using EstateManagment.Web.Models.Properties;
 
 namespace EstateManagment.Web.Common.Mapper
 {
@@ -12,6 +14,7 @@ namespace EstateManagment.Web.Common.Mapper
             CreateMap<User, UserInfoModel>();
             CreateMap<User, UserShortModel>();
             CreateMap<UserInfoModel, RemoveRolesUserViewModel>();
+            CreateMap<CompanyDetailsModel, CreatePropertyViewModel>();
         }
     }
 }

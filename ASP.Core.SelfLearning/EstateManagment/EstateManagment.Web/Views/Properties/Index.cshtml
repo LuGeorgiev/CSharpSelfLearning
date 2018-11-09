@@ -1,0 +1,43 @@
+﻿@model IEnumerable<PropertiesListingModel>
+@{
+    ViewData["Title"] = "Фирми и недвижимите им имоти";
+}
+
+<h3>@ViewData["Title"]</h3>
+
+@foreach (var company in Model)
+{
+    <div class=" col-md-12 col-lg-12">
+        <h4>
+            Фирма собственик: @company.CompanyName
+            <a asp-action="Create" asp-route-companyId="@company.CompanyId" class="btn btn-default "> Нов имот</a>
+        </h4>
+        <table class="table table-condensed table-striped table-hover">
+            <thead class="info">
+                <tr>
+                    <th scope="col">Имот</th>
+                    <th scope="col">Адрес</th>
+                    <th scope="col">Описание</th>
+                    <th scope="col">Площ кв.м.</th>
+                    <th scope="col" class="pull-right">Действие</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var property in company.Properties)
+                {
+                    <tr>
+                        <td>@property.Name</td>
+                        <td>@property.Address</td>
+                        <td>@property.Description</td>
+                        <td>@property.Area</td>
+                        <td class="pull-right">
+                            <a asp-controller="Properties" asp-action="Deactivate" asp-route-id="@property.Id" class="btn btn-danger">Неактивен</a>
+                            <a asp-controller="Properties" asp-action="Edit" asp-route-id="@property.Id" class="btn btn-default ">Редактирай</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+

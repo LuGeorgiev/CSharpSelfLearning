@@ -29,6 +29,9 @@
         [Required]
         public PropertyType Type { get; set; }
 
+
+        public bool IsActual { get; set; } = true;
+
         [Required]
         public int CompanyId { get; set; }
 
