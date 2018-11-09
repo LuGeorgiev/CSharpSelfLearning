@@ -1,11 +1,10 @@
-﻿namespace EstateManagment.Data.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+using static EstateManagment.Data.DataConstants;
+
+namespace EstateManagment.Services.ServiceModels.Companies
 {
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-    using static DataConstants;
-
-    public class Company
+    public class CompanyDetailsModel
     {
         public int Id { get; set; }
 
@@ -31,10 +30,5 @@
         [MinLength(ClientNameMinLength)]
         [MaxLength(ClientNameMaxLength)]
         public string AccountablePerson { get; set; }
-
-        public virtual ICollection<Property> Properties { get; set; } = new HashSet<Property>();
-
-        public virtual ICollection<ParkingSlot> ParkingSlots { get; set; } = new HashSet<ParkingSlot>();
-
     }
 }

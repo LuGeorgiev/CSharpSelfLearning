@@ -1,4 +1,5 @@
 ﻿using EstateManagment.Services;
+using EstateManagment.Services.ServiceModels.Companies;
 using EstateManagment.Web.Models.Companies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +23,6 @@ namespace EstateManagment.Web.Controllers
         public async Task<IActionResult> Index()
              => this.View(await GetCompaniesAsync());
 
-
         [HttpPost]
         public async Task<IActionResult> Create(CreateCompanyFormModel model)
         {
@@ -42,6 +42,34 @@ namespace EstateManagment.Web.Controllers
             var formModel = await GetCompaniesAsync();
 
             return View("Index", formModel);
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var model = await this.companies.GetAsync(id);
+            if (model==null)
+            {
+                return BadRequest();
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(CompanyDetailsModel model)
+        {           
+            if (model == null)
+            {
+                return BadRequest();
+            }
+
+            var result = await this.companies.EditSync(model.Id, model.Name, model.Bulstat, model.AccountablePerson, model.Address);
+            if (!result)
+            {
+                return BadRequest();
+            }
+
+            return Redirect("/Companies/Index");
         }
 
         private async Task<CreateCompanyFormModel> GetCompaniesAsync()

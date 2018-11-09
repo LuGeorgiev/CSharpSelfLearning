@@ -39,6 +39,7 @@
         public const string MaxPayment = "1000000";
 
         public const string RegexLatinNames = @"^[A-za-z\u0400-\u044F\ ]+$";
+        public const string RegexLatinCompanyNames = @"^[A-za-z\u0400-\u044F\ 0-9\?\!\.,]+$";
         public const string RegexTelephone = @"^\+?[0-9\ -]{5,20}$";
         public const string RegexBulstat = @"^(BG|bg)?[0-9]{9,15}$";
     }

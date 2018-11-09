@@ -11,7 +11,7 @@
         public int Id { get; set; }
 
         [Required]
-        [RegularExpression(RegexLatinNames)]
+        [RegularExpression(RegexLatinCompanyNames)]
         [MinLength(ClientNameMinLength)]
         [MaxLength(ClientNameMaxLength)]
         public string Name { get; set; }
