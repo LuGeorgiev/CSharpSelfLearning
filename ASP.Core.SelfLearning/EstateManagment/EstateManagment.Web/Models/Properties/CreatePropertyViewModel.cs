@@ -11,17 +11,21 @@ namespace EstateManagment.Web.Models.Properties
         [Required]
         [MinLength(PropertyNameMinLength)]
         [MaxLength(PropertyNameMaxLength)]
+        [Display(Name = DisplayPropertyName)]
         public string PropertyName { get; set; }
 
         [Required]
         [MinLength(PropertyAddressMinLength)]
         [MaxLength(PropertyAddressMaxLength)]
+        [Display(Name = DisplayAddress)]
         public string PropertyAddress { get; set; }
 
         [Required]
         [Range(PropertyMinArea, PropertyMaxArea)]
+        [Display(Name = DisplayArea)]
         public int Area { get; set; }
 
+        [Display(Name = DisplayDescription)]
         [MaxLength(DescriptionMaxLength)]
         public string Description { get; set; }
 

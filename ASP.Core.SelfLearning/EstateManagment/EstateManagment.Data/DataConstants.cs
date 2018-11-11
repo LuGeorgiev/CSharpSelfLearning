@@ -42,5 +42,28 @@
         public const string RegexLatinCompanyNames = @"^[A-za-z\u0400-\u044F\ 0-9\?\!\.,]+$";
         public const string RegexTelephone = @"^\+?[0-9\ -]{5,20}$";
         public const string RegexBulstat = @"^(BG|bg)?[0-9]{9,15}$";
+        public const string RegexEGN = @"^[0-9]{10}$";
+
+        public const string DisplayCompanyName = "Име на фирма";
+        public const string DisplayClientName = "Име на клиент";
+        public const string DisplayAcountablePerson = "МОЛ";
+        public const string DisplayAddress = "Адрес";
+        public const string DisplayBulstat = "Булстат";
+        public const string DisplayEGN = "ЕГН";
+        public const string DisplayContactName = "Лице за контакти";
+        public const string DisplayTelephone = "Телефон";
+        public const string DisplayNotes = "Бележки";
+        public const string DisplayIsDeletedClient = "Изтрит клиент";
+        public const string DisplayPropertyName = "Недвижимост";
+        public const string DisplayArea = "Площ";
+        public const string DisplayDescription = "Описание";
+        public const string DisplayPropertyType = "Вид на имота";
+        public const string DisplayIsActual = "Актуалност";
+
+        public const string ErrorMessageCompanyName = "Да съдържа букви на кирилица, латиница, цифри и знаците: !., ? ";
+        public const string ErrorMessageBulstat = "Да започва с или без BG последван от 9 то 15 цифри";
+        public const string ErrorMessageEGN = "Точно 10 цифри";
+        public const string ErrorMessageLatinNames = "Само букви на кирилица или латиница";
+        public const string ErrorMessageTelephone = "Ц или без + в началото последван от цифри,интервали и тирета";
     }
 }

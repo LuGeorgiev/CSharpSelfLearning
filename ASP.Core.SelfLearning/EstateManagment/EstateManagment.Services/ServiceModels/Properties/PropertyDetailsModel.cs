@@ -11,23 +11,29 @@ namespace EstateManagment.Services.ServiceModels.Properties
         [Required]
         [MinLength(PropertyNameMinLength)]
         [MaxLength(PropertyNameMaxLength)]
+        [Display(Name= DisplayPropertyName)]
         public string Name { get; set; }
 
         [Required]
         [MinLength(PropertyAddressMinLength)]
         [MaxLength(PropertyAddressMaxLength)]
+        [Display(Name = DisplayAddress)]
         public string Address { get; set; }
 
         [Required]
         [Range(PropertyMinArea, PropertyMaxArea)]
+        [Display(Name = DisplayArea)]
         public int Area { get; set; }
 
+        [Display(Name = DisplayDescription)]
         [MaxLength(DescriptionMaxLength)]
         public string Description { get; set; }
 
         [Required]
+        [Display(Name = DisplayPropertyType)]
         public PropertyType Type { get; set; }
 
+        [Display(Name = DisplayIsActual)]
         public bool IsActual { get; set; } 
     }
 }

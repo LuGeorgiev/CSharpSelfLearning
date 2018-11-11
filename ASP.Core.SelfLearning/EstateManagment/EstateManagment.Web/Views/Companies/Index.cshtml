@@ -38,7 +38,7 @@
             <thead class="bg-info">
                 <tr>
                     <th scope="col">Име на Фирмата</th>
-                    <th scope="col">Булстата</th>
+                    <th scope="col">Булста</th>
                     <th scope="col">Адрес</th>
                     <th scope="col"></th>
                 </tr>
@@ -52,7 +52,7 @@
                         <td>@company.Bulstat</td>
                         <td>@company.Address</td>
                         <td>
-                            <a href="#" class="btn btn-default">Паркомясто</a>
+                            @*<a href="#" class="btn btn-default">Паркомясто</a>*@
                             <a asp-controller="Properties" asp-action="Create" asp-route-companyId="@company.Id" class="btn btn-default">Парцел</a>
                         </td>
                     </tr>

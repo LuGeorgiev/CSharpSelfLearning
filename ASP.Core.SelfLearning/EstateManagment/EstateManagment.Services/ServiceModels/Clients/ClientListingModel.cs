@@ -9,31 +9,31 @@ namespace EstateManagment.Services.ServiceModels.Clients
         public int Id { get; set; }
 
         [Required]
-        [RegularExpression(RegexLatinCompanyNames)]
+        [RegularExpression(RegexLatinCompanyNames, ErrorMessage = ErrorMessageCompanyName)]
         [MinLength(ClientNameMinLength)]
         [MaxLength(ClientNameMaxLength)]
-        [Display(Name="Име на фирма или клиент")]
+        [Display(Name = DisplayClientName)]
         public string Name { get; set; }
         
 
         [Required]
         [MinLength(CompanyBulstatMinLength)]
         [MaxLength(CompanyBulstatMaxLength)]
-        [RegularExpression(RegexBulstat)]
-        [Display(Name = "Булстат")]
+        [RegularExpression(RegexBulstat, ErrorMessage = ErrorMessageBulstat)]
+        [Display(Name = DisplayBulstat)]
         public string Bulstat { get; set; }        
 
         [Required]
-        [RegularExpression(RegexLatinNames, ErrorMessage="Само букви на кирилица или латиница")]
+        [RegularExpression(RegexLatinNames, ErrorMessage = ErrorMessageLatinNames)]
         [MinLength(ClientContactNameMinLength)]
         [MaxLength(ClientContactNameMaxLength)]
-        [Display(Name="Лице за контакти")]
+        [Display(Name = DisplayContactName)]
         public string ContactName { get; set; }
 
         [Required]
-        [RegularExpression(@"^\+?[\d\ -]+$",ErrorMessage ="Позволени са само + в началото последван от цифри,интервали и тирета")]
+        [RegularExpression(RegexTelephone, ErrorMessage = ErrorMessageTelephone)]
         [MaxLength(20)]
-        [Display(Name="Телефон")]
+        [Display(Name = DisplayTelephone)]
         public string Telephone { get; set; }
 
     }

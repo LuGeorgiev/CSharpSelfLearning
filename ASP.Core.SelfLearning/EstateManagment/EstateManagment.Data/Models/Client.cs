@@ -28,7 +28,7 @@
         public string Bulstat { get; set; }
 
         [MaxLength(10)]
-        [RegularExpression(@"^[0-9]{10}$")]
+        [RegularExpression(RegexEGN)]
         public string EGN { get; set; }
 
         [Required]
@@ -44,7 +44,7 @@
         public string ContactName { get; set; }
 
         [Required]
-        [RegularExpression(@"^\+?[\d\ -]+$")]
+        [RegularExpression(RegexTelephone)]
         [MaxLength(20)]
         public string Telephone { get; set; }
 

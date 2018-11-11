@@ -7,10 +7,10 @@ namespace EstateManagment.Web.Models.Clients
     public class CreateClientFormModel
     {
         [Required]
-        [RegularExpression(RegexLatinCompanyNames)]
+        [RegularExpression(RegexLatinCompanyNames, ErrorMessage = ErrorMessageCompanyName)]
         [MinLength(ClientNameMinLength)]
         [MaxLength(ClientNameMaxLength)]
-        [Display(Name = "Име на фирма или клиент")]
+        [Display(Name = DisplayClientName)]
         public string Name { get; set; }
 
         [Required]
@@ -20,39 +20,38 @@ namespace EstateManagment.Web.Models.Clients
         public string Address { get; set; }
 
         [Required]
-        [MinLength(CompanyBulstatMinLength)]
-        [MaxLength(CompanyBulstatMaxLength)]
-        [RegularExpression(RegexBulstat)]
-        [Display(Name = "Булстат")]
+        [MinLength(PropertyAddressMinLength)]
+        [MaxLength(PropertyAddressMaxLength)]
+        [Display(Name = DisplayAddress)]
         public string Bulstat { get; set; }
 
         [MaxLength(10)]
-        [RegularExpression(@"^[0-9]{10}$",ErrorMessage ="Невалидно ЕГН")]
-        [Display(Name = "ЕГН")]
+        [RegularExpression(RegexEGN, ErrorMessage = ErrorMessageEGN)]
+        [Display(Name = DisplayEGN)]
         public string EGN { get; set; }
 
         [Required]
-        [RegularExpression(RegexLatinNames)]
+        [RegularExpression(RegexLatinNames, ErrorMessage = ErrorMessageLatinNames)]
         [MinLength(ClientNameMinLength)]
         [MaxLength(ClientNameMaxLength)]
-        [Display(Name = "МОЛ")]
+        [Display(Name = DisplayAcountablePerson)]
         public string AccountableName { get; set; }
 
         [Required]
-        [RegularExpression(RegexLatinNames, ErrorMessage = "Само букви на кирилица или латиница")]
+        [RegularExpression(RegexLatinNames, ErrorMessage = ErrorMessageLatinNames)]
         [MinLength(ClientContactNameMinLength)]
         [MaxLength(ClientContactNameMaxLength)]
-        [Display(Name = "Лице за контакти")]
+        [Display(Name = DisplayContactName)]
         public string ContactName { get; set; }
 
         [Required]
-        [RegularExpression(@"^\+?[\d\ -]+$", ErrorMessage = "Позволени са само + в началото последван от цифри,интервали и тирета")]
+        [RegularExpression(RegexTelephone, ErrorMessage = ErrorMessageTelephone)]
         [MaxLength(20)]
-        [Display(Name = "Телефон")]
+        [Display(Name = DisplayTelephone)]
         public string Telephone { get; set; }
 
         [MaxLength(DescriptionMaxLength)]
-        [Display(Name = "Бележки")]
+        [Display(Name = DisplayNotes)]
         public string Notes { get; set; }
     }
 }
