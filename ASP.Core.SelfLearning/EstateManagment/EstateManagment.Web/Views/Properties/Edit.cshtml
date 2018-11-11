@@ -1,0 +1,33 @@
+﻿@model PropertyDetailsModel
+@{
+    ViewData["Title"] = "Редактиране на описанието на недвижим имот или маркиране като неактивен";
+}
+
+<h3>@ViewData["Title"]</h3>
+<h3>Имот: @Model.Name</h3>
+<p> Тип на имота @Model.Type</p>
+<p>Намиращ се на адрес: @Model.Address и имащ площ: @Model.Area, кв.м.</p>
+<div class="row">
+    <div class="col-md-5 col-lg-5">
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Description">Описание</label>
+                <textarea asp-for="Description" class="form-control">@Model.Description</textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="IsActual">Активен ли е имота с това описание:</label>
+                <input asp-for="IsActual" class="item bg-danger" value="@Model.IsActual" /> 
+                <input type="hidden" name="@Model.Id" />
+            </div>
+                       
+            <button asp-action="Edit" asp-controller="Properties" type="submit" class="btn btn-default btn-success">Редактирайте</button>
+            <a asp-controller="Properties" asp-action="Index" class="btn btn-default">Към Недвижимости</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

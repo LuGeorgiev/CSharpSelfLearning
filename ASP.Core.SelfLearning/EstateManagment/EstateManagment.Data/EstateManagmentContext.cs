@@ -28,8 +28,6 @@ namespace EstateManagment.Data
 
         public DbSet<ParkingSlot> ParkingSlots{ get; set; }
 
-        public DbSet<ParkingSlotRent> ParkingSlotRents{ get; set; }
-
         public DbSet<Payment> Payments{ get; set; }
 
         public DbSet<Property> Properties{ get; set; }
@@ -42,9 +40,7 @@ namespace EstateManagment.Data
         {
             builder.Entity<PropertyRent>()
                 .HasKey(pr => new { pr.PropertyId, pr.RentAgreementId });
-
-            builder.Entity<ParkingSlotRent>()
-                .HasKey(ps => new { ps.ParkingSlotId, ps.RentAgreementId });
+                        
 
             builder.Entity<ClientRent>()
                 .HasKey(cl => new { cl.ClientId, cl.RentAgreementId});

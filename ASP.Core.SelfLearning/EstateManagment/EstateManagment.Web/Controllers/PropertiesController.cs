@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace EstateManagment.Web.Controllers
 {
-    [Authorize]
+    [Authorize(Roles =WebConstants.ManagerRole)]
     public class PropertiesController : Controller
     {
         private readonly IPropertiesService properties;
@@ -59,6 +59,35 @@ namespace EstateManagment.Web.Controllers
                 model.Description,
                 model.Type);
 
+            if (!isCreated)
+            {
+                return BadRequest();
+            }
+
+
+            return this.Redirect("/Properties/Index");
+        }
+               
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var model = await this.properties.GetAsync(id);
+            if (model==null)
+            {
+                return BadRequest();
+            }
+
+            return this.View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, string description, bool isActual)
+        {            
+            bool result = await this.properties.EditAsync(id, description, isActual);
+            if (!result)
+            {
+                return BadRequest();
+            }
 
             return this.Redirect("/Properties/Index");
         }

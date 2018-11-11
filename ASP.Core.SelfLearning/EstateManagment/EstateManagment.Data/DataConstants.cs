@@ -11,7 +11,7 @@
         public const int PropertyNameMaxLength = 40;
         public const int PropertyAddressMinLength = 2;
         public const int PropertyAddressMaxLength = 200;
-        public const int PropertyMinArea = 10;
+        public const int PropertyMinArea = 1;
         public const int PropertyMaxArea = 1000000;
         public const decimal PropertyRentMinPrice = 0;
         public const decimal PropertyRentMaxPrice = 100000000;

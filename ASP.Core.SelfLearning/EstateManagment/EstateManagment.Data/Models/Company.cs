@@ -34,7 +34,7 @@
 
         public virtual ICollection<Property> Properties { get; set; } = new HashSet<Property>();
 
-        public virtual ICollection<ParkingSlot> ParkingSlots { get; set; } = new HashSet<ParkingSlot>();
+        //public virtual ICollection<ParkingSlot> ParkingSlots { get; set; } = new HashSet<ParkingSlot>();
 
     }
 }

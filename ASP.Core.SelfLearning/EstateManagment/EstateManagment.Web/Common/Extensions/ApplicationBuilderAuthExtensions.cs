@@ -8,9 +8,9 @@ namespace EstateManagment.Web.Common.Extensions
 {
     public static class ApplicationBuilderAuthExtensions
     {
-        private static string DefaultAdminPass = "admin2";
-        private static string DefaultAdminUsername = "admin2";
-        private static string DefaultAdminEmail = "admin2@admin.com";
+        private static string DefaultAdminPass = "adminpass";
+        private static string DefaultAdminUsername = "1admin@admin.com";
+        private static string DefaultAdminEmail = "1admin@admin.com";
 
         private static IdentityRole[] roles =
         {
@@ -29,32 +29,29 @@ namespace EstateManagment.Web.Common.Extensions
                 var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
                 var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
 
-               // Task.Run(async () =>
-               //{
-                   foreach (var role in roles)
-                   {
-                       if (!await roleManager.RoleExistsAsync(role.Name))
-                       {
-                           var result = await roleManager.CreateAsync(role);
-                       }
-                   }
+                {
+                    foreach (var role in roles)
+                    {
+                        if (!await roleManager.RoleExistsAsync(role.Name))
+                        {
+                            var result = await roleManager.CreateAsync(role);
+                        }
+                    }
 
-                   var adminUser = await userManager.FindByEmailAsync(DefaultAdminEmail);
-                   if (adminUser == null)
-                   {
-                       adminUser = new User()
-                       {
-                           UserName = DefaultAdminUsername,
-                           Email = DefaultAdminEmail,
-                       };
+                    var adminUser = await userManager.FindByEmailAsync(DefaultAdminEmail);
+                    if (adminUser == null)
+                    {
+                        adminUser = new User()
+                        {
+                            UserName = DefaultAdminUsername,
+                            Email = DefaultAdminEmail,
+                        };
 
-                       var result = await userManager.CreateAsync(adminUser, DefaultAdminPass);
-                       result = await userManager.AddToRoleAsync(adminUser, roles[0].Name);
-                   }
-               //})
-               //.Wait();
+                        var result = await userManager.CreateAsync(adminUser, DefaultAdminPass);
+                        result = await userManager.AddToRoleAsync(adminUser, roles[0].Name);
+                    }
+                }
             }
-            //return app;
         }
     }
 }

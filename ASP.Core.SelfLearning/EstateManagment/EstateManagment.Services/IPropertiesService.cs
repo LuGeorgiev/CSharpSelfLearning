@@ -12,5 +12,9 @@ namespace EstateManagment.Services
         Task<bool> CreateAsync(int companyId, string propertyName, string propertyAddress, int area, string description, PropertyType type);
 
         Task<IEnumerable<PropertiesListingModel>> AllAsync();
+
+        Task<PropertyDetailsModel> GetAsync(int propertyId);
+
+        Task<bool> EditAsync(int id, string description, bool isActual);
     }
 }

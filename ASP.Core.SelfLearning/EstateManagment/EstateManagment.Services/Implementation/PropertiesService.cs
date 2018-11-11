@@ -1,27 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using EstateManagment.Data;
 using EstateManagment.Data.Models;
 using EstateManagment.Data.Models.Enums;
 using EstateManagment.Services.ServiceModels.Properties;
-using Microsoft.EntityFrameworkCore;
 
 namespace EstateManagment.Services.Implementation
 {
-    public class PropertiesService : IPropertiesService
+    public class PropertiesService : BaseService,IPropertiesService
     {
-        private readonly EstateManagmentContext db;
-
-        public PropertiesService(EstateManagmentContext db)
+        public PropertiesService(IMapper mapper, EstateManagmentContext db) 
+            : base(mapper, db)
         {
-            this.db = db;
-        }
+        }        
 
         public async Task<IEnumerable<PropertiesListingModel>> AllAsync()
-            => await this.db.Companies
+            => await this.Db.Companies
                 .Where(c=>c.Properties.Count>0)
                 .Select(c => new PropertiesListingModel
                 {
@@ -43,7 +41,7 @@ namespace EstateManagment.Services.Implementation
 
         public async Task<bool> CreateAsync(int companyId, string propertyName, string propertyAddress, int area, string description, PropertyType type)
         {
-            var company = await this.db.Companies
+            var company = await this.Db.Companies
                 .FirstOrDefaultAsync(x => x.Id == companyId);
             if (company==null)
             {
@@ -59,10 +57,10 @@ namespace EstateManagment.Services.Implementation
                  CompanyId=company.Id
             };
 
-            await this.db.Properties.AddAsync(property);
+            await this.Db.Properties.AddAsync(property);
             try
             {
-                await db.SaveChangesAsync();
+                await Db.SaveChangesAsync();
             }
             catch (Exception)
             {
@@ -70,6 +68,42 @@ namespace EstateManagment.Services.Implementation
             }
 
             return true;
+        }
+
+        public async Task<bool> EditAsync(int id, string description, bool isActual)
+        {
+            var property = await this.Db.Properties
+                .FirstOrDefaultAsync(x => x.Id == id);
+            if (property == null)
+            {
+                return false;
+            }
+
+            property.IsActual = isActual;
+            property.Description = description;
+            this.Db.Properties.Update(property);
+            try
+            {
+                await this.Db.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public async Task<PropertyDetailsModel> GetAsync(int propertyId)
+        {
+            var property = await this.Db.Properties
+                .FirstOrDefaultAsync(x => x.Id == propertyId && x.IsActual==true);
+            if (property==null)
+            {
+                return null;
+            }
+
+            return this.Mapper.Map<PropertyDetailsModel>(property);
         }
     }
 }

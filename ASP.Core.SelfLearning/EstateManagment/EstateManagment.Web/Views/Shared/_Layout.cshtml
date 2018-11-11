@@ -30,11 +30,18 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    @*<li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>*@
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Properties" asp-action="Index">Недвижимости</a></li>
-                    <li><a asp-area="" asp-controller="Companies" asp-action="Index">Фирми</a></li>
-                    <li><a asp-area="Admin" asp-controller="Home" asp-action="Index">Admin</a></li>
+                    @if (User.IsInRole(WebConstants.ManagerRole))
+                    {
+                        <li><a asp-area="" asp-controller="Properties" asp-action="Index">Недвижимости</a></li>
+                        <li><a asp-area="" asp-controller="Companies" asp-action="Index">Фирми</a></li>
+                        <li><a asp-area="" asp-controller="Clients" asp-action="Index">Клиенти</a></li>
+                    }
+                    @if (User.IsInRole(WebConstants.AdminRole))
+                    {
+                        <li><a asp-area="Admin" asp-controller="Home" asp-action="Index">Admin</a></li>
+                    }
                 </ul>
                 <partial name="_LoginPartial" />
             </div>

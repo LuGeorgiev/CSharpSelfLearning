@@ -75,6 +75,7 @@ namespace EstateManagment.Web
             services.AddTransient<ICompaniesService, CompaniesService>();
             services.AddTransient<IUsersService, UsersService>();
             services.AddTransient<IPropertiesService, PropertiesService>();
+            services.AddTransient<IClientsService, ClientsService>();
 
             services.AddSingleton<IEmailSender, SendGridEmailSender>();
             services.Configure<SendGridOptions>(this.Configuration.GetSection("SendGridSettings"));
@@ -86,10 +87,10 @@ namespace EstateManagment.Web
                     options.AllowAreas = true;
                     options.Conventions.AuthorizeAreaFolder("Identity", "/Account/Manage");
                     options.Conventions.AuthorizeAreaPage("Identity", "/Account/Logout");
-                }); ;
+                });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {            
 

@@ -16,13 +16,12 @@
         public decimal Price { get; set; }
 
         [Required]
-        public int CompanyId { get; set; }
+        [Range(0, int.MaxValue)]
+        public int Quantity { get; set; }
 
-        public bool IsActual { get; set; } = true;
+        [Required]
+        public int RentAgreementId { get; set; }
 
-        public virtual Company Company { get; set; }
-
-        public virtual ICollection<ParkingSlotRent> ParkingSlotRents { get; set; } = new HashSet<ParkingSlotRent>();
-
+        public virtual RentAgreement RentAgreement { get; set; }
     }
 }

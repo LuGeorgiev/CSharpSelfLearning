@@ -1,0 +1,62 @@
+﻿@model ClientDetailsModel
+@{
+    ViewData["Title"] = "Редактиране на клент";
+}
+
+<h3>@ViewData["Title"]</h3>
+<h3>Булстат: @Model.Bulstat</h3>
+<div class="row">
+    <div class="col-md-5 col-lg-5">
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" type="text" class="form-control" value="@Model.Name" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address"></label>
+                <textarea asp-for="Address" type="text" class="form-control">@Model.Address</textarea>
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EGN"></label>
+                <input asp-for="EGN" type="text" class="form-control" value="@Model.EGN" />
+                <span asp-validation-for="EGN" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AccountableName"></label>
+                <input asp-for="AccountableName" type="text" class="form-control" value="@Model.AccountableName" />
+                <span asp-validation-for="AccountableName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ContactName"></label>
+                <input asp-for="ContactName" type="text" class="form-control" value="@Model.ContactName" />
+                <span asp-validation-for="ContactName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telephone"></label>
+                <input asp-for="Telephone" type="text" class="form-control" value="@Model.Telephone" />
+                <span asp-validation-for="Telephone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Notes">Описание</label>
+                <textarea asp-for="Notes" class="form-control">@Model.Notes</textarea>
+                <span asp-validation-for="Notes" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="IsDeleted"><strong class="text-danger">Изтриване на клиента:</strong></label>
+                <input asp-for="IsDeleted" class="item bg-danger" />
+            </div>
+            <input type="hidden" name="@Model.Id" />
+
+            <button asp-action="Edit" asp-controller="Clients" type="submit" class="btn btn-default btn-success">Редактирайте</button>
+            <a asp-controller="Clients" asp-action="Index" class="btn btn-default">Към Клиенти</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

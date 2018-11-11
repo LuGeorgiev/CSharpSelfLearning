@@ -13,16 +13,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EstateManagment.Services.Implementation
 {
-    public class UsersService : IUsersService
-    {
-        private readonly IMapper mapper;
-        private readonly EstateManagmentContext db;
+    public class UsersService : BaseService,IUsersService
+    {       
         private readonly UserManager<User> userManager;
 
         public UsersService(IMapper mapper, EstateManagmentContext db, UserManager<User> userManager)
-        {
-            this.mapper = mapper;
-            this.db = db;
+        :base(mapper,db)
+        {            
             this.userManager = userManager;
         }
 
@@ -32,28 +29,28 @@ namespace EstateManagment.Services.Implementation
             var usersOfRole = await userManager
                 .GetUsersInRoleAsync("Administrator");
 
-            var nonAdminUsers = await this.db.Users
+            var nonAdminUsers = await this.Db.Users
                 .Where(x => x.Id != loggedUserId && !usersOfRole.Any(z=>z.Id==x.Id))
                 .ToListAsync();
 
-            var model = mapper.Map<IEnumerable<UserShortModel>>(nonAdminUsers);
+            var model = this.Mapper.Map<IEnumerable<UserShortModel>>(nonAdminUsers);
             return model;
         }
 
         public async Task<User> GetUserAsync(string userId)
-            => await this.db.Users.FirstOrDefaultAsync(x=>x.Id==userId);
+            => await this.Db.Users.FirstOrDefaultAsync(x=>x.Id==userId);
 
         public async Task<UserInfoModel> GetUserWithRolesAsync(string userId)
         {           
 
-            var user = await this.db.Users
+            var user = await this.Db.Users
                 .FirstOrDefaultAsync(x => x.Id == userId);
             if (user==null)
             {
                 return null;
             }
             var roles = await this.userManager.GetRolesAsync(user);
-            var model = this.mapper.Map<UserInfoModel>(user);
+            var model = this.Mapper.Map<UserInfoModel>(user);
             model.Roles = roles;
 
             return model;

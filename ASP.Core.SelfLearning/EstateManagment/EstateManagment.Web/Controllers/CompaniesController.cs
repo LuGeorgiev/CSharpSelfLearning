@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace EstateManagment.Web.Controllers
 {
-    [Authorize]
+    [Authorize(Roles =WebConstants.ManagerRole)]
     public class CompaniesController:Controller
     {
         public readonly ICompaniesService companies;

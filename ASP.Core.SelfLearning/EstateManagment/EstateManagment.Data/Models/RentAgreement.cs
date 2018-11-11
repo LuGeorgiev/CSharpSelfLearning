@@ -22,7 +22,7 @@
 
         public virtual ICollection<PropertyRent> PropertyRents { get; set; } = new HashSet<PropertyRent>();
 
-        public virtual ICollection<ParkingSlotRent> ParkingSlotRents { get; set; } = new HashSet<ParkingSlotRent>();
+        public virtual ICollection<ParkingSlot> ParkingSlots { get; set; } = new HashSet<ParkingSlot>();
 
         public virtual ICollection<ClientRent> ClientRents { get; set; } = new HashSet<ClientRent>();
 

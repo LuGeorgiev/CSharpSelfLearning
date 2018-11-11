@@ -1,0 +1,62 @@
+﻿@model CreateClientFormModel
+@{
+    ViewData["Title"] = "Създаване на нов клиент";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+
+<div class="col-md-6 col-lg-6">
+    <form method="post">
+        <hr />
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" placeholder="Име на клиента..." />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Address"></label>
+            <input asp-for="Address" type="text" class="form-control" placeholder="Адрес..." />
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Bulstat"></label>
+            <input asp-for="Bulstat" class="form-control" placeholder="Булстат..."/>
+            <span asp-validation-for="Bulstat" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="AccountableName"></label>
+            <input asp-for="AccountableName" class="form-control" placeholder="МОЛ..."/>
+            <span asp-validation-for="AccountableName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="EGN"></label>
+            <input asp-for="EGN" class="form-control" placeholder="ЕГН..."/>
+            <span asp-validation-for="EGN" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ContactName"></label>
+            <input asp-for="ContactName" class="form-control" placeholder="Лице за контакти..."/>
+            <span asp-validation-for="ContactName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Telephone"></label>
+            <input asp-for="Telephone" class="form-control" placeholder="Телефон..."/>
+            <span asp-validation-for="Telephone" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Notes"></label>
+            <textarea asp-for="Notes" class="form-control" placeholder="Бележки..."></textarea>
+            <span asp-validation-for="Notes" class="text-danger"></span>
+        </div>
+
+        <button asp-action="Create" asp-controller="Clients" type="submit" class="btn btn-default btn-info">Създайте клиент</button>
+    </form>
+</div>
+ 
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

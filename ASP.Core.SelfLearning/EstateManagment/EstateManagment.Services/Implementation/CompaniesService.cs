@@ -11,19 +11,15 @@ using System.Threading.Tasks;
 
 namespace EstateManagment.Services.Implementation
 {
-    public class CompaniesService : ICompaniesService
-    {
-        private readonly EstateManagmentContext db;
-        private readonly IMapper mapper;
-
+    public class CompaniesService : BaseService,ICompaniesService
+    {        
         public CompaniesService(EstateManagmentContext db, IMapper mapper)
-        {
-            this.db = db;
-            this.mapper = mapper;
+            :base(mapper,db)
+        {            
         }
 
         public async Task<IEnumerable<CompanyModel>> AllAsync()
-            =>await this.db.Companies.Select(x => new CompanyModel
+            =>await this.Db.Companies.Select(x => new CompanyModel
             {
                 Id=x.Id,
                 Name = x.Name,
@@ -42,11 +38,11 @@ namespace EstateManagment.Services.Implementation
                 Name=name,                   
             };
 
-            this.db.Companies.Add(newCompany);
+            this.Db.Companies.Add(newCompany);
 
             try
             {
-                await this.db.SaveChangesAsync();
+                await this.Db.SaveChangesAsync();
             }
             catch (Exception e)
             {
@@ -59,7 +55,7 @@ namespace EstateManagment.Services.Implementation
 
         public async Task<bool> EditSync(int id, string name, string bulstat, string acoutableName, string address)
         {
-            var company = await this.db.Companies
+            var company = await this.Db.Companies
                 .FirstOrDefaultAsync(x => x.Id == id);
             if (company==null)
             {
@@ -70,10 +66,10 @@ namespace EstateManagment.Services.Implementation
             company.Address = address;
             company.Bulstat = bulstat;
             company.Name = name;
-            this.db.Companies.Update(company);
+            this.Db.Companies.Update(company);
             try
             {
-                this.db.SaveChanges();
+                this.Db.SaveChanges();
             }
             catch (Exception)
             {
@@ -85,13 +81,13 @@ namespace EstateManagment.Services.Implementation
 
         public async Task<CompanyDetailsModel> GetAsync(int companyId)
         {
-            var company = await this.db.Companies
+            var company = await this.Db.Companies
                 .FirstOrDefaultAsync(x => x.Id == companyId);
             if (company==null)
             {
                 return null;
             }
-            var model = this.mapper.Map<CompanyDetailsModel>(company);
+            var model = this.Mapper.Map<CompanyDetailsModel>(company);
 
             return model;
         }

@@ -1,0 +1,44 @@
+﻿@model IEnumerable<ClientListingModel>
+@{
+    ViewData["Title"] = "Активни Клиенти";
+}
+
+<h2>@ViewData["Title"]</h2>
+<div class=" col-md-12 col-lg-12">
+    <h4>
+        <a asp-action="Create" class="btn btn-default ">Нов клиент</a>
+    </h4>
+    @if (Model.Any())
+    {
+        <table class="table table-condensed table-striped table-hover">
+            <thead class="info">
+                <tr>
+                    <th scope="col">Име</th>
+                    <th scope="col">Булстат</th>
+                    <th scope="col">Леце за контакти</th>
+                    <th scope="col">Телефон</th>
+                    <th scope="col" class="pull-right">Действие</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var client in @Model)
+                {
+                    <tr>
+                        <td>@client.Name</td>
+                        <td>@client.Bulstat</td>
+                        <td>@client.ContactName</td>
+                        <td>@client.Telephone</td>
+                        <td class="pull-right">
+                            @*<a asp-controller="Properties" asp-action="Deactivate" asp-route-id="@property.Id" class="btn btn-danger">Неактивен</a>*@
+                            <a asp-controller="Clients" asp-action="Edit" asp-route-id="@client.Id" class="btn btn-default ">Редактирай</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <h2>Няма активни клиенти</h2>
+    }
+</div>
