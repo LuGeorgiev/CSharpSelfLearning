@@ -16,8 +16,6 @@ namespace EstateManagment.Data
 
         public DbSet<Client> Clients{ get; set; }
 
-        public DbSet<ClientRent> ClientRents{ get; set; }
-
         public DbSet<Company> Companies{ get; set; }
 
         public DbSet<Contract> Contracts{ get; set; }
@@ -39,11 +37,8 @@ namespace EstateManagment.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<PropertyRent>()
-                .HasKey(pr => new { pr.PropertyId, pr.RentAgreementId });
-                        
+                .HasKey(pr => new { pr.PropertyId, pr.RentAgreementId });                     
 
-            builder.Entity<ClientRent>()
-                .HasKey(cl => new { cl.ClientId, cl.RentAgreementId});
 
             base.OnModelCreating(builder);
         }

@@ -15,6 +15,7 @@
         
         [Required]
         [Range(typeof(decimal), MinPayment,MaxPayment)]
+        [Display(Name = DisplayPrice)]
         public decimal MonthlyPrice { get; set; }
     }
 }

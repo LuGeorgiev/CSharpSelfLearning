@@ -30,6 +30,7 @@ namespace EstateManagment.Web.Models.Properties
         public string Description { get; set; }
 
         [Required]
+        [Display(Name=DisplayPropertyType)]
         public IEnumerable<PropertyType> Type { get; set; }        
 
         public int Id { get; set; }

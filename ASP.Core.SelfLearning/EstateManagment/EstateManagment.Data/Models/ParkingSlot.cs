@@ -9,14 +9,18 @@
     {
         public int Id { get; set; }
 
+        [Required]
+        [Display(Name = DisplayParkingSlotType)]
         public ParkingSlotType Type { get; set; }
 
         [Required]
         [Range(typeof(decimal), MinPayment, MaxPayment)]
+        [Display(Name =DisplayPrice)]
         public decimal Price { get; set; }
 
         [Required]
         [Range(0, int.MaxValue)]
+        [Display(Name = DisplayQuantity)]
         public int Quantity { get; set; }
 
         [Required]

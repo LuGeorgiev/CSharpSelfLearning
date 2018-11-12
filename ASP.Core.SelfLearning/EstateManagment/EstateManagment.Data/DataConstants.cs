@@ -59,9 +59,15 @@
         public const string DisplayDescription = "Описание";
         public const string DisplayPropertyType = "Вид на имота";
         public const string DisplayIsActual = "Актуалност";
+        public const string DisplayStartDate = "Начална дата";
+        public const string DisplayEndDate = "Крайна Дата";
+        public const string DisplayParkingDecription = "Описание на паркоместата";
+        public const string DisplayParkingSlotType = "Тип паркомясто";
+        public const string DisplayPrice = "Месечен наем";
+        public const string DisplayQuantity = "Броя";
 
         public const string ErrorMessageCompanyName = "Да съдържа букви на кирилица, латиница, цифри и знаците: !., ? ";
-        public const string ErrorMessageBulstat = "Да започва с или без BG последван от 9 то 15 цифри";
+        public const string ErrorMessageBulstat = "Да започва с или без BG последван от 9 до 15 цифри";
         public const string ErrorMessageEGN = "Точно 10 цифри";
         public const string ErrorMessageLatinNames = "Само букви на кирилица или латиница";
         public const string ErrorMessageTelephone = "Ц или без + в началото последван от цифри,интервали и тирета";
