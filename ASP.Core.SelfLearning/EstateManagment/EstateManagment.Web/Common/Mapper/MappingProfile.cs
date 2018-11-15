@@ -7,6 +7,7 @@ using EstateManagment.Services.ServiceModels.Rents;
 using EstateManagment.Services.ServiceModels.Users;
 using EstateManagment.Web.Areas.Admin.Models.Users;
 using EstateManagment.Web.Models.Properties;
+using System.Linq;
 
 namespace EstateManagment.Web.Common.Mapper
 {
@@ -17,11 +18,17 @@ namespace EstateManagment.Web.Common.Mapper
             CreateMap<User, UserInfoModel>();
             CreateMap<User, UserShortModel>();
             CreateMap<UserInfoModel, RemoveRolesUserViewModel>();
+
             CreateMap<CompanyDetailsModel, CreatePropertyViewModel>();
+
             CreateMap<Property, PropertyDetailsModel>();
+            CreateMap<Property, PropertyShortModel>();
+
             CreateMap<Client, ClientListingModel>();
             CreateMap<Client, ClientDetailsModel>();
-            //CreateMap<RentAgreement,RentListingViewModel>().ForMember(c=>c.Client, opt=>opt.MapFrom(ra=>ra.ClientRents.Client))
+            CreateMap<RentAgreement, RentListingViewModel>()
+                .ForMember(c => c.Client, opt => opt.MapFrom(ra => ra.Client.Name))
+                .ForMember(p => p.Properties, opt => opt.MapFrom(pr => pr.PropertyRents.Select(x => x.Property.Name)));
         }
     }
 }

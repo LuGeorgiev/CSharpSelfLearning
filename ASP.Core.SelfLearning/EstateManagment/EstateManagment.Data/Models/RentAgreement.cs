@@ -12,10 +12,17 @@ namespace EstateManagment.Data.Models
         public int Id { get; set; }
 
         [Required]
+        [Range(typeof(decimal), MinPayment, MaxPayment)]
+        [Display(Name = DisplayPrice)]
+        public decimal MonthlyPrice { get; set; }
+
+        [Required]
         [Display(Name = DisplayStartDate)]
+        [DataType(DataType.Date)]
         public DateTime StartDate { get; set; }
 
         [Display(Name = DisplayEndDate)]
+        [DataType(DataType.Date)]
         public DateTime? EndDate { get; set; }
 
         [MaxLength(RentDescriptionMaxLength)]

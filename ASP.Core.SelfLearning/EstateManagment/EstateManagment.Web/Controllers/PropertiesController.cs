@@ -26,7 +26,7 @@ namespace EstateManagment.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var model = await this.properties.AllAsync();
+            var model = await this.properties.AllWithCompaniesAsync();
 
             return View(model);
         }

@@ -16,9 +16,22 @@ namespace EstateManagment.Services.Implementation
         public PropertiesService(IMapper mapper, EstateManagmentContext db) 
             : base(mapper, db)
         {
-        }        
+        }
 
-        public async Task<IEnumerable<PropertiesListingModel>> AllAsync()
+        public async Task<IEnumerable<PropertyShortModel>> AllFreeAsync()
+        {
+            var properties = await this.Db.Properties
+            .Where(x => x.IsActual == true && 
+            x.PropertyRents.Count == 0 && 
+            ! x.PropertyRents.Any(y=>y.RentAgreement.EndDate==null) &&
+            ! x.PropertyRents.Any(y=>y.RentAgreement.EndDate>DateTime.UtcNow))
+            .ToListAsync();
+
+            var result = this.Mapper.Map<IEnumerable<PropertyShortModel>>(properties);
+            return result;
+        }
+
+        public async Task<IEnumerable<PropertiesListingModel>> AllWithCompaniesAsync()
             => await this.Db.Companies
                 .Where(c=>c.Properties.Count>0)
                 .Select(c => new PropertiesListingModel

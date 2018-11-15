@@ -76,6 +76,7 @@ namespace EstateManagment.Web
             services.AddTransient<IUsersService, UsersService>();
             services.AddTransient<IPropertiesService, PropertiesService>();
             services.AddTransient<IClientsService, ClientsService>();
+            services.AddTransient<IRentService, RentService>();
 
             services.AddSingleton<IEmailSender, SendGridEmailSender>();
             services.Configure<SendGridOptions>(this.Configuration.GetSection("SendGridSettings"));

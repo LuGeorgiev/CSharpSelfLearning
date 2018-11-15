@@ -65,11 +65,20 @@
         public const string DisplayParkingSlotType = "Тип паркомясто";
         public const string DisplayPrice = "Месечен наем";
         public const string DisplayQuantity = "Броя";
+        public const string DisplayClients = "Клиенти";
+        public const string DisplayFreeProperties = "Свободни Недвижимости";
+        public const string DisplayCarSlots = "Паркоместа  коли";
+        public const string DisplayBusSlots = "Паркоместа рейсове";
+        public const string DisplayTruckSlots = "Паркоместа камиони";
+        public const string DisplayBigTruckSlots = "Паркоместа голями камиони";
+        public const string DisplayCarCageSlots = "Паркоместа авто-клетки";
+        public const string DisplayOtherSlots = "Други";
+        public const string DisplaySlotPrice = "Еденична цена";
 
         public const string ErrorMessageCompanyName = "Да съдържа букви на кирилица, латиница, цифри и знаците: !., ? ";
         public const string ErrorMessageBulstat = "Да започва с или без BG последван от 9 до 15 цифри";
         public const string ErrorMessageEGN = "Точно 10 цифри";
         public const string ErrorMessageLatinNames = "Само букви на кирилица или латиница";
-        public const string ErrorMessageTelephone = "Ц или без + в началото последван от цифри,интервали и тирета";
+        public const string ErrorMessageTelephone = "С или без '+' в началото последван от цифри,интервали и тирета";
     }
 }

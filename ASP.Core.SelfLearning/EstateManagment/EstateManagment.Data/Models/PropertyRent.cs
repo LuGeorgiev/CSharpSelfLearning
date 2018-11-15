@@ -11,11 +11,7 @@
 
         public int RentAgreementId { get; set; }
 
-        public virtual RentAgreement RentAgreement { get; set; }
-        
-        [Required]
-        [Range(typeof(decimal), MinPayment,MaxPayment)]
-        [Display(Name = DisplayPrice)]
-        public decimal MonthlyPrice { get; set; }
+        public virtual RentAgreement RentAgreement { get; set; }        
+       
     }
 }

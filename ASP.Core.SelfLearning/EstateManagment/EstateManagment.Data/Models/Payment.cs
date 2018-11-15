@@ -12,6 +12,7 @@
         [Range(typeof(decimal), MinPayment, MaxPayment)]
         public decimal Amount { get; set; }
 
+        [DataType(DataType.Date)]
         public DateTime PaymentDate { get; set; } = DateTime.UtcNow;
 
         public string UserId { get; set; }

@@ -28,14 +28,17 @@
         [Range(typeof(decimal), MinPayment, MaxPayment)]
         public decimal ElectricityPrice { get; set; }
 
+        [DataType(DataType.Date)]
         public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
 
+        [DataType(DataType.Date)]
         public DateTime DeadLine { get; set; } = DateTime.UtcNow.AddMonths(1);
 
         public string UserId { get; set; }
 
         public virtual User User { get; set; }
 
+        [DataType(DataType.Date)]
         public DateTime? PaymentDate { get; set; }
 
         [Required]

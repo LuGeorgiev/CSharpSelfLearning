@@ -1,7 +1,134 @@
-﻿
+﻿@model CreateRentFormViewModel
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Създаване на нов договор за отдаване под наем";
 }
 
-<h2>Create</h2>
+<h2>@ViewData["Title"]</h2>
+<div class="container-fluid">
+
+    <div class="col-md-12 col-lg-12">
+        <form method="post">
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label @*asp-for="Type" *@>Свободни Недвижимости</label>
+                <select asp-for="PropertiesIds" asp-items="@Model.FreeProperties" class="form-control"> </select>
+            </div>
+            <div class="form-group col-lg-6 col-md-6">
+                <label @*asp-for="Type" *@>Клиент</label>
+                <select asp-for="ClientId" asp-items="@Model.Clients" class="form-control"> </select>
+            </div>
+            <div class="form-group col-lg-6 col-md-6">
+                <label asp-for="MonthlyPrice"></label>
+                <input asp-for="MonthlyPrice" class="form-control" />
+                <span asp-validation-for="MonthlyPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group col-lg-6 col-md-6">
+                <label asp-for="StartDate"></label>
+                <input asp-for="StartDate" class="form-control" value="@DateTime.Now.ToShortDateString()" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group col-lg-6 col-md-6">
+                <label asp-for="EndDate">Крайна дата, ако има такава..</label>
+                <input asp-for="EndDate" class="form-control" @*placeholder="Крайна дата, ако има такава.." *@ />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group col-lg-6 col-md-6">
+                <label asp-for="Description"></label>
+                <textarea asp-for="Description" class="form-control" rows="4" placeholder="Описание на имота/имотите..."></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group col-lg-6 col-md-6">
+                <label asp-for="ParkingSlotDescription"></label>
+                <textarea asp-for="ParkingSlotDescription" class="form-control" rows="4" placeholder="Описание на наетите паркоместа..."></textarea>
+                <span asp-validation-for="ParkingSlotDescription" class="text-danger"></span>
+            </div>
+
+            <div class="panel col-lg-4 col-md-4">
+                <div class="form-group">
+                    <label asp-for="CarSlots"></label>
+                    <input asp-for="CarSlots" class="form-control" value="0" />
+                    <span asp-validation-for="CarSlots" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CarMonthPrice">Цена за една кола</label>
+                    <input asp-for="CarMonthPrice" class="form-control" value="0" />
+                    <span asp-validation-for="CarMonthPrice" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="panel col-lg-4 col-md-4">
+                <div class="form-group">
+                    <label asp-for="BusSlots"></label>
+                    <input asp-for="BusSlots" class="form-control" value="0" />
+                    <span asp-validation-for="BusSlots" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BusMonthPrice">Цена за еднн рейс</label>
+                    <input asp-for="BusMonthPrice" class="form-control" value="0" />
+                    <span asp-validation-for="BusMonthPrice" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div class="panel col-lg-4 col-md-4">
+                <div class="form-group">
+                    <label asp-for="TruckSlots"></label>
+                    <input asp-for="TruckSlots" class="form-control" value="0" />
+                    <span asp-validation-for="TruckSlots" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TruckMonthPrice">Цена за един камион</label>
+                    <input asp-for="TruckMonthPrice" class="form-control" value="0" />
+                    <span asp-validation-for="TruckMonthPrice" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="panel col-lg-4 col-md-4">
+            <div class="form-group">
+                <label asp-for="BigTruckSlots"></label>
+                <input asp-for="BigTruckSlots" class="form-control" value="0" />
+                <span asp-validation-for="BigTruckSlots" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BigTruckMonthPrice">Цена за един голям камион</label>
+                <input asp-for="BigTruckMonthPrice" class="form-control" value="0" />
+                <span asp-validation-for="BigTruckMonthPrice" class="text-danger"></span>
+            </div>
+            </div>
+            <div class="panel col-lg-4 col-md-4">
+                <div class="form-group">
+                    <label asp-for="CarCageSlots"></label>
+                    <input asp-for="CarCageSlots" class="form-control" value="0" />
+                    <span asp-validation-for="CarCageSlots" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CarCageMonthPrice">Цена за едиа авто-клетка</label>
+                    <input asp-for="CarCageMonthPrice" class="form-control" value="0" />
+                    <span asp-validation-for="CarCageMonthPrice" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="panel col-lg-4 col-md-4">
+            <div class="form-group">
+                <label asp-for="OtherSlots"></label>
+                <input asp-for="OtherSlots" class="form-control" value="0" />
+                <span asp-validation-for="OtherSlots" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OtherMonthPrice"></label>
+                <input asp-for="OtherMonthPrice" class="form-control" value="0" />
+                <span asp-validation-for="OtherMonthPrice" class="text-danger"></span>
+            </div>
+            </div>
+
+            @*<input type="hidden" name="companyId" value="@Model.Id" />*@
+            <div>
+                <button asp-action="Create" asp-controller="Rents" type="submit" class="btn btn-success btn-info">Създай</button>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
 

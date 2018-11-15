@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using static EstateManagment.Data.DataConstants;
 
 namespace EstateManagment.Services.ServiceModels.Rents
@@ -11,7 +12,7 @@ namespace EstateManagment.Services.ServiceModels.Rents
         public string Client { get; set; }
 
         [Display(Name = DisplayPropertyName)]
-        public string Property { get; set; }
+        public IEnumerable<string> Properties { get; set; }
                 
         [Display(Name = DisplayPrice)]
         public decimal MonthlyPrice { get; set; }
