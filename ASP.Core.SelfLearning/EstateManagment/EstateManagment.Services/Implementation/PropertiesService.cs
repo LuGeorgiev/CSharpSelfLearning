@@ -11,20 +11,19 @@ using EstateManagment.Services.ServiceModels.Properties;
 
 namespace EstateManagment.Services.Implementation
 {
-    public class PropertiesService : BaseService,IPropertiesService
+    public class PropertiesService : BaseService, IPropertiesService
     {
-        public PropertiesService(IMapper mapper, EstateManagmentContext db) 
+        public PropertiesService(IMapper mapper, EstateManagmentContext db)
             : base(mapper, db)
         {
         }
 
         public async Task<IEnumerable<PropertyShortModel>> AllFreeAsync()
-        {
+        {          
             var properties = await this.Db.Properties
-            .Where(x => x.IsActual == true && 
-            x.PropertyRents.Count == 0 && 
-            ! x.PropertyRents.Any(y=>y.RentAgreement.EndDate==null) &&
-            ! x.PropertyRents.Any(y=>y.RentAgreement.EndDate>DateTime.UtcNow))
+            .Where(x => x.IsActual == true &&
+            !x.PropertyRents.Any(y => y.RentAgreement.EndDate == null) &&
+             x.PropertyRents.All(y => y.RentAgreement.EndDate <= DateTime.UtcNow))
             .ToListAsync();
 
             var result = this.Mapper.Map<IEnumerable<PropertyShortModel>>(properties);
@@ -33,41 +32,41 @@ namespace EstateManagment.Services.Implementation
 
         public async Task<IEnumerable<PropertiesListingModel>> AllWithCompaniesAsync()
             => await this.Db.Companies
-                .Where(c=>c.Properties.Count>0)
+                .Where(c => c.Properties.Count > 0)
                 .Select(c => new PropertiesListingModel
                 {
-                     CompanyId=c.Id,
-                     CompanyName=c.Name,
-                     Properties = c.Properties
-                     .Where(p=>p.IsActual==true)
-                     .Select(p=> new PropertyViewModel
+                    CompanyId = c.Id,
+                    CompanyName = c.Name,
+                    Properties = c.Properties
+                     .Where(p => p.IsActual == true)
+                     .Select(p => new PropertyViewModel
                      {
-                         Id=p.Id,
-                         Address=p.Address,
-                         Area=p.Area,
-                         Name=p.Name,
-                         Description=p.Description
+                         Id = p.Id,
+                         Address = p.Address,
+                         Area = p.Area,
+                         Name = p.Name,
+                         Description = p.Description
                      })
                      .ToList()
                 })
-                .ToListAsync();         
+                .ToListAsync();
 
         public async Task<bool> CreateAsync(int companyId, string propertyName, string propertyAddress, int area, string description, PropertyType type)
         {
             var company = await this.Db.Companies
                 .FirstOrDefaultAsync(x => x.Id == companyId);
-            if (company==null)
+            if (company == null)
             {
                 return false;
             }
             var property = new Property
             {
-                 Address=propertyAddress,
-                 Name=propertyName,
-                 Area=area,
-                 Description=description,
-                 Type=type,
-                 CompanyId=company.Id
+                Address = propertyAddress,
+                Name = propertyName,
+                Area = area,
+                Description = description,
+                Type = type,
+                CompanyId = company.Id
             };
 
             await this.Db.Properties.AddAsync(property);
@@ -110,8 +109,8 @@ namespace EstateManagment.Services.Implementation
         public async Task<PropertyDetailsModel> GetAsync(int propertyId)
         {
             var property = await this.Db.Properties
-                .FirstOrDefaultAsync(x => x.Id == propertyId && x.IsActual==true);
-            if (property==null)
+                .FirstOrDefaultAsync(x => x.Id == propertyId && x.IsActual == true);
+            if (property == null)
             {
                 return null;
             }

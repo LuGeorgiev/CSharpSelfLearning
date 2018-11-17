@@ -1,7 +1,56 @@
-﻿
+﻿@model RentDetailsModel
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Детайли на договора";
 }
 
-<h2>Details</h2>
+<div class="container-fluid">
+    <form method="post" asp-action="UploadContract" asp-route-id="@Model.Id" enctype="multipart/form-data">
+        <div class="form-group">
+            <div class="col-md-12">
+                <p>Качване на договор в .zip формат под 2 MB размер:</p>
+                <input type="file" name="contract" multiple accept=".zip" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-12">
+                <input type="submit" value="Upload" />
+            </div>
+        </div>
+    </form>
+    <br />
+    <h2>@ViewData["Title"]</h2>
 
+    <partial name="_RentDescription" />
+
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-lg-offset-1" ">
+            <h4>Описание</h4>
+            <p>@Model.Description</p>
+        </div>
+        <div class="col-lg-4 col-md-4">
+            <h4>Описание на паркоместата</h4>
+            <p>@Model.ParkingSlotDescription</p>
+        </div>
+    </div>
+    @*<form method="post">
+            <div asp-validation-summary="All">
+            </div>
+            <br />
+            Upload your exam(pnly .zip files allowed):
+            <br />
+            <input type="file" name="contract" style="display:none" accept=".zip" />
+            <button type="button" class="btn btn-default" onclick="document.getElementsByName('contract')[0].click()">Choose your file!</button>
+            <br />
+            <br />
+            <input asp-action="UploadContract" asp-route-id="@Model.Id" enctype="form-data" type="submit" class="btn btn-primary" value="Upload Contract" />
+        </form>*@
+
+    <div>
+        @await Component.InvokeAsync("ContractsList", new { rentId = Model.Id})
+    </div>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

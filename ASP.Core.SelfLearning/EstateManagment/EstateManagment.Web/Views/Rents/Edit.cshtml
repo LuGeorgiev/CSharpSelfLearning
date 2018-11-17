@@ -1,7 +1,30 @@
-﻿
+﻿@model RentDetailsModel
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Редактиране коментарите по договор";
 }
 
-<h2>Edit</h2>
+<h2>@ViewData["Title"]</h2>
 
+<div class="container-fluid">
+    <partial name="_RentDescription" />
+    
+    <form method="post">
+        <hr />
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group col-lg-6 col-md-6">
+            <label asp-for="Description"></label>
+            <textarea asp-for="Description" class="form-control" rows="4" >@Model.Description</textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="form-group col-lg-6 col-md-6">
+            <label asp-for="ParkingSlotDescription"></label>
+            <textarea asp-for="ParkingSlotDescription" class="form-control" rows="4" >@Model.ParkingSlotDescription</textarea>
+            <span asp-validation-for="ParkingSlotDescription" class="text-danger"></span>
+        </div>
+        <input type="hidden" name="companyId" value="@Model.Id" />
+        <div>
+            <button asp-controller="Rents" asp-action="Edit"  type="submit" class="btn btn-success btn-info">Редактирай</button>
+        </div>
+    </form>
+
+</div>

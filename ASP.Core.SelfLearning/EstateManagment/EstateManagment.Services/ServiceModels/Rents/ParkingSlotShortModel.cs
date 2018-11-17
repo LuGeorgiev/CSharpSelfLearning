@@ -1,0 +1,13 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace EstateManagment.Services.ServiceModels.Rents
+{
+    public class ParkingSlotShortModel
+    {
+        public string Type { get; set; }
+
+        public string Quantity { get; set; }
+    }
+}

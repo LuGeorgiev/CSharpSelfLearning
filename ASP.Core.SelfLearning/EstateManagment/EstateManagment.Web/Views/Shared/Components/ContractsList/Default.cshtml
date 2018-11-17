@@ -1,0 +1,28 @@
+﻿@model IEnumerable<ContractListingModel>
+
+@if (Model.Count() > 0)
+{
+    <table class="table table-condensed table-striped table-hover">
+        <thead class="info">
+            <tr>
+                <th scope="col">Дата на качване</th>
+                <th scope="col">Действие</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var contract in Model)
+            {
+                <tr>
+                    <td class="col-md-2">@contract.UploadDate</td>                    
+                    <td >
+                        <a asp-controller="Contracts" asp-action="Download" asp-route-id="@contract.Id" class="btn btn-default ">Свали</a>
+                        <a asp-controller="Contracts" asp-action="Delete" asp-route-id="@contract.Id" class="btn btn-danger ">Изтрии</a>
+                    </td>
+                </tr>}
+        </tbody>
+    </table>
+}
+else
+{
+    <h2>Все още няма качени контракти пои този договор</h2>
+}

@@ -7,6 +7,7 @@ using AutoMapper;
 using EstateManagment.Data;
 using EstateManagment.Data.Models;
 using EstateManagment.Data.Models.Enums;
+using EstateManagment.Services.ServiceModels.Properties;
 using EstateManagment.Services.ServiceModels.Rents;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,7 +20,7 @@ namespace EstateManagment.Services.Implementation
         {
         }
 
-        public async Task<IEnumerable<RentListingViewModel>> AllAsync(bool isActual)
+        public async Task<IEnumerable<RentListingViewModel>> AllAsync(bool isActual=true)
         {
             var rentAgreements = await this.Db.RentAgreements
                 .Where(x => x.IsActual == isActual)
@@ -114,6 +115,89 @@ namespace EstateManagment.Services.Implementation
             catch (Exception)
             {
                 return false;
+            }
+
+            return true;
+        }
+
+        public async Task<bool> EditDescriptionsAsync(string description, string parkingSlotDescription, int id)
+        {
+            var rentAgreement = await this.Db.RentAgreements
+                .FirstOrDefaultAsync(x => x.Id == id);
+            if (rentAgreement==null)
+            {
+                return false;
+            }
+
+            rentAgreement.Description = description;
+            rentAgreement.ParkingSlotDescription = parkingSlotDescription;
+            this.Db.RentAgreements.Update(rentAgreement);
+            try
+            {
+                await this.Db.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public async Task<RentDetailsModel> GetDetailsAsync(int id)
+        {
+            var rentAgreement = await this.Db.RentAgreements
+                .FirstOrDefaultAsync(x => x.Id==id);
+            if (rentAgreement==null)
+            {
+                return null;
+            }
+
+            var result = Mapper.Map<RentDetailsModel>(rentAgreement);
+            return result;
+        }
+
+        public async Task<bool> TerminateAsync(int id)
+        {
+            var rentAgreement = await this.Db.RentAgreements
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            if (rentAgreement==null)
+            {
+                return false;
+            }
+            rentAgreement.IsActual = false;
+            rentAgreement.EndDate = DateTime.UtcNow;
+
+            this.Db.RentAgreements.Update(rentAgreement);
+            try
+            {
+                await this.Db.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public async Task<bool> UploadContractAsync(byte[] fileContent, int id)
+        {
+            var rentAgreement = await this.Db.RentAgreements
+                .FirstOrDefaultAsync(x => x.Id == id);
+            if (rentAgreement==null)
+            {
+                return false;
+            }
+
+            rentAgreement.Contracts.Add(new Contract { ScannedContract=fileContent });
+            try
+            {
+                await this.Db.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                return false;                
             }
 
             return true;

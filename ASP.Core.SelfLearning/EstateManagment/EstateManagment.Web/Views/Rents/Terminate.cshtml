@@ -1,7 +1,32 @@
-﻿
+﻿@model RentDetailsModel
 @{
-    ViewData["Title"] = "Terminate";
+    ViewData["Title"] = "Прекратяване на договор";
 }
 
-<h2>Terminate</h2>
+<h2>@ViewData["Title"]</h2>
 
+<div class="container-fluid">
+   <partial name="_RentDescription" />
+
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-lg-offset-1" ">
+            <h4>Описание</h4>
+            <p>@Model.Description</p>
+        </div>
+
+        <div class="col-lg-4 col-md-4">
+            <h4>Описание на паркоместата</h4>
+            <p>@Model.ParkingSlotDescription</p>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-lg-offset-1">
+            @*<a asp-controller="rents" asp-action="confirmTerminate" asp-route-id="@Model.Id" class="btn btn-danger">Потвърждаване</a>
+                <a asp-controller="rents" asp-action="index" class="btn btn-warning">Отказване</a>*@
+            <a href="/rents/confirmTerminate?id=@Model.Id" class="btn btn-danger">Потвърждаване</a>
+            <a href="/rents/index" class="btn btn-warning">Отказване</a>
+        </div>
+    </div>
+
+</div>

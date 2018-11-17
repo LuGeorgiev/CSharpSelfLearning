@@ -2,14 +2,16 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
-using static EstateManagment.Web.WebConstants;
 using EstateManagment.Web.Models.Rents;
 using EstateManagment.Services.ServiceModels.Rents;
+using Microsoft.AspNetCore.Http;
+using EstateManagment.Web.Common.Extensions;
+
+using static EstateManagment.Web.WebConstants;
+using static EstateManagment.Data.DataConstants;
 
 namespace EstateManagment.Web.Controllers
 {
@@ -19,6 +21,7 @@ namespace EstateManagment.Web.Controllers
         private readonly IRentService rents;
         private readonly IClientsService clients;
         private readonly IPropertiesService properties;
+
         public RentsController(IRentService rents, IPropertiesService properties, IClientsService clients)
         {
             this.rents = rents;
@@ -26,18 +29,22 @@ namespace EstateManagment.Web.Controllers
             this.clients = clients;
         }
 
-        public async Task<IActionResult> Index(bool isActual)
+        public async Task<IActionResult> Index()
         {
-            var model = await this.rents.AllAsync(isActual);
+            var model = await this.rents.AllAsync();
 
             return View(model);
         }
 
         public async Task<IActionResult> Details(int id)
-        {          
-            
+        {
+            var model = await this.rents.GetDetailsAsync(id);
 
-            return View();
+            if (model==null)
+            {
+                return this.BadRequest();
+            }
+            return View(model);
         }
 
         public async Task<IActionResult> Create()
@@ -70,6 +77,7 @@ namespace EstateManagment.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = ManagerRole)]
         public async Task<IActionResult> Create(CreateRentModel model)
         {
             if (!ModelState.IsValid)
@@ -80,7 +88,7 @@ namespace EstateManagment.Web.Controllers
             bool isCreated = await this.rents.CreateAsync(model);
             if (!isCreated)
             {
-                return this.Redirect("/Rents/Create");
+                return this.BadRequest();
             }
 
             return this.Redirect("/Rents/Index");
@@ -88,35 +96,77 @@ namespace EstateManagment.Web.Controllers
 
         public async Task<IActionResult> Terminate(int id)
         {
-            return View();
-        }
+            var model = await this.rents.GetDetailsAsync(id);
+            if (model==null)
+            {
+                return Redirect("/Rents/Index");
+            }
 
-        [HttpPost]
-        public async Task<IActionResult> Terminate(DateTime endDate)
+            return View(model);
+        }
+          
+        [Authorize(Roles = ManagerRole)]
+        public async Task<IActionResult> ConfirmTerminate(int id)
         {
-            return View();
+            var isTerminated = await this.rents.TerminateAsync(id);
+            if (!isTerminated)
+            {
+                return this.BadRequest();
+            }
+
+            return Redirect("/Rents/Index");
         }
 
         public async Task<IActionResult> Edit(int id)
         {
+            var model = await this.rents.GetDetailsAsync(id);
+
+            if (model == null)
+            {
+                return this.BadRequest();
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(string description, string parkingSlotDescription, int id)
+        {
+            bool isEdited = await this.rents.EditDescriptionsAsync(description, parkingSlotDescription, id);
+
+            if (!isEdited)
+            {
+                return this.BadRequest();
+            }
+
+            return Redirect("/Rents/Index");
+        }
+
+        public async Task<IActionResult> CreatePayment(int id)
+        {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(string description, string parkingDescriptionpre)
-        {
-            return View();
-        }
-
-        public async Task<IActionResult> ReSign(int id)
+        public async Task<IActionResult> CreatePayment(string description, string parkingDescriptionpre)
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> ReSign(string description, string parkingDescriptionpre)
+        public async Task<IActionResult> UploadContract(int id, IFormFile contract)
         {
-            return View();
+            if (!contract.FileName.EndsWith(".zip")||contract.Length>ContractsFileMaxSize)
+            {
+                return RedirectToAction(nameof(Details), new { id });
+            }
+            var fileContent = await contract.ToByteArrayAsync();
+            bool isUloaded = await this.rents.UploadContractAsync(fileContent, id);
+            if (!isUloaded)
+            {
+                return BadRequest();
+            }
+
+            return Redirect("/Rents/Index");
         }
     }
 }

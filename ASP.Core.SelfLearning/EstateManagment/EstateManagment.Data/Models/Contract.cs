@@ -9,7 +9,7 @@
     {
         public int Id { get; set; }
 
-        public DateTime UploadData { get; set; } = DateTime.UtcNow;
+        public DateTime UploadDate { get; set; } = DateTime.UtcNow;
 
         [Required]
         [MaxLength(ContractsFileMaxSize)]

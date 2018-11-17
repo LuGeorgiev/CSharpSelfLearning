@@ -29,6 +29,12 @@ namespace EstateManagment.Web.Common.Mapper
             CreateMap<RentAgreement, RentListingViewModel>()
                 .ForMember(c => c.Client, opt => opt.MapFrom(ra => ra.Client.Name))
                 .ForMember(p => p.Properties, opt => opt.MapFrom(pr => pr.PropertyRents.Select(x => x.Property.Name)));
+            CreateMap<RentAgreement, RentDetailsModel>()
+                .ForMember(r => r.TotalMonthlyPrice, opt => opt.MapFrom(ra => ra.MonthlyPrice + ra.ParkingSlots.Sum(x => x.Price * x.Quantity)))
+                .ForMember(r => r.Client, opt => opt.MapFrom(ra => ra.Client.Name))
+                .ForMember(r=>r.Properties, opt=>opt.MapFrom(ra=>ra.PropertyRents.Select(x=>x.Property)));
+
+            CreateMap<ParkingSlot, ParkingSlotShortModel>();
         }
     }
 }
