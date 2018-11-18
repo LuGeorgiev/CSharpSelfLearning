@@ -9,5 +9,7 @@ namespace EstateManagment.Services.ServiceModels.Rents
         public string Type { get; set; }
 
         public string Quantity { get; set; }
+
+        public decimal Price { get; set; }
     }
 }

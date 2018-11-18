@@ -23,6 +23,10 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Payments\Data\" />
+    <Folder Include="Areas\Payments\Models\MonthlyConsumables\" />
+    <Folder Include="Areas\Payments\Models\MonthlyRents\" />
+    <Folder Include="Areas\Payments\Models\Payments\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,6 +34,12 @@
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Areas\Admin\Views\_ViewStart.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\Payments\Views\_ViewImports.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\Payments\Views\_ViewStart.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
   </ItemGroup>

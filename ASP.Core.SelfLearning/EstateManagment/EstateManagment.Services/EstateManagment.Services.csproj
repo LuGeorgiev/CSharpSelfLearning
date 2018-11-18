@@ -13,4 +13,9 @@
     <ProjectReference Include="..\EstateManagment.Data\EstateManagment.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Payments\Models\MonthlyConsumables\" />
+    <Folder Include="Areas\Payments\Models\Payments\" />
+  </ItemGroup>
+
 </Project>

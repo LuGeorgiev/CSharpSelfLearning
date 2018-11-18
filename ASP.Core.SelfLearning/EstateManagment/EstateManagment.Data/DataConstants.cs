@@ -74,6 +74,18 @@
         public const string DisplayCarCageSlots = "Паркоместа авто-клетки";
         public const string DisplayOtherSlots = "Други";
         public const string DisplaySlotPrice = "Еденична цена";
+        public const string DisplayDeadLine = "Краен срок";
+        public const string DisplayTotalPayment = "Оставащо плащане";
+        public const string DisplayApplyVat = "Сложи ДДС";
+        public const string DisplayWaterPayment = "Сметка за вода";
+        public const string DisplayElectricityPayment = "Сметка за ток";
+        public const string DisplayWaterReport = "Изразходвана вода";
+        public const string DisplayElectricityDay = "Разход дневна тарифа";
+        public const string DisplayElectricityNight = "Разход нощна тарифа";
+        public const string DisplayElectricityPeak = "Разход върхова тарифа";
+        public const string DisplayPaidOn = "Дата на плащане";
+        public const string DisplayAmount = "Сума";
+        public const string DisplayCashPayment = "Платено в брой";
 
         public const string ErrorMessageCompanyName = "Да съдържа букви на кирилица, латиница, цифри и знаците: !., ? ";
         public const string ErrorMessageBulstat = "Да започва с или без BG последван от 9 до 15 цифри";

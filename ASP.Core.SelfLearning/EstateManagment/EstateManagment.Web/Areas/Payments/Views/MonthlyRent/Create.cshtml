@@ -1,0 +1,52 @@
+﻿@model CreateMonthlyRentFormViewModel
+@{
+    ViewData["Title"] = "Създаване на месечно палщеане";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Клиент: <strong>@Model.Client</strong></h4>
+            <h4>Брой паркоместа: <strong>@Model.ParkingSlotsQty</strong></h4>
+            <h4>Месечен наем: <strong>@Model.TotalPayment.ToString("F2")</strong> лв</h4>
+        </div>
+        <div class="col-md-6">
+            <h4>Наети площи:</h4>
+            @foreach (var property in Model.Properties)
+            {
+                <p>@property</p>
+            }  
+
+        </div>
+    </div>
+    <div>
+
+    </div>
+    <form method="post" class="col-md-8">
+        <hr />
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="TotalPayment"></label>
+            <input asp-for="TotalPayment" class="form-control" value="@Model.TotalPayment" />
+            <span asp-validation-for="TotalPayment" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="DeadLine"></label>
+            <input asp-for="DeadLine" class="form-control" value="@DateTime.UtcNow.AddMonths(1)" />
+            <span asp-validation-for="DeadLine" class="text-danger"></span>
+        </div>
+        <div class="form-group ">
+            <label asp-for="ApplyVAT"></label>
+            <input asp-for="ApplyVAT" /> 
+        </div>
+        <input type="hidden" name="Id" value="@Model.RentAgreementId" />
+        <button asp-action="Create" asp-controller="MonthlyRent" type="submit" class="btn btn-default btn-success">Създайте месечно плащане</button>
+        <a href="javascript:window.history.back()" class="btn btn-info">Назад</a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -129,6 +129,7 @@ namespace EstateManagment.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = ManagerRole)]
         public async Task<IActionResult> Edit(string description, string parkingSlotDescription, int id)
         {
             bool isEdited = await this.rents.EditDescriptionsAsync(description, parkingSlotDescription, id);
@@ -141,18 +142,8 @@ namespace EstateManagment.Web.Controllers
             return Redirect("/Rents/Index");
         }
 
-        public async Task<IActionResult> CreatePayment(int id)
-        {
-            return View();
-        }
-
         [HttpPost]
-        public async Task<IActionResult> CreatePayment(string description, string parkingDescriptionpre)
-        {
-            return View();
-        }
-
-        [HttpPost]
+        [Authorize(Roles = ManagerRole)]
         public async Task<IActionResult> UploadContract(int id, IFormFile contract)
         {
             if (!contract.FileName.EndsWith(".zip")||contract.Length>ContractsFileMaxSize)

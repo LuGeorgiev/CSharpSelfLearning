@@ -10,10 +10,15 @@
 
         [Required]
         [Range(typeof(decimal), MinPayment, MaxPayment)]
+        [Display(Name = DisplayAmount)]
         public decimal Amount { get; set; }
 
         [DataType(DataType.Date)]
-        public DateTime PaymentDate { get; set; } = DateTime.UtcNow;
+        [Display(Name = DisplayPaidOn)]
+        public DateTime PaidOn { get; set; } = DateTime.UtcNow;
+
+        [Display(Name = DisplayCashPayment)]
+        public bool CashPayment { get; set; } = false;
 
         public string UserId { get; set; }
 

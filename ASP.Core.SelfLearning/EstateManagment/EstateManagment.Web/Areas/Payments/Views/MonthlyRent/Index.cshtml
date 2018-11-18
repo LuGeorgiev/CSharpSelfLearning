@@ -1,0 +1,32 @@
+﻿@model IEnumerable<MonthlyRentListingModel>
+@{
+    ViewData["Title"] = "Чакащи задължения";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table table-condensed table-striped table-hover">
+    <thead class="info">
+        <tr>
+            <th scope="col">Краен срок</th>
+            <th scope="col">Клиент</th>
+            <th scope="col">Сума</th>
+            <th scope="col">Имоти</th>
+            <th scope="col" class="pull-right">Действие</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var rent in Model)
+        {
+            <tr>
+                <td>@rent.DeadLine.ToShortDateString()</td>
+                <td>@rent.Client</td>
+                <td>@rent.TotalPayment.ToString("F2") лв</td>
+                <td>@String.Join(", ",rent.Properties)</td>
+                <td class="pull-right">
+                    <a asp-controller="MonthlyRent" asp-action="Edit" asp-route-id="@rent.Id" class="btn btn-default ">Редактирай</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

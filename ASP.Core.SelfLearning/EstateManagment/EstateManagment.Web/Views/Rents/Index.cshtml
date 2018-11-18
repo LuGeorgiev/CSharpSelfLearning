@@ -39,8 +39,8 @@
                             {
                                 <td class="pull-right">
                                     <a asp-controller="Rents" asp-action="Details" asp-route-id="@rent.Id" class="btn btn-default">Детайли</a>
-                                    <a asp-controller="Rents" asp-action="Edit" asp-route-id="@rent.Id" class="btn btn-info">Редактиране</a>
-                                    <a asp-controller="Rents" asp-action="CreatePayment" asp-route-id="@rent.Id" class="btn btn-warning">Месечен наем</a>
+                                    <a asp-controller="Rents" asp-action="Edit" asp-route-id="@rent.Id" class="btn btn-info">Редактиране</a>                                    
+                                    <a asp-area="Payments" asp-controller="MonthlyRent" asp-action="Create" asp-route-id="@rent.Id" class="btn btn-warning">Месечен наем</a>
                                     <a asp-controller="Rents" asp-action="Terminate" asp-route-id="@rent.Id" class="btn btn-danger">Прекратяване</a>
 
                                 </td>

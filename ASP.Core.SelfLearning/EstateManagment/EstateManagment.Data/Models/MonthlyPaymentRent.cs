@@ -13,13 +13,18 @@
         public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
 
         [DataType(DataType.Date)]
+        [Display(Name = DisplayDeadLine)]
         public DateTime DeadLine { get; set; } = DateTime.UtcNow.AddMonths(1);
 
         [Required]
         [Range(typeof(decimal), MinPayment, MaxPayment)]
-        public decimal MonthlyPayment { get; set; }
+        [Display(Name =DisplayTotalPayment)]
+        public decimal TotalPayment { get; set; }
 
         public bool IsPaid { get; set; } = false;
+
+        [Display(Name =DisplayApplyVat)]
+        public bool ApplyVAT { get; set; }
 
         public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
 
