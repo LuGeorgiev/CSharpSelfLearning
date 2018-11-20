@@ -29,8 +29,10 @@
                         <td>@client.ContactName</td>
                         <td>@client.Telephone</td>
                         <td class="pull-right">
+                            //TODO:make klient inactive
                             @*<a asp-controller="Properties" asp-action="Deactivate" asp-route-id="@property.Id" class="btn btn-danger">Неактивен</a>*@
                             <a asp-controller="Clients" asp-action="Edit" asp-route-id="@client.Id" class="btn btn-default ">Редактирай</a>
+                            <a href="javascript:window.history.back()" class="btn btn-info">Назад</a>
                         </td>
                     </tr>
                 }

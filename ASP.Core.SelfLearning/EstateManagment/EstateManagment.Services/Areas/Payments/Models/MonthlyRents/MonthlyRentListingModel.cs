@@ -23,5 +23,15 @@ namespace EstateManagment.Services.Areas.Payments.Models.MonthlyRents
         public string Client { get; set; }
 
         public IEnumerable<string> Properties { get; set; }
+
+        [Range(typeof(decimal), MinPayment, MaxPayment)]
+        [Display(Name = DisplayPayment)]
+        public decimal Payment { get; set; }
+
+        [Display(Name = DisplayCreatNextMonth)]
+        public bool CreaetNextMonth { get; set; } = true;
+
+        [Display(Name = DisplayCashPayment)]
+        public bool CashPayment { get; set; } = false;
     }
 }

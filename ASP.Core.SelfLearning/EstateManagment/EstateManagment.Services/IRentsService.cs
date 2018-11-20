@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EstateManagment.Services
 {
-    public interface IRentService
+    public interface IRentsService
     {
         Task<IEnumerable<RentListingViewModel>> AllAsync(bool isActual=true);
 

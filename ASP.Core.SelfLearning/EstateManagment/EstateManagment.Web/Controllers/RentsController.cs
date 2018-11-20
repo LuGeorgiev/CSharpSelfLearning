@@ -18,11 +18,11 @@ namespace EstateManagment.Web.Controllers
     [Authorize(Roles = "Manager, Accountant")]
     public class RentsController : Controller
     {
-        private readonly IRentService rents;
+        private readonly IRentsService rents;
         private readonly IClientsService clients;
         private readonly IPropertiesService properties;
 
-        public RentsController(IRentService rents, IPropertiesService properties, IClientsService clients)
+        public RentsController(IRentsService rents, IPropertiesService properties, IClientsService clients)
         {
             this.rents = rents;
             this.properties = properties;

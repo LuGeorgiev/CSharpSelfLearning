@@ -6,6 +6,7 @@
 <h2>@ViewData["Title"]</h2>
 <div>
     <a asp-controller="Rents" asp-action="Create" class="btn btn-success">Създаване на нов договор</a>
+    <a href="javascript:window.history.back()" class="btn btn-info">Назад</a>
 </div>
 
 @if (Model.Count() > 0)

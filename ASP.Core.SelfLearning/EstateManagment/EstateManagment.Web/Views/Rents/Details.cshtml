@@ -44,6 +44,9 @@
             <br />
             <input asp-action="UploadContract" asp-route-id="@Model.Id" enctype="form-data" type="submit" class="btn btn-primary" value="Upload Contract" />
         </form>*@
+    <div>
+        <a href="javascript:window.history.back()" class="btn btn-info">Назад</a>
+    </div>
 
     <div>
         @await Component.InvokeAsync("ContractsList", new { rentId = Model.Id})

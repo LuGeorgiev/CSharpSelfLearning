@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EstateManagment.Services.Areas.Payments;
+using EstateManagment.Services.Areas.Payments.Models.MonthlyRents;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EstateManagment.Web.Areas.Payments.Controllers
@@ -34,15 +35,36 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
         {
             if (totalPayment<0 )
             {
-                return this.BadRequest();
+                return this.View(id);
             }
 
             bool isCreated = await this.monthlyRents.CreateAsync(id, totalPayment, deadLine, applyVat);
             if (!isCreated)
             {
-                return this.BadRequest();
+                return this.View(id);
             }
             
+            return RedirectToAction("Index");
+        }
+                
+        public async Task<IActionResult> Edit(int id)
+        {
+            var model = await this.monthlyRents.GetByIdAsync(id);
+            if (model==null)
+            {
+                return this.BadRequest();
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(MonthlyRentViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return this.View(model.Id);
+            }
+
             return RedirectToAction("Index");
         }
 

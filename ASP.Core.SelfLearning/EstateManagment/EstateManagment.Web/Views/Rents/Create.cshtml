@@ -25,7 +25,7 @@
             </div>
             <div class="form-group col-lg-6 col-md-6">
                 <label asp-for="StartDate"></label>
-                <input asp-for="StartDate" class="form-control" value="@DateTime.Now.ToShortDateString()" />
+                <input asp-for="StartDate" class="form-control" />
                 <span asp-validation-for="StartDate" class="text-danger"></span>
             </div>
             <div class="form-group col-lg-6 col-md-6">
@@ -120,7 +120,7 @@
 
             <div>
                 <button asp-action="Create" asp-controller="Rents" type="submit" class="btn btn-success btn-info">Създай</button>
-
+                <a href="javascript:window.history.back()" class="btn btn-info">Назад</a>
             </div>
         </form>
     </div>

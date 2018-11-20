@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using EstateManagment.Data.Models;
 using EstateManagment.Services.Areas.Payments.Models.MonthlyRents;
-using EstateManagment.Services.Areas.Payments.Models.MonthlyRents;
 using EstateManagment.Services.ServiceModels.Clients;
 using EstateManagment.Services.ServiceModels.Companies;
 using EstateManagment.Services.ServiceModels.Properties;
@@ -48,8 +47,11 @@ namespace EstateManagment.Web.Common.Mapper
             CreateMap<ParkingSlot, ParkingSlotShortModel>();
 
             CreateMap<MonthlyPaymentRent, MonthlyRentListingModel>()
-                .ForMember(mp => mp.Client, opt => opt.MapFrom(mp => mp.RentAgreement.Client.Name))
-                .ForMember(mp => mp.Properties, opt => opt.MapFrom(mp => mp.RentAgreement.PropertyRents.Select( x => x.Property.Name)));
+                .ForMember(mr => mr.Client, opt => opt.MapFrom(mr => mr.RentAgreement.Client.Name))
+                .ForMember(mr => mr.Properties, opt => opt.MapFrom(mr => mr.RentAgreement.PropertyRents.Select( x => x.Property.Name)))
+                .ForMember(mr=>mr.TotalPayment, opt=>opt.MapFrom(mr=>mr.TotalPayment-mr.Payments.Sum(x=>x.Amount)));
+
+            CreateMap<MonthlyPaymentRent, MonthlyRentViewModel>();
         }
     }
 }

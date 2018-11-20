@@ -13,9 +13,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EstateManagment.Services.Implementation
 {
-    public class RentService : BaseService, IRentService
+    public class RentsService : BaseService, IRentsService
     {
-        public RentService(IMapper mapper, EstateManagmentContext db) 
+        public RentsService(IMapper mapper, EstateManagmentContext db) 
             : base(mapper, db)
         {
         }

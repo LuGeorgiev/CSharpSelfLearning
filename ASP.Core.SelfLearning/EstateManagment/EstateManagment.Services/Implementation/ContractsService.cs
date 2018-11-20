@@ -10,9 +10,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EstateManagment.Services.Implementation
 {
-    public class ContractService : BaseService, IContractsService
+    public class ContractsService : BaseService, IContractsService
     {
-        public ContractService(IMapper mapper, EstateManagmentContext db) 
+        public ContractsService(IMapper mapper, EstateManagmentContext db) 
             : base(mapper, db)
         {
         }

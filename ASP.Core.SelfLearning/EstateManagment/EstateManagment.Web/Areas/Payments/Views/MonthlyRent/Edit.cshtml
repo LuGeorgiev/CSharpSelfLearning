@@ -1,0 +1,37 @@
+﻿@model EstateManagment.Services.Areas.Payments.Models.MonthlyRents.MonthlyRentViewModel
+
+@{
+    ViewData["Title"] = "Редактиране на месечният наем";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" asp-route-id="@Model.Id">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group">
+                <label asp-for="DeadLine" class="control-label"></label>
+                <input asp-for="DeadLine" class="form-control" />
+                <span asp-validation-for="DeadLine" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalPayment" class="control-label"></label>
+                <input asp-for="TotalPayment" class="form-control" />
+                <span asp-validation-for="TotalPayment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Запази" class="btn btn-default" />
+                <a href="javascript:window.history.back()" class="btn btn-info">Назад</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+

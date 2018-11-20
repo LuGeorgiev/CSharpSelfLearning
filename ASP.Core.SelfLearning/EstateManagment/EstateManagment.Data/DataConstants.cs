@@ -85,12 +85,15 @@
         public const string DisplayElectricityPeak = "Разход върхова тарифа";
         public const string DisplayPaidOn = "Дата на плащане";
         public const string DisplayAmount = "Сума";
-        public const string DisplayCashPayment = "Платено в брой";
+        public const string DisplayCashPayment = "В брой";
+        public const string DisplayPayment = "Платащане";
+        public const string DisplayCreatNextMonth = "Следващ месец";
 
         public const string ErrorMessageCompanyName = "Да съдържа букви на кирилица, латиница, цифри и знаците: !., ? ";
         public const string ErrorMessageBulstat = "Да започва с или без BG последван от 9 до 15 цифри";
         public const string ErrorMessageEGN = "Точно 10 цифри";
         public const string ErrorMessageLatinNames = "Само букви на кирилица или латиница";
         public const string ErrorMessageTelephone = "С или без '+' в началото последван от цифри,интервали и тирета";
+        public const string ErrorMessagePayment = "Плащането трябва да е положитено и НЕ по-голямо от дължимата сума";
     }
 }

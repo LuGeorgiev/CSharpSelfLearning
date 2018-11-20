@@ -33,6 +33,7 @@
                         <td class="pull-right">
                             @*<a asp-controller="Properties" asp-action="Deactivate" asp-route-id="@property.Id" class="btn btn-danger">Неактивен</a>*@
                             <a asp-controller="Properties" asp-action="Edit" asp-route-id="@property.Id" class="btn btn-default ">Редактирай</a>
+                            <a href="javascript:window.history.back()" class="btn btn-info">Назад</a>
                         </td>
                     </tr>
                 }

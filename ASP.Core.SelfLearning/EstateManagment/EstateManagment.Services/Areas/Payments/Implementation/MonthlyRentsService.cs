@@ -62,6 +62,16 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
             return true;
         }
 
+        public async Task<MonthlyRentViewModel> GetByIdAsync(int id)
+        {
+            var monthlyRent = await this.Db.FindAsync<MonthlyPaymentRent>(id);
+            if (monthlyRent==null)
+            {
+                return null;
+            }
+            return Mapper.Map<MonthlyRentViewModel>(monthlyRent);
+        }
+
         public async Task<CreateMonthlyRentFormViewModel> GetDetailsAsync(int rentAgreementId)
         {
             var rentAgreement = await this.Db
