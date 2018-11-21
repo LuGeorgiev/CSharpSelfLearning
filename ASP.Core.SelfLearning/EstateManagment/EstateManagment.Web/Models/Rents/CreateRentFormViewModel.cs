@@ -12,7 +12,7 @@ namespace EstateManagment.Web.Models.Rents
         [Required]
         [Display(Name = DisplayStartDate)]
         [DataType(DataType.Date)]
-        public DateTime StartDate { get; set; }
+        public DateTime StartDate { get; set; } = DateTime.UtcNow;
 
         [Display(Name = DisplayEndDate)]
         [DataType(DataType.Date)]

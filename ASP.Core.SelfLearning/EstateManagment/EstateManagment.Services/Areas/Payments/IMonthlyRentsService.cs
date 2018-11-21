@@ -15,5 +15,11 @@ namespace EstateManagment.Services.Areas.Payments
         Task<bool> CreateAsync(int idRentAgreement, decimal totalPayment, DateTime deadLine, bool applyVat);
 
         Task<MonthlyRentViewModel> GetByIdAsync(int id);
+
+        Task<bool> CreateNextMonthPayment(int monthlyRentId);
+
+        Task<bool> EditAsync(MonthlyRentViewModel model);
+
+        Task<bool> Terminate(int id);
     }
 }

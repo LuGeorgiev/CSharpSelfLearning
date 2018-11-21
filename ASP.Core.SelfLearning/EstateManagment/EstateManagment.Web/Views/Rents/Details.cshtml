@@ -18,6 +18,7 @@
         </div>
     </form>
     <br />
+    <hr />
     <h2>@ViewData["Title"]</h2>
 
     <partial name="_RentDescription" />
@@ -47,7 +48,8 @@
     <div>
         <a href="javascript:window.history.back()" class="btn btn-info">Назад</a>
     </div>
-
+    <hr />
+    <h2>Сканирани договори:</h2>
     <div>
         @await Component.InvokeAsync("ContractsList", new { rentId = Model.Id})
     </div>

@@ -14,14 +14,14 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
 {
     public class PaymentsService :BaseService, IPaymentsService
     {
-        private readonly IRentsService rentService;
-        public PaymentsService(IMapper mapper, EstateManagmentContext db, IRentsService rentService)
+        private readonly IMonthlyRentsService monthlyRentService;
+        public PaymentsService(IMapper mapper, EstateManagmentContext db, IMonthlyRentsService monthlyRentService)
             : base(mapper, db)
         {
-            this.rentService = rentService;
+            this.monthlyRentService = monthlyRentService;
         }
 
-        public async Task<bool> MakePaymentAsync(BindingMonthlyRentModel model, string userId)
+        public async Task<bool?> MakePaymentAsync(BindingMonthlyRentModel model, string userId)
         {
             var monthlyRent = await this.Db.FindAsync<MonthlyPaymentRent>(model.MonthlyRentId);  
             if (monthlyRent == null)
@@ -49,16 +49,15 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
                 return false;
             }
 
-            if (monthlyRent.IsPaid&&model.NextMont)
+            //Create payment for next month
+            if (monthlyRent.IsPaid && model.NextMonth)
             {
-                this.Db.MonthlyPaymentRents.Add(new MonthlyPaymentRent()
+                bool nextMonthCreated = await this.monthlyRentService
+                    .CreateNextMonthPayment(monthlyRent.Id);
+                if (!nextMonthCreated)
                 {
-                    ApplyVAT=monthlyRent.ApplyVAT,
-                    DeadLine = monthlyRent.DeadLine.AddMonths(1),
-                    RentAgreementId=monthlyRent.RentAgreementId,
-                    TotalPayment=monthlyRent.TotalPayment
-                });
-                await this.Db.SaveChangesAsync();
+                    return null;
+                }
             }
 
             return true;

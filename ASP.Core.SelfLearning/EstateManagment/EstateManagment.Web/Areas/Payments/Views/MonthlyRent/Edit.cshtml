@@ -1,4 +1,4 @@
-﻿@model EstateManagment.Services.Areas.Payments.Models.MonthlyRents.MonthlyRentViewModel
+﻿@model MonthlyRentViewModel
 
 @{
     ViewData["Title"] = "Редактиране на месечният наем";
@@ -18,13 +18,17 @@
                 <span asp-validation-for="DeadLine" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TotalPayment" class="control-label"></label>
+                <label asp-for="TotalPayment" class="control-label">Пълен месеченн наем</label>
                 <input asp-for="TotalPayment" class="form-control" />
                 <span asp-validation-for="TotalPayment" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Запази" class="btn btn-default" />
-                <a href="javascript:window.history.back()" class="btn btn-info">Назад</a>
+                <input type="submit" value="Запази" class="btn btn-success" />
+                <a href="javascript:window.history.back()" class="btn btn-default">Назад</a>
+            @if (User.IsInRole("Manager"))
+            {
+                <a asp-action="Terminate" asp-route-id="@Model.Id" class="btn btn-danger pull-right">Анулирай наема</a>
+            }
             </div>
         </form>
     </div>

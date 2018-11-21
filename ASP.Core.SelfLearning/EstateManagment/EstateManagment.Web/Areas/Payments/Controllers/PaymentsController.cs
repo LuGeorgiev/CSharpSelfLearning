@@ -34,12 +34,15 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
                 return RedirectToAction("Index", "MonthlyRent");
             }
             var successfulPayment = await this.payments.MakePaymentAsync(model, madeByUser.Id);
-            if (!successfulPayment)
+            if (!successfulPayment.Value)
             {
-                //ToDO Temp data faliour             
-
+                //ToDO Temp data faliour   
                 return RedirectToAction("Index", "MonthlyRent");
-
+            }
+            if (successfulPayment==null)
+            {
+                //TODO Temp Data NEXT MONTH WAS NOT CREATED
+                return RedirectToAction("Index", "MonthlyRent");
             }
             return RedirectToAction("Index", "MonthlyRent");
         }

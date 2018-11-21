@@ -62,6 +62,59 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
             return true;
         }
 
+        public async Task<bool> CreateNextMonthPayment(int monthlyRentId)
+        {
+            var monthlyRent = await this.Db
+                .FindAsync<MonthlyPaymentRent>(monthlyRentId);
+            if (monthlyRent==null)
+            {
+                return false;
+            }
+
+            this.Db.MonthlyPaymentRents.Add(new MonthlyPaymentRent()
+            {
+                ApplyVAT = monthlyRent.ApplyVAT,
+                DeadLine = monthlyRent.DeadLine.AddMonths(1),
+                RentAgreementId = monthlyRent.RentAgreementId,
+                TotalPayment = monthlyRent.TotalPayment
+            });
+            try
+            {
+                await this.Db.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public async Task<bool> EditAsync(MonthlyRentViewModel model)
+        {
+            var monthlyRent = await this.Db
+                .FindAsync<MonthlyPaymentRent>(model.Id);
+            if (monthlyRent==null 
+                || monthlyRent.IsPaid==true
+                || model.TotalPayment-monthlyRent.Payments.Sum(x=>x.Amount)<0)
+            {
+                return false;
+            }
+            monthlyRent.DeadLine = model.DeadLine;
+            monthlyRent.TotalPayment = model.TotalPayment;
+            this.Db.MonthlyPaymentRents.Update(monthlyRent);
+
+            try
+            {
+                await this.Db.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
+        }
+
         public async Task<MonthlyRentViewModel> GetByIdAsync(int id)
         {
             var monthlyRent = await this.Db.FindAsync<MonthlyPaymentRent>(id);
@@ -83,6 +136,29 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
             var result = Mapper.Map<CreateMonthlyRentFormViewModel>(rentAgreement);
 
             return result;
+        }
+
+        public async Task<bool> Terminate(int id)
+        {
+            var monthlyRent = await this.Db
+               .FindAsync<MonthlyPaymentRent>(id);
+
+            if (monthlyRent == null || monthlyRent.IsPaid == true)
+            {
+                return false;
+            }
+            monthlyRent.IsPaid = true;
+            this.Db.MonthlyPaymentRents.Update(monthlyRent);
+
+            try
+            {
+                await this.Db.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

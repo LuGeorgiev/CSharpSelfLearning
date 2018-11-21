@@ -1,5 +1,6 @@
 ﻿namespace EstateManagment.Data.Models
 {
+    using EstateManagment.Data.Models.ValidationAttributes;
     using System;
     using System.ComponentModel.DataAnnotations;
     using static DataConstants;
@@ -23,6 +24,14 @@
         public string UserId { get; set; }
 
         public virtual User User { get; set; }
+
+        [XorAttributte(nameof(MonthlyPaymentConsumableId))]
+        public int? MonthlyPaymentRentId { get; set; }
+        public virtual MonthlyPaymentRent MonthlyPaymentRent { get; set; }
+
+        public int? MonthlyPaymentConsumableId { get; set; }
+
+        public virtual MonthlyPaymentConsumable MonthlyPaymentConsumable { get; set; }
 
     }
 }

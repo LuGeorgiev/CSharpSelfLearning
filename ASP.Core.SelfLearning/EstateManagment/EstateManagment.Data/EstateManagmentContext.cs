@@ -37,7 +37,12 @@ namespace EstateManagment.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<PropertyRent>()
-                .HasKey(pr => new { pr.PropertyId, pr.RentAgreementId });                     
+                .HasKey(pr => new { pr.PropertyId, pr.RentAgreementId });
+
+            builder.Entity<MonthlyPaymentConsumable>()
+                .HasOne(mc => mc.Payment)
+                .WithOne(p => p.MonthlyPaymentConsumable)
+                .HasForeignKey<Payment>(mc => mc.MonthlyPaymentConsumableId);
 
 
             base.OnModelCreating(builder);

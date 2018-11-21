@@ -4,7 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using EstateManagment.Services.Areas.Payments;
 using EstateManagment.Services.Areas.Payments.Models.MonthlyRents;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+
+using static EstateManagment.Web.WebConstants;
 
 namespace EstateManagment.Web.Areas.Payments.Controllers
 {
@@ -62,10 +65,35 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return this.View(model.Id);
+                return this.View(model);
+            }
+
+            bool isEdited = await this.monthlyRents.EditAsync(model);
+            if (!isEdited)
+            {
+                //TODO TEEMP msg
+            }
+            else
+            {
+
             }
 
             return RedirectToAction("Index");
+        }
+
+        [Authorize(Roles = ManagerRole)]
+        public async Task<IActionResult> Terminate(int id)
+        {
+            bool isTerminated = await this.monthlyRents.Terminate(id);
+            if (isTerminated)
+            {
+                //TODO
+            }
+            else
+            {
+
+            }
+            return RedirectToAction("Index"); ;
         }
 
     }

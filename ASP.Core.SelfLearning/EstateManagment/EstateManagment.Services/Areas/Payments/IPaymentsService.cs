@@ -8,6 +8,6 @@ namespace EstateManagment.Services.Areas.Payments
 {
     public interface IPaymentsService
     {
-        Task<bool> MakePaymentAsync(BindingMonthlyRentModel model, string userId);
+        Task<bool?> MakePaymentAsync(BindingMonthlyRentModel model, string userId);
     }
 }
