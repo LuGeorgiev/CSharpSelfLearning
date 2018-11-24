@@ -90,6 +90,7 @@
         public const string DisplayCreatNextMonth = "Следващ месец";
         public const string DisplayTotalConsumablesMonthlyPrice = "Месечни консумативи";
 
+
         public const string ErrorMessageCompanyName = "Да съдържа букви на кирилица, латиница, цифри и знаците: !., ? ";
         public const string ErrorMessageBulstat = "Да започва с или без BG последван от 9 до 15 цифри";
         public const string ErrorMessageEGN = "Точно 10 цифри";

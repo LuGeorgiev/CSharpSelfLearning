@@ -36,7 +36,7 @@ namespace EstateManagment.Web.Models.Rents
         [Display(Name = DisplayClients)]
         public IEnumerable<SelectListItem> Clients { get; set; }
         
-        [Required]
+        
         public IEnumerable<int> PropertiesIds { get; set; }
 
         [Display(Name = DisplayFreeProperties)]

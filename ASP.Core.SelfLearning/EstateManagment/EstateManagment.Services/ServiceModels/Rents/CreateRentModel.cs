@@ -33,8 +33,9 @@ namespace EstateManagment.Services.ServiceModels.Rents
         [Required]
         public int ClientId { get; set; }
 
-        [Required]
+        
         public IEnumerable<int> PropertiesIds { get; set; }
+
         [Range(0, int.MaxValue)]
         [Display(Name = DisplayCarSlots)]
         public int CarSlots { get; set; }

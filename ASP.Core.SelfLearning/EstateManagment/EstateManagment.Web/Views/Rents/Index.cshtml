@@ -9,7 +9,7 @@
     <a href="javascript:window.history.back()" class="btn btn-default">Назад</a>
 </div>
 
-@if (Model.Count() > 0)
+@if (Model!=null && Model.Count() > 0)
 {
     <div class="row">
         <div class="col-md-12 col-lg-12">
@@ -17,8 +17,9 @@
                 <thead>
                     <tr>
                         <th scope="col">Клиент</th>
-                        <th scope="col">Наем на имотите</th>
+                        <th scope="col">Цена без ДДС</th>
                         <th scope="col">Имоти</th>
+                        <th scope="col">Брой паркоместа</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
@@ -27,15 +28,12 @@
                     {
                         <tr>
                             <td>@rent.Client</td>
-                            <td>@rent.MonthlyPrice.ToString("F2")</td>
+                            <td>@rent.TotalMonthlyPrice.ToString("F2")</td>
                             <td>
-                                <ul class="list-group">
-                                    @foreach (var property in rent.Properties)
-                                    {
-                                        <li>@property</li>
-                                    }
-                                </ul>
+                                @String.Join(", ",rent.Properties)
+                               
                             </td>
+                            <td class="text-center"> @rent.ParkingSlotQuantity</td>
                             @if (User.IsInRole("Manager"))
                             {
                                 <td class="pull-right">
@@ -44,7 +42,6 @@
                                     <a asp-area="Payments" asp-controller="MonthlyConsumables" asp-action="Create" asp-route-id="@rent.Id" class="btn btn-primary">Консумативи</a>
                                     <a asp-controller="Rents" asp-action="Edit" asp-route-id="@rent.Id" class="btn btn-info">Редактиране</a>                                    
                                     <a asp-controller="Rents" asp-action="Terminate" asp-route-id="@rent.Id" class="btn btn-danger">Прекратяване</a>
-
                                 </td>
                             }
                         </tr>

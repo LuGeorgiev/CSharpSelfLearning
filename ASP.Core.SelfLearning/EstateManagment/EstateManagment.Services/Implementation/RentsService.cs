@@ -42,15 +42,17 @@ namespace EstateManagment.Services.Implementation
                 MonthlyPrice=model.MonthlyPrice
             };
 
-            var listProperties = new List<PropertyRent>();
-            foreach (var propertyId in model.PropertiesIds)
+            if (model.PropertiesIds!=null)
             {
-                listProperties.Add(new PropertyRent() { PropertyId = propertyId });
+                var listProperties = new List<PropertyRent>();
+                foreach (var propertyId in model.PropertiesIds)
+                {
+                    listProperties.Add(new PropertyRent() { PropertyId = propertyId });
+                }
+                rentAgreement.PropertyRents = listProperties;
             }
-            rentAgreement.PropertyRents = listProperties;
 
             var listParkingSlots = new List<ParkingSlot>();
-
             if (model.CarSlots>0)
             {
                 listParkingSlots.Add(new ParkingSlot()

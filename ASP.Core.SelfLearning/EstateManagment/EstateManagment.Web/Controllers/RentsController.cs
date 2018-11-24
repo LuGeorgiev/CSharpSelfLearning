@@ -88,7 +88,7 @@ namespace EstateManagment.Web.Controllers
             bool isCreated = await this.rents.CreateAsync(model);
             if (!isCreated)
             {
-                return this.BadRequest();
+                return this.Redirect("/Rents/Create");
             }
 
             return this.Redirect("/Rents/Index");

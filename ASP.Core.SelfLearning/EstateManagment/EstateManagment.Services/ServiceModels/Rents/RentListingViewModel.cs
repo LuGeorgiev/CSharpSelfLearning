@@ -14,7 +14,9 @@ namespace EstateManagment.Services.ServiceModels.Rents
         [Display(Name = DisplayPropertyName)]
         public IEnumerable<string> Properties { get; set; }
                 
+        public int ParkingSlotQuantity { get; set; }
+
         [Display(Name = DisplayPrice)]
-        public decimal MonthlyPrice { get; set; }
+        public decimal TotalMonthlyPrice { get; set; }
     }
 }

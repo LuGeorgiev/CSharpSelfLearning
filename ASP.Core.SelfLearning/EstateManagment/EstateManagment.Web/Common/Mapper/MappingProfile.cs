@@ -33,11 +33,13 @@ namespace EstateManagment.Web.Common.Mapper
 
             CreateMap<RentAgreement, RentListingViewModel>()
                 .ForMember(c => c.Client, opt => opt.MapFrom(ra => ra.Client.Name))
-                .ForMember(p => p.Properties, opt => opt.MapFrom(pr => pr.PropertyRents.Select(x => x.Property.Name)));
+                .ForMember(p => p.Properties, opt => opt.MapFrom(pr => pr.PropertyRents.Select(x => x.Property.Name)))
+                .ForMember(t=>t.TotalMonthlyPrice, opt=>opt.MapFrom(ra=>ra.MonthlyPrice+ra.ParkingSlots.Sum(x=>x.Price*x.Quantity)))
+                .ForMember(p=>p.ParkingSlotQuantity, opt=>opt.MapFrom(ra=>ra.ParkingSlots.Sum(x=>x.Quantity)));
             CreateMap<RentAgreement, RentDetailsModel>()
-                .ForMember(r => r.TotalMonthlyPrice, opt => opt.MapFrom(ra => ra.MonthlyPrice + ra.ParkingSlots.Sum(x => x.Price * x.Quantity)))
                 .ForMember(r => r.Client, opt => opt.MapFrom(ra => ra.Client.Name))
                 .ForMember(r=>r.Properties, opt=>opt.MapFrom(ra=>ra.PropertyRents.Select(x=>x.Property)));
+            CreateMap<ParkingSlot, ParkingSlotShortModel>();
 
             CreateMap<RentAgreement, CreateMonthlyRentFormViewModel>()
                 .ForMember(r => r.TotalPayment, opt => opt.MapFrom(ra =>ra.MonthlyPrice + ra.ParkingSlots.Sum(x => x.Quantity * x.Price)))
@@ -46,7 +48,6 @@ namespace EstateManagment.Web.Common.Mapper
                 .ForMember(r=>r.ParkingSlotsQty, opt=>opt.MapFrom(ra=>ra.ParkingSlots.Sum(x=>x.Quantity)))
                 .ForMember(r=>r.RentAgreementId, opt=>opt.MapFrom(ra=>ra.Id));
 
-            CreateMap<ParkingSlot, ParkingSlotShortModel>();
 
             CreateMap<MonthlyPaymentRent, MonthlyRentListingModel>()
                 .ForMember(mr => mr.Client, opt => opt.MapFrom(mr => mr.RentAgreement.Client.Name))

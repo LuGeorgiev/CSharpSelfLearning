@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EstateManagment.Data.Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,7 +7,7 @@ namespace EstateManagment.Services.ServiceModels.Rents
 {
     public class ParkingSlotShortModel
     {
-        public string Type { get; set; }
+        public ParkingSlotType Type { get; set; }
 
         public string Quantity { get; set; }
 

@@ -11,7 +11,7 @@
             <h4>Клиент: <strong>@Model.Client</strong></h4>
             <h4>Цена на договора за наем: <strong>@Model.MonthlyPrice.ToString("F2")</strong> лв</h4>
             <h4>За имоти: </h4>
-            <ul class="list-group">
+            <ul class="list-unstyled">
             @foreach(var property in Model.Properties )
             { 
                 <li class="list-group-item-info">@property</li>            

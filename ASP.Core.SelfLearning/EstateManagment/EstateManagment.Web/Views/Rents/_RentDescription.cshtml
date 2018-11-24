@@ -1,11 +1,11 @@
 ﻿@model RentDetailsModel
-
 <div>
     <h3>Клиент:<span> @Model.Client </span> </h3>
 </div>
 <div class="row ">
     <div class="col-lg-5 col-md-5 col-lg-offset-1">
         <h4>Недвижимости:</h4>
+        <hr />
         <ul class="list-unstyled ">
             @foreach (var property in Model.Properties)
             {
@@ -14,17 +14,20 @@
                 </li>
             }
         </ul>
+        <h4>Месечен наем без ДДС: @Model.MonthlyPrice.ToString("F2") лв</h4>
     </div>
     <div class="col-lg-5 col-md-5 ">
 
         <h4>Пaркоместа:</h4>
+        <hr />
+
         @if (Model.ParkingSlots.Count() > 0)
         {
             <ul class="list-unstyled">
                 @foreach (var slot in Model.ParkingSlots)
                 {
                     <li>
-                        Тип паркоместа: <strong>@slot.Type</strong> брой: <strong>@slot.Quantity</strong> и еденична цена: @slot.Price.ToString("F2")
+                        Тип паркоместа: <strong>@slot.Type</strong> брой: <strong>@slot.Quantity</strong> и еденична цена:<strong> @slot.Price.ToString("F2")</strong>
                     </li>
                 }
             </ul>
@@ -34,7 +37,9 @@
             <h4>Няма наети паркоместа</h4>
         }
     </div>
+    <hr />
 </div>
+<hr />
 <div class="row">
     <div class="col-lg-5 col-md-5 col-lg-offset-1" ">
         <h4>Начална дата:</h4>
@@ -54,6 +59,10 @@
 
     </div>
 </div>
+<hr />
+
 <div class="col-lg-8 col-md-8 bg-info col-lg-offset-1" ">
-    <h3>Обща месечна сума: <strong>@Model.TotalMonthlyPrice.ToString("F2")</strong> лв.</h3>
+    <h4>Обща месечна сума без ДДС: <strong>@Model.TotalMonthlyPrice.ToString("F2")</strong> лв.</h4>
+
 </div>
+

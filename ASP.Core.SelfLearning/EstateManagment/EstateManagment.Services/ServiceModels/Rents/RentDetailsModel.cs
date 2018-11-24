@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-
+using System.Linq;
 using static EstateManagment.Data.DataConstants;
 
 namespace EstateManagment.Services.ServiceModels.Rents
@@ -12,7 +12,7 @@ namespace EstateManagment.Services.ServiceModels.Rents
         public int Id { get; set; }
 
         [Display(Name = DisplayPrice)]
-        public decimal TotalMonthlyPrice { get; set; }
+        public decimal MonthlyPrice { get; set; }
                 
         [DataType(DataType.Date)]
         public DateTime StartDate { get; set; }
@@ -32,5 +32,13 @@ namespace EstateManagment.Services.ServiceModels.Rents
         public IEnumerable<PropertyShortModel> Properties { get; set; }
 
         public IEnumerable<ParkingSlotShortModel> ParkingSlots { get; set; }
+
+        public decimal TotalMonthlyPrice
+        {
+            get
+            {
+                return this.MonthlyPrice + this.ParkingSlots.Sum(x => int.Parse(x.Quantity) * x.Price);
+            }
+        }
     }
 }
