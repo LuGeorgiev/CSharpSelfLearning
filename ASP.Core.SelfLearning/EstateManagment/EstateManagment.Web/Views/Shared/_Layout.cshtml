@@ -33,9 +33,9 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                     @if (User.IsInRole(WebConstants.ManagerRole))
                     {
-                        <li><a asp-area="" asp-controller="Properties" asp-action="Index">Недвижимости</a></li>
                         <li><a asp-area="" asp-controller="Companies" asp-action="Index">Фирми</a></li>
                         <li><a asp-area="" asp-controller="Clients" asp-action="Index">Клиенти</a></li>
+                        <li><a asp-area="" asp-controller="Properties" asp-action="Index">Недвижимости</a></li>
                     }
                     @if (User.IsInRole(WebConstants.ManagerRole) || User.IsInRole(WebConstants.AccountantRole))
                     {

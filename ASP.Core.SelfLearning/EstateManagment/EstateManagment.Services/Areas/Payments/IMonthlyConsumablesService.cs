@@ -1,0 +1,17 @@
+﻿using EstateManagment.Services.Areas.Payments.Models.MonthlyConsumables;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EstateManagment.Services.Areas.Payments
+{
+    public interface IMonthlyConsumablesService
+    {
+        Task<CreateMonthlyConsumablesModel> GetCreateInfoAsync(int rentId);
+
+        Task<bool> CreateMonthlyConsumable(MonthlyConsumablesBindingModel model);
+
+        Task<IEnumerable<MonthlyConsumablesListingModel>> AllNotPaid();
+    }
+}

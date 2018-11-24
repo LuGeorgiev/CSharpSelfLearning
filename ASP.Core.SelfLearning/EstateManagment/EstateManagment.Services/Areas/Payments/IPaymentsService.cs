@@ -9,5 +9,6 @@ namespace EstateManagment.Services.Areas.Payments
     public interface IPaymentsService
     {
         Task<bool?> MakePaymentAsync(BindingMonthlyRentModel model, string userId);
+        Task<bool> MakeConsumablesPaymentAsync(int consumableId, bool isCash, string userId);
     }
 }

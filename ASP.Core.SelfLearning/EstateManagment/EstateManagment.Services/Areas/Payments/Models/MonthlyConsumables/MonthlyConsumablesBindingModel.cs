@@ -1,12 +1,14 @@
-﻿namespace EstateManagment.Data.Models
-{
-    using System;
-    using System.ComponentModel.DataAnnotations;
-    using static DataConstants;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using static EstateManagment.Data.DataConstants;
 
-    public class MonthlyPaymentConsumable
+namespace EstateManagment.Services.Areas.Payments.Models.MonthlyConsumables
+{
+    public class MonthlyConsumablesBindingModel
     {
-        public int Id { get; set; }
+        [Required]
+        public int rentId { get; set; }
 
         [Required]
         [Range(typeof(decimal), MinPayment, MaxPayment)]
@@ -34,22 +36,8 @@
         [Display(Name = DisplayElectricityPeak)]
         public int? ElectricityPeak { get; set; }
 
-
-        [DataType(DataType.Date)]
-        public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
-
         [DataType(DataType.Date)]
         [Display(Name = DisplayDeadLine)]
-        public DateTime DeadLine { get; set; } = DateTime.UtcNow.AddMonths(1);
-
-        [Required]
-        public int RentAgreementId { get; set; }
-
-        public virtual RentAgreement RentAgreement { get; set; }
-
-        
-        public int? PaymentId { get; set; }
-
-        public virtual Payment Payment { get; set; }
+        public DateTime DeadLine { get; set; }
     }
 }

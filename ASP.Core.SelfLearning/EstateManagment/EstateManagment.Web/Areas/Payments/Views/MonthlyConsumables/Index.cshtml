@@ -1,7 +1,69 @@
-﻿
+﻿@model IEnumerable<MonthlyConsumablesListingModel>
 @{
     ViewData["Title"] = "Месечни плащания на консумативи";
 }
 
 <h2>@ViewData["Title"]</h2>
 
+<table class="table table-condensed table-striped table-hover">
+    <thead class="info">
+        <tr>
+            <th scope="col">Краен срок</th>
+            <th scope="col">Клиент</th>
+            <th scope="col">Дължима сума</th>
+            <th scope="col">Имоти</th>
+            <th scope="col">Извършванен на плащане</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var monthlyConsumable in Model)
+        {
+            string rowColor;
+            if (monthlyConsumable.DeadLine <= DateTime.UtcNow)
+            {
+                rowColor = "danger";
+            }
+            else
+            {
+                rowColor = "";
+            }
+            <tr class="@rowColor">
+                <td>@monthlyConsumable.DeadLine.ToShortDateString()</td>
+                <td>@monthlyConsumable.Client</td>
+                <td>@monthlyConsumable.TotalConsumablesMonthlyPrice.ToString("F2") лв</td>
+                @if (monthlyConsumable.Properties.Count() > 0)
+                {
+                    <td>
+                        @String.Join(", ", monthlyConsumable.Properties)
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        Само паркоместа
+                    </td>
+                }
+                <td>
+                    <form asp-area="Payments" asp-controller="Payments" asp-action="PayConsumables" method="post" class="form-inline">
+                        <div asp-validation-summary="All" class="text-danger"></div>                        
+                        <div class="form-group ">
+                            <label asp-for="@monthlyConsumable.IsCash"></label>
+                            <input asp-for="@monthlyConsumable.IsCash" name="isCash" />
+                        </div>
+                        <input type="hidden" name="id" value="@monthlyConsumable.Id" />  
+                        <input type="submit" value="Плати" class="btn btn-success" />
+                    </form>
+                </td>
+                <td>
+                    <a asp-controller="MonthlyConsumables" asp-action="Edit" asp-route-id="@monthlyConsumable.Id" class="btn btn-primary ">Редакция</a>
+                    <a asp-controller="MonthlyConsumables" asp-action="Terminate" asp-route-id="@monthlyConsumable.Id" class="btn btn-danger ">Прекрати</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

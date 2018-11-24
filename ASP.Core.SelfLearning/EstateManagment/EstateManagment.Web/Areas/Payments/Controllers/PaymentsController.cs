@@ -19,6 +19,7 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
             this.userManager = userManager;
             this.payments = payments;
         }
+
         public IActionResult Index()
         {
             return View();
@@ -33,7 +34,9 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
                 //ToDO Temp data faliour
                 return RedirectToAction("Index", "MonthlyRent");
             }
+
             var successfulPayment = await this.payments.MakePaymentAsync(model, madeByUser.Id);
+
             if (!successfulPayment.Value)
             {
                 //ToDO Temp data faliour   
@@ -44,7 +47,24 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
                 //TODO Temp Data NEXT MONTH WAS NOT CREATED
                 return RedirectToAction("Index", "MonthlyRent");
             }
+
             return RedirectToAction("Index", "MonthlyRent");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> PayConsumables(int id, bool isCash)
+        {
+            var madeByUser = await this.userManager.GetUserAsync(this.User);
+            var successfulPayment = await this.payments.MakeConsumablesPaymentAsync(id, isCash, madeByUser.Id);
+
+            if (!successfulPayment)
+            {
+                //ToDO Temp data faliour   
+                return RedirectToAction("Index", "MonthlyConsumables");
+            }
+
+            //TODO Success
+            return RedirectToAction("Index", "MonthlyConsumables");
         }
 
     }

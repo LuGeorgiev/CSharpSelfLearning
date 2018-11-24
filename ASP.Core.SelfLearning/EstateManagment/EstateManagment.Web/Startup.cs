@@ -42,8 +42,7 @@ namespace EstateManagment.Web
             services.AddDbContext<EstateManagmentContext>(options =>
                 options
                 .UseLazyLoadingProxies()
-                .UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                .UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<User, IdentityRole>()
                 //.AddDefaultUI()
@@ -74,14 +73,15 @@ namespace EstateManagment.Web
                 //options.SignIn.RequireConfirmedEmail = true;
             });            
 
-            services.AddTransient<ICompaniesService, CompaniesService>();
-            services.AddTransient<IUsersService, UsersService>();
-            services.AddTransient<IPropertiesService, PropertiesService>();
-            services.AddTransient<IClientsService, ClientsService>();
-            services.AddTransient<IRentsService, RentsService>();
-            services.AddTransient<IContractsService, ContractsService>();
-            services.AddTransient<IMonthlyRentsService, MonthlyRentsService>();
-            services.AddTransient<IPaymentsService, PaymentsService>();
+            services.AddScoped<ICompaniesService, CompaniesService>();
+            services.AddScoped<IUsersService, UsersService>();
+            services.AddScoped<IPropertiesService, PropertiesService>();
+            services.AddScoped<IClientsService, ClientsService>();
+            services.AddScoped<IRentsService, RentsService>();
+            services.AddScoped<IContractsService, ContractsService>();
+            services.AddScoped<IMonthlyRentsService, MonthlyRentsService>();
+            services.AddScoped<IPaymentsService, PaymentsService>();
+            services.AddScoped<IMonthlyConsumablesService, MonthlyConsumablesService>();
 
             services.AddSingleton<IEmailSender, SendGridEmailSender>();
             services.Configure<SendGridOptions>(this.Configuration.GetSection("SendGridSettings"));

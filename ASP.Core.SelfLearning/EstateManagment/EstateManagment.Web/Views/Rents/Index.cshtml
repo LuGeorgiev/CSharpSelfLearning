@@ -17,7 +17,7 @@
                 <thead>
                     <tr>
                         <th scope="col">Клиент</th>
-                        <th scope="col">Наем</th>
+                        <th scope="col">Наем на имотите</th>
                         <th scope="col">Имоти</th>
                         <th scope="col"></th>
                     </tr>
@@ -40,8 +40,9 @@
                             {
                                 <td class="pull-right">
                                     <a asp-controller="Rents" asp-action="Details" asp-route-id="@rent.Id" class="btn btn-default">Детайли</a>
+                                    <a asp-area="Payments" asp-controller="MonthlyRent" asp-action="Create" asp-route-id="@rent.Id" class="btn btn-primary">Месечен наем</a>
+                                    <a asp-area="Payments" asp-controller="MonthlyConsumables" asp-action="Create" asp-route-id="@rent.Id" class="btn btn-primary">Консумативи</a>
                                     <a asp-controller="Rents" asp-action="Edit" asp-route-id="@rent.Id" class="btn btn-info">Редактиране</a>                                    
-                                    <a asp-area="Payments" asp-controller="MonthlyRent" asp-action="Create" asp-route-id="@rent.Id" class="btn btn-warning">Месечен наем</a>
                                     <a asp-controller="Rents" asp-action="Terminate" asp-route-id="@rent.Id" class="btn btn-danger">Прекратяване</a>
 
                                 </td>

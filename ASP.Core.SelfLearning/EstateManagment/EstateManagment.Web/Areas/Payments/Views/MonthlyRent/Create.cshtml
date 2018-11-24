@@ -12,7 +12,7 @@
             <h4>Брой паркоместа: <strong>@Model.ParkingSlotsQty</strong></h4>
             <h4>Месечен наем: <strong>@Model.TotalPayment.ToString("F2")</strong> лв</h4>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 list-group">
             <h4>Наети площи:</h4>
             @foreach (var property in Model.Properties)
             {

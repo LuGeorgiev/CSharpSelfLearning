@@ -21,10 +21,49 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
             this.monthlyRentService = monthlyRentService;
         }
 
+        public async Task<bool> MakeConsumablesPaymentAsync(int consumableId, bool isCash, string userId)
+        {
+            var monthlyConsumables = await this.Db.FindAsync<MonthlyPaymentConsumable>(consumableId);
+            var user = await this.Db.FindAsync<User>(userId);
+            if (user==null || monthlyConsumables==null)
+            {
+                return false;
+            }
+          
+            var payment = await this.Db.Payments.AddAsync(new Payment()
+            {
+                Amount = monthlyConsumables.PaymentForElectricity + monthlyConsumables.PaymentForWater,
+                CashPayment = isCash,
+                MonthlyPaymentConsumableId = monthlyConsumables.Id,
+                PaidOn = DateTime.UtcNow,
+                UserId = userId
+            });
+            try
+            {
+                await this.Db.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            monthlyConsumables.PaymentId = payment.Entity.Id;
+            try
+            {
+                await this.Db.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
+        }
+
         public async Task<bool?> MakePaymentAsync(BindingMonthlyRentModel model, string userId)
         {
-            var monthlyRent = await this.Db.FindAsync<MonthlyPaymentRent>(model.MonthlyRentId);  
-            if (monthlyRent == null)
+            var monthlyRent = await this.Db.FindAsync<MonthlyPaymentRent>(model.MonthlyRentId);
+            var user = await this.Db.FindAsync<User>(userId);
+            if (monthlyRent == null || user==null)
             {
                 return false;
             }

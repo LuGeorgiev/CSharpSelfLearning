@@ -16,6 +16,5 @@ namespace EstateManagment.Data.Models
 
         public virtual ICollection<Payment> SubmittedRentPayments { get; set; } = new List<Payment>();
 
-        public virtual ICollection<MonthlyPaymentConsumable> SubmittedConsumablePayments { get; set; } = new List<MonthlyPaymentConsumable>();
     }
 }
