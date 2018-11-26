@@ -89,7 +89,7 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
             }
 
             //Create payment for next month
-            if (monthlyRent.IsPaid && model.NextMonth)
+            if (monthlyRent.IsPaid)
             {
                 bool nextMonthCreated = await this.monthlyRentService
                     .CreateNextMonthPayment(monthlyRent.Id);

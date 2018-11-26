@@ -17,8 +17,6 @@ namespace EstateManagment.Services.Areas.Payments.Models.MonthlyRents
         [Range(typeof(decimal), MinPayment, MaxPayment)]
         public decimal TotalLeft { get; set; }
 
-        public bool NextMonth { get; set; }
-
         public bool CashPayment { get; set; }
     }
 }

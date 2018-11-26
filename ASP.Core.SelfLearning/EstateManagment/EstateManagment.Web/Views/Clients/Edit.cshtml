@@ -1,4 +1,4 @@
-﻿@model ClientDetailsModel
+﻿@model ClientViewModel
 @{
     ViewData["Title"] = "Редактиране на клент";
 }
@@ -18,6 +18,11 @@
                 <label asp-for="Address"></label>
                 <textarea asp-for="Address" type="text" class="form-control">@Model.Address</textarea>
                 <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Bulstat"></label>
+                <input asp-for="Bulstat" type="text" class="form-control" value="@Model.Bulstat" />
+                <span asp-validation-for="Bulstat" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="EGN"></label>
@@ -44,15 +49,16 @@
                 <textarea asp-for="Notes" class="form-control">@Model.Notes</textarea>
                 <span asp-validation-for="Notes" class="text-danger"></span>
             </div>
-            <div>
+            <div class="bg-danger img-rounded form-group">
                 <label asp-for="IsDeleted"><strong class="text-danger">Изтриване на клиента:</strong></label>
                 <input asp-for="IsDeleted" class="item bg-danger" />
             </div>
             <input type="hidden" name="@Model.Id" />
-
-            <button asp-action="Edit" asp-controller="Clients" type="submit" class="btn btn-default btn-danger">Редактирайте</button>
-            <a asp-controller="Clients" asp-action="Index" class="btn btn-info">Към Клиенти</a>
-            <a href="javascript:window.history.back()" class="btn btn-default">Назад</a>
+            <div>
+                <button asp-action="Edit" asp-controller="Clients" type="submit" class="btn btn-default btn-danger">Редактирайте</button>
+                <a asp-controller="Clients" asp-action="Index" class="btn btn-info">Към Клиенти</a>
+                <a href="javascript:window.history.back()" class="btn btn-default pull-right">Назад</a>
+            </div>
         </form>
     </div>
 </div>

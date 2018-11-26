@@ -2,6 +2,7 @@
 using EstateManagment.Data;
 using EstateManagment.Data.Models;
 using EstateManagment.Services.ServiceModels.Clients;
+using EstateManagment.Services.ServiceModels.Rents;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -87,7 +88,7 @@ namespace EstateManagment.Services.Implementation
             return true;
         }
 
-        public async Task<ClientDetailsModel> GetAsync(int id)
+        public async Task<ClientViewModel> GetAsync(int id)
         {
             var client = await this.Db.Clients
                 .FirstOrDefaultAsync(x => x.Id == id);
@@ -96,8 +97,20 @@ namespace EstateManagment.Services.Implementation
                 return null;
             }
 
-            var model = this.Mapper.Map<ClientDetailsModel>(client);
+            var model = this.Mapper.Map<ClientViewModel>(client);
 
+            return model;
+        }
+
+        public async Task<ClientDetailsModel> GetDetailsAsync(int id)
+        {
+            var client = await this.Db.FindAsync<Client>(id);
+            if (client==null)
+            {
+                return null;
+            }
+
+            var model = Mapper.Map<ClientDetailsModel>(client);
             return model;
         }
     }

@@ -9,6 +9,7 @@ using EstateManagment.Services.ServiceModels.Rents;
 using EstateManagment.Services.ServiceModels.Users;
 using EstateManagment.Web.Areas.Admin.Models.Users;
 using EstateManagment.Web.Models.Properties;
+using System;
 using System.Linq;
 
 namespace EstateManagment.Web.Common.Mapper
@@ -29,7 +30,13 @@ namespace EstateManagment.Web.Common.Mapper
             CreateMap<Property, PropertyShortModel>();
 
             CreateMap<Client, ClientListingModel>();
-            CreateMap<Client, ClientDetailsModel>();
+            CreateMap<Client, ClientViewModel>();
+            CreateMap<Client, ClientDetailsModel>()
+                .ForMember(c => c.RentAgreements, opt => opt.MapFrom(ra => ra.RentAgreements.Where(x => x.EndDate == null || x.EndDate > DateTime.UtcNow)));
+            CreateMap<RentAgreement, RentAgreementShortModel>()
+                .ForMember(ra => ra.ParkingPlacesQuantity, opt => opt.MapFrom(ps => ps.ParkingSlots.Sum(x => x.Quantity)))
+                .ForMember(ra => ra.TotalPrice, opt => opt.MapFrom(ra => ra.MonthlyPrice + ra.ParkingSlots.Sum(x => x.Quantity * x.Price)))
+                .ForMember(ra => ra.PropertyName, opt => opt.MapFrom(ra => ra.PropertyRents.Select(x => x.Property.Name)));
 
             CreateMap<RentAgreement, RentListingViewModel>()
                 .ForMember(c => c.Client, opt => opt.MapFrom(ra => ra.Client.Name))
@@ -52,7 +59,8 @@ namespace EstateManagment.Web.Common.Mapper
             CreateMap<MonthlyPaymentRent, MonthlyRentListingModel>()
                 .ForMember(mr => mr.Client, opt => opt.MapFrom(mr => mr.RentAgreement.Client.Name))
                 .ForMember(mr => mr.Properties, opt => opt.MapFrom(mr => mr.RentAgreement.PropertyRents.Select( x => x.Property.Name )))
-                .ForMember(mr=>mr.TotalPayment, opt=>opt.MapFrom(mr=>mr.TotalPayment-mr.Payments.Sum(x=>x.Amount)));
+                .ForMember(mr=>mr.TotalPayment, opt=>opt.MapFrom(mr=>mr.TotalPayment-mr.Payments.Sum(x=>x.Amount)))
+                .ForMember(mr=>mr.ParkingSlotQuantity, opt=>opt.MapFrom(mr=>mr.RentAgreement.ParkingSlots.Sum(x=>x.Quantity)));
 
             CreateMap<RentAgreement, CreateMonthlyConsumablesModel>()
                 .ForMember(r=>r.Client, opt=>opt.MapFrom(ra=>ra.Client.Name))

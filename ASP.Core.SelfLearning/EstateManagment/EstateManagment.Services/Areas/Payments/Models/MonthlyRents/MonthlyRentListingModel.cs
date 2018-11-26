@@ -26,12 +26,11 @@ namespace EstateManagment.Services.Areas.Payments.Models.MonthlyRents
 
         [Range(typeof(decimal), MinPayment, MaxPayment)]
         [Display(Name = DisplayPayment)]
-        public decimal Payment { get; set; }
-
-        [Display(Name = DisplayCreatNextMonth)]
-        public bool CreaetNextMonth { get; set; } = true;
+        public decimal Payment { get; set; }       
 
         [Display(Name = DisplayCashPayment)]
         public bool CashPayment { get; set; } = false;
+
+        public int ParkingSlotQuantity { get; set; }
     }
 }

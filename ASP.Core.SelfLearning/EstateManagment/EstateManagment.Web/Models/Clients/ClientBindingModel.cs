@@ -4,7 +4,7 @@ using static EstateManagment.Data.DataConstants;
 
 namespace EstateManagment.Web.Models.Clients
 {
-    public class CreateClientFormModel
+    public class ClientBindingModel
     {
         [Required]
         [RegularExpression(RegexLatinCompanyNames, ErrorMessage = ErrorMessageCompanyName)]
@@ -22,7 +22,7 @@ namespace EstateManagment.Web.Models.Clients
         [Required]
         [MinLength(PropertyAddressMinLength)]
         [MaxLength(PropertyAddressMaxLength)]
-        [Display(Name = DisplayAddress)]
+        [Display(Name = DisplayBulstat)]
         public string Bulstat { get; set; }
 
         [MaxLength(10)]
