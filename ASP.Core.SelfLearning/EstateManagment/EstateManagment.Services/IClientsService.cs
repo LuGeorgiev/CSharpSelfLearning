@@ -18,5 +18,7 @@ namespace EstateManagment.Services
         Task<bool> EditAsync(int id, string accountableName, string address, string contactName, string egn, bool isDeleted, string name, string notes, string telephone);
 
         Task<ClientDetailsModel> GetDetailsAsync(int id);
+
+        Task<int> GetIdByNameAsync(string name);
     }
 }

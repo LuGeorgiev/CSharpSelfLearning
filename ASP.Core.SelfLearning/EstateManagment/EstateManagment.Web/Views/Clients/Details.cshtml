@@ -1,0 +1,86 @@
+﻿@model ClientDetailsModel
+@{
+    ViewData["Title"] = "Детайли за клиент: ";
+}
+
+<h2>@ViewData["Title"] @Model.Name</h2>
+<div class="container-fluid col-md-offset-1">
+    <div class="row">
+        <div class="col-md-4 ">
+            <h3>МОЛ: @Model.AccountableName</h3>
+
+        </div>
+        <div class="col-md-4">
+
+            <h3>Булстат: @Model.Bulstat</h3>
+
+        </div>
+        <div class="col-md-4 panel panel-default">
+            <div class="panel-body">
+                <p>Адрес: @Model.Address</p>
+                <p>ЕГН: @Model.EGN</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <h4>Лице за контакти: @Model.ContactName</h4>
+        </div>
+        <div class="col-md-4">
+            <h4>Телефон: @Model.Telephone</h4>
+        </div>
+        <div class="col-md-4">
+            <p>Бележки: @Model.Notes</p>
+        </div>
+    </div>
+    @if ((Model.RentAgreements?.Count() ?? 0) == 0)
+    {
+        <h3>В момента този клиент няма сключени договори за отдаване под наем</h3>
+    }
+    else
+    {
+        <h3>Сключени договори за отдаване под наем:</h3>
+
+        <table class="table table-condensed table-striped table-hover">
+            <thead class="info">
+                <tr>
+                    <th scope="col">Месечен наем</th>
+                    <th scope="col">Начална дата</th>
+                    <th scope="col">Крайна дата</th>
+                    <th scope="col">Брой паркоместа</th>
+                    <th scope="col">Имена на имотите</th>
+                    <th scope="col" class="pull-right">
+                        <a href="javascript:window.history.back()" class="btn btn-default">Назад</a>
+                        Действие
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var rent in Model.RentAgreements)
+                {
+
+                    <tr>
+                        <td>@rent.TotalPrice.ToString("F2") лв</td>
+
+                        <td>@rent.StartDate.ToShortDateString()</td>
+
+                        <td>
+                            @(rent.EndDate==null ? "Няма дата" :                 rent.EndDate.Value.ToShortDateString())
+                            </td>
+
+                        <td>@rent.ParkingPlacesQuantity</td>
+                        <td>
+                            @String.Join(", ", rent.PropertyName)
+                        </td>
+
+                        <td class="pull-right">
+                            <a asp-controller="Rents" asp-action="Details" asp-route-id="@rent.Id" class="btn btn-info ">Детайли</a>
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    }
+</div>
+

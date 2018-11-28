@@ -113,5 +113,17 @@ namespace EstateManagment.Services.Implementation
             var model = Mapper.Map<ClientDetailsModel>(client);
             return model;
         }
+
+        public async Task<int> GetIdByNameAsync(string name)
+        {
+            var client = await this.Db.Clients
+                .FirstOrDefaultAsync(x => x.Name == name);
+            if (client==null)
+            {
+                return 0;
+            }
+
+            return client.Id;
+        }
     }
 }

@@ -93,5 +93,16 @@ namespace EstateManagment.Web.Controllers
             }
             return View(model); 
         }
+
+        public async Task<IActionResult> DetailsByName(string name)
+        {
+            var modelId = await this.clients.GetIdByNameAsync(name);
+            if (modelId == 0)
+            {
+                return BadRequest();
+            }
+            return RedirectToAction("Details", new { id= modelId});
+        }
+
     }
 }

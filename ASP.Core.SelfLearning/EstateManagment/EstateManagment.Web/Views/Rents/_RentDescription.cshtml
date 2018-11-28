@@ -1,6 +1,6 @@
 ﻿@model RentDetailsModel
 <div>
-    <h3>Клиент:<span> @Model.Client </span> </h3>
+    <h3>Клиент:<span> <a asp-controller="Clients" asp-action="DetailsByName" asp-route-name="@Model.Client">@Model.Client</a> </span> </h3>
 </div>
 <div class="row ">
     <div class="col-lg-5 col-md-5 col-lg-offset-1">

@@ -9,7 +9,7 @@
     <a href="javascript:window.history.back()" class="btn btn-default">Назад</a>
 </div>
 
-@if (Model!=null && Model.Count() > 0)
+@if (Model != null && Model.Count() > 0)
 {
     <div class="row">
         <div class="col-md-12 col-lg-12">
@@ -27,11 +27,13 @@
                     @foreach (var rent in Model)
                     {
                         <tr>
-                            <td>@rent.Client</td>
+                            <td>
+                                <a asp-controller="Clients" asp-action="DetailsByName" asp-route-name="@rent.Client">@rent.Client</a>
+                            </td>
                             <td>@rent.TotalMonthlyPrice.ToString("F2")</td>
                             <td>
-                                @String.Join(", ",rent.Properties)
-                               
+                                @String.Join(", ", rent.Properties)
+
                             </td>
                             <td class="text-center"> @rent.ParkingSlotQuantity</td>
                             @if (User.IsInRole("Manager"))
@@ -40,7 +42,7 @@
                                     <a asp-controller="Rents" asp-action="Details" asp-route-id="@rent.Id" class="btn btn-default">Детайли</a>
                                     <a asp-area="Payments" asp-controller="MonthlyRent" asp-action="Create" asp-route-id="@rent.Id" class="btn btn-primary">Месечен наем</a>
                                     <a asp-area="Payments" asp-controller="MonthlyConsumables" asp-action="Create" asp-route-id="@rent.Id" class="btn btn-primary">Консумативи</a>
-                                    <a asp-controller="Rents" asp-action="Edit" asp-route-id="@rent.Id" class="btn btn-info">Редактиране</a>                                    
+                                    <a asp-controller="Rents" asp-action="Edit" asp-route-id="@rent.Id" class="btn btn-info">Редактиране</a>
                                     <a asp-controller="Rents" asp-action="Terminate" asp-route-id="@rent.Id" class="btn btn-danger">Прекратяване</a>
                                 </td>
                             }
@@ -56,4 +58,4 @@ else
     <h3>Няма активни договори</h3>
 }
 
-    
+

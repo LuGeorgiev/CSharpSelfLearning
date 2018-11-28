@@ -87,7 +87,12 @@ namespace EstateManagment.Web
             services.Configure<SendGridOptions>(this.Configuration.GetSection("SendGridSettings"));
             services.AddAutoMapper();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+            services
+                .AddMvc(options=> 
+                {
+                    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+                })
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                 .AddRazorPagesOptions(options =>
                 {
                     options.AllowAreas = true;
