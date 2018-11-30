@@ -30,7 +30,9 @@
             }
             <tr class="@rowColor">
                 <td>@monthlyConsumable.DeadLine.ToShortDateString()</td>
-                <td>@monthlyConsumable.Client</td>
+                <td>
+                    <a asp-area="" asp-controller="Clients" asp-action="DetailsByName" asp-route-name="@monthlyConsumable.Client"><strong>@monthlyConsumable.Client</strong></a>
+                </td>
                 <td>@monthlyConsumable.TotalConsumablesMonthlyPrice.ToString("F2") лв</td>
                 @if (monthlyConsumable.Properties.Count() > 0)
                 {
@@ -46,19 +48,22 @@
                 }
                 <td>
                     <form asp-area="Payments" asp-controller="Payments" asp-action="PayConsumables" method="post" class="form-inline">
-                        <div asp-validation-summary="All" class="text-danger"></div>                        
+                        <div asp-validation-summary="All" class="text-danger"></div>
                         <div class="form-group ">
                             <label asp-for="@monthlyConsumable.IsCash"></label>
                             <input asp-for="@monthlyConsumable.IsCash" name="isCash" />
                         </div>
-                        <input type="hidden" name="id" value="@monthlyConsumable.Id" />  
+                        <input type="hidden" name="id" value="@monthlyConsumable.Id" />
                         <input type="submit" value="Плати" class="btn btn-success" />
                     </form>
                 </td>
-                <td>
-                    <a asp-controller="MonthlyConsumables" asp-action="Edit" asp-route-id="@monthlyConsumable.Id" class="btn btn-primary ">Редакция</a>
-                    <a asp-controller="MonthlyConsumables" asp-action="Terminate" asp-route-id="@monthlyConsumable.Id" class="btn btn-danger ">Прекрати</a>
-                </td>
+                @if (User.IsInRole("Manager"))
+                {
+                    <td>
+                        <a asp-controller="MonthlyConsumables" asp-action="Edit" asp-route-id="@monthlyConsumable.Id" class="btn btn-primary ">Редакция</a>
+                        <a asp-controller="MonthlyConsumables" asp-action="Terminate" asp-route-id="@monthlyConsumable.Id" class="btn btn-danger ">Прекрати</a>
+                    </td>
+                }
             </tr>
         }
     </tbody>

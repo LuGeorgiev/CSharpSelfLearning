@@ -13,5 +13,11 @@ namespace EstateManagment.Services.Areas.Payments
         Task<bool> CreateMonthlyConsumable(MonthlyConsumablesBindingModel model);
 
         Task<IEnumerable<MonthlyConsumablesListingModel>> AllNotPaid();
+
+        Task<MonthlyConsumablesViewModel> GetByIdAsync(int id);
+
+        Task<bool> TerminateAsync(int id);
+
+        Task<bool> EditAsync(EditMontlyConsumablesModel model);
     }
 }

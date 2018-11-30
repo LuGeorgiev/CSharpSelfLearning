@@ -70,6 +70,8 @@ namespace EstateManagment.Web.Common.Mapper
                 .ForMember(r => r.Client, opt => opt.MapFrom(mc => mc.RentAgreement.Client.Name))
                 .ForMember(mc => mc.TotalConsumablesMonthlyPrice, opt => opt.MapFrom(mc => mc.PaymentForElectricity + mc.PaymentForWater))
                 .ForMember(mc => mc.Properties, opt => opt.MapFrom(mc => mc.RentAgreement.PropertyRents.Select(x => x.Property.Name)));
+            CreateMap<MonthlyPaymentConsumable, MonthlyConsumablesViewModel>()
+                .ForMember(mc => mc.Client, opt => opt.MapFrom(mc => mc.RentAgreement.Client.Name));
 
             CreateMap<MonthlyPaymentRent, MonthlyRentViewModel>();
         }

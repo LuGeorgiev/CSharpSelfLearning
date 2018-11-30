@@ -1,7 +1,70 @@
-﻿
+﻿@model MonthlyConsumablesViewModel
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Редктиране на месечно плащане на консумативите";
 }
 
-<h2>Edit</h2>
+<h2>@ViewData["Title"]</h2>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Клиент: <a asp-area="" asp-controller="Clients" asp-action="DetailsByName" asp-route-name="@Model.Client"><strong>@Model.Client</strong></a></h4>            
+        </div>
+    </div>
+    <div>
 
+    </div>
+    <form method="post" class="col-md-8">
+        <hr />
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group col-md-6">
+            <label asp-for="PaymentForElectricity"></label>
+            <input asp-for="PaymentForElectricity" class="form-control" />
+            <span asp-validation-for="PaymentForElectricity" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label asp-for="PaymentForWater"></label>
+            <input asp-for="PaymentForWater" class="form-control" />
+            <span asp-validation-for="PaymentForWater" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label asp-for="ElectricityDay"></label>
+            <input asp-for="ElectricityDay" class="form-control" />
+            <span asp-validation-for="ElectricityDay" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label asp-for="WaterReport"></label>
+            <input asp-for="WaterReport" class="form-control" />
+            <span asp-validation-for="WaterReport" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label asp-for="ElectricityNight"></label>
+            <input asp-for="ElectricityNight" class="form-control" />
+            <span asp-validation-for="ElectricityNight" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label asp-for="DeadLine"></label>
+            <input asp-for="DeadLine" class="form-control" />
+            <span asp-validation-for="DeadLine" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label asp-for="ElectricityPeak"></label>
+            <input asp-for="ElectricityPeak" class="form-control" />
+            <span asp-validation-for="ElectricityPeak" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label asp-for="CreatedOn">Създадено на</label>
+            <input asp-for="CreatedOn" class="form-control"  disabled="disabled"/>
+            <span asp-validation-for="CreatedOn" class="text-danger"></span>
+        </div>
+        <div class="col-md-12">
+
+            @*<input type="hidden" name="rentId" value="@Model.Id" />*@
+            <button asp-action="Edit" asp-controller="MonthlyConsumables" type="submit" class="btn btn-default btn-success">Редактирай месечното плащане</button>
+            <a href="javascript:window.history.back()" class="btn btn-default">Назад</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
