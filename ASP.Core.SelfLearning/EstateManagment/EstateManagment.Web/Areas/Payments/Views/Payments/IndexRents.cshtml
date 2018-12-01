@@ -1,4 +1,6 @@
-﻿@model IEnumerable<PaymentRentListingModel>
+﻿@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@model IPagedList<PaymentRentListingModel>
 @{
     ViewData["Title"] = "Плащания по наеми";
 }
@@ -31,9 +33,9 @@
                             <td> @payment.TotalPayment.ToString("F2")</td>
                             <td> @payment.PaidOn.ToShortDateString()</td>
                             <td> @payment.DeadLine.ToShortDateString()</td>
-                            <td>@(payment.CashPayment == true ? "В брой" :"Банка")</td>
+                            <td>@(payment.CashPayment == true ? "В брой" : "Банка")</td>
                             <td>@payment.Username</td>
-                            <td>@(payment.ApplyVAT == true ? "Включено" :"Без")</td>
+                            <td>@(payment.ApplyVAT == true ? "Включено" : "Без")</td>
                             <td>
                                 <a asp-area="" asp-controller="Clients" asp-action="DetailsByName" asp-route-name="@payment.Client">@payment.Client</a>
                             </td>
@@ -46,6 +48,9 @@
                 </tbody>
             </table>
         </div>
+    </div>
+    <div>
+        @Html.PagedListPager(Model, page => Url.Action("IndexRents", new { page }))
     </div>
 }
 else

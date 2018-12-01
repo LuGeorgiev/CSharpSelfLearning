@@ -1,4 +1,6 @@
-﻿@model IEnumerable<PaymentConsumablesListingModel>
+﻿@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@model IPagedList<PaymentConsumablesListingModel>
 @{
     ViewData["Title"] = "Плащания на консумативи";
 }
@@ -28,8 +30,8 @@
                     {
                     <tr>
                         <td>@payment.Amount.ToString("F2")</td>
-                        <td> @payment.PaidOn.ToShortDateString()</td>
-                        <td> @payment.DeadLine.ToShortDateString()</td>
+                        <td>@payment.PaidOn.ToShortDateString()</td>
+                        <td>@payment.DeadLine.ToShortDateString()</td>
                         <td>@payment.PaymentForElectricity.ToString("F2")</td>
                         <td>@payment.PaymentForWater.ToString("F2")</td>
                         <td>@(payment.CashPayment == true ? "В брой" : "Банка")</td>
@@ -46,6 +48,9 @@
                 </tbody>
             </table>
         </div>
+    </div>
+    <div>
+        @Html.PagedListPager(Model, page => Url.Action("IndexConsumables", new { page }))
     </div>
 }
 else

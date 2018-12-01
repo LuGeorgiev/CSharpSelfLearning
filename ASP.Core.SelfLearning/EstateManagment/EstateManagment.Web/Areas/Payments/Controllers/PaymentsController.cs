@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using EstateManagment.Data.Models;
 using EstateManagment.Services.Areas.Payments;
 using EstateManagment.Services.Areas.Payments.Models.MonthlyRents;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using X.PagedList;
 
 namespace EstateManagment.Web.Areas.Payments.Controllers
 {
@@ -20,15 +18,23 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
             this.payments = payments;
         }
 
-        public  async Task<IActionResult> IndexConsumables()
+        public  async Task<IActionResult> IndexConsumables(int? page)
         {
             var model = await this.payments.AllConsumablePaymentsAsync();
-            return View(model);
+
+            var pageNumber = page ?? 1;
+            var onePageFromModel = model.ToPagedList(pageNumber, 5);
+
+            return View(onePageFromModel);
         }
-        public  async Task<IActionResult> IndexRents()
+        public  async Task<IActionResult> IndexRents(int? page)
         {
             var model = await this.payments.AllRentPaymentsAsync();
-            return View(model);
+
+            var pageNumber = page ?? 1;
+            var onePageFromModel = model.ToPagedList(pageNumber, 5);
+
+            return View(onePageFromModel);
         }
 
         [HttpPost]
