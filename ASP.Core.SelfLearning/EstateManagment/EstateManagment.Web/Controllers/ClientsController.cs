@@ -9,7 +9,7 @@ using static EstateManagment.Web.WebConstants;
 
 namespace EstateManagment.Web.Controllers
 {
-    [Authorize(Roles = ManagerRole)]
+    [Authorize(Roles = "Manager, Accountant")]
     public class ClientsController : Controller
     {
         private readonly IClientsService clients;
@@ -25,11 +25,13 @@ namespace EstateManagment.Web.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = ManagerRole)]
         public async Task<IActionResult> Create()
         {
             return View();
         }
 
+        [Authorize(Roles = ManagerRole)]
         [HttpPost]
         public async Task<IActionResult> Create(ClientBindingModel model)
         {
@@ -47,6 +49,7 @@ namespace EstateManagment.Web.Controllers
             return RedirectToAction("/Clients/Index");
         }
 
+        [Authorize(Roles = ManagerRole)]
         public async Task<IActionResult> Edit(int id)
         {
             var model = await this.clients.GetAsync(id);
@@ -58,6 +61,7 @@ namespace EstateManagment.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = ManagerRole)]
         public async Task<IActionResult> Edit(ClientEditedFormModel model)
         {
             if (!ModelState.IsValid)

@@ -20,9 +20,15 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
             this.payments = payments;
         }
 
-        public IActionResult Index()
+        public  async Task<IActionResult> IndexConsumables()
         {
-            return View();
+            var model = await this.payments.AllConsumablePaymentsAsync();
+            return View(model);
+        }
+        public  async Task<IActionResult> IndexRents()
+        {
+            var model = await this.payments.AllRentPaymentsAsync();
+            return View(model);
         }
 
         [HttpPost]

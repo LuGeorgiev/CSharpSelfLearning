@@ -2,6 +2,7 @@
 using EstateManagment.Data.Models;
 using EstateManagment.Services.Areas.Payments.Models.MonthlyConsumables;
 using EstateManagment.Services.Areas.Payments.Models.MonthlyRents;
+using EstateManagment.Services.Areas.Payments.Models.Payments;
 using EstateManagment.Services.ServiceModels.Clients;
 using EstateManagment.Services.ServiceModels.Companies;
 using EstateManagment.Services.ServiceModels.Properties;
@@ -74,6 +75,21 @@ namespace EstateManagment.Web.Common.Mapper
                 .ForMember(mc => mc.Client, opt => opt.MapFrom(mc => mc.RentAgreement.Client.Name));
 
             CreateMap<MonthlyPaymentRent, MonthlyRentViewModel>();
+
+            CreateMap<Payment, PaymentConsumablesListingModel>()
+                .ForMember(p => p.Client, opt => opt.MapFrom(p => p.MonthlyPaymentConsumable.RentAgreement.Client.Name))
+                .ForMember(p => p.DeadLine, opt => opt.MapFrom(p => p.MonthlyPaymentConsumable.DeadLine))
+                .ForMember(p => p.PaymentForElectricity, opt => opt.MapFrom(p => p.MonthlyPaymentConsumable.PaymentForElectricity))
+                .ForMember(p => p.PaymentForWater, opt => opt.MapFrom(p => p.MonthlyPaymentConsumable.PaymentForWater))
+                .ForMember(p => p.RentAgreementId, opt => opt.MapFrom(p => p.MonthlyPaymentConsumable.RentAgreementId))
+                .ForMember(p => p.User, opt => opt.MapFrom(p => p.User.Nickname ?? p.User.UserName));
+            CreateMap<Payment, PaymentRentListingModel>()
+                .ForMember(p => p.ApplyVAT, opt => opt.MapFrom(p => p.MonthlyPaymentRent.ApplyVAT))
+                .ForMember(p => p.Client, opt => opt.MapFrom(p => p.MonthlyPaymentRent.RentAgreement.Client.Name))
+                .ForMember(p => p.DeadLine, opt => opt.MapFrom(p => p.MonthlyPaymentRent.DeadLine))
+                .ForMember(p => p.RentAgreementId, opt => opt.MapFrom(p => p.MonthlyPaymentRent.RentAgreementId))
+                .ForMember(p => p.TotalPayment, opt => opt.MapFrom(p => p.MonthlyPaymentRent.TotalPayment))
+                .ForMember(p => p.Username, opt => opt.MapFrom(p => p.User.Nickname ?? p.User.UserName));
         }
     }
 }

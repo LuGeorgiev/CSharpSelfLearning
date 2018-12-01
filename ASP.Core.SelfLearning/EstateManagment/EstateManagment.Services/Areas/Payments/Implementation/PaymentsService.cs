@@ -7,8 +7,10 @@ using AutoMapper;
 using EstateManagment.Data;
 using EstateManagment.Data.Models;
 using EstateManagment.Services.Areas.Payments.Models.MonthlyRents;
+using EstateManagment.Services.Areas.Payments.Models.Payments;
 using EstateManagment.Services.Implementation;
 using EstateManagment.Services.ServiceModels.Rents;
+using Microsoft.EntityFrameworkCore;
 
 namespace EstateManagment.Services.Areas.Payments.Implementation
 {
@@ -19,6 +21,28 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
             : base(mapper, db)
         {
             this.monthlyRentService = monthlyRentService;
+        }
+
+        public async Task<IEnumerable<PaymentConsumablesListingModel>> AllConsumablePaymentsAsync()
+        {
+            var payments = await this.Db.Payments
+                .Where(x => x.MonthlyPaymentConsumableId != null)
+                .OrderByDescending(x => x.PaidOn)
+                .ToListAsync();
+
+            var model = Mapper.Map<IEnumerable<PaymentConsumablesListingModel>>(payments);
+            return model;
+        }
+
+        public async Task<IEnumerable<PaymentRentListingModel>> AllRentPaymentsAsync()
+        {
+            var payments = await this.Db.Payments
+                .Where(x => x.MonthlyPaymentRentId != null)
+                .OrderByDescending(x => x.PaidOn)
+                .ToListAsync();
+
+            var model = Mapper.Map<IEnumerable<PaymentRentListingModel>>(payments);
+            return model; ;
         }
 
         public async Task<bool> MakeConsumablesPaymentAsync(int consumableId, bool isCash, string userId)
