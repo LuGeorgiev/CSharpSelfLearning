@@ -1,9 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using EstateManagment.Data.Models;
 using EstateManagment.Services.Areas.Payments;
 using EstateManagment.Services.Areas.Payments.Models.MonthlyRents;
+using EstateManagment.Services.Areas.Payments.Models.Payments;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using X.PagedList;
 
 namespace EstateManagment.Web.Areas.Payments.Controllers
@@ -77,6 +80,17 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
 
             //TODO Success
             return RedirectToAction("Index", "MonthlyConsumables");
+        }
+
+        public async Task<IActionResult> FilterConsumables(FilterPaymentsBindingModel bindModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("IndexConsumables");
+            }
+
+            var model = await this.payments.FilterConsumablesAsync(bindModel);
+            return View(model);
         }
 
     }

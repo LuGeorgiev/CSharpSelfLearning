@@ -27,7 +27,6 @@
     <Folder Include="Areas\Payments\Data\" />
     <Folder Include="Areas\Payments\Models\MonthlyConsumables\" />
     <Folder Include="Areas\Payments\Models\MonthlyRents\" />
-    <Folder Include="Areas\Payments\Models\Payments\" />
   </ItemGroup>
 
   <ItemGroup>

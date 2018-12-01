@@ -66,6 +66,7 @@
         public const string DisplayPrice = "Месечен наем";
         public const string DisplayQuantity = "Броя";
         public const string DisplayClients = "Клиенти";
+        public const string DisplayActiveClients = "Активни клиенти";
         public const string DisplayFreeProperties = "Свободни Недвижимости";
         public const string DisplayCarSlots = "Паркоместа  коли";
         public const string DisplayBusSlots = "Паркоместа рейсове";
@@ -89,6 +90,8 @@
         public const string DisplayPayment = "Платащане";
         public const string DisplayCreatNextMonth = "Следващ месец";
         public const string DisplayTotalConsumablesMonthlyPrice = "Месечни консумативи";
+        public const string DisplayShowAll = "Покажи всички";
+
 
 
         public const string ErrorMessageCompanyName = "Да съдържа букви на кирилица, латиница, цифри и знаците: !., ? ";

@@ -14,7 +14,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EstateManagment.Services.Areas.Payments.Implementation
 {
-    public class PaymentsService :BaseService, IPaymentsService
+    public class PaymentsService : BaseService, IPaymentsService
     {
         private readonly IMonthlyRentsService monthlyRentService;
         public PaymentsService(IMapper mapper, EstateManagmentContext db, IMonthlyRentsService monthlyRentService)
@@ -45,15 +45,42 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
             return model; ;
         }
 
+        public async Task<FilterConsumablesViewModel> FilterConsumablesAsync(FilterPaymentsBindingModel bindModel)
+        {
+            var payments = await this.Db.Payments
+                .Where(x => x.MonthlyPaymentConsumableId!=null && x.PaidOn >= bindModel.StartDate && x.PaidOn <= bindModel.EndDate)
+                .OrderBy(x=>x.PaidOn)
+                .ToListAsync();
+            if (payments==null)
+            {
+                return null;
+            }
+            if (!bindModel.ShowAll)
+            {
+                payments =  payments
+                    .Where(x => x.MonthlyPaymentConsumable.RentAgreement.ClientId == bindModel.Client)
+                    .ToList();
+            }
+            var paymentsListingModel = Mapper.Map<IEnumerable<PaymentConsumablesListingModel>>(payments);
+
+            var model = new FilterConsumablesViewModel()
+            {
+                StartDate = bindModel.StartDate,
+                EndDate = bindModel.EndDate,
+                Payments = paymentsListingModel
+            };
+            return model;
+        }
+
         public async Task<bool> MakeConsumablesPaymentAsync(int consumableId, bool isCash, string userId)
         {
             var monthlyConsumables = await this.Db.FindAsync<MonthlyPaymentConsumable>(consumableId);
             var user = await this.Db.FindAsync<User>(userId);
-            if (user==null || monthlyConsumables==null)
+            if (user == null || monthlyConsumables == null)
             {
                 return false;
             }
-          
+
             var payment = await this.Db.Payments.AddAsync(new Payment()
             {
                 Amount = monthlyConsumables.PaymentForElectricity + monthlyConsumables.PaymentForWater,
@@ -87,21 +114,21 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
         {
             var monthlyRent = await this.Db.FindAsync<MonthlyPaymentRent>(model.MonthlyRentId);
             var user = await this.Db.FindAsync<User>(userId);
-            if (monthlyRent == null || user==null)
+            if (monthlyRent == null || user == null)
             {
                 return false;
             }
             var sumLeftToBePaid = monthlyRent.TotalPayment - monthlyRent.Payments.Sum(x => x.Amount);
-            if (model.Payment== sumLeftToBePaid)
+            if (model.Payment == sumLeftToBePaid)
             {
                 monthlyRent.IsPaid = true;
             }
             monthlyRent.Payments.Add(new Payment()
             {
-                Amount=model.Payment,
-                CashPayment=model.CashPayment,
+                Amount = model.Payment,
+                CashPayment = model.CashPayment,
                 PaidOn = DateTime.UtcNow,
-                UserId=userId
+                UserId = userId
             });
             try
             {

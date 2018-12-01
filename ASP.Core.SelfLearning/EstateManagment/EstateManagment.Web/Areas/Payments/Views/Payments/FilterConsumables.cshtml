@@ -1,0 +1,68 @@
+﻿@model FilterConsumablesViewModel
+@{
+    ViewData["Title"] = "Резултат от филтрирането на консумативите";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h2 class="panel-title">@ViewData["Title"]</h2>
+    </div>
+    <div class="panel-body">
+        <div class="col-md-4">
+            Начална дата: @Model.StartDate.ToShortDateString()
+        </div>
+        <div class="col-md-4">
+            Крайна дата: @Model.EndDate.ToShortDateString()
+        </div>
+        <div class="col-md-4">
+            Всички приходи от периода:<strong>@Model.TotalIncome лв.</strong>
+        </div>
+    </div>
+    @if (Model.Payments != null && Model.Payments.Count() > 0)
+    {
+        <div class="row">
+            <div class="col-md-12 col-lg-12">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Платено</th>
+                            <th scope="col">Платено на</th>
+                            <th scope="col">Краен срок</th>
+                            <th scope="col">Сметка ток</th>
+                            <th scope="col">Сметка вода</th>
+                            <th scope="col">Начин</th>
+                            <th scope="col">Отразено от</th>
+                            <th scope="col">Клент</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var payment in Model.Payments)
+                        {
+                            <tr>
+                                <td>@payment.Amount.ToString("F2")</td>
+                                <td>@payment.PaidOn.ToShortDateString()</td>
+                                <td>@payment.DeadLine.ToShortDateString()</td>
+                                <td>@payment.PaymentForElectricity.ToString("F2")</td>
+                                <td>@payment.PaymentForWater.ToString("F2")</td>
+                                <td>@(payment.CashPayment == true ? "В брой" : "Банка")</td>
+                                <td>@payment.User</td>
+                                <td>
+                                    <a asp-area="" asp-controller="Clients" asp-action="DetailsByName" asp-route-name="@payment.Client">@payment.Client</a>
+                                </td>
+                                <td class="pull-right">
+                                    <a asp-area="" asp-controller="Rents" asp-action="Details" asp-route-id="@payment.RentAgreementId" class="btn btn-default">Договор Детайли</a>
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+    else
+    {
+        <h3>Няма записи за плащания на консумативи в този период</h3>
+    }
+</div>

@@ -5,8 +5,9 @@
     ViewData["Title"] = "Плащания на консумативи";
 }
 
-<h2>IndexConsumables</h2>
+@await Component.InvokeAsync("ConsumablesFilterView", new {})
 
+<h2>@ViewData["Title"]</h2>
 @if (Model != null && Model.Count() > 0)
 {
     <div class="row">
@@ -28,22 +29,22 @@
                 <tbody>
                     @foreach (var payment in Model)
                     {
-                    <tr>
-                        <td>@payment.Amount.ToString("F2")</td>
-                        <td>@payment.PaidOn.ToShortDateString()</td>
-                        <td>@payment.DeadLine.ToShortDateString()</td>
-                        <td>@payment.PaymentForElectricity.ToString("F2")</td>
-                        <td>@payment.PaymentForWater.ToString("F2")</td>
-                        <td>@(payment.CashPayment == true ? "В брой" : "Банка")</td>
-                        <td>@payment.User</td>
-                        <td>
-                            <a asp-area="" asp-controller="Clients" asp-action="DetailsByName" asp-route-name="@payment.Client">@payment.Client</a>
-                        </td>
-                        <td class="pull-right">
-                            <a asp-area="" asp-controller="Rents" asp-action="Details" asp-route-id="@payment.RentAgreementId" class="btn btn-default">Договор Детайли</a>
-                        </td>
+                        <tr>
+                            <td>@payment.Amount.ToString("F2")</td>
+                            <td>@payment.PaidOn.ToShortDateString()</td>
+                            <td>@payment.DeadLine.ToShortDateString()</td>
+                            <td>@payment.PaymentForElectricity.ToString("F2")</td>
+                            <td>@payment.PaymentForWater.ToString("F2")</td>
+                            <td>@(payment.CashPayment == true ? "В брой" : "Банка")</td>
+                            <td>@payment.User</td>
+                            <td>
+                                <a asp-area="" asp-controller="Clients" asp-action="DetailsByName" asp-route-name="@payment.Client">@payment.Client</a>
+                            </td>
+                            <td class="pull-right">
+                                <a asp-area="" asp-controller="Rents" asp-action="Details" asp-route-id="@payment.RentAgreementId" class="btn btn-default">Договор Детайли</a>
+                            </td>
 
-                    </tr>
+                        </tr>
                     }
                 </tbody>
             </table>
@@ -55,5 +56,5 @@
 }
 else
 {
-    <h3>Няма записи за плащания по консумативи</h3>
+    <h3>Няма записи за плащания за консумативи</h3>
 }
