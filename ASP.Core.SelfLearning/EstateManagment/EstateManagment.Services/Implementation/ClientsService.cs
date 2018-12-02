@@ -23,6 +23,7 @@ namespace EstateManagment.Services.Implementation
         {
             var clients = await this.Db.Clients
                 .Where(x => x.IsDeleted == false)
+                .OrderBy(x=>x.Name)
                 .ToListAsync();
 
             var model = this.Mapper.Map<IEnumerable<ClientListingModel>>(clients);

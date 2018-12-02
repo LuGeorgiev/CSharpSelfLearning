@@ -91,6 +91,10 @@
         public const string DisplayCreatNextMonth = "Следващ месец";
         public const string DisplayTotalConsumablesMonthlyPrice = "Месечни консумативи";
         public const string DisplayShowAll = "Покажи всички";
+        public const string DisplayParkingSoltArea = "Място за пакиране";
+        public const string DisplayFrontParking = "Преден паркинг";
+        public const string DisplayBackParking = "Заден паркинг";
+        public const string DisplayNoReserved = "Без запазено място";
 
 
 

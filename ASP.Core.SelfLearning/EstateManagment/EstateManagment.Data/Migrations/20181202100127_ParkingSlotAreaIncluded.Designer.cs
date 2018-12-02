@@ -4,14 +4,16 @@ using EstateManagment.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EstateManagment.Data.Migrations
 {
     [DbContext(typeof(EstateManagmentContext))]
-    partial class EsteteManagmentContextModelSnapshot : ModelSnapshot
+    [Migration("20181202100127_ParkingSlotAreaIncluded")]
+    partial class ParkingSlotAreaIncluded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

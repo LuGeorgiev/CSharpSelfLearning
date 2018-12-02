@@ -23,6 +23,10 @@
         [Display(Name = DisplayQuantity)]
         public int Quantity { get; set; }
 
+
+        [Display(Name = DisplayParkingSoltArea)]
+        public ParkingSlotArea Area { get; set; } = ParkingSlotArea.NoReserved;
+
         [Required]
         public int RentAgreementId { get; set; }
 

@@ -1,4 +1,5 @@
 ﻿using EstateManagment.Data;
+using EstateManagment.Services;
 using EstateManagment.Web.Areas.Payments.Models.Payments;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -13,25 +14,26 @@ namespace EstateManagment.Web.ViewComponents
     [ViewComponent(Name = "ConsumablesFilterView")]
     public class ConsumablesFilterView : ViewComponent
     {
-        private readonly EstateManagmentContext db;
+        private readonly IClientsService clients;
 
-        public ConsumablesFilterView(EstateManagmentContext db)
+        public ConsumablesFilterView(IClientsService clients)
         {
-            this.db = db;
+            this.clients = clients;
         }
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var model = new FilterConsumablesFormModel();
-            IEnumerable<SelectListItem> clients = await this.db.Clients
-                .Where(x => x.IsDeleted == false)
-                .OrderBy(x => x.Name)
+
+            var allActiveClients = await this.clients.AllAsync();
+
+            IEnumerable<SelectListItem> clients = allActiveClients
                 .Select(x => new SelectListItem
                 {
                     Value = x.Id.ToString(),
                     Text = x.Name
-                })
-                .ToListAsync();
+                });
+
             model.ActiveClients = clients;
 
             return View(model);
