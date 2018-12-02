@@ -2,12 +2,13 @@
 @using X.PagedList;
 @model IPagedList<PaymentConsumablesListingModel>
 @{
-    ViewData["Title"] = "Плащания на консумативи";
+    ViewData["Title"] = "Всички плащания на консумативи";
 }
 
-@await Component.InvokeAsync("ConsumablesFilterView", new {})
+@await Component.InvokeAsync("ConsumablesFilterView", new { })
 
 <h2>@ViewData["Title"]</h2>
+
 @if (Model != null && Model.Count() > 0)
 {
     <div class="row">
@@ -50,8 +51,10 @@
             </table>
         </div>
     </div>
-    <div>
+    <div class="row">
         @Html.PagedListPager(Model, page => Url.Action("IndexConsumables", new { page }))
+
+        <a href="javascript:window.history.back()" class="btn btn-default pull-right">Назад</a>
     </div>
 }
 else

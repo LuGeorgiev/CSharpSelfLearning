@@ -82,7 +82,7 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
             return RedirectToAction("Index", "MonthlyConsumables");
         }
 
-        public async Task<IActionResult> FilterConsumables(FilterPaymentsBindingModel bindModel)
+        public async Task<IActionResult> FilterConsumables(FilterConsumablesBindingModel bindModel)
         {
             if (!ModelState.IsValid)
             {
@@ -90,6 +90,17 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
             }
 
             var model = await this.payments.FilterConsumablesAsync(bindModel);
+            return View(model);
+        }
+
+        public async Task<IActionResult> FilterRents(FilterRentBindingModel bindModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("IndexRents");
+            }
+
+            var model = await this.payments.FilterRentsAsync(bindModel);
             return View(model);
         }
 

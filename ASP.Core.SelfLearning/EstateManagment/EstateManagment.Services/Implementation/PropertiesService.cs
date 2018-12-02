@@ -18,6 +18,16 @@ namespace EstateManagment.Services.Implementation
         {
         }
 
+        public async Task<IEnumerable<PropertyShortModel>> AllActiveAsync()
+        {
+            var properties = await this.Db.Properties
+           .Where(x => x.IsActual == true)
+           .ToListAsync();
+
+            var result = this.Mapper.Map<IEnumerable<PropertyShortModel>>(properties);
+            return result;
+        }
+
         public async Task<IEnumerable<PropertyShortModel>> AllFreeAsync()
         {          
             var properties = await this.Db.Properties

@@ -6,7 +6,7 @@ using System.Text;
 namespace EstateManagment.Services.Areas.Payments.Models.Payments
 {
     public class PaymentRentListingModel
-    {        
+    {    
         public decimal Amount { get; set; }
 
         public DateTime PaidOn { get; set; } 

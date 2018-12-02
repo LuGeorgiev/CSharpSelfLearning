@@ -1,11 +1,12 @@
-﻿@model FilterConsumablesViewModel
+﻿@model FilterRentsViewModel
 @{
-    ViewData["Title"] = "Резултат от филтрирането на консумативите";
+    ViewData["Title"] = "Резултат от филтрирането на недвижимостите и парко местата";
 }
 
 <div class="panel panel-default">
     <div class="panel-heading">
         <h2 class="panel-title">@ViewData["Title"]</h2>
+
     </div>
     <div class="panel-body">
         <div class="col-md-3">
@@ -31,8 +32,8 @@
                             <th scope="col">Платено</th>
                             <th scope="col">Платено на</th>
                             <th scope="col">Краен срок</th>
-                            <th scope="col">Сметка ток</th>
-                            <th scope="col">Сметка вода</th>
+                            <th scope="col">Пълна сума</th>
+                            <th scope="col">ДДС</th>
                             <th scope="col">Начин</th>
                             <th scope="col">Отразено от</th>
                             <th scope="col">Клент</th>
@@ -46,10 +47,10 @@
                                 <td>@payment.Amount.ToString("F2")</td>
                                 <td>@payment.PaidOn.ToShortDateString()</td>
                                 <td>@payment.DeadLine.ToShortDateString()</td>
-                                <td>@payment.PaymentForElectricity.ToString("F2")</td>
-                                <td>@payment.PaymentForWater.ToString("F2")</td>
+                                <td>@payment.TotalPayment.ToString("F2")</td>
+                                <td>@(payment.ApplyVAT == true ? "Включено" : "Без")</td>
                                 <td>@(payment.CashPayment == true ? "В брой" : "Банка")</td>
-                                <td>@payment.User</td>
+                                <td>@payment.Username</td>
                                 <td>
                                     <a asp-area="" asp-controller="Clients" asp-action="DetailsByName" asp-route-name="@payment.Client">@payment.Client</a>
                                 </td>
@@ -66,8 +67,6 @@
     }
     else
     {
-        <h3>Няма записи за плащания на консумативи в зададения филтър</h3>
-    }  
-
-
+        <h3>Няма записи за плащания на наем в зададения филтър</h3>
+    }
 </div>

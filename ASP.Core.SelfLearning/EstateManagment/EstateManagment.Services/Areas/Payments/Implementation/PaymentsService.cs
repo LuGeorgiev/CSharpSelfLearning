@@ -46,7 +46,7 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
             return model; ;
         }
 
-        public async Task<FilterConsumablesViewModel> FilterConsumablesAsync(FilterPaymentsBindingModel bindModel)
+        public async Task<FilterConsumablesViewModel> FilterConsumablesAsync(FilterConsumablesBindingModel bindModel)
         {
             var payments = await this.Db.Payments
                 .Where(x => x.MonthlyPaymentConsumableId!=null && x.PaidOn >= bindModel.StartDate && x.PaidOn <= bindModel.EndDate)
@@ -67,6 +67,45 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
             var model = new FilterConsumablesViewModel()
             {
                 StartDate = bindModel.StartDate,
+                EndDate = bindModel.EndDate,
+                Payments = paymentsListingModel
+            };
+            return model;
+        }
+
+        public async Task<FilterRentsViewModel> FilterRentsAsync(FilterRentBindingModel bindModel)
+        {
+            var paymenst = await this.Db.Payments
+                .Where(x => x.MonthlyPaymentRentId != null && x.PaidOn >= bindModel.StartDate && x.PaidOn <= bindModel.EndDate)
+                .OrderBy(x=>x.PaidOn)
+                .ToListAsync();
+            if (paymenst==null)
+            {
+                return null;
+            }
+            if (bindModel.Client!=0)
+            {
+                paymenst = paymenst
+                    .Where(x => x.MonthlyPaymentRent.RentAgreement.ClientId == bindModel.Client)
+                    .ToList();
+            }
+            if (bindModel.Property!=0)
+            {
+                paymenst = paymenst
+                    .Where(x => x.MonthlyPaymentRent.RentAgreement.PropertyRents.Any(p => p.PropertyId == bindModel.Property))
+                    .ToList();
+            }
+            if (bindModel.ParkingArea!=0)
+            {
+                paymenst = paymenst
+                    .Where(x => x.MonthlyPaymentRent.RentAgreement.ParkingSlots.All(y => (int)y.Area == bindModel.ParkingArea))
+                    .ToList();
+            }
+            var paymentsListingModel = Mapper.Map<IEnumerable<PaymentRentListingModel>>(paymenst);
+
+            var model = new FilterRentsViewModel()
+            {
+                StartDate=bindModel.StartDate,
                 EndDate = bindModel.EndDate,
                 Payments = paymentsListingModel
             };

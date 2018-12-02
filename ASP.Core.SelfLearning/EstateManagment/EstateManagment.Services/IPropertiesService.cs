@@ -18,5 +18,6 @@ namespace EstateManagment.Services
         Task<bool> EditAsync(int id, string description, bool isActual);
 
         Task<IEnumerable<PropertyShortModel>> AllFreeAsync();
+        Task<IEnumerable<PropertyShortModel>> AllActiveAsync();
     }
 }
