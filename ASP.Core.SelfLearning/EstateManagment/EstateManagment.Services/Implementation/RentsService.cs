@@ -59,7 +59,8 @@ namespace EstateManagment.Services.Implementation
                 {
                      Type=ParkingSlotType.Car,
                      Quantity=model.CarSlots,
-                     Price=model.CarMonthPrice
+                     Price=model.CarMonthPrice,
+                     Area=model.CarsArea
                 });
             }
             if (model.BusSlots > 0)
@@ -68,7 +69,8 @@ namespace EstateManagment.Services.Implementation
                 {
                     Type = ParkingSlotType.Bus,
                     Quantity = model.BusSlots,
-                    Price = model.BusMonthPrice
+                    Price = model.BusMonthPrice,
+                    Area=model.BusesArea
                 });
             }
             if (model.TruckSlots > 0)
@@ -77,7 +79,8 @@ namespace EstateManagment.Services.Implementation
                 {
                     Type = ParkingSlotType.Truck,
                     Quantity = model.TruckSlots,
-                    Price = model.TruckMonthPrice
+                    Price = model.TruckMonthPrice,
+                    Area = model.TrucksArea
                 });
             }
             if (model.BigTruckSlots > 0)
@@ -86,7 +89,8 @@ namespace EstateManagment.Services.Implementation
                 {
                     Type = ParkingSlotType.BigTruck,
                     Quantity = model.BigTruckSlots,
-                    Price = model.BigTruckMonthPrice
+                    Price = model.BigTruckMonthPrice,
+                    Area = model.BigTrucksArea
                 });
             }
             if (model.CarCageSlots > 0)
@@ -95,7 +99,8 @@ namespace EstateManagment.Services.Implementation
                 {
                     Type = ParkingSlotType.CarCage,
                     Quantity = model.CarCageSlots,
-                    Price = model.CarCageMonthPrice
+                    Price = model.CarCageMonthPrice,
+                    Area =model.CarCagesArea
                 });
             }
             if (model.OtherSlots > 0)
@@ -104,7 +109,8 @@ namespace EstateManagment.Services.Implementation
                 {
                     Type = ParkingSlotType.Other,
                     Quantity = model.OtherSlots,
-                    Price = model.OtherMonthPrice
+                    Price = model.OtherMonthPrice,
+                    Area = model.OthersArea
                 });
             }
             rentAgreement.ParkingSlots = listParkingSlots;

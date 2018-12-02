@@ -1,11 +1,11 @@
 ﻿@model RentDetailsModel
+<hr class="col-xs-12">
 <div>
     <h3>Клиент:<span> <a asp-controller="Clients" asp-action="DetailsByName" asp-route-name="@Model.Client">@Model.Client</a> </span> </h3>
 </div>
 <div class="row ">
     <div class="col-lg-5 col-md-5 col-lg-offset-1">
         <h4>Недвижимости:</h4>
-        <hr />
         <ul class="list-unstyled ">
             @foreach (var property in Model.Properties)
             {
@@ -18,8 +18,7 @@
     </div>
     <div class="col-lg-5 col-md-5 ">
 
-        <h4>Пaркоместа:</h4>
-        <hr />
+        <h4>Пaркоместа:</h4>       
 
         @if (Model.ParkingSlots.Count() > 0)
         {
@@ -27,7 +26,7 @@
                 @foreach (var slot in Model.ParkingSlots)
                 {
                     <li>
-                        Тип паркоместа: <strong>@slot.Type</strong> брой: <strong>@slot.Quantity</strong> и еденична цена:<strong> @slot.Price.ToString("F2")</strong>
+                        Тип : <strong>@slot.Type</strong>, брой: <strong>@slot.Quantity</strong>, цена:<strong> @slot.Price.ToString("F2")</strong>, част на паркинга: <strong>@slot.Area</strong>
                     </li>
                 }
             </ul>
@@ -37,9 +36,9 @@
             <h4>Няма наети паркоместа</h4>
         }
     </div>
-    <hr />
+    
 </div>
-<hr />
+<hr class="col-xs-12">
 <div class="row">
     <div class="col-lg-5 col-md-5 col-lg-offset-1" ">
         <h4>Начална дата:</h4>

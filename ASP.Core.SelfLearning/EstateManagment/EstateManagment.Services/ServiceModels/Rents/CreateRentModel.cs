@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EstateManagment.Data.Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -45,6 +46,9 @@ namespace EstateManagment.Services.ServiceModels.Rents
         [Display(Name = DisplaySlotPrice)]
         public decimal CarMonthPrice { get; set; }
 
+        [Display(Name = DisplayParkingSoltArea)]
+        public ParkingSlotArea CarsArea { get; set; } 
+
         [Range(0, int.MaxValue)]
         [Display(Name = DisplayBusSlots)]
         public int BusSlots { get; set; }
@@ -53,6 +57,9 @@ namespace EstateManagment.Services.ServiceModels.Rents
         [Range(typeof(decimal), MinPayment, MaxPayment)]
         [Display(Name = DisplaySlotPrice)]
         public decimal BusMonthPrice { get; set; }
+
+        [Display(Name = DisplayParkingSoltArea)]
+        public ParkingSlotArea BusesArea { get; set; }
 
         [Range(0, int.MaxValue)]
         [Display(Name = DisplayTruckSlots)]
@@ -63,6 +70,9 @@ namespace EstateManagment.Services.ServiceModels.Rents
         [Display(Name = DisplaySlotPrice)]
         public decimal TruckMonthPrice { get; set; }
 
+        [Display(Name = DisplayParkingSoltArea)]
+        public ParkingSlotArea TrucksArea { get; set; }
+
         [Range(0, int.MaxValue)]
         [Display(Name = DisplayBigTruckSlots)]
         public int BigTruckSlots { get; set; }
@@ -71,6 +81,9 @@ namespace EstateManagment.Services.ServiceModels.Rents
         [Range(typeof(decimal), MinPayment, MaxPayment)]
         [Display(Name = DisplaySlotPrice)]
         public decimal BigTruckMonthPrice { get; set; }
+
+        [Display(Name = DisplayParkingSoltArea)]
+        public ParkingSlotArea BigTrucksArea { get; set; } 
 
         [Range(0, int.MaxValue)]
         [Display(Name = DisplayCarCageSlots)]
@@ -81,6 +94,9 @@ namespace EstateManagment.Services.ServiceModels.Rents
         [Display(Name = DisplaySlotPrice)]
         public decimal CarCageMonthPrice { get; set; }
 
+        [Display(Name = DisplayParkingSoltArea)]
+        public ParkingSlotArea CarCagesArea { get; set; }
+
         [Range(0, int.MaxValue)]
         [Display(Name = DisplayOtherSlots)]
         public int OtherSlots { get; set; }
@@ -89,5 +105,8 @@ namespace EstateManagment.Services.ServiceModels.Rents
         [Range(typeof(decimal), MinPayment, MaxPayment)]
         [Display(Name = DisplaySlotPrice)]
         public decimal OtherMonthPrice { get; set; }
+
+        [Display(Name = DisplayParkingSoltArea)]
+        public ParkingSlotArea OthersArea { get; set; } 
     }
 }

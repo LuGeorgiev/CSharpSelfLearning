@@ -43,17 +43,21 @@
                 <textarea asp-for="ParkingSlotDescription" class="form-control" rows="4" placeholder="Описание на наетите паркоместа..."></textarea>
                 <span asp-validation-for="ParkingSlotDescription" class="text-danger"></span>
             </div>
-
+            <hr class="col-xs-12" />
             <div class="panel col-lg-4 col-md-4">
                 <div class="form-group">
                     <label asp-for="CarSlots"></label>
                     <input asp-for="CarSlots" class="form-control" value="0" />
                     <span asp-validation-for="CarSlots" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="CarMonthPrice">Цена за една кола</label>
+                <div class="form-group  col-md-6 col-lg-6">
+                    <label asp-for="CarMonthPrice">Еденична цена</label>
                     <input asp-for="CarMonthPrice" class="form-control" value="0" />
                     <span asp-validation-for="CarMonthPrice" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6 col-lg-6">
+                    <label asp-for="CarsArea"></label>
+                    <select asp-for="CarsArea" asp-items="Html.GetEnumSelectList<ParkingSlotArea>()" class="form-control"></select>
                 </div>
             </div>
             <div class="panel col-lg-4 col-md-4">
@@ -62,12 +66,15 @@
                     <input asp-for="BusSlots" class="form-control" value="0" />
                     <span asp-validation-for="BusSlots" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="BusMonthPrice">Цена за еднн рейс</label>
+                <div class="form-group col-md-6 col-lg-6">
+                    <label asp-for="BusMonthPrice">Еденична цена</label>
                     <input asp-for="BusMonthPrice" class="form-control" value="0" />
                     <span asp-validation-for="BusMonthPrice" class="text-danger"></span>
                 </div>
-
+                <div class="form-group col-md-6 col-lg-6">
+                    <label asp-for="BusesArea"></label>
+                    <select asp-for="BusesArea" asp-items="Html.GetEnumSelectList<ParkingSlotArea>()" class="form-control"></select>
+                </div>
             </div>
             <div class="panel col-lg-4 col-md-4">
                 <div class="form-group">
@@ -75,47 +82,64 @@
                     <input asp-for="TruckSlots" class="form-control" value="0" />
                     <span asp-validation-for="TruckSlots" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="TruckMonthPrice">Цена за един камион</label>
+                <div class="form-group col-md-6 col-lg-6">
+                    <label asp-for="TruckMonthPrice">Еденична цена</label>
                     <input asp-for="TruckMonthPrice" class="form-control" value="0" />
                     <span asp-validation-for="TruckMonthPrice" class="text-danger"></span>
                 </div>
+                <div class="form-group col-md-6 col-lg-6">
+                    <label asp-for="TrucksArea"></label>
+                    <select asp-for="TrucksArea" asp-items="Html.GetEnumSelectList<ParkingSlotArea>()" class="form-control"></select>
+                </div>
             </div>
-            <div class="panel col-lg-4 col-md-4">
-            <div class="form-group">
-                <label asp-for="BigTruckSlots"></label>
-                <input asp-for="BigTruckSlots" class="form-control" value="0" />
-                <span asp-validation-for="BigTruckSlots" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BigTruckMonthPrice">Цена за един голям камион</label>
-                <input asp-for="BigTruckMonthPrice" class="form-control" value="0" />
-                <span asp-validation-for="BigTruckMonthPrice" class="text-danger"></span>
-            </div>
-            </div>
+            <hr class="col-xs-12" />
             <div class="panel col-lg-4 col-md-4">
                 <div class="form-group">
+                    <label asp-for="BigTruckSlots"></label>
+                    <input asp-for="BigTruckSlots" class="form-control" value="0" />
+                    <span asp-validation-for="BigTruckSlots" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6 col-lg-6">
+                    <label asp-for="BigTruckMonthPrice">Еденична цена</label>
+                    <input asp-for="BigTruckMonthPrice" class="form-control" value="0" />
+                    <span asp-validation-for="BigTruckMonthPrice" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6 col-lg-6">
+                    <label asp-for="BigTrucksArea"></label>
+                    <select asp-for="BigTrucksArea" asp-items="Html.GetEnumSelectList<ParkingSlotArea>()" class="form-control"></select>
+                </div>
+            </div>
+            <div class="panel col-lg-4 col-md-4">
+                <div class="form-group ">
                     <label asp-for="CarCageSlots"></label>
                     <input asp-for="CarCageSlots" class="form-control" value="0" />
                     <span asp-validation-for="CarCageSlots" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="CarCageMonthPrice">Цена за едиа авто-клетка</label>
+                <div class="form-group  col-md-6 col-lg-6">
+                    <label asp-for="CarCageMonthPrice">Еденична цена</label>
                     <input asp-for="CarCageMonthPrice" class="form-control" value="0" />
                     <span asp-validation-for="CarCageMonthPrice" class="text-danger"></span>
                 </div>
+                <div class="form-group col-md-6 col-lg-6">
+                    <label asp-for="CarCagesArea"></label>
+                    <select asp-for="CarCagesArea" asp-items="Html.GetEnumSelectList<ParkingSlotArea>()" class="form-control"></select>
+                </div>
             </div>
             <div class="panel col-lg-4 col-md-4">
-            <div class="form-group">
-                <label asp-for="OtherSlots"></label>
-                <input asp-for="OtherSlots" class="form-control" value="0" />
-                <span asp-validation-for="OtherSlots" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="OtherMonthPrice"></label>
-                <input asp-for="OtherMonthPrice" class="form-control" value="0" />
-                <span asp-validation-for="OtherMonthPrice" class="text-danger"></span>
-            </div>
+                <div class="form-group">
+                    <label asp-for="OtherSlots"></label>
+                    <input asp-for="OtherSlots" class="form-control" value="0" />
+                    <span asp-validation-for="OtherSlots" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6 col-lg-6">
+                    <label asp-for="OtherMonthPrice">Еденична цена</label>
+                    <input asp-for="OtherMonthPrice" class="form-control" value="0" />
+                    <span asp-validation-for="OtherMonthPrice" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6 col-lg-6">
+                    <label asp-for="OthersArea"></label>
+                    <select asp-for="OthersArea" asp-items="Html.GetEnumSelectList<ParkingSlotArea>()" class="form-control"></select>
+                </div>
             </div>
 
             <div>

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using EstateManagment.Data.Models.Enums;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -33,6 +34,7 @@ namespace EstateManagment.Web.Models.Rents
 
         [Required]
         public int ClientId { get; set; }
+
         [Display(Name = DisplayClients)]
         public IEnumerable<SelectListItem> Clients { get; set; }
         
@@ -51,6 +53,9 @@ namespace EstateManagment.Web.Models.Rents
         [Display(Name = DisplaySlotPrice)]
         public decimal CarMonthPrice { get; set; }
 
+        [Display(Name = DisplayParkingSoltArea)]
+        public ParkingSlotArea CarsArea { get; set; } = ParkingSlotArea.NoReserved;
+
         [Range(0, int.MaxValue)]
         [Display(Name = DisplayBusSlots)]
         public int BusSlots { get; set; }
@@ -59,6 +64,9 @@ namespace EstateManagment.Web.Models.Rents
         [Range(typeof(decimal), MinPayment, MaxPayment)]
         [Display(Name = DisplaySlotPrice)]
         public decimal BusMonthPrice { get; set; }
+
+        [Display(Name = DisplayParkingSoltArea)]
+        public ParkingSlotArea BusesArea { get; set; } = ParkingSlotArea.NoReserved;
 
         [Range(0,int.MaxValue)]
         [Display(Name = DisplayTruckSlots)]
@@ -69,6 +77,9 @@ namespace EstateManagment.Web.Models.Rents
         [Display(Name = DisplaySlotPrice)]
         public decimal TruckMonthPrice { get; set; }
 
+        [Display(Name = DisplayParkingSoltArea)]
+        public ParkingSlotArea TrucksArea { get; set; } = ParkingSlotArea.NoReserved;
+
         [Range(0,int.MaxValue)]
         [Display(Name = DisplayBigTruckSlots)]
         public int BigTruckSlots { get; set; }
@@ -77,6 +88,9 @@ namespace EstateManagment.Web.Models.Rents
         [Range(typeof(decimal), MinPayment, MaxPayment)]
         [Display(Name = DisplaySlotPrice)]
         public decimal BigTruckMonthPrice { get; set; }
+
+        [Display(Name = DisplayParkingSoltArea)]
+        public ParkingSlotArea BigTrucksArea { get; set; } = ParkingSlotArea.NoReserved;
 
         [Range(0,int.MaxValue)]
         [Display(Name = DisplayCarCageSlots)]
@@ -87,6 +101,9 @@ namespace EstateManagment.Web.Models.Rents
         [Display(Name = DisplaySlotPrice)]
         public decimal CarCageMonthPrice { get; set; }
 
+        [Display(Name = DisplayParkingSoltArea)]
+        public ParkingSlotArea CarCagesArea { get; set; } = ParkingSlotArea.NoReserved;
+
         [Range(0,int.MaxValue)]
         [Display(Name = DisplayOtherSlots)]
         public int OtherSlots { get; set; }
@@ -95,5 +112,11 @@ namespace EstateManagment.Web.Models.Rents
         [Range(typeof(decimal), MinPayment, MaxPayment)]
         [Display(Name = DisplaySlotPrice)]
         public decimal OtherMonthPrice { get; set; }
+
+        [Display(Name = DisplayParkingSoltArea)]
+        public ParkingSlotArea OthersArea { get; set; } = ParkingSlotArea.NoReserved;
+
+        [Display(Name =DisplayParkingSoltArea)]
+        public IEnumerable<ParkingSlotArea> Areas { get; set; }
     }
 }

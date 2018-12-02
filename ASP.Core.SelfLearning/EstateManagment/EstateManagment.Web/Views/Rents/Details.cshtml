@@ -17,15 +17,15 @@
             </div>
         </div>
     </form>
-    <br />
-    <hr />
+    <hr class="col-xs-12">
     <h2>@ViewData["Title"]</h2>
 
-    <partial name="_RentDescription" />
 
+    <partial name="_RentDescription" />
+    <hr class="col-xs-12">
     <div class="row">
         <div class="col-lg-4 col-md-4 col-lg-offset-1" ">
-            <h4>Описание</h4>
+            <h4>Описание на договора</h4>
             <p>@Model.Description</p>
         </div>
         <div class="col-lg-4 col-md-4">
@@ -51,7 +51,7 @@
     <hr />
     <h2>Сканирани договори:</h2>
     <div>
-        @await Component.InvokeAsync("ContractsList", new { rentId = Model.Id})
+        @await Component.InvokeAsync("ContractsList", new { rentId = Model.Id })
     </div>
 </div>
 
