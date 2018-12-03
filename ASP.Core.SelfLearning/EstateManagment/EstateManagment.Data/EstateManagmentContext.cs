@@ -45,7 +45,8 @@ namespace EstateManagment.Data
                 .HasForeignKey<Payment>(mc => mc.MonthlyPaymentConsumableId);
 
             builder.Entity<Client>()
-                .HasIndex(c => c.Name);
+                .HasIndex(c => c.Name)
+                .IsUnique();
 
 
             base.OnModelCreating(builder);
