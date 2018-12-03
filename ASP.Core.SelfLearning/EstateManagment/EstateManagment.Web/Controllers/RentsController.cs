@@ -88,10 +88,10 @@ namespace EstateManagment.Web.Controllers
             bool isCreated = await this.rents.CreateAsync(model);
             if (!isCreated)
             {
-                return this.RedirectToAction("/Rents/Create");
+                return this.RedirectToAction("Index");
             }
 
-            return this.RedirectToAction("/Rents/Index");
+            return this.RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Terminate(int id)

@@ -9,7 +9,7 @@ namespace EstateManagment.Services
 {
     public interface IClientsService
     {
-        Task<IEnumerable<ClientListingModel>> AllAsync();
+        Task<IEnumerable<ClientListingModel>> AllAsync(bool isDeleted = false);
 
         Task<bool> CreateAsync(string name, string address, string bulstat, string egn, string accountableName, string contactName, string telephone, string notes);
 
@@ -20,5 +20,6 @@ namespace EstateManagment.Services
         Task<ClientDetailsModel> GetDetailsAsync(int id);
 
         Task<int> GetIdByNameAsync(string name);
+        Task<bool> Resurect(int id);
     }
 }

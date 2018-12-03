@@ -26,7 +26,7 @@ namespace EstateManagment.Web.Controllers
         }
 
         [Authorize(Roles = ManagerRole)]
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
             return View();
         }
@@ -46,7 +46,7 @@ namespace EstateManagment.Web.Controllers
                 return View(model);
             }
 
-            return RedirectToAction("/Clients/Index");
+            return RedirectToAction("Index");
         }
 
         [Authorize(Roles = ManagerRole)]
@@ -106,6 +106,25 @@ namespace EstateManagment.Web.Controllers
                 return BadRequest();
             }
             return RedirectToAction("Details", new { id= modelId});
+        }
+
+        public async Task<IActionResult> Resurect()
+        {
+            var deletedClients = await this.clients.AllAsync(true);
+            
+            return View(deletedClients);
+        }
+
+        
+        public async Task<IActionResult> DoResurect(int id)
+        {
+            bool isResurected = await this.clients.Resurect(id);
+            if (!isResurected)
+            {
+                return this.RedirectToAction("Resurect");
+            }
+
+            return RedirectToAction("Index");
         }
 
     }

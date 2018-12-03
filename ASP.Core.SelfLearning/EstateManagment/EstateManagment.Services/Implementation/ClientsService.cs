@@ -19,10 +19,10 @@ namespace EstateManagment.Services.Implementation
         {
         }
 
-        public async Task<IEnumerable<ClientListingModel>> AllAsync()
+        public async Task<IEnumerable<ClientListingModel>> AllAsync(bool isDeleted=false)
         {
             var clients = await this.Db.Clients
-                .Where(x => x.IsDeleted == false)
+                .Where(x => x.IsDeleted == isDeleted)
                 .OrderBy(x=>x.Name)
                 .ToListAsync();
 
@@ -125,6 +125,25 @@ namespace EstateManagment.Services.Implementation
             }
 
             return client.Id;
+        }
+
+        public async Task<bool> Resurect(int id)
+        {
+            var client = await this.Db.FindAsync<Client>(id);
+            if (client==null || client.IsDeleted==false)
+            {
+                return false;
+            }
+            client.IsDeleted = false;
+            try
+            {
+                await this.Db.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

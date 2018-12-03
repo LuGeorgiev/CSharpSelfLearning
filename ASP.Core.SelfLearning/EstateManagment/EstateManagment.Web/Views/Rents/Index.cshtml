@@ -5,7 +5,10 @@
 
 <h2>@ViewData["Title"]</h2>
 <div>
-    <a asp-controller="Rents" asp-action="Create" class="btn btn-success">Създаване на нов договор</a>
+    @if (User.IsInRole("Manager"))
+    {
+        <a asp-controller="Rents" asp-action="Create" class="btn btn-success">Създаване на нов договор</a>
+    }
     <a href="javascript:window.history.back()" class="btn btn-default">Назад</a>
 </div>
 
@@ -36,16 +39,16 @@
 
                             </td>
                             <td class="text-center"> @rent.ParkingSlotQuantity</td>
-                            @if (User.IsInRole("Manager"))
-                            {
-                                <td class="pull-right">
-                                    <a asp-controller="Rents" asp-action="Details" asp-route-id="@rent.Id" class="btn btn-default">Детайли</a>
+                            <td class="pull-right">
+                                <a asp-controller="Rents" asp-action="Details" asp-route-id="@rent.Id" class="btn btn-default">Детайли</a>
+                                @if (User.IsInRole("Manager"))
+                                {
                                     <a asp-area="Payments" asp-controller="MonthlyRent" asp-action="Create" asp-route-id="@rent.Id" class="btn btn-primary">Месечен наем</a>
                                     <a asp-area="Payments" asp-controller="MonthlyConsumables" asp-action="Create" asp-route-id="@rent.Id" class="btn btn-primary">Консумативи</a>
                                     <a asp-controller="Rents" asp-action="Edit" asp-route-id="@rent.Id" class="btn btn-info">Редактиране</a>
                                     <a asp-controller="Rents" asp-action="Terminate" asp-route-id="@rent.Id" class="btn btn-danger">Прекратяване</a>
-                                </td>
-                            }
+                                }
+                            </td>
                         </tr>
                     }
                 </tbody>

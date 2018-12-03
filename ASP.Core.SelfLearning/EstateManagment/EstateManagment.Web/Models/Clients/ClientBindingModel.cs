@@ -16,7 +16,7 @@ namespace EstateManagment.Web.Models.Clients
         [Required]
         [MinLength(PropertyAddressMinLength)]
         [MaxLength(PropertyAddressMaxLength)]
-        [Display(Name = "Адрес")]
+        [Display(Name = DisplayAddress)]
         public string Address { get; set; }
 
         [Required]

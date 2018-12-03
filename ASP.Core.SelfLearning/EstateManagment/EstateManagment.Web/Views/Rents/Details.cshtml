@@ -4,23 +4,28 @@
 }
 
 <div class="container-fluid">
-    <form method="post" asp-action="UploadContract" asp-route-id="@Model.Id" enctype="multipart/form-data">
-        <div class="form-group">
-            <div class="col-md-12">
-                <p>Качване на договор в .zip формат под 2 MB размер:</p>
-                <input type="file" name="contract" multiple accept=".zip" />
+    @if (User.IsInRole("Manager"))
+    {
+        <form method="post" asp-action="UploadContract" asp-route-id="@Model.Id" enctype="multipart/form-data">
+            <div class="form-group">
+                <div class="col-md-12">
+                    <p>Качване на договор в .zip формат под 2 MB размер:</p>
+                    <input type="file" name="contract" multiple accept=".zip" />
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-12">
-                <input type="submit" value="Upload" />
+            <div class="form-group">
+                <div class="col-md-12">
+                    <input type="submit" value="Upload" />
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+    }
     <hr class="col-xs-12">
+
+
     <h2>@ViewData["Title"]</h2>
 
-    
+
     <partial name="_RentDescription" />
 
 
@@ -48,13 +53,16 @@
             <input asp-action="UploadContract" asp-route-id="@Model.Id" enctype="form-data" type="submit" class="btn btn-primary" value="Upload Contract" />
         </form>*@
     <div>
-        <a href="javascript:window.history.back()" class="btn btn-info">Назад</a>
+        <a href="javascript:window.history.back()" class="btn btn-default">Назад</a>
     </div>
-    <hr />
-    <h2>Сканирани договори:</h2>
-    <div>
-        @await Component.InvokeAsync("ContractsList", new { rentId = Model.Id })
-    </div>
+    <hr class="col-xs-12">
+    @if (User.IsInRole("Manager"))
+    {
+        <h2>Сканирани договори:</h2>
+        <div>
+            @await Component.InvokeAsync("ContractsList", new { rentId = Model.Id })
+        </div>
+    }
 </div>
 
 
