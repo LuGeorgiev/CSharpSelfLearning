@@ -67,10 +67,10 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PayConsumables(int id, bool isCash)
+        public async Task<IActionResult> PayConsumables(int id, bool isCash, DateTime paidOn)
         {
             var madeByUser = await this.userManager.GetUserAsync(this.User);
-            var successfulPayment = await this.payments.MakeConsumablesPaymentAsync(id, isCash, madeByUser.Id);
+            var successfulPayment = await this.payments.MakeConsumablesPaymentAsync(id, isCash,paidOn, madeByUser.Id);
 
             if (!successfulPayment)
             {

@@ -13,7 +13,11 @@ namespace EstateManagment.Services.Areas.Payments.Models.MonthlyRents
 
         [DataType(DataType.Date)]
         [Display(Name = DisplayDeadLine)]
-        public DateTime DeadLine { get; set; } = DateTime.UtcNow.AddMonths(1);
+        public DateTime DeadLine { get; set; } /*= DateTime.UtcNow.AddMonths(1);*/
+
+        [DataType(DataType.Date)]
+        [Display(Name = DisplayPaidOn)]
+        public DateTime PaidOn { get; set; } = DateTime.UtcNow;
 
         [Required]
         [Range(typeof(decimal), MinPayment, MaxPayment)]

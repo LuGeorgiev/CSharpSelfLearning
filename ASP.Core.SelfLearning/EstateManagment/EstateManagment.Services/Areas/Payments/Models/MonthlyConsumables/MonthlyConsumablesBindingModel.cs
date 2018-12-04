@@ -39,5 +39,7 @@ namespace EstateManagment.Services.Areas.Payments.Models.MonthlyConsumables
         [DataType(DataType.Date)]
         [Display(Name = DisplayDeadLine)]
         public DateTime DeadLine { get; set; }
+
+
     }
 }

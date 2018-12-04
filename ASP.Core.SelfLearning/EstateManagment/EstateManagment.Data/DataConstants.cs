@@ -39,7 +39,7 @@
         public const string MaxPayment = "1000000";
 
         public const string RegexLatinNames = @"^[A-za-z\u0400-\u044F\ ]+$";
-        public const string RegexLatinCompanyNames = @"^[A-za-z\u0400-\u044F\ 0-9\?\!\.,]+$";
+        public const string RegexLatinCompanyNames = @"^[A-za-z\u0400-\u044F\ 0-9\?\!\.""'\-\(\)\+,]+$";
         public const string RegexTelephone = @"^\+?[0-9\ -]{5,20}$";
         public const string RegexBulstat = @"^(BG|bg)?[0-9]{9,15}$";
         public const string RegexEGN = @"^[0-9]{10}$";
@@ -67,7 +67,7 @@
         public const string DisplayQuantity = "Броя";
         public const string DisplayClients = "Клиенти";
         public const string DisplayActiveClients = "Активни клиенти";
-        public const string DisplayFreeProperties = "Свободни Недвижимости";
+        public const string DisplayFreeProperties = "Свободни имоти";
         public const string DisplayCarSlots = "Паркоместа  коли";
         public const string DisplayBusSlots = "Паркоместа рейсове";
         public const string DisplayTruckSlots = "Паркоместа камиони";
@@ -98,7 +98,7 @@
 
 
 
-        public const string ErrorMessageCompanyName = "Да съдържа букви на кирилица, латиница, цифри и знаците: !., ? ";
+        public const string ErrorMessageCompanyName = @"Да съдържа букви на кирилица, латиница, цифри и знаците: !.,-""? ";
         public const string ErrorMessageBulstat = "Да започва с или без BG последван от 9 до 15 цифри";
         public const string ErrorMessageEGN = "Точно 10 цифри";
         public const string ErrorMessageLatinNames = "Само букви на кирилица или латиница";

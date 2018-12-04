@@ -12,7 +12,7 @@ namespace EstateManagment.Services.Areas.Payments
     {
         Task<bool?> MakePaymentAsync(BindingMonthlyRentModel model, string userId);
 
-        Task<bool> MakeConsumablesPaymentAsync(int consumableId, bool isCash, string userId);
+        Task<bool> MakeConsumablesPaymentAsync(int consumableId, bool isCash, DateTime paidOn, string userId);
 
         Task<IEnumerable<PaymentRentListingModel>> AllRentPaymentsAsync();
 

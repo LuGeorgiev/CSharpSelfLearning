@@ -4,70 +4,81 @@
 }
 
 <h2>@ViewData["Title"]</h2>
-
-<table class="table table-condensed table-striped table-hover">
-    <thead class="info">
-        <tr>
-            <th scope="col">Краен срок</th>
-            <th scope="col">Клиент</th>
-            <th scope="col">Дължима сума</th>
-            <th scope="col">Имоти</th>
-            <th scope="col">Извършванен на плащане</th>
-            <th scope="col"></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var monthlyConsumable in Model)
-        {
-            string rowColor;
-            if (monthlyConsumable.DeadLine <= DateTime.UtcNow)
+@if (Model.Any())
+{
+    <table class="table table-condensed table-striped table-hover">
+        <thead class="info">
+            <tr>
+                <th scope="col">Краен срок</th>
+                <th scope="col">Клиент</th>
+                <th scope="col">Дължима сума</th>
+                <th scope="col">Имоти</th>
+                <th scope="col">Извършванен на плащане</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var monthlyConsumable in Model)
             {
-                rowColor = "danger";
-            }
-            else
-            {
-                rowColor = "";
-            }
-            <tr class="@rowColor">
-                <td>@monthlyConsumable.DeadLine.ToShortDateString()</td>
-                <td>
-                    <a asp-area="" asp-controller="Clients" asp-action="DetailsByName" asp-route-name="@monthlyConsumable.Client"><strong>@monthlyConsumable.Client</strong></a>
-                </td>
-                <td>@monthlyConsumable.TotalConsumablesMonthlyPrice.ToString("F2") лв</td>
-                @if (monthlyConsumable.Properties.Count() > 0)
+                string rowColor;
+                if (monthlyConsumable.DeadLine <= DateTime.UtcNow)
                 {
-                    <td>
-                        @String.Join(", ", monthlyConsumable.Properties)
-                    </td>
+                    rowColor = "danger";
                 }
                 else
                 {
-                    <td>
-                        Само паркоместа
-                    </td>
+                    rowColor = "";
                 }
-                <td>
-                    <form asp-area="Payments" asp-controller="Payments" asp-action="PayConsumables" method="post" class="form-inline">
-                        <div asp-validation-summary="All" class="text-danger"></div>
-                        <div class="form-group ">
-                            <label asp-for="@monthlyConsumable.IsCash"></label>
-                            <input asp-for="@monthlyConsumable.IsCash" name="isCash" />
-                        </div>
-                        <input type="hidden" name="id" value="@monthlyConsumable.Id" />
-                        <input type="submit" value="Плати" class="btn btn-success" />
-                    </form>
-                </td>
-                @if (User.IsInRole("Manager"))
-                {
+                <tr class="@rowColor">
+                    <td>@monthlyConsumable.DeadLine.ToShortDateString()</td>
                     <td>
-                        <a asp-controller="MonthlyConsumables" asp-action="Edit" asp-route-id="@monthlyConsumable.Id" class="btn btn-primary ">Редакция</a>
-                        <a asp-controller="MonthlyConsumables" asp-action="Terminate" asp-route-id="@monthlyConsumable.Id" class="btn btn-danger ">Прекрати</a>
+                        <a asp-area="" asp-controller="Clients" asp-action="DetailsByName" asp-route-name="@monthlyConsumable.Client"><strong>@monthlyConsumable.Client</strong></a>
                     </td>
-                }
-            </tr>
-        }
-    </tbody>
-</table>
+                    <td>@monthlyConsumable.TotalConsumablesMonthlyPrice.ToString("F2") лв</td>
+                    @if (monthlyConsumable.Properties.Count() > 0)
+                    {
+                        <td>
+                            @String.Join(", ", monthlyConsumable.Properties)
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            Само паркоместа
+                        </td>
+                    }
+                    <td>
+                        <form asp-area="Payments" asp-controller="Payments" asp-action="PayConsumables" method="post" class="form-inline">
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="@monthlyConsumable.PaidOn">Дата:</label>
+                                <input asp-for="@monthlyConsumable.PaidOn" name="paidOn" class="form-control" />
+                            </div>
+                            <div class="form-group ">
+                                <label asp-for="@monthlyConsumable.IsCash"></label>
+                                <input asp-for="@monthlyConsumable.IsCash" name="isCash" />
+                            </div>
+                            <input type="hidden" name="id" value="@monthlyConsumable.Id" />
+                            <input type="submit" value="Плати" class="btn btn-success" />
+                        </form>
+                    </td>
+                    @if (User.IsInRole("Manager"))
+                    {
+                        <td>
+                            <a asp-controller="MonthlyConsumables" asp-action="Edit" asp-route-id="@monthlyConsumable.Id" class="btn btn-primary ">Редакция</a>
+                            <a asp-controller="MonthlyConsumables" asp-action="Terminate" asp-route-id="@monthlyConsumable.Id" class="btn btn-danger ">Прекрати</a>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <hr class="col-xs-12">
+    <h4>Няма чакащи плащания на консумативи</h4>
+}
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

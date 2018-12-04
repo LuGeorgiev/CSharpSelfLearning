@@ -16,10 +16,13 @@
 
         [DataType(DataType.Date)]
         [Display(Name = DisplayPaidOn)]
-        public DateTime PaidOn { get; set; } = DateTime.UtcNow;
+        public DateTime PaidOn { get; set; } 
 
         [Display(Name = DisplayCashPayment)]
         public bool CashPayment { get; set; } = false;
+
+        [DataType(DataType.Date)]
+        public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
 
         public string UserId { get; set; }
 

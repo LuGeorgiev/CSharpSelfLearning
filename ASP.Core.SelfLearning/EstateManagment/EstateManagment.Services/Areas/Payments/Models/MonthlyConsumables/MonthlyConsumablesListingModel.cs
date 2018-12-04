@@ -25,6 +25,10 @@ namespace EstateManagment.Services.Areas.Payments.Models.MonthlyConsumables
         [Display(Name = DisplayDeadLine)]
         public DateTime DeadLine { get; set; }
 
+        [DataType(DataType.Date)]
+        [Display(Name = DisplayPaidOn)]
+        public DateTime PaidOn { get; set; } = DateTime.UtcNow;
+
         [Display(Name = DisplayCashPayment)]
         public bool IsCash { get; set; }
     }

@@ -14,8 +14,7 @@
             <th scope="col">Дължима сума</th>
             <th scope="col">Имоти</th>
             <th scope="col">Паркоместа</th>
-            <th scope="col"></th>
-            <th scope="col" class="text-center">Извършванен на плащане</th>
+            <th scope="col">Плащане</th>
         </tr>
     </thead>
     <tbody>
@@ -37,18 +36,19 @@
                 </td>
                 <td>@rent.TotalPayment.ToString("F2") лв</td>
                 <td>@String.Join(", ", rent.Properties)</td>
-                <td class="text-center">@rent.ParkingSlotQuantity</td>
-                <td>
-                    <a asp-controller="MonthlyRent" asp-action="Edit" asp-route-id="@rent.Id" class="btn btn-default ">Редакция</a>
-                </td>
+                <td class="text-center">@rent.ParkingSlotQuantity</td>                
                 <td>
                     <form asp-controller="Payments" asp-action="Pay" method="post" class="form-inline">
                         <div asp-validation-summary="All" class="text-danger"></div>
-                        <div class="form-group">
+                        <div class="form-group ">
+                            <label asp-for="@rent.PaidOn">Дата:</label>
+                            <input asp-for="@rent.PaidOn" name="paidOn" class="form-control"/>
+                        </div>
+                        <div class="form-group  col-md-4 col-lg-4">
                             <div class="input-group">
-                            <div class="input-group-addon">BGN</div>
-                            <input asp-for="@rent.Payment" name="payment" value="@rent.TotalPayment" class="form-control" />
-                            <span asp-validation-for="@rent.Payment" class="text-danger"></span>
+                                <div class="input-group-addon">BGN</div>
+                                <input asp-for="@rent.Payment" name="payment" value="@rent.TotalPayment" class="form-control" />
+                                <span asp-validation-for="@rent.Payment" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="form-group ">
@@ -56,9 +56,8 @@
                             <input asp-for="@rent.CashPayment" name="cashPayment" />
                         </div>
                         <input type="hidden" name="monthlyRentId" value="@rent.Id" />
-                        <input type="hidden" name="totalLeft" value="@rent.TotalPayment" />                       
-                        <input type="submit" value="Плати" class="btn btn-success" />                      
-
+                        <input type="hidden" name="totalLeft" value="@rent.TotalPayment" />
+                        <input type="submit" value="Плати" class="btn btn-success" />
                     </form>
                 </td>
             </tr>

@@ -112,7 +112,7 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
             return model;
         }
 
-        public async Task<bool> MakeConsumablesPaymentAsync(int consumableId, bool isCash, string userId)
+        public async Task<bool> MakeConsumablesPaymentAsync(int consumableId, bool isCash, DateTime paidOn, string userId)
         {
             var monthlyConsumables = await this.Db.FindAsync<MonthlyPaymentConsumable>(consumableId);
             var user = await this.Db.FindAsync<User>(userId);
@@ -126,8 +126,9 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
                 Amount = monthlyConsumables.PaymentForElectricity + monthlyConsumables.PaymentForWater,
                 CashPayment = isCash,
                 MonthlyPaymentConsumableId = monthlyConsumables.Id,
-                PaidOn = DateTime.UtcNow,
-                UserId = userId
+                PaidOn = paidOn,
+                UserId = userId,
+                CreatedOn=DateTime.UtcNow
             });
             try
             {
@@ -167,8 +168,9 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
             {
                 Amount = model.Payment,
                 CashPayment = model.CashPayment,
-                PaidOn = DateTime.UtcNow,
-                UserId = userId
+                PaidOn = model.PaidOn,
+                UserId = userId,
+                CreatedOn = DateTime.UtcNow
             });
             try
             {
