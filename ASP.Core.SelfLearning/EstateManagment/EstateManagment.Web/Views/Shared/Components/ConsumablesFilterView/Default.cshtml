@@ -20,8 +20,8 @@
                 <select asp-for="Client" asp-items="@Model.ActiveClients" class="form-control"> </select>
             </div>
             <div class="form-group ">
-                <label asp-for="ShowAll"></label>
-                <input asp-for="ShowAll"/>
+                <label asp-for="OnlyCash">Само в брой</label>
+                <input asp-for="OnlyCash"/>
             </div>
 
             <button asp-area="Payments" asp-action="FilterConsumables" asp-controller="Payments" type="submit" class="btn btn-default">Филтър</button>

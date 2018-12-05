@@ -20,5 +20,25 @@ namespace EstateManagment.Services.Areas.Payments.Models.Payments
                 return this.Payments.Sum(x => x.Amount);
             }
         }
+
+        public decimal VAT
+        {
+            get
+            {
+                return this.Payments
+                    .Where(x => x.ApplyVAT == true)
+                    .Sum(x => x.Amount-x.Amount/1.2m);
+            }
+        }
+
+        public decimal PaidInCash
+        {
+            get
+            {
+                return this.Payments
+                    .Where(x => x.CashPayment == true)
+                    .Sum(x => x.Amount);
+            }
+        }
     }
 }

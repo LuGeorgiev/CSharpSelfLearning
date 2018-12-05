@@ -56,10 +56,17 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
             {
                 return null;
             }
-            if (!bindModel.ShowAll)
+            if (bindModel.Client!=0)
             {
                 payments =  payments
                     .Where(x => x.MonthlyPaymentConsumable.RentAgreement.ClientId == bindModel.Client)
+                    .ToList();
+            }
+
+            if (bindModel.OnlyCash)
+            {
+                payments = payments
+                    .Where(x => x.CashPayment == true)
                     .ToList();
             }
             var paymentsListingModel = Mapper.Map<IEnumerable<PaymentConsumablesListingModel>>(payments);
@@ -75,33 +82,39 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
 
         public async Task<FilterRentsViewModel> FilterRentsAsync(FilterRentBindingModel bindModel)
         {
-            var paymenst = await this.Db.Payments
+            var payments = await this.Db.Payments
                 .Where(x => x.MonthlyPaymentRentId != null && x.PaidOn >= bindModel.StartDate && x.PaidOn <= bindModel.EndDate)
                 .OrderBy(x=>x.PaidOn)
                 .ToListAsync();
-            if (paymenst==null)
+            if (payments==null)
             {
                 return null;
             }
+            if (bindModel.OnlyCash)
+            {
+                payments = payments
+                    .Where(x => x.CashPayment == true)
+                    .ToList();
+            }
             if (bindModel.Client!=0)
             {
-                paymenst = paymenst
+                payments = payments
                     .Where(x => x.MonthlyPaymentRent.RentAgreement.ClientId == bindModel.Client)
                     .ToList();
             }
             if (bindModel.Property!=0)
             {
-                paymenst = paymenst
+                payments = payments
                     .Where(x => x.MonthlyPaymentRent.RentAgreement.PropertyRents.Any(p => p.PropertyId == bindModel.Property))
                     .ToList();
             }
             if (bindModel.ParkingArea!=0)
             {
-                paymenst = paymenst
+                payments = payments
                     .Where(x => x.MonthlyPaymentRent.RentAgreement.ParkingSlots.All(y => (int)y.Area == bindModel.ParkingArea))
                     .ToList();
             }
-            var paymentsListingModel = Mapper.Map<IEnumerable<PaymentRentListingModel>>(paymenst);
+            var paymentsListingModel = Mapper.Map<IEnumerable<PaymentRentListingModel>>(payments);
 
             var model = new FilterRentsViewModel()
             {

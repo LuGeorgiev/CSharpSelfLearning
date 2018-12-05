@@ -1,34 +1,48 @@
-﻿@model FilterRentsFormViewModel
+﻿@model FilterRentsFormModel
 
 <div class="panel panel-info">
-    <div class="panel-heading" >Филтриране по дата, клиент, отдаван имот или област от паркинга:</div>
+    <div class="panel-heading">Филтриране по дата, клиент, отдаван имот или област от паркинга:</div>
     <div class="panel-body">
         <form method="get" class="form-inline">
             <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="StartDate" >От</label>
-                <input asp-for="StartDate" class="form-control" />
-                <span asp-validation-for="StartDate" class="text-danger"></span>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="StartDate"></label>
+                    <input asp-for="StartDate" class="form-control  " />
+                    <span asp-validation-for="StartDate" class="text-danger"></span>
+                </div>
+                <hr />
+                <div class="form-group ">
+                    <label asp-for="EndDate"></label>
+                    <input asp-for="EndDate" class="form-control  " />
+                    <span asp-validation-for="EndDate" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group ">
-                <label asp-for="EndDate" >До</label>
-                <input asp-for="EndDate" class="form-control" />
-                <span asp-validation-for="EndDate" class="text-danger"></span>
+            <div class="col-md-3">
+                <div class="form-group ">
+                    <label asp-for="ActiveClients">Клиент</label>
+                    <select asp-for="Client" asp-items="@Model.ActiveClients" class="form-control  "> </select>
+                </div>
+                <hr />
+                <div class="form-group ">
+                    <label asp-for="Properties">Имот</label>
+                    <select asp-for="Property" asp-items="@Model.Properties" class="form-control  "> </select>
+                </div>
             </div>
-            <div class="form-group ">
-                <label asp-for="ActiveClients">Клиент</label>
-                <select asp-for="Client" asp-items="@Model.ActiveClients" class="form-control"> </select>
-            </div>
-            <div class="form-group ">
-                <label asp-for="Properties">Имот</label>
-                <select asp-for="Property" asp-items="@Model.Properties" class="form-control"> </select>
-            </div>
-            <div class="form-group ">
-                <label asp-for="ParkingAreas">Място</label>
-                <select asp-for="ParkingArea" asp-items="@Model.ParkingAreas" class="form-control"> </select>
+            <div class="col-md-4">
+                <div class="form-group ">
+                    <label asp-for="ParkingAreas">Място на паркинга</label>
+                    <select asp-for="ParkingArea" asp-items="@Model.ParkingAreas" class="form-control  "> </select>
+                </div>
+                <hr />
+                <div class="form-group ">
+                    <label asp-for="OnlyCash" >Само в брой</label>
+                    <input asp-for="OnlyCash" />
+                </div>
             </div>
 
-            <button asp-area="Payments" asp-action="FilterRents" asp-controller="Payments" type="submit" class=" btn btn-info ">Филтър</button>
+                <button asp-area="Payments" asp-action="FilterRents" asp-controller="Payments" type="submit" class=" btn btn-info ">Филтър</button>
+               
 
         </form>
     </div>

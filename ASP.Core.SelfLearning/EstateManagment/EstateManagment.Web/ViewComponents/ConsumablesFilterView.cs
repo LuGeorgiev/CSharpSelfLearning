@@ -1,5 +1,5 @@
 ﻿using EstateManagment.Services;
-using EstateManagment.Web.Areas.Payments.Models.Payments;
+using EstateManagment.Services.Areas.Payments.Models.Payments;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
@@ -29,6 +29,11 @@ namespace EstateManagment.Web.ViewComponents
                 {
                     Value = x.Id.ToString(),
                     Text = x.Name
+                })
+                .Prepend( new SelectListItem
+                {
+                    Value = "0",
+                    Text = "Всички клиенти"
                 });
             
 

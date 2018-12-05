@@ -22,6 +22,8 @@ namespace EstateManagment.Services.Implementation
         {
             var properties = await this.Db.Properties
            .Where(x => x.IsActual == true)
+           .OrderBy(x=>x.Name)
+           .ThenByDescending(x=>x.Area)
            .ToListAsync();
 
             var result = this.Mapper.Map<IEnumerable<PropertyShortModel>>(properties);

@@ -23,7 +23,7 @@ namespace EstateManagment.Web.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var model = new FilterRentsFormViewModel();
+            var model = new FilterRentsFormModel();
 
             var allActiveClients = await this.clients.AllAsync();
             IEnumerable<SelectListItem> clients = allActiveClients

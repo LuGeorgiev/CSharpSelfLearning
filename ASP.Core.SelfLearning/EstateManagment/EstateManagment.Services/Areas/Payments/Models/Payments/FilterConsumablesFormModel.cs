@@ -3,11 +3,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+
 using static EstateManagment.Data.DataConstants;
 
 namespace EstateManagment.Services.Areas.Payments.Models.Payments
 {
-    public class FilterRentsFormViewModel
+    public class FilterConsumablesFormModel
     {
         [Required]
         [Display(Name = DisplayStartDate)]
@@ -21,21 +22,10 @@ namespace EstateManagment.Services.Areas.Payments.Models.Payments
         public DateTime EndDate { get; set; } = DateTime.UtcNow.AddHours(3);
 
         [Display(Name = DisplayActiveClients)]
-        public IEnumerable<SelectListItem> ActiveClients { get; set; }
+        public IEnumerable<SelectListItem> ActiveClients { get; set; }      
 
-        [Required]
+        public bool OnlyCash { get; set; }
+
         public SelectListItem Client { get; set; }
-
-        [Display(Name = DisplayPropertyName)]
-        public IEnumerable<SelectListItem> Properties { get; set; }
-
-        [Required]
-        public SelectListItem Property { get; set; }
-
-        [Display(Name = DisplayPropertyName)]
-        public IEnumerable<SelectListItem> ParkingAreas { get; set; }
-
-        [Required]
-        public SelectListItem ParkingArea { get; set; }
     }
 }

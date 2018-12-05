@@ -20,8 +20,8 @@ namespace EstateManagment.Services.Areas.Payments.Models.Payments
         [AfterDate(nameof(StartDate))]
         public DateTime EndDate { get; set; }               
 
-        [Display(Name = DisplayShowAll)]
-        public bool ShowAll { get; set; } 
+       
+        public bool OnlyCash { get; set; } 
 
         [Required]
         public int Client { get; set; }

@@ -28,7 +28,8 @@ namespace EstateManagment.Services.Areas.Payments.Models.Payments
         [Required]
         public int Property { get; set; }
 
-        
+        public bool OnlyCash { get; set; }
+
         [Required]
         public int ParkingArea { get; set; }
     }

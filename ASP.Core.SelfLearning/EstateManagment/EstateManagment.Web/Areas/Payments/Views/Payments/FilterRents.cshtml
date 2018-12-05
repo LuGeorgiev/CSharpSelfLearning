@@ -6,19 +6,34 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <h2 class="panel-title">@ViewData["Title"]</h2>
-
     </div>
     <div class="panel-body">
-        <div class="col-md-3">
-            Начална дата: @Model.StartDate.ToShortDateString()
-        </div>
-        <div class="col-md-3">
-            Крайна дата: @Model.EndDate.ToShortDateString()
-        </div>
-        <div class="col-md-4">
-            Всички приходи от периода:<strong>@Model.TotalIncome лв.</strong>
-        </div>
         <div class="col-md-2">
+
+            <div>
+                От:<strong> @Model.StartDate.ToShortDateString()</strong>
+            </div>
+            <div>
+                До:<strong> @Model.EndDate.ToShortDateString()</strong>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div>
+                Всички приходи:<strong>@Model.TotalIncome лв.</strong> 
+            </div>
+            <div>
+                &nbsp;&nbsp;Чисти приходи:<strong>@((Model.TotalIncome - Model.VAT).ToString("F2")) лв.</strong> 
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div>
+                от тях: <strong>@Model.PaidInCash лв.</strong> в брой!
+            </div>
+            <div>
+                &nbsp;&nbsp;ДДС: <strong>@Model.VAT.ToString("F2") лв.</strong> за периода!
+            </div>
+        </div>
+        <div class="pull-right">
             <a href="javascript:window.history.back()" class="btn btn-default pull-right">Назад</a>
         </div>
     </div>
@@ -44,7 +59,7 @@
                         @foreach (var payment in Model.Payments)
                         {
                             <tr>
-                                <td>@payment.Amount.ToString("F2")</td>
+                                <td class="@(payment.Amount!=payment.TotalPayment?"text-danger":"")"><strong>@payment.Amount.ToString("F2")</strong></td>
                                 <td>@payment.PaidOn.ToShortDateString()</td>
                                 <td>@payment.DeadLine.ToShortDateString()</td>
                                 <td>@payment.TotalPayment.ToString("F2")</td>
