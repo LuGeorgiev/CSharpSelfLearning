@@ -1,0 +1,37 @@
+﻿@model IEnumerable<OverdueMonthlyConsumablesListingModel>
+@if (Model.Any())
+{
+    <table class="table table-condensed table-striped table-hover">
+        <thead class="info">
+            <tr>
+                <th scope="col">Клиент</th>
+                <th scope="col">Краен Срок</th>
+                <th scope="col">За Ток</th>
+                <th scope="col">За Вода</th>
+                <th scope="col">Всичко</th>
+                <th scope="col">Имоти по договора</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var rent in Model)
+            {
+                <tr>
+                    <td><a asp-controller="Clients" asp-action="DetailsByName" asp-route-name="@rent.ClientName">@rent.ClientName</a></td>
+                    <td>@rent.DeadLine.ToShortDateString()</td>
+                    <td>@rent.PaymentForElectricity ,лв</td>
+                    <td>@rent.PaymentForWater ,лв</td>
+                    <td>@((rent.PaymentForElectricity + rent.PaymentForWater).ToString("F2")), лв</td>
+                    <td>@string.Join(", ", rent.PropertyRentsNames)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-success">
+        <h3>В момента няма просрочени плащания по консумативи</h3>
+    </div>
+}
+
+

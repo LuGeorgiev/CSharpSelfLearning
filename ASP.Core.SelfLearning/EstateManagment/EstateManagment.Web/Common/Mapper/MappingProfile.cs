@@ -5,6 +5,8 @@ using EstateManagment.Services.Areas.Payments.Models.MonthlyRents;
 using EstateManagment.Services.Areas.Payments.Models.Payments;
 using EstateManagment.Services.ServiceModels.Clients;
 using EstateManagment.Services.ServiceModels.Companies;
+using EstateManagment.Services.ServiceModels.MonthlyPaymentRentsService;
+using EstateManagment.Services.ServiceModels.MontlyPaymentConsumablesService;
 using EstateManagment.Services.ServiceModels.Properties;
 using EstateManagment.Services.ServiceModels.Rents;
 using EstateManagment.Services.ServiceModels.Users;
@@ -90,6 +92,20 @@ namespace EstateManagment.Web.Common.Mapper
                 .ForMember(p => p.RentAgreementId, opt => opt.MapFrom(p => p.MonthlyPaymentRent.RentAgreementId))
                 .ForMember(p => p.TotalPayment, opt => opt.MapFrom(p => p.MonthlyPaymentRent.TotalPayment))
                 .ForMember(p => p.Username, opt => opt.MapFrom(p => p.User.Nickname ?? p.User.UserName));
+
+            CreateMap<MonthlyPaymentRent, OverdueMontlyRentsListingModel>()
+                .ForMember(mp => mp.MonthsOverdue, opt => opt.MapFrom(mp => DateTime.UtcNow.Month - mp.DeadLine.Month))
+                .ForMember(mp => mp.ParkingSlotsQty, opt => opt.MapFrom(mp => mp.RentAgreement.ParkingSlots.Sum(x => x.Quantity)))
+                .ForMember(mp=>mp.PropertyRentsNames, opt=>opt.MapFrom(mp=>mp.RentAgreement.PropertyRents.Select(x=>x.Property.Name+"/"+x.Property.Area)))
+                .ForMember(mp=>mp.ClientName, opt=>opt.MapFrom(mp=>mp.RentAgreement.Client.Name));
+
+            CreateMap<MonthlyPaymentConsumable, OverdueMonthlyConsumablesListingModel>()
+                .ForMember(mp => mp.PropertyRentsNames, opt => opt.MapFrom(mp => mp.RentAgreement.PropertyRents.Select(x => x.Property.Name + "/" + x.Property.Area)))
+                .ForMember(mp => mp.ClientName, opt => opt.MapFrom(mp => mp.RentAgreement.Client.Name));
+
+
+
+
         }
     }
 }

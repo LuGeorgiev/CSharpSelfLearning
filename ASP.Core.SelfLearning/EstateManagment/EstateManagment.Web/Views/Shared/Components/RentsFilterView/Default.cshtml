@@ -1,6 +1,6 @@
 ﻿@model FilterRentsFormModel
 
-<div class="panel panel-info">
+<div class="panel panel-warning">
     <div class="panel-heading">Филтриране по дата, клиент, отдаван имот или област от паркинга:</div>
     <div class="panel-body">
         <form method="get" class="form-inline">
@@ -41,7 +41,7 @@
                 </div>
             </div>
 
-                <button asp-area="Payments" asp-action="FilterRents" asp-controller="Payments" type="submit" class=" btn btn-info ">Филтър</button>
+                <button asp-area="Payments" asp-action="FilterRents" asp-controller="Payments" type="submit" class=" btn btn-info "><strong>Филтър</strong></button>
                
 
         </form>

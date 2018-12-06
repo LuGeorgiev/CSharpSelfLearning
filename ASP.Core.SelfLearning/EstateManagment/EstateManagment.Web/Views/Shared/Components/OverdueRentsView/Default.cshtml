@@ -1,0 +1,41 @@
+﻿@model IEnumerable<OverdueMontlyRentsListingModel>
+@if (Model.Any())
+{    
+    <table class="table table-condensed table-striped table-hover">
+        <thead class="info">
+            <tr>
+                <th scope="col">Клиент</th>
+                <th scope="col">Краен Срок</th>
+                <th scope="col">Просрочени месеци</th>
+                <th scope="col">Месечен наем</th>
+                <th scope="col">ДДС</th>
+                <th scope="col">Всичко</th>
+                <th scope="col">Имоти по договора</th>
+                <th scope="col">Брой паркоместа</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var rent in Model)
+            {
+                <tr>
+                    <td><a asp-controller="Clients" asp-action="DetailsByName" asp-route-name="@rent.ClientName">@rent.ClientName</a></td>
+                    <td>@rent.DeadLine.ToShortDateString()</td>
+                    <td>@rent.MonthsOverdue</td>
+                    <td>@rent.TotalPayment ,лв</td>
+                    <td>@(rent.ApplyVAT == true ? "Включено" : "Без")</td>
+                    <td>@((rent.TotalPayment*rent.MonthsOverdue).ToString("F2")), лв</td>
+                    <td>@string.Join(", ",rent.PropertyRentsNames)</td>
+                    <td>@rent.ParkingSlotsQty</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-success">
+        <h3>В момента няма просрочени плащания по наеми</h3>
+    </div>
+}
+
+

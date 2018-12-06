@@ -82,6 +82,8 @@ namespace EstateManagment.Web
             services.AddScoped<IMonthlyRentsService, MonthlyRentsService>();
             services.AddScoped<IPaymentsService, PaymentsService>();
             services.AddScoped<IMonthlyConsumablesService, MonthlyConsumablesService>();
+            services.AddScoped<IMonthlyPaymentRentsService, MonthlyPaymentRentsService>();
+            services.AddScoped<IMontlyPaymentConsumablesService, MontlyPaymentConsumablesService>();
 
             services.AddSingleton<IEmailSender, SendGridEmailSender>();
             services.Configure<SendGridOptions>(this.Configuration.GetSection("SendGridSettings"));
