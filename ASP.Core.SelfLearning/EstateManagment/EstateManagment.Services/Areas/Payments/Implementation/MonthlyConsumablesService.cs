@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using EstateManagment.Data;
 using EstateManagment.Data.Models;
+using EstateManagment.Services.Areas.Payments.Models;
 using EstateManagment.Services.Areas.Payments.Models.MonthlyConsumables;
 using EstateManagment.Services.Implementation;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -121,6 +123,16 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
             }
 
             return true;
+        }
+
+        public async Task<IEnumerable<OverdueMonthlyConsumablesListingModel>> AllOverduConsumablesAsync()
+        {
+            var overduConsumables = await this.Db.MonthlyPaymentConsumables
+                .Where(x => x.PaymentId == null && x.DeadLine < DateTime.UtcNow)
+                .ToListAsync();
+
+            var model = Mapper.Map<IEnumerable<OverdueMonthlyConsumablesListingModel>>(overduConsumables);
+            return model;
         }
     }
 }

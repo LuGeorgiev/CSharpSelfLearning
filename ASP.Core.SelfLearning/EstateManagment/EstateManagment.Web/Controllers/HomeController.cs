@@ -5,14 +5,23 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using EstateManagment.Web.Models;
+using EstateManagment.Services.Areas.Payments;
 
 namespace EstateManagment.Web.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly IPaymentsService payments;
+
+        public HomeController(IPaymentsService payments)
         {
-            return View();
+            this.payments = payments;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var model = await payments.MonthIncomeStatistic(DateTime.Today.AddMonths(-1));
+            return View(model);
         }
 
         public IActionResult About()

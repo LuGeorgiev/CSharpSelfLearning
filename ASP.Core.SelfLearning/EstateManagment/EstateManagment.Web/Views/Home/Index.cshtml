@@ -1,68 +1,136 @@
-﻿@{
+﻿@model MonthlyPaymentStatisticView
+@{
     ViewData["Title"] = "Добре дошли в старницата подпомагаща управлението на вашите имоти";
 }
 <h3>@ViewData["Title"]</h3>
 
+@if (User.IsInRole("Accountant") || User.IsInRole("Manager"))
+{
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-danger">
+            <div class="panel-heading" role="tab" id="headingFour">
+                <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                        Просрочени задължения от наеми и паркинг:
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseFour" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFour">
+                @await Component.InvokeAsync("OverdueRentsView", new { })
+            </div>
+        </div>
+        <div class="panel panel-danger">
+            <div class="panel-heading" role="tab" id="headingThree">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Просрочени задължения на сметки за вода и ток:
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                <div class="panel-body">
+                    @await Component.InvokeAsync("OverdueConsumablesView", new { })
 
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Филтър на <strong>плащанията</strong> на отдаваните под наем имоти и паркоместа:
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                @await Component.InvokeAsync("RentsFilterView", new { })
 
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingTwo">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Филтър на <strong>плащанията</strong> на сметки за вода и ток:
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
 
+                @await Component.InvokeAsync("ConsumablesFilterView", new { })
 
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-    <div class="panel panel-danger">
-        <div class="panel-heading" role="tab" id="headingFour">
-            <h4 class="panel-title">
-                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
-                    Просрочени плащания от наеми и паркинг
-                </a>
-            </h4>
+            </div>
         </div>
-        <div id="collapseFour" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFour">            
-            @await Component.InvokeAsync("OverdueRentsView", new { })           
-        </div>
-    </div>
-    <div class="panel panel-default">
-        <div class="panel-heading" role="tab" id="headingOne">
-            <h4 class="panel-title">
-                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    Collapsible Group Item #1
-                </a>
-            </h4>
-        </div>
-        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-            @*<div class="panel-body">*@
-            @await Component.InvokeAsync("RentsFilterView", new { })
-            @*</div>*@
-        </div>
-    </div>
-    <div class="panel panel-default">
-        <div class="panel-heading" role="tab" id="headingTwo">
-            <h4 class="panel-title">
-                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                    Collapsible Group Item #2
-                </a>
-            </h4>
-        </div>
-        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingFive">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                        Статистика на приходите от предишни месец. Предишният е по подразбиране!
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
 
-            @await Component.InvokeAsync("ConsumablesFilterView", new { })
+                <div class="row">
+                    <div class="col-md-3 col-lg-3">
+                        <input asp-for="@Model.MonthToView" name="month" class="form-control col-md-4 col-lg-4" id="month" />
+                    </div>
+                    <div>
+                        <button value="Sent date" class="btn btn-info" id="monthBtn">Изберете месец</button>
+                    </div>
+                </div>
+                <div class="text-center"><span id="viewMonth"></span></div>
+                <div class="col-lg-2 col-md-2">Приходи от имоти</div>
+                <div class="col-lg-2 col-md-2" id="totalRent">@Model.TotalRentPayment</div>
+                <div class="col-lg-2 col-md-2">В борй</div>
+                <div class="col-lg-2 col-md-2" id="cashRent">@Model.RentInCash</div>
+                <div class="col-lg-2 col-md-2">ДДС</div>
+                <div class="col-lg-2 col-md-2" id="vat">@Model.VAT.ToString("F2")</div>
 
-        </div>
-    </div>
-    <div class="panel panel-danger">
-        <div class="panel-heading" role="tab" id="headingThree">
-            <h4 class="panel-title">
-                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                    Collapsible Group Item #3
-                </a>
-            </h4>
-        </div>
-        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-            <div class="panel-body">
-                @await Component.InvokeAsync("OverdueConsumablesView", new { })
+                <div class="col-lg-2 col-md-2">Приходи от консумативи</div>
+                <div class="col-lg-2 col-md-2" id="consum">@Model.TotalConsumablesPayment</div>
+                <div class="col-lg-2 col-md-2">В брой</div>
+                <div class="col-lg-2 col-md-2" id="cashConsum">@Model.ConsumablesInCash</div>
+
+                <div class="col-lg-2 col-md-2" id="frontPark">@Model.IncomeFronParking</div>
+                <div class="col-lg-2 col-md-2"></div>
+
+                <div class="col-lg-2 col-md-2" id="backPark">@Model.IncomeBackParking</div>
+                <div class="col-lg-2 col-md-2"></div>
+
+                <div class="col-lg-2 col-md-2" id="noPark">@Model.IncomeNoReservedParking</div>
 
             </div>
         </div>
     </div>
-</div>
+}
+else
+{
+    <div><h4>За достъп до пълната функционалност трябва да се регистрирате и да се обърнете към администратора на адрес: lubomir_78@abv.bg ,за да Ви бъде дадено съответното ниво на достъп! </h4></div>
+}
+@section Scripts{
 
+    <script>
+        $("#monthBtn").on('click', function () {
+            var month = $("#month").val();
+            $.ajax({
+                type: "GET",
+                url: "/Payments/Payments/MonthlyStatistic",
+                data: { month: month },
+                success: function (model) {
+                    console.log(model);
+                    $("#totalRent").html(model.totalRentPayment);
+                    $("#cashRent").html(model.rentInCash);
+                    $("#vat").html(model.vat);
+                    $("#consum").html(model.totalConsumablesPayment);
+                    $("#cashConsum").html(model.consumablesInCash);
+                    $("#frontPark").html(model.incomeFronParking);
+                    $("#backPark").html(model.incomeBackParking);
+                    $("#noPark").html(model.incomeNoReservedParking);
+                    $("#viewMonth").html("Дата " + model.monthToView.substr(10));
+                }
+            });
+        });
+    </script>
+}
 

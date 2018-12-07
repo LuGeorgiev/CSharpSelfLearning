@@ -1,4 +1,5 @@
 ﻿using EstateManagment.Services;
+using EstateManagment.Services.Areas.Payments;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,9 @@ namespace EstateManagment.Web.ViewComponents
     [ViewComponent(Name = "OverdueConsumablesView")]
     public class OverdueConsumablesView : ViewComponent
     {
-        private readonly IMontlyPaymentConsumablesService consumables;
+        private readonly IMonthlyConsumablesService consumables;
 
-        public OverdueConsumablesView(IMontlyPaymentConsumablesService consumables)
+        public OverdueConsumablesView(IMonthlyConsumablesService consumables)
         {
             this.consumables = consumables;
         }

@@ -1,4 +1,5 @@
-﻿using EstateManagment.Services.Areas.Payments.Models.MonthlyConsumables;
+﻿using EstateManagment.Services.Areas.Payments.Models;
+using EstateManagment.Services.Areas.Payments.Models.MonthlyConsumables;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -19,5 +20,8 @@ namespace EstateManagment.Services.Areas.Payments
         Task<bool> TerminateAsync(int id);
 
         Task<bool> EditAsync(EditMontlyConsumablesModel model);
+
+
+        Task<IEnumerable<OverdueMonthlyConsumablesListingModel>> AllOverduConsumablesAsync();
     }
 }

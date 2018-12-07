@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using EstateManagment.Data;
 using EstateManagment.Data.Models;
+using EstateManagment.Services.Areas.Payments.Models;
 using EstateManagment.Services.Areas.Payments.Models.MonthlyRents;
 using EstateManagment.Services.Implementation;
 using Microsoft.EntityFrameworkCore;
@@ -159,6 +160,15 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
                 return false;
             }
             return true;
+        }
+
+        public async Task<IEnumerable<OverdueMontlyRentsListingModel>> AllOverdueRentsAsync()
+        {
+            var overdueRents = await this.Db.MonthlyPaymentRents
+                .Where(x => x.IsPaid == false && x.DeadLine < DateTime.UtcNow)
+                .ToListAsync();
+            var model = this.Mapper.Map<IEnumerable<OverdueMontlyRentsListingModel>>(overdueRents);
+            return model;
         }
     }
 }

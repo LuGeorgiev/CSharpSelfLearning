@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using static EstateManagment.Data.DataConstants;
 
-namespace EstateManagment.Services.ServiceModels.MonthlyPaymentRentsService
+namespace EstateManagment.Services.Areas.Payments.Models.MonthlyRents
 {
     public class OverdueMontlyRentsListingModel
     {      

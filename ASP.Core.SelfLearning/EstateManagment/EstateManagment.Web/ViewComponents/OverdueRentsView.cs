@@ -1,4 +1,5 @@
 ﻿using EstateManagment.Services;
+using EstateManagment.Services.Areas.Payments;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,8 @@ namespace EstateManagment.Web.ViewComponents
     [ViewComponent(Name = "OverdueRentsView")]
     public class OverdueRentsView : ViewComponent
     {
-        private readonly IMonthlyPaymentRentsService rents;
-        public OverdueRentsView(IMonthlyPaymentRentsService rents)
+        private readonly IMonthlyRentsService rents;
+        public OverdueRentsView(IMonthlyRentsService rents)
         {
             this.rents = rents;
         }

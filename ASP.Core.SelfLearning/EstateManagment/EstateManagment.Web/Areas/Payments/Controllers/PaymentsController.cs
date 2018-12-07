@@ -104,5 +104,12 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
             return View(model);
         }
 
+        public async Task<MonthlyPaymentStatisticView> MonthlyStatistic(DateTime month)
+        {
+            var model = await this.payments.MonthIncomeStatistic(month);
+
+            return model;
+        }
+
     }
 }

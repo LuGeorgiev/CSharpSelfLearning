@@ -19,6 +19,9 @@ namespace EstateManagment.Services.Areas.Payments
         Task<IEnumerable<PaymentConsumablesListingModel>> AllConsumablePaymentsAsync();
 
         Task<FilterConsumablesViewModel> FilterConsumablesAsync(FilterConsumablesBindingModel model);
+
         Task<FilterRentsViewModel> FilterRentsAsync(FilterRentBindingModel bindModel);
+
+        Task<MonthlyPaymentStatisticView> MonthIncomeStatistic(DateTime month);
     }
 }
