@@ -65,7 +65,7 @@
             <div class="panel-heading" role="tab" id="headingFive">
                 <h4 class="panel-title">
                     <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                        Статистика на приходите от предишни месец. Предишният е по подразбиране!
+                        Статистика на приходите от предишни месец. Предишния е по подразбиране!
                     </a>
                 </h4>
             </div>
@@ -79,27 +79,39 @@
                         <button value="Sent date" class="btn btn-info" id="monthBtn">Изберете месец</button>
                     </div>
                 </div>
-                <div class="text-center"><span id="viewMonth"></span></div>
-                <div class="col-lg-2 col-md-2">Приходи от имоти</div>
-                <div class="col-lg-2 col-md-2" id="totalRent">@Model.TotalRentPayment</div>
-                <div class="col-lg-2 col-md-2">В борй</div>
-                <div class="col-lg-2 col-md-2" id="cashRent">@Model.RentInCash</div>
-                <div class="col-lg-2 col-md-2">ДДС</div>
-                <div class="col-lg-2 col-md-2" id="vat">@Model.VAT.ToString("F2")</div>
+                <div class="jumbotron">
+                    <div class="row">
 
-                <div class="col-lg-2 col-md-2">Приходи от консумативи</div>
-                <div class="col-lg-2 col-md-2" id="consum">@Model.TotalConsumablesPayment</div>
-                <div class="col-lg-2 col-md-2">В брой</div>
-                <div class="col-lg-2 col-md-2" id="cashConsum">@Model.ConsumablesInCash</div>
 
-                <div class="col-lg-2 col-md-2" id="frontPark">@Model.IncomeFronParking</div>
-                <div class="col-lg-2 col-md-2"></div>
+                        <div class="col-lg-3 col-md-3 text-right">Приходи от консумативи:</div>
+                        <div class="col-lg-1 col-md-1" id="consum">@Model.TotalConsumablesPayment</div>
 
-                <div class="col-lg-2 col-md-2" id="backPark">@Model.IncomeBackParking</div>
-                <div class="col-lg-2 col-md-2"></div>
+                        <div class="col-lg-3 col-md-3 text-right">В брой:</div>
+                        <div class="col-lg-1 col-md-1" id="cashConsum">@Model.ConsumablesInCash</div>
 
-                <div class="col-lg-2 col-md-2" id="noPark">@Model.IncomeNoReservedParking</div>
+                        <div class="col-lg-2 col-md-2 text-right">Месец:</div>
+                        <div class="col-lg-2 col-md-2" id="viewMonth">@Model.MonthToView.ToString("yyyy-MM")</div>
 
+                        <div class="col-lg-3 col-md-3 text-right">Приходи от имоти:</div>
+                        <div class="col-lg-1 col-md-1" id="totalRent">@Model.TotalRentPayment</div>
+
+                        <div class="col-lg-3 col-md-3 text-right">В борй:</div>
+                        <div class="col-lg-1 col-md-1" id="cashRent">@Model.RentInCash</div>
+
+                        <div class="col-lg-3 col-md-3 text-right">ДДС:</div>
+                        <div class="col-lg-1 col-md-1" id="vat">@Model.VAT.ToString("F2")</div>
+
+
+                        <div class="col-lg-3 col-md-3 text-right">Приходи преден паркинг:</div>
+                        <div class="col-lg-1 col-md-1" id="frontPark">@Model.IncomeFronParking</div>
+
+                        <div class="col-lg-3 col-md-3 text-right">Приходи заден паркинг:</div>
+                        <div class="col-lg-1 col-md-1" id="backPark">@Model.IncomeBackParking</div>
+
+                        <div class="col-lg-3 col-md-3 text-right">Приходи без запазени:</div>
+                        <div class="col-lg-1 col-md-1" id="noPark">@Model.IncomeNoReservedParking</div>
+                    </div>
+                </div>        
             </div>
         </div>
     </div>
@@ -108,6 +120,7 @@ else
 {
     <div><h4>За достъп до пълната функционалност трябва да се регистрирате и да се обърнете към администратора на адрес: lubomir_78@abv.bg ,за да Ви бъде дадено съответното ниво на достъп! </h4></div>
 }
+
 @section Scripts{
 
     <script>
@@ -118,16 +131,16 @@ else
                 url: "/Payments/Payments/MonthlyStatistic",
                 data: { month: month },
                 success: function (model) {
-                    console.log(model);
+                    //console.log(model);
                     $("#totalRent").html(model.totalRentPayment);
                     $("#cashRent").html(model.rentInCash);
-                    $("#vat").html(model.vat);
+                    $("#vat").html(model.vat.toFixed(2));
                     $("#consum").html(model.totalConsumablesPayment);
                     $("#cashConsum").html(model.consumablesInCash);
                     $("#frontPark").html(model.incomeFronParking);
                     $("#backPark").html(model.incomeBackParking);
                     $("#noPark").html(model.incomeNoReservedParking);
-                    $("#viewMonth").html("Дата " + model.monthToView.substr(10));
+                    $("#viewMonth").html(model.monthToView.substr(0,7));
                 }
             });
         });
