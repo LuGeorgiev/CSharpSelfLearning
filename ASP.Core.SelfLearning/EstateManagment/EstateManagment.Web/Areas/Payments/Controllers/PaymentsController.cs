@@ -13,6 +13,8 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
 {
     public class PaymentsController : PaymentsBaseController
     {
+        private const int PageSize = 20;
+
         private readonly UserManager<User> userManager;
         private readonly IPaymentsService payments;
         public PaymentsController(UserManager<User> userManager, IPaymentsService payments)
@@ -26,7 +28,7 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
             var model = await this.payments.AllConsumablePaymentsAsync();
 
             var pageNumber = page ?? 1;
-            var onePageFromModel = model.ToPagedList(pageNumber, 5);
+            var onePageFromModel = model.ToPagedList(pageNumber, PageSize);
 
             return View(onePageFromModel);
         }
@@ -35,7 +37,7 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
             var model = await this.payments.AllRentPaymentsAsync();
 
             var pageNumber = page ?? 1;
-            var onePageFromModel = model.ToPagedList(pageNumber, 5);
+            var onePageFromModel = model.ToPagedList(pageNumber, PageSize);
 
             return View(onePageFromModel);
         }

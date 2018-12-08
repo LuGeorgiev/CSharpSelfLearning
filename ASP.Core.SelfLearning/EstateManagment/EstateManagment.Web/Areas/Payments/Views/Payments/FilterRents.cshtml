@@ -48,7 +48,6 @@
                             <th scope="col">Платено на</th>
                             <th scope="col">Краен срок</th>
                             <th scope="col">Пълна сума</th>
-                            <th scope="col">ДДС</th>
                             <th scope="col">Начин</th>
                             <th scope="col">Отразено от</th>
                             <th scope="col">Клент</th>
@@ -63,7 +62,6 @@
                                 <td>@payment.PaidOn.ToShortDateString()</td>
                                 <td>@payment.DeadLine.ToShortDateString()</td>
                                 <td>@payment.TotalPayment.ToString("F2")</td>
-                                <td>@(payment.ApplyVAT == true ? "Включено" : "Без")</td>
                                 <td>@(payment.CashPayment == true ? "В брой" : "Банка")</td>
                                 <td>@payment.Username</td>
                                 <td>

@@ -34,14 +34,14 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(bool applyVat, decimal totalPayment, DateTime deadLine, int id)
+        public async Task<IActionResult> Create(decimal totalPayment, DateTime deadLine, int id)
         {
             if (totalPayment<0 )
             {
                 return this.View(id);
             }
 
-            bool isCreated = await this.monthlyRents.CreateAsync(id, totalPayment, deadLine, applyVat);
+            bool isCreated = await this.monthlyRents.CreateAsync(id, totalPayment, deadLine);
             if (!isCreated)
             {
                 return this.View(id);

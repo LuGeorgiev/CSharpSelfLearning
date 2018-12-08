@@ -30,7 +30,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+                    @*<li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>*@
                     @if (User.IsInRole(WebConstants.ManagerRole))
                     {
                         <li><a asp-area="" asp-controller="Companies" asp-action="Index">Фирми</a></li>

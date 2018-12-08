@@ -13,7 +13,7 @@ namespace EstateManagment.Services.Areas.Payments
 
         Task<IEnumerable<MonthlyRentListingModel>> AllNotPaidAsync(bool isPaid = false);
 
-        Task<bool> CreateAsync(int idRentAgreement, decimal totalPayment, DateTime deadLine, bool applyVat);
+        Task<bool> CreateAsync(int idRentAgreement, decimal totalPayment, DateTime deadLine);
 
         Task<MonthlyRentViewModel> GetByIdAsync(int id);
 

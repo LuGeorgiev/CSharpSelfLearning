@@ -17,9 +17,7 @@ namespace EstateManagment.Services.Areas.Payments.Models.MonthlyRents
         [Range(typeof(decimal), MinPayment, MaxPayment)]
         [Display(Name = DisplayTotalPayment)]
         public decimal TotalPayment { get; set; }
-        
-        [Display(Name = DisplayApplyVat)]
-        public bool ApplyVAT { get; set; }
+               
         
         [Required]
         public int RentAgreementId { get; set; }

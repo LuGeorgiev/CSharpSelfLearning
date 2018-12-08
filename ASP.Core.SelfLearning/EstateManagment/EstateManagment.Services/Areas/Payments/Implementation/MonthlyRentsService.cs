@@ -31,23 +31,20 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
             return notPaidModel;
         }
 
-        public async Task<bool> CreateAsync(int idRentAgreement, decimal totalPayment, DateTime deadLine, bool applyVat)
+        public async Task<bool> CreateAsync(int idRentAgreement, decimal totalPayment, DateTime deadLine)
         {
             var rentAgreement = await this.Db.FindAsync<RentAgreement>(idRentAgreement);
             if (rentAgreement==null)
             {
                 return false;
             }
-
-            if (applyVat==true)
-            {
-                totalPayment *= 1.20m;
-            }
+            //applying VAT
+            totalPayment *= 1.20m;            
 
             rentAgreement.MonthlyRents.Add(new MonthlyPaymentRent()
             {
                 DeadLine=deadLine,
-                ApplyVAT=applyVat,
+                ApplyVAT=true,
                 TotalPayment = totalPayment                 
             });
 

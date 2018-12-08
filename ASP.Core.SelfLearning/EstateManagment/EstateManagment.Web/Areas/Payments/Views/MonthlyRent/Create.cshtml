@@ -28,7 +28,7 @@
         <hr />
         <div asp-validation-summary="All" class="text-danger"></div>
         <div class="form-group">
-            <label asp-for="TotalPayment"></label>
+            <label asp-for="TotalPayment">Пълен месечен наем без ДДС</label>
             <input asp-for="TotalPayment" class="form-control" value="@Model.TotalPayment" />
             <span asp-validation-for="TotalPayment" class="text-danger"></span>
         </div>
@@ -36,11 +36,7 @@
             <label asp-for="DeadLine"></label>
             <input asp-for="DeadLine" class="form-control"/>
             <span asp-validation-for="DeadLine" class="text-danger"></span>
-        </div>
-        <div class="form-group ">
-            <label asp-for="ApplyVAT"></label>
-            <input asp-for="ApplyVAT" /> 
-        </div>
+        </div>        
         <input type="hidden" name="Id" value="@Model.RentAgreementId" />
         <button asp-action="Create" asp-controller="MonthlyRent" type="submit" class="btn btn-default btn-success">Създайте месечно плащане</button>
         <a href="javascript:window.history.back()" class="btn btn-default">Назад</a>

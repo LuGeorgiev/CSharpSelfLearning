@@ -8,7 +8,6 @@
                 <th scope="col">Краен Срок</th>
                 <th scope="col">Просрочени месеци</th>
                 <th scope="col">Месечен наем</th>
-                <th scope="col">ДДС</th>
                 <th scope="col">Всичко</th>
                 <th scope="col">Имоти по договора</th>
                 <th scope="col">Брой паркоместа</th>
@@ -22,7 +21,6 @@
                     <td>@rent.DeadLine.ToShortDateString()</td>
                     <td>@rent.MonthsOverdue</td>
                     <td>@rent.TotalPayment ,лв</td>
-                    <td>@(rent.ApplyVAT == true ? "Включено" : "Без")</td>
                     <td>@((rent.TotalPayment*rent.MonthsOverdue).ToString("F2")), лв</td>
                     <td>@string.Join(", ",rent.PropertyRentsNames)</td>
                     <td>@rent.ParkingSlotsQty</td>
