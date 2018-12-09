@@ -1,11 +1,9 @@
 ﻿using EstateManagment.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
+using EstateManagment.Web.Common.Extensions;
 using static EstateManagment.Web.WebConstants;
 
 namespace EstateManagment.Web.Controllers
@@ -26,7 +24,7 @@ namespace EstateManagment.Web.Controllers
             {
                 return this.BadRequest();
             }
-
+            TempData.AddSuccessMessage("Договорът беше изтрит успешно!");
             return this.RedirectToAction("Details", "Rents", new { id });
         }
         public async Task<IActionResult> Download(int id)

@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using EstateManagment.Services.Areas.Payments;
 using EstateManagment.Services.Areas.Payments.Models.MonthlyRents;
+using EstateManagment.Web.Common.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,13 +22,16 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
         public async Task<IActionResult> Index()
         {
             var model = await this.monthlyRents.AllNotPaidAsync();
-
             return View(model);
         }
 
         public async Task<IActionResult> Create(int id)
         {
             var monthlyRent = await this.monthlyRents.GetDetailsAsync(id);
+            if (monthlyRent==null)
+            {
+                return BadRequest();
+            }
             return View(monthlyRent);
         }
 
@@ -38,15 +40,18 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
         {
             if (totalPayment<0 )
             {
+                TempData.AddErrorMessage("Сумата не може да бъде по-малак от нула!");
                 return this.View(id);
             }
 
             bool isCreated = await this.monthlyRents.CreateAsync(id, totalPayment, deadLine);
             if (!isCreated)
             {
+                TempData.AddErrorMessage("Месечното задължение за наем не беше създадено!");
                 return this.View(id);
             }
-            
+
+            TempData.AddSuccessMessage("Месечното задължение беше успешно създадено!");
             return RedirectToAction("Index");
         }
                 
@@ -65,19 +70,18 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
         {
             if (!ModelState.IsValid)
             {
+                TempData.AddErrorMessage(WrongInput);
                 return this.View(model);
             }
 
             bool isEdited = await this.monthlyRents.EditAsync(model);
             if (!isEdited)
             {
-                //TODO TEEMP msg
-            }
-            else
-            {
-
+                TempData.AddErrorMessage("Корекцията на месечния наем не беше успешно!");
+                return RedirectToAction("Index");
             }
 
+            TempData.AddSuccessMessage("Корекцията на месечния наем беше успешно!");
             return RedirectToAction("Index");
         }
 
@@ -87,12 +91,10 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
             bool isTerminated = await this.monthlyRents.Terminate(id);
             if (isTerminated)
             {
-                //TODO
+                TempData.AddErrorMessage("Премахването на месечния наем не беше успешно!");
+                return RedirectToAction("Index");
             }
-            else
-            {
-
-            }
+            TempData.AddSuccessMessage("Премахването на месечния наем беше успешно!");
             return RedirectToAction("Index"); ;
         }
 

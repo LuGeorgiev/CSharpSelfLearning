@@ -6,8 +6,9 @@
         public const string ManagerRole = "Manager";
         public const string AccountantRole = "Accountant";
 
-        //public const string AdminRole = "c";
-        //public const string ManagerRole = "d";
-        //public const string AccountantRole = "f";
+        public const string TempDataSuccessMsgKey = "SuccessMessage";
+        public const string TempDataErrorMsgKey = "ErrorMessage";
+
+        public const string WrongInput = "Формата не е попълнена коректно!";
     }
 }

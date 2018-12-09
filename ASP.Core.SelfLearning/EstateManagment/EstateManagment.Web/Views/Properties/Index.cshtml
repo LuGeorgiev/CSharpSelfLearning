@@ -11,15 +11,16 @@
         <h4>
             Фирма собственик: @company.CompanyName
             <a asp-action="Create" asp-route-companyId="@company.CompanyId" class="btn btn-success "> Нов имот</a>
+            <a href="javascript:window.history.back()" class="btn btn-default">Назад</a>
         </h4>
         <table class="table table-condensed table-striped table-hover">
             <thead class="info">
                 <tr>
-                    <th scope="col">Имот</th>
-                    <th scope="col">Адрес</th>
-                    <th scope="col">Описание</th>
-                    <th scope="col">Площ кв.м.</th>
-                    <th scope="col" class="pull-right">Действие</th>
+                    <th scope="col" class="col-lg-2 col-md-2">Имот</th>
+                    <th scope="col" class="col-lg-3 col-md-3">Адрес</th>
+                    <th scope="col" class="col-lg-5 col-md-5">Описание</th>
+                    <th scope="col" class="col-lg-1 col-md-1">Площ кв.м.</th>
+                    <th scope="col" class=" col-lg-1 col-md-1 text-center">Действие</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,7 +34,6 @@
                         <td class="pull-right">
                             @*<a asp-controller="Properties" asp-action="Deactivate" asp-route-id="@property.Id" class="btn btn-danger">Неактивен</a>*@
                             <a asp-controller="Properties" asp-action="Edit" asp-route-id="@property.Id" class="btn btn-info ">Редактирай</a>
-                            <a href="javascript:window.history.back()" class="btn btn-default">Назад</a>
                         </td>
                     </tr>
                 }

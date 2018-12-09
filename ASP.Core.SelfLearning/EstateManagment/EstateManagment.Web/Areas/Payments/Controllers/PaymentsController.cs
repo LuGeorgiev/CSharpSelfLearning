@@ -4,10 +4,12 @@ using EstateManagment.Data.Models;
 using EstateManagment.Services.Areas.Payments;
 using EstateManagment.Services.Areas.Payments.Models.MonthlyRents;
 using EstateManagment.Services.Areas.Payments.Models.Payments;
+using EstateManagment.Web.Common.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using X.PagedList;
+
+using static EstateManagment.Web.WebConstants;
 
 namespace EstateManagment.Web.Areas.Payments.Controllers
 {
@@ -17,6 +19,7 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
 
         private readonly UserManager<User> userManager;
         private readonly IPaymentsService payments;
+
         public PaymentsController(UserManager<User> userManager, IPaymentsService payments)
         {
             this.userManager = userManager;
@@ -32,6 +35,7 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
 
             return View(onePageFromModel);
         }
+
         public  async Task<IActionResult> IndexRents(int? page)
         {
             var model = await this.payments.AllRentPaymentsAsync();
@@ -48,7 +52,7 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
             var madeByUser = await this.userManager.GetUserAsync(this.User);
             if (!ModelState.IsValid)
             {
-                //ToDO Temp data faliour
+                TempData.AddErrorMessage(WrongInput);
                 return RedirectToAction("Index", "MonthlyRent");
             }
 
@@ -56,15 +60,16 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
 
             if (!successfulPayment.Value)
             {
-                //ToDO Temp data faliour   
+                TempData.AddErrorMessage("Плащането на наем не беше успешно!");
                 return RedirectToAction("Index", "MonthlyRent");
             }
             if (successfulPayment==null)
             {
-                //TODO Temp Data NEXT MONTH WAS NOT CREATED
+                TempData.AddErrorMessage("Плащането на наема БЕШЕ успешно, но прехвърляното за следващ месец се провали!");
                 return RedirectToAction("Index", "MonthlyRent");
             }
 
+            TempData.AddSuccessMessage("Плащането на наем беше успешно!");
             return RedirectToAction("Index", "MonthlyRent");
         }
 
@@ -72,15 +77,14 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
         public async Task<IActionResult> PayConsumables(int id, bool isCash, DateTime paidOn)
         {
             var madeByUser = await this.userManager.GetUserAsync(this.User);
-            var successfulPayment = await this.payments.MakeConsumablesPaymentAsync(id, isCash,paidOn, madeByUser.Id);
-
+            var successfulPayment = await this.payments.MakeConsumablesPaymentAsync(id, isCash, paidOn, madeByUser.Id);
             if (!successfulPayment)
             {
-                //ToDO Temp data faliour   
+                TempData.AddErrorMessage("Плащането на консумативите не беше успешно!");
                 return RedirectToAction("Index", "MonthlyConsumables");
             }
 
-            //TODO Success
+            TempData.AddSuccessMessage("Плащането на консумативите беше успешно!");
             return RedirectToAction("Index", "MonthlyConsumables");
         }
 
@@ -88,6 +92,7 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
         {
             if (!ModelState.IsValid)
             {
+                TempData.AddErrorMessage(WrongInput);
                 return RedirectToAction("IndexConsumables");
             }
 
@@ -99,6 +104,7 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
         {
             if (!ModelState.IsValid)
             {
+                TempData.AddErrorMessage(WrongInput);
                 return RedirectToAction("IndexRents");
             }
 

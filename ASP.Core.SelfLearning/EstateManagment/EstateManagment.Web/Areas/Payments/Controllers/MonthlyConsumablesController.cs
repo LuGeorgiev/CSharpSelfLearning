@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using EstateManagment.Services.Areas.Payments;
 using EstateManagment.Services.Areas.Payments.Models.MonthlyConsumables;
+using EstateManagment.Web.Common.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -38,39 +39,24 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
         {
             if (!ModelState.IsValid)
             {
+                TempData.AddErrorMessage(WrongInput);
                 return this.View(model);
             }
 
             var isCreated = await this.consumables.CreateMonthlyConsumable(model);
             if (!isCreated)
             {
-                return this.View(model);
+                return this.BadRequest();
             }
-
+            TempData.AddSuccessMessage("Успешно въведохте консумативи ");
             return RedirectToAction("Index");
         }
-
-        //public async Task<IActionResult> Pay(int id, bool isCash)
-        //{
-        //    return View();
-        //}
-
+      
         [Authorize(Roles = ManagerRole)]
         public async Task<IActionResult> Terminate(int id)
         {
             var model = await this.consumables.GetByIdAsync(id);
             if (model==null)
-            {
-                return this.BadRequest();
-            }
-            return View(model);
-        }
-
-        [Authorize(Roles = ManagerRole)]
-        public async Task<IActionResult> Edit(int id)
-        {
-            var model = await this.consumables.GetByIdAsync(id);
-            if (model == null)
             {
                 return this.BadRequest();
             }
@@ -88,10 +74,23 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
             var isTerminated = await this.consumables.TerminateAsync(id);
             if (!isTerminated)
             {
-                return this.BadRequest();
+                TempData.AddErrorMessage("Консумативите не бяха премахнатаи!");
+                return RedirectToAction("Index");
             }
 
+            TempData.AddErrorMessage("Консумативите бяха успешно премахнатаи!");
             return RedirectToAction("Index");
+        }
+
+        [Authorize(Roles = ManagerRole)]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var model = await this.consumables.GetByIdAsync(id);
+            if (model == null)
+            {
+                return this.BadRequest();
+            }
+            return View(model);
         }
 
         [Authorize(Roles = ManagerRole)]
@@ -100,14 +99,16 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
         {            
             if (!ModelState.IsValid)
             {
+                TempData.AddErrorMessage(WrongInput);
                 return this.View(model);
             }
             var isEdited = await this.consumables.EditAsync(model);
             if (!isEdited)
             {
-                return this.View(model);
+                TempData.AddErrorMessage("Редакцията не беше успешна");
+                return RedirectToAction("Index");
             }
-
+            TempData.AddErrorMessage("Редакцията беше успешна");
             return RedirectToAction("Index");
         }
     }

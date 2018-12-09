@@ -3,10 +3,10 @@ using EstateManagment.Services.ServiceModels.Companies;
 using EstateManagment.Web.Models.Companies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+
+using EstateManagment.Web.Common.Extensions;
+using static EstateManagment.Web.WebConstants;
 
 namespace EstateManagment.Web.Controllers
 {
@@ -28,6 +28,7 @@ namespace EstateManagment.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
+                TempData.AddErrorMessage(WrongInput);
                 return this.View(model);
             }
 
@@ -36,11 +37,12 @@ namespace EstateManagment.Web.Controllers
 
             if (!wasSuccessfullyCreated)
             {
+                TempData.AddErrorMessage(WrongInput);
                 return this.View(model);
             }
 
             var formModel = await GetCompaniesAsync();
-
+            TempData.AddSuccessMessage("Компанията беше добавена успешно!");
             return View("Index", formModel);
         }
 
@@ -69,6 +71,7 @@ namespace EstateManagment.Web.Controllers
                 return BadRequest();
             }
 
+            TempData.AddSuccessMessage("Компанията беше редактирана успешно!");
             return Redirect("/Companies/Index");
         }
 

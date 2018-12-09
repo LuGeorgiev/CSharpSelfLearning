@@ -51,16 +51,7 @@
                                 <li role="separator" class="divider"></li>
                                 <li><a asp-area="Payments" asp-controller="Payments" asp-action="IndexConsumables">Справки Консумативи</a></li>
                             </ul>
-                        </li>
-                        @*<div class="dropdown dropdown-toggle" type="button" data-toggle="dropdown">
-                            Приходи
-                            <span class="caret"></span>
-                            <ul class="dropdown-menu">
-                                <li><a asp-area="Payments" asp-controller="MonthlyRent" asp-action="Index">Наеми</a></li>
-                                <li><a asp-area="Payments" asp-controller="MonthlyConsumables" asp-action="Index">Консумативи</a></li>
-                                <li><a asp-area="Payments" asp-controller="Payments" asp-action="Index">Плащания</a></li>
-                            </ul>
-                        </div>*@
+                        </li>                       
                     }
                     @if (User.IsInRole(WebConstants.AdminRole))
                     {
@@ -75,6 +66,19 @@
     <partial name="_CookieConsentPartial" />
 
     <div class="container body-content">
+        @if (TempData.ContainsKey(WebConstants.TempDataSuccessMsgKey))
+        {
+            <div class="alert alert-success">
+                @TempData[WebConstants.TempDataSuccessMsgKey]
+            </div>
+        }
+
+        @if (TempData.ContainsKey(WebConstants.TempDataErrorMsgKey))
+        {
+            <div class="alert alert-danger">
+                @TempData[WebConstants.TempDataErrorMsgKey]
+            </div>
+        }
         @RenderBody()
         <hr />
         <footer>

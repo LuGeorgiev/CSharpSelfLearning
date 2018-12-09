@@ -82,24 +82,29 @@ namespace EstateManagment.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
+                TempData.AddErrorMessage(WrongInput);
                 return this.View(model);
             }
 
             bool isCreated = await this.rents.CreateAsync(model);
             if (!isCreated)
             {
+                TempData.AddErrorMessage(WrongInput);
                 return this.RedirectToAction("Index");
             }
 
+            TempData.AddSuccessMessage("Договорът за наем беше успешно създаден!");
             return this.RedirectToAction("Index");
         }
 
+
+        [Authorize(Roles = ManagerRole)]
         public async Task<IActionResult> Terminate(int id)
         {
             var model = await this.rents.GetDetailsAsync(id);
             if (model==null)
             {
-                return Redirect("/Rents/Index");
+                return BadRequest();
             }
 
             return View(model);
@@ -113,7 +118,7 @@ namespace EstateManagment.Web.Controllers
             {
                 return this.BadRequest();
             }
-
+            TempData.AddSuccessMessage("Добоворът беше успешно изтрит!");
             return Redirect("/Rents/Index");
         }
 
@@ -138,7 +143,7 @@ namespace EstateManagment.Web.Controllers
             {
                 return this.BadRequest();
             }
-
+            TempData.AddSuccessMessage("Добоворът беше успешно редактиран!");
             return Redirect("/Rents/Index");
         }
 
@@ -146,17 +151,18 @@ namespace EstateManagment.Web.Controllers
         [Authorize(Roles = ManagerRole)]
         public async Task<IActionResult> UploadContract(int id, IFormFile contract)
         {
-            if (!contract.FileName.EndsWith(".zip")||contract.Length>ContractsFileMaxSize)
+            if (!contract.FileName.EndsWith(".zip")||contract.Length>ContractsFileMaxSize ||contract.Length==0)
             {
                 return RedirectToAction(nameof(Details), new { id });
             }
             var fileContent = await contract.ToByteArrayAsync();
+          
             bool isUloaded = await this.rents.UploadContractAsync(fileContent, id);
             if (!isUloaded)
             {
                 return BadRequest();
             }
-
+            TempData.AddSuccessMessage("Договорът беше качен успешно!");
             return Redirect("/Rents/Index");
         }
     }

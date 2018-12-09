@@ -3,10 +3,10 @@ using EstateManagment.Services;
 using EstateManagment.Web.Models.Properties;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+
+using EstateManagment.Web.Common.Extensions;
+using static EstateManagment.Web.WebConstants;
 
 namespace EstateManagment.Web.Controllers
 {
@@ -48,6 +48,7 @@ namespace EstateManagment.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
+                TempData.AddErrorMessage(WrongInput);
                 return this.Redirect("/Properties/Index");
             }
 
@@ -64,7 +65,7 @@ namespace EstateManagment.Web.Controllers
                 return BadRequest();
             }
 
-
+            TempData.AddSuccessMessage("Новият имот беше успешно създаден!");
             return this.Redirect("/Properties/Index");
         }
                
@@ -88,7 +89,7 @@ namespace EstateManagment.Web.Controllers
             {
                 return BadRequest();
             }
-
+            TempData.AddSuccessMessage("Имотът беше успешно редактиран!");
             return this.Redirect("/Properties/Index");
         }
     }

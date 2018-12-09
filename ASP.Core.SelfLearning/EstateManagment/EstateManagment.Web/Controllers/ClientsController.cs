@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using EstateManagment.Services;
-using EstateManagment.Services.ServiceModels.Rents;
 using EstateManagment.Web.Models.Clients;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using EstateManagment.Web.Common.Extensions;
 
 using static EstateManagment.Web.WebConstants;
 
@@ -37,15 +37,18 @@ namespace EstateManagment.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
+                TempData.AddErrorMessage(WrongInput);
                 return View(model);
             }
             var result = await this.clients
                 .CreateAsync(model.Name, model.Address, model.Bulstat, model.EGN, model.AccountableName, model.ContactName, model.Telephone, model.Notes);
             if (!result)
             {
+                TempData.AddErrorMessage("Клиентът не беше създаден!");
                 return View(model);
             }
 
+            TempData.AddSuccessMessage("Клиентът беше създаден успешно!");
             return RedirectToAction("Index");
         }
 
@@ -55,6 +58,7 @@ namespace EstateManagment.Web.Controllers
             var model = await this.clients.GetAsync(id);
             if (model == null)
             {
+                TempData.AddErrorMessage(WrongInput);
                 return this.View(model);
             }
             return View(model);
@@ -66,6 +70,7 @@ namespace EstateManagment.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
+                TempData.AddErrorMessage(WrongInput);
                 return Redirect("/Clients/Index");
             }
 
@@ -85,6 +90,7 @@ namespace EstateManagment.Web.Controllers
                 return BadRequest();
             }
 
+            TempData.AddSuccessMessage("Корекцията беше успешна!");
             return Redirect("/Clients/Index");
         }
 
@@ -115,15 +121,15 @@ namespace EstateManagment.Web.Controllers
             return View(deletedClients);
         }
 
-        
+        [Authorize(Roles =ManagerRole)]
         public async Task<IActionResult> DoResurect(int id)
         {
             bool isResurected = await this.clients.Resurect(id);
             if (!isResurected)
             {
-                return this.RedirectToAction("Resurect");
+                return BadRequest();
             }
-
+            TempData.AddSuccessMessage("Клиентът беше успешно активиран отново!");
             return RedirectToAction("Index");
         }
 
