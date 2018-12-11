@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using EstateManagment.Data;
@@ -9,9 +8,7 @@ using EstateManagment.Data.Models;
 using EstateManagment.Services.Areas.Payments.Models.MonthlyRents;
 using EstateManagment.Services.Areas.Payments.Models.Payments;
 using EstateManagment.Services.Implementation;
-using EstateManagment.Services.ServiceModels.Rents;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using EstateManagment.Data.Models.Enums;
 
 namespace EstateManagment.Services.Areas.Payments.Implementation

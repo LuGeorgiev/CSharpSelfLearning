@@ -2,12 +2,10 @@
 using EstateManagment.Data;
 using EstateManagment.Data.Models;
 using EstateManagment.Services.ServiceModels.Clients;
-using EstateManagment.Services.ServiceModels.Rents;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace EstateManagment.Services.Implementation

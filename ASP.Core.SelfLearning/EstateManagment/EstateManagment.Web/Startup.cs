@@ -9,15 +9,10 @@ using EstateManagment.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using EstateManagment.Data.Models;
-using EstateManagment.Services.Implementation;
-using EstateManagment.Services;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using EstateManagment.Web.Areas.Identity.Services;
 using EstateManagment.Web.Common.Extensions;
-using Microsoft.AspNetCore.Authentication.Google;
 using AutoMapper;
-using EstateManagment.Services.Areas.Payments;
-using EstateManagment.Services.Areas.Payments.Implementation;
 
 namespace EstateManagment.Web
 {
@@ -70,18 +65,10 @@ namespace EstateManagment.Web
                 options.Lockout.MaxFailedAccessAttempts = 4;
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(20);
 
-                //options.SignIn.RequireConfirmedEmail = true;
-            });            
+                options.SignIn.RequireConfirmedEmail = true;
+            });           
 
-            services.AddScoped<ICompaniesService, CompaniesService>();
-            services.AddScoped<IUsersService, UsersService>();
-            services.AddScoped<IPropertiesService, PropertiesService>();
-            services.AddScoped<IClientsService, ClientsService>();
-            services.AddScoped<IRentsService, RentsService>();
-            services.AddScoped<IContractsService, ContractsService>();
-            services.AddScoped<IMonthlyRentsService, MonthlyRentsService>();
-            services.AddScoped<IPaymentsService, PaymentsService>();
-            services.AddScoped<IMonthlyConsumablesService, MonthlyConsumablesService>();
+            services.AddDomainService();
 
             services.AddSingleton<IEmailSender, SendGridEmailSender>();
             services.Configure<SendGridOptions>(this.Configuration.GetSection("SendGridSettings"));

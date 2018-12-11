@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+
 using static EstateManagment.Data.DataConstants;
 
 namespace EstateManagment.Services.ServiceModels.Clients

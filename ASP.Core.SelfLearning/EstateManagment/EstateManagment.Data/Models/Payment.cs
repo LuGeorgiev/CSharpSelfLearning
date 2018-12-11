@@ -1,8 +1,9 @@
 ﻿namespace EstateManagment.Data.Models
 {
-    using EstateManagment.Data.Models.ValidationAttributes;
+    using ValidationAttributes;
     using System;
     using System.ComponentModel.DataAnnotations;
+
     using static DataConstants;
 
     public class Payment

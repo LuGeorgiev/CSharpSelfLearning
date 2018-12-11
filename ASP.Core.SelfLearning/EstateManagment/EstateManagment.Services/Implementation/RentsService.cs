@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using EstateManagment.Data;
 using EstateManagment.Data.Models;
 using EstateManagment.Data.Models.Enums;
-using EstateManagment.Services.ServiceModels.Properties;
 using EstateManagment.Services.ServiceModels.Rents;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,8 +1,5 @@
 ﻿namespace EstateManagment.Data.Models
-{
-    using System.ComponentModel.DataAnnotations;
-    using static DataConstants;
-
+{ 
     public class PropertyRent
     {
         public int PropertyId { get; set; }

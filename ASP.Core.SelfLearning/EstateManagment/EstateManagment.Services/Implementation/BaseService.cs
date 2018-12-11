@@ -1,8 +1,5 @@
 ﻿using AutoMapper;
 using EstateManagment.Data;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace EstateManagment.Services.Implementation
 {

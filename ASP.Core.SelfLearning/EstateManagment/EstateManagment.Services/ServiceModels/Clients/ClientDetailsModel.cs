@@ -1,7 +1,5 @@
 ﻿using EstateManagment.Services.ServiceModels.Rents;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace EstateManagment.Services.ServiceModels.Clients
 {

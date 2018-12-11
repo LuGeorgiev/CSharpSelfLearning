@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using EstateManagment.Data;
 using EstateManagment.Data.Models;
-using EstateManagment.Services.Areas.Payments.Models;
 using EstateManagment.Services.Areas.Payments.Models.MonthlyConsumables;
 using EstateManagment.Services.Implementation;
 using Microsoft.EntityFrameworkCore;

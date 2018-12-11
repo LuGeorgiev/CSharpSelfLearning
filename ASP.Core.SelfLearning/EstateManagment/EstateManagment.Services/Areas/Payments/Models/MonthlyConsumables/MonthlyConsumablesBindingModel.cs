@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+
 using static EstateManagment.Data.DataConstants;
 
 namespace EstateManagment.Services.Areas.Payments.Models.MonthlyConsumables

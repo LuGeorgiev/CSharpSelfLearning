@@ -1,6 +1,7 @@
 ﻿using EstateManagment.Services.Common.ValidationAttributes;
 using System;
 using System.ComponentModel.DataAnnotations;
+
 using static EstateManagment.Data.DataConstants;
 
 namespace EstateManagment.Services.Areas.Payments.Models.MonthlyRents

@@ -1,8 +1,8 @@
 ﻿namespace EstateManagment.Data.Models
 {
     using Enums;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+
     using static DataConstants;
 
     public class ParkingSlot

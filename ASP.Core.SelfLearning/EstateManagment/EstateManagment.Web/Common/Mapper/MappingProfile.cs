@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using EstateManagment.Data.Models;
-using EstateManagment.Services.Areas.Payments.Models;
 using EstateManagment.Services.Areas.Payments.Models.MonthlyConsumables;
 using EstateManagment.Services.Areas.Payments.Models.MonthlyRents;
 using EstateManagment.Services.Areas.Payments.Models.Payments;

@@ -1,14 +1,12 @@
 ﻿using AutoMapper;
 using EstateManagment.Data;
 using EstateManagment.Data.Models;
-using EstateManagment.Services.Areas.Payments.Models;
 using EstateManagment.Services.Areas.Payments.Models.MonthlyRents;
 using EstateManagment.Services.Implementation;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace EstateManagment.Services.Areas.Payments.Implementation

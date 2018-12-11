@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using EstateManagment.Data;
 using EstateManagment.Data.Models;
-using EstateManagment.Services;
 using EstateManagment.Services.ServiceModels.Companies;
 using Microsoft.EntityFrameworkCore;
 using System;
