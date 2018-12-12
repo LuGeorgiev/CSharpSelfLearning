@@ -1,8 +1,7 @@
 ﻿using EstateManagment.Data.Models.Enums;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using static EstateManagment.Data.DataConstants;
+
+using static EstateManagment.Data.Models.DataConstants;
 
 namespace EstateManagment.Services.ServiceModels.Rents
 {

@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EstateManagment.Data.Model\EstateManagment.Data.Models.csproj" />
     <ProjectReference Include="..\EstateManagment.Data\EstateManagment.Data.csproj" />
   </ItemGroup>
 

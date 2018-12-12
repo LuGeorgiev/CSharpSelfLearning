@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
-using static EstateManagment.Data.DataConstants;
+using static EstateManagment.Data.Models.DataConstants;
 
 namespace EstateManagment.Web.Areas.Identity.Pages.Account
 {

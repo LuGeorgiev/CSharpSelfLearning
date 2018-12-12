@@ -1,6 +1,4 @@
-﻿using static EstateManagment.Data.DataConstants;
-
-namespace EstateManagment.Data.Models
+﻿namespace EstateManagment.Data.Models
 {
     using System;
     using System.Collections.Generic;

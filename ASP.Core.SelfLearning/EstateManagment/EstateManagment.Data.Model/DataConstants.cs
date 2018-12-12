@@ -1,4 +1,4 @@
-﻿namespace EstateManagment.Data
+﻿namespace EstateManagment.Data.Models
 {
     public static class DataConstants
     {

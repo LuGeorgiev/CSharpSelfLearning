@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Http;
 using EstateManagment.Web.Common.Extensions;
 
 using static EstateManagment.Web.WebConstants;
-using static EstateManagment.Data.DataConstants;
+using static EstateManagment.Data.Models.DataConstants;
 
 namespace EstateManagment.Web.Controllers
 {
