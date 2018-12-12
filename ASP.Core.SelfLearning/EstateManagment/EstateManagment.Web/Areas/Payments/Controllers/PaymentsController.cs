@@ -2,8 +2,8 @@
 using System.Threading.Tasks;
 using EstateManagment.Data.Models;
 using EstateManagment.Services.Areas.Payments;
-using EstateManagment.Services.Areas.Payments.Models.MonthlyRents;
-using EstateManagment.Services.Areas.Payments.Models.Payments;
+using EstateManagment.Services.Models.Areas.Payments.MonthlyRents;
+using EstateManagment.Services.Models.Areas.Payments.Payments;
 using EstateManagment.Web.Common.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

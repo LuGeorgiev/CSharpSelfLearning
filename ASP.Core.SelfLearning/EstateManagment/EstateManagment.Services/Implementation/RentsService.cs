@@ -6,7 +6,7 @@ using AutoMapper;
 using EstateManagment.Data;
 using EstateManagment.Data.Models;
 using EstateManagment.Data.Models.Enums;
-using EstateManagment.Services.ServiceModels.Rents;
+using EstateManagment.Services.Models.Rents;
 using Microsoft.EntityFrameworkCore;
 
 namespace EstateManagment.Services.Implementation

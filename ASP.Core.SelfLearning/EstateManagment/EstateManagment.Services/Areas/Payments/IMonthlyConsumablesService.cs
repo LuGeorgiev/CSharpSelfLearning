@@ -1,4 +1,4 @@
-﻿using EstateManagment.Services.Areas.Payments.Models.MonthlyConsumables;
+﻿using EstateManagment.Services.Models.Areas.Payments.MonthlyConsumables;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

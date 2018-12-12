@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using EstateManagment.Services.Areas.Payments;
-using EstateManagment.Services.Areas.Payments.Models.MonthlyConsumables;
+using EstateManagment.Services.Models.Areas.Payments.MonthlyConsumables;
 using EstateManagment.Web.Common.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

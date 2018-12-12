@@ -1,5 +1,5 @@
 ﻿using EstateManagment.Data;
-using EstateManagment.Services.ServiceModels.Contracts;
+using EstateManagment.Services.Models.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;

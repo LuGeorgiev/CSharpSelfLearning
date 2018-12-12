@@ -1,4 +1,4 @@
-﻿using EstateManagment.Services.ServiceModels.Companies;
+﻿using EstateManagment.Services.Models.Companies;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

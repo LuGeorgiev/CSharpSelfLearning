@@ -1,4 +1,4 @@
-﻿using EstateManagment.Services.Areas.Payments.Models.MonthlyRents;
+﻿using EstateManagment.Services.Models.Areas.Payments.MonthlyRents;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

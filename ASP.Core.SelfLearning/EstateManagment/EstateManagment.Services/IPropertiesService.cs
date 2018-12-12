@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using EstateManagment.Data.Models.Enums;
-using EstateManagment.Services.ServiceModels.Properties;
+using EstateManagment.Services.Models.Property;
 
 namespace EstateManagment.Services
 {

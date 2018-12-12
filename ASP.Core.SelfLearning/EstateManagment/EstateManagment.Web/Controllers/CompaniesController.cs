@@ -1,11 +1,12 @@
 ﻿using EstateManagment.Services;
-using EstateManagment.Services.ServiceModels.Companies;
 using EstateManagment.Web.Models.Companies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-
 using EstateManagment.Web.Common.Extensions;
+using EstateManagment.Services.Models.Companies;
+using System.Collections.Generic;
+
 using static EstateManagment.Web.WebConstants;
 
 namespace EstateManagment.Web.Controllers
@@ -77,7 +78,8 @@ namespace EstateManagment.Web.Controllers
 
         private async Task<CreateCompanyFormModel> GetCompaniesAsync()
         {
-            var companies = await this.companies.AllAsync();
+            IEnumerable<CompanyModel> companies = await this.companies.AllAsync();
+
             var formModel = new CreateCompanyFormModel
             {
                 Companies = companies

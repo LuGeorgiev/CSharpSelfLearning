@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EstateManagment.Data", "Est
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EstateManagment.Data.Models", "EstateManagment.Data.Model\EstateManagment.Data.Models.csproj", "{68099FB2-5C2E-456B-AF37-D12BFDA06928}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EstateManagment.Services.Models", "EstateManagment.Services.Models\EstateManagment.Services.Models.csproj", "{F16D661B-A9C3-4F8D-8CB3-9AA94259E1DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{68099FB2-5C2E-456B-AF37-D12BFDA06928}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68099FB2-5C2E-456B-AF37-D12BFDA06928}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68099FB2-5C2E-456B-AF37-D12BFDA06928}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F16D661B-A9C3-4F8D-8CB3-9AA94259E1DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F16D661B-A9C3-4F8D-8CB3-9AA94259E1DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F16D661B-A9C3-4F8D-8CB3-9AA94259E1DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F16D661B-A9C3-4F8D-8CB3-9AA94259E1DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

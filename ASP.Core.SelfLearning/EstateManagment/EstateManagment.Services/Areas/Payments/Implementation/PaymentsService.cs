@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 using AutoMapper;
 using EstateManagment.Data;
 using EstateManagment.Data.Models;
-using EstateManagment.Services.Areas.Payments.Models.MonthlyRents;
-using EstateManagment.Services.Areas.Payments.Models.Payments;
 using EstateManagment.Services.Implementation;
 using Microsoft.EntityFrameworkCore;
 using EstateManagment.Data.Models.Enums;
+using EstateManagment.Services.Models.Areas.Payments.Payments;
+using EstateManagment.Services.Models.Areas.Payments.MonthlyRents;
 
 namespace EstateManagment.Services.Areas.Payments.Implementation
 {

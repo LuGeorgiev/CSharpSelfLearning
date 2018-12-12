@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using EstateManagment.Data;
 using EstateManagment.Data.Models;
-using EstateManagment.Services.Areas.Payments.Models.MonthlyRents;
 using EstateManagment.Services.Implementation;
+using EstateManagment.Services.Models.Areas.Payments.MonthlyRents;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

@@ -1,9 +1,5 @@
-﻿using EstateManagment.Services;
-using EstateManagment.Services.Areas.Payments;
+﻿using EstateManagment.Services.Areas.Payments;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace EstateManagment.Web.ViewComponents

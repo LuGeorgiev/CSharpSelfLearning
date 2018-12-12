@@ -1,5 +1,5 @@
 ﻿using EstateManagment.Data.Models;
-using EstateManagment.Services.ServiceModels.Users;
+using EstateManagment.Services.Models.Users;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

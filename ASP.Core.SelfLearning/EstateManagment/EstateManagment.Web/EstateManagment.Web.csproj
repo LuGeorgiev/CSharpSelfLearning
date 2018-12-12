@@ -29,11 +29,11 @@
   <ItemGroup>
     <ProjectReference Include="..\EstateManagment.Data.Model\EstateManagment.Data.Models.csproj" />
     <ProjectReference Include="..\EstateManagment.Data\EstateManagment.Data.csproj" />
+    <ProjectReference Include="..\EstateManagment.Services.Models\EstateManagment.Services.Models.csproj" />
     <ProjectReference Include="..\EstateManagment.Services\EstateManagment.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Payments\Data\" />
     <Folder Include="wwwroot\PhantomJsRoot\" />
   </ItemGroup>

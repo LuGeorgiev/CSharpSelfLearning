@@ -1,4 +1,4 @@
-﻿using EstateManagment.Services.ServiceModels.Invoices;
+﻿using EstateManagment.Services.Models.Invoices;
 using System.Threading.Tasks;
 
 namespace EstateManagment.Services

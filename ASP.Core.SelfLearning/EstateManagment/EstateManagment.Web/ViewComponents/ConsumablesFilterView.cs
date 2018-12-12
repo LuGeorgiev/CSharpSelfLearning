@@ -1,5 +1,5 @@
 ﻿using EstateManagment.Services;
-using EstateManagment.Services.Areas.Payments.Models.Payments;
+using EstateManagment.Services.Models.Areas.Payments.Payments;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;

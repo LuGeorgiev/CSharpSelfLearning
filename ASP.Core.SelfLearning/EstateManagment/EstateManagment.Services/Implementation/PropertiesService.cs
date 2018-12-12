@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using EstateManagment.Data;
 using EstateManagment.Data.Models;
 using EstateManagment.Data.Models.Enums;
-using EstateManagment.Services.ServiceModels.Properties;
+using EstateManagment.Services.Models.Property;
 
 namespace EstateManagment.Services.Implementation
 {

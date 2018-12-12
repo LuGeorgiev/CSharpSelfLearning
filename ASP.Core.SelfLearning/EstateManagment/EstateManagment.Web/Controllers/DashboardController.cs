@@ -1,5 +1,5 @@
 ﻿using EstateManagment.Services;
-using EstateManagment.Services.ServiceModels.Invoices;
+using EstateManagment.Services.Models.Invoices;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 

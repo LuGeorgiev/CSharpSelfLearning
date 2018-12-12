@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using EstateManagment.Data;
 using EstateManagment.Data.Models;
-using EstateManagment.Services.ServiceModels.Users;
+using EstateManagment.Services.Models.Users;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

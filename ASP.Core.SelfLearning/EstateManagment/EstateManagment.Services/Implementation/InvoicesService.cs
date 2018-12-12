@@ -1,6 +1,6 @@
-﻿using System;
+﻿using EstateManagment.Services.Models.Invoices;
+using System;
 using System.Threading.Tasks;
-using EstateManagment.Services.ServiceModels.Invoices;
 
 namespace EstateManagment.Services.Implementation
 {
