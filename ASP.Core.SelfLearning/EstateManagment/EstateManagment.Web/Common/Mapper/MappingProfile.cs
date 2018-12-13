@@ -9,7 +9,6 @@ using EstateManagment.Services.Models.Rents;
 using EstateManagment.Services.Models.Users;
 using EstateManagment.Services.Models.Property;
 using EstateManagment.Web.Areas.Admin.Models.Users;
-using EstateManagment.Web.Models.Properties;
 using System;
 using System.Linq;
 

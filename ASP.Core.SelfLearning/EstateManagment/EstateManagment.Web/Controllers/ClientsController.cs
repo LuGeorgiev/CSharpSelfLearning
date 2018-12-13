@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using EstateManagment.Services;
-using EstateManagment.Web.Models.Clients;
+using EstateManagment.Services.Models.Clients;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using EstateManagment.Web.Common.Extensions;

@@ -17,6 +17,7 @@ namespace EstateManagment.Services
         Task<ClientDetailsModel> GetDetailsAsync(int id);
 
         Task<int> GetIdByNameAsync(string name);
+
         Task<bool> Resurect(int id);
     }
 }

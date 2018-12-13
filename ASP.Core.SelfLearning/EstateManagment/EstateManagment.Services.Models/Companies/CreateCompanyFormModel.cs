@@ -1,11 +1,9 @@
-﻿using EstateManagment.Services.Models.Companies;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 using static EstateManagment.Data.Models.DataConstants;
 
-namespace EstateManagment.Web.Models.Companies
+namespace EstateManagment.Services.Models.Companies
 {
     public class CreateCompanyFormModel
     {

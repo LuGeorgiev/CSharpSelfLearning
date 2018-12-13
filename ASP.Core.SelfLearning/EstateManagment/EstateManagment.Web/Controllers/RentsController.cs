@@ -5,13 +5,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using EstateManagment.Web.Models.Rents;
+using EstateManagment.Services.Models.Rents;
 using Microsoft.AspNetCore.Http;
 using EstateManagment.Web.Common.Extensions;
 
 using static EstateManagment.Web.WebConstants;
 using static EstateManagment.Data.Models.DataConstants;
-using EstateManagment.Services.Models.Rents;
 
 namespace EstateManagment.Web.Controllers
 {

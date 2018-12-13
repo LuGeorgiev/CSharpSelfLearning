@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 using static EstateManagment.Data.Models.DataConstants;
 
-namespace EstateManagment.Web.Models.Rents
+namespace EstateManagment.Services.Models.Rents
 {
     public class CreateRentFormViewModel
     {

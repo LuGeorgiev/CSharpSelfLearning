@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using EstateManagment.Services;
-using EstateManagment.Web.Models.Properties;
+using EstateManagment.Services.Models.Property;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;

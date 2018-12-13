@@ -2,7 +2,7 @@
 
 using static EstateManagment.Data.Models.DataConstants;
 
-namespace EstateManagment.Web.Models.Clients
+namespace EstateManagment.Services.Models.Clients
 {
     public class ClientBindingModel
     {

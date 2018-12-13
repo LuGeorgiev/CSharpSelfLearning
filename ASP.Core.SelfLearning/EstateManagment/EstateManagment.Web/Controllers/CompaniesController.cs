@@ -1,10 +1,9 @@
 ﻿using EstateManagment.Services;
-using EstateManagment.Web.Models.Companies;
+using EstateManagment.Services.Models.Companies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using EstateManagment.Web.Common.Extensions;
-using EstateManagment.Services.Models.Companies;
 using System.Collections.Generic;
 
 using static EstateManagment.Web.WebConstants;
