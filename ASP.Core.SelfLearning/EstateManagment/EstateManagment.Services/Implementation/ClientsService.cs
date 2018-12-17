@@ -32,15 +32,16 @@ namespace EstateManagment.Services.Implementation
         {
             var client = new Client()
             {
-                Name=name,
-                Address=address,
-                Bulstat=bulstat,
-                EGN=egn,
-                AccountableName=accountableName,
-                ContactName=contactName,
-                Telephone=telephone,
-                Notes=notes                 
+                Name = name,
+                Address = address,
+                Bulstat = bulstat,
+                EGN = egn,
+                AccountableName = accountableName,
+                ContactName = contactName,
+                Telephone = telephone,
+                Notes = notes
             };
+
 
             await this.Db.Clients.AddAsync(client);
             try
@@ -125,7 +126,7 @@ namespace EstateManagment.Services.Implementation
             return client.Id;
         }
 
-        public async Task<bool> Resurect(int id)
+        public async Task<bool> ResurectAsync(int id)
         {
             var client = await this.Db.FindAsync<Client>(id);
             if (client==null || client.IsDeleted==false)

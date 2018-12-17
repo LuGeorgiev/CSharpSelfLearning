@@ -43,16 +43,15 @@ namespace EstateManagment.Services.Implementation
             {
                 await this.Db.SaveChangesAsync();
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Console.WriteLine(e.Message);
                 return false;
             }
 
             return true;
         }
 
-        public async Task<bool> EditSync(int id, string name, string bulstat, string acoutableName, string address)
+        public async Task<bool> EditAsync(int id, string name, string bulstat, string acoutableName, string address)
         {
             var company = await this.Db.Companies
                 .FirstOrDefaultAsync(x => x.Id == id);

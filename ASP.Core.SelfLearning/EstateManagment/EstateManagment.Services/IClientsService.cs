@@ -18,6 +18,6 @@ namespace EstateManagment.Services
 
         Task<int> GetIdByNameAsync(string name);
 
-        Task<bool> Resurect(int id);
+        Task<bool> ResurectAsync(int id);
     }
 }

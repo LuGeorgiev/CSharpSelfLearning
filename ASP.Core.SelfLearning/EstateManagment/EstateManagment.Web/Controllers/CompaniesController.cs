@@ -65,7 +65,7 @@ namespace EstateManagment.Web.Controllers
                 return this.View(model.Id);
             }
 
-            var result = await this.companies.EditSync(model.Id, model.Name, model.Bulstat, model.AccountablePerson, model.Address);
+            var result = await this.companies.EditAsync(model.Id, model.Name, model.Bulstat, model.AccountablePerson, model.Address);
             if (!result)
             {
                 return BadRequest();

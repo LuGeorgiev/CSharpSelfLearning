@@ -12,6 +12,6 @@ namespace EstateManagment.Services
 
         Task<CompanyDetailsModel> GetAsync(int companyId);
 
-        Task<bool> EditSync(int id, string name, string bulstat, string acoutableName, string address);
+        Task<bool> EditAsync(int id, string name, string bulstat, string acoutableName, string address);
     }
 }

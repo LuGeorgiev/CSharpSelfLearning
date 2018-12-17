@@ -124,7 +124,7 @@ namespace EstateManagment.Web.Controllers
         [Authorize(Roles =ManagerRole)]
         public async Task<IActionResult> DoResurect(int id)
         {
-            bool isResurected = await this.clients.Resurect(id);
+            bool isResurected = await this.clients.ResurectAsync(id);
             if (!isResurected)
             {
                 return BadRequest();
