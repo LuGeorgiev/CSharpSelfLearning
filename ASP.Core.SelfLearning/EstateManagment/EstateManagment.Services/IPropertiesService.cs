@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using EstateManagment.Data.Models.Enums;
 using EstateManagment.Services.Models.Property;
 
 namespace EstateManagment.Services
 {
     public interface IPropertiesService
     {
-        Task<bool> CreateAsync(int companyId, string propertyName, string propertyAddress, int area, string description, PropertyType type);
+        Task<bool> CreateAsync(CreatePropertyModel model);
 
         Task<IEnumerable<PropertiesListingModel>> AllWithCompaniesAsync();
 
@@ -16,6 +15,7 @@ namespace EstateManagment.Services
         Task<bool> EditAsync(int id, string description, bool isActual);
 
         Task<IEnumerable<PropertyShortModel>> AllFreeAsync();
+
         Task<IEnumerable<PropertyShortModel>> AllActiveAsync();
     }
 }

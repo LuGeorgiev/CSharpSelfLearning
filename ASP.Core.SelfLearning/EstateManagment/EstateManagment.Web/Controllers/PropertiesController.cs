@@ -52,13 +52,7 @@ namespace EstateManagment.Web.Controllers
                 return this.Redirect("/Properties/Index");
             }
 
-            var isCreated = await this.properties.CreateAsync(
-                model.CompanyId,
-                model.PropertyName,
-                model.PropertyAddress,
-                model.Area,
-                model.Description,
-                model.Type);
+            var isCreated = await this.properties.CreateAsync(model);
 
             if (!isCreated)
             {

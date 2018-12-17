@@ -36,9 +36,12 @@ namespace EstateManagment.Services.Implementation
             .Where(x => x.IsActual == true &&
             !x.PropertyRents.Any(y => y.RentAgreement.EndDate == null) &&
              x.PropertyRents.All(y => y.RentAgreement.EndDate <= DateTime.UtcNow))
+            .OrderBy(x=>x.Name)
+            .ThenByDescending(x=>x.Area)
             .ToListAsync();
 
             var result = this.Mapper.Map<IEnumerable<PropertyShortModel>>(properties);
+
             return result;
         }
 
@@ -63,21 +66,21 @@ namespace EstateManagment.Services.Implementation
                 })
                 .ToListAsync();
 
-        public async Task<bool> CreateAsync(int companyId, string propertyName, string propertyAddress, int area, string description, PropertyType type)
+        public async Task<bool> CreateAsync(CreatePropertyModel model)
         {
             var company = await this.Db.Companies
-                .FirstOrDefaultAsync(x => x.Id == companyId);
+                .FirstOrDefaultAsync(x => x.Id == model.CompanyId);
             if (company == null)
             {
                 return false;
             }
             var property = new Property
             {
-                Address = propertyAddress,
-                Name = propertyName,
-                Area = area,
-                Description = description,
-                Type = type,
+                Address = model.PropertyAddress,
+                Name = model.PropertyName,
+                Area = model.Area,
+                Description = model.Description,
+                Type = model.Type,
                 CompanyId = company.Id
             };
 
