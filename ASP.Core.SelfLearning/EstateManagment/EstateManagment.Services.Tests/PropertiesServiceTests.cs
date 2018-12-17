@@ -18,7 +18,6 @@ namespace EstateManagment.Services.Tests
 {
     public class PropertiesServiceTests
     {
-
         [Fact]
         public async Task AllActiveAsync_SouldReturn_CollectionWithActiveProperties_FromDb()
         {
@@ -398,7 +397,6 @@ namespace EstateManagment.Services.Tests
                     && p.Type== PropertyType.Warehouse);            
         }
 
-
         [Fact]
         public async Task GetAsync_SouldReturn_Null_IfPropertyDoNotExist()
         {
@@ -429,6 +427,7 @@ namespace EstateManagment.Services.Tests
                 .Should()
                 .BeNull();
         }
+
         private EstateManagmentContext GetDatabase()
         {
             var dbOptions = new DbContextOptionsBuilder<EstateManagmentContext>()
