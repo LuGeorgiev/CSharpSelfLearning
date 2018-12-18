@@ -20,7 +20,7 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var model = await this.consumables.AllNotPaid();
+            var model = await this.consumables.AllNotPaidAsync();
             return View(model);
         }
 
@@ -43,7 +43,7 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
                 return this.View(model);
             }
 
-            var isCreated = await this.consumables.CreateMonthlyConsumable(model);
+            var isCreated = await this.consumables.CreateAsync(model);
             if (!isCreated)
             {
                 return this.BadRequest();

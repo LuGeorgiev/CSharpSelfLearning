@@ -11,7 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace EstateManagment.Services.Tests
+namespace EstateManagment.Services.Tests.Implementation
 {
     public class CompaniesServiceTests
     {

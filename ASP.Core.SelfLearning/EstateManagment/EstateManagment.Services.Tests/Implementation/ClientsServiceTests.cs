@@ -11,7 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace EstateManagment.Services.Tests
+namespace EstateManagment.Services.Tests.Implementation
 {
     public class ClientsServiceTests
     {
@@ -130,9 +130,9 @@ namespace EstateManagment.Services.Tests
             var db = this.GetDatabase();
             var mapper = this.GetMapper();
 
-
             var client = new Client
             {
+                Id=1,
                 Name = "Петров 96",
                 Address = "София Младост 6",
                 Bulstat = "BG063698652",
@@ -169,7 +169,6 @@ namespace EstateManagment.Services.Tests
                 .Match<Client>(x => x.AccountableName == "Иван NEW"
                     && x.Address == "София 6 NEW"
                     && x.Telephone == "0895 69 32 14");
-
 
         }
 

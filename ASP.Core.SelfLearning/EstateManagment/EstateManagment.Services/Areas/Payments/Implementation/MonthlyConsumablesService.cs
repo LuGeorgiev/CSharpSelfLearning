@@ -18,7 +18,7 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
         {
         }
 
-        public async Task<IEnumerable<MonthlyConsumablesListingModel>> AllNotPaid()
+        public async Task<IEnumerable<MonthlyConsumablesListingModel>> AllNotPaidAsync()
         {
             var allUnpaidConsumables = await this.Db.MonthlyPaymentConsumables
                 .Where(x => x.PaymentId == null)
@@ -29,7 +29,7 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
             return listingConsumables;
         }
 
-        public async Task<bool> CreateMonthlyConsumable(MonthlyConsumablesBindingModel model)
+        public async Task<bool> CreateAsync(MonthlyConsumablesBindingModel model)
         {
             var rentAgreement = await this.Db
                 .FindAsync<RentAgreement>(model.rentId);
@@ -45,7 +45,7 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
             {
                 await this.Db.SaveChangesAsync();
             }
-            catch (System.Exception)
+            catch (Exception)
             {
                 return false;
             }
@@ -116,7 +116,7 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
             {
                 await this.Db.SaveChangesAsync();
             }
-            catch (System.Exception)
+            catch (Exception)
             {
                 return false;
             }
@@ -128,6 +128,7 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
         {
             var overduConsumables = await this.Db.MonthlyPaymentConsumables
                 .Where(x => x.PaymentId == null && x.DeadLine < DateTime.UtcNow)
+                .OrderBy(x=>x.DeadLine)
                 .ToListAsync();
 
             var model = Mapper.Map<IEnumerable<OverdueMonthlyConsumablesListingModel>>(overduConsumables);

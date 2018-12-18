@@ -8,9 +8,9 @@ namespace EstateManagment.Services.Areas.Payments
     {
         Task<CreateMonthlyConsumablesModel> GetCreateInfoAsync(int rentId);
 
-        Task<bool> CreateMonthlyConsumable(MonthlyConsumablesBindingModel model);
+        Task<bool> CreateAsync(MonthlyConsumablesBindingModel model);
 
-        Task<IEnumerable<MonthlyConsumablesListingModel>> AllNotPaid();
+        Task<IEnumerable<MonthlyConsumablesListingModel>> AllNotPaidAsync();
 
         Task<MonthlyConsumablesViewModel> GetByIdAsync(int id);
 
