@@ -18,7 +18,7 @@ namespace EstateManagment.Services.Tests.Areas.Payments.Implementation
     public class MonthlyConsumablesServiceTests
     {
         [Fact]
-        public async Task AllNotPaid_ShouldReturn_AllConsumablesThatAreNotPaid_IfSuchExis()
+        public async Task AllNotPaid_ShouldReturn_AllConsumablesThatAreNotPaid_IfSuchExist()
         {
             var db = GetDatabase();
             var mapper = GetMapper();

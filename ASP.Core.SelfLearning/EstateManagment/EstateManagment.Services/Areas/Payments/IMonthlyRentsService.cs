@@ -19,7 +19,7 @@ namespace EstateManagment.Services.Areas.Payments
 
         Task<bool> EditAsync(MonthlyRentViewModel model);
 
-        Task<bool> Terminate(int id);
+        Task<bool> TerminateAsync(int id);
 
         Task<IEnumerable<OverdueMontlyRentsListingModel>> AllOverdueRentsAsync();
     }

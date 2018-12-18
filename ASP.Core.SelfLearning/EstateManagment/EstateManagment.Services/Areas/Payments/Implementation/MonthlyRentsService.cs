@@ -21,7 +21,7 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
         public async Task<IEnumerable<MonthlyRentListingModel>> AllNotPaidAsync(bool isPaid = false)
         {
             var notPaid = await this.Db.MonthlyPaymentRents
-                .Where(x => x.IsPaid == false)
+                .Where(x => x.IsPaid == isPaid)
                 .OrderBy(x => x.DeadLine)
                 .ToListAsync();
 
@@ -134,7 +134,7 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
             return result;
         }
 
-        public async Task<bool> Terminate(int id)
+        public async Task<bool> TerminateAsync(int id)
         {
             var monthlyRent = await this.Db
                .FindAsync<MonthlyPaymentRent>(id);
@@ -161,6 +161,7 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
         {
             var overdueRents = await this.Db.MonthlyPaymentRents
                 .Where(x => x.IsPaid == false && x.DeadLine < DateTime.UtcNow)
+                .OrderBy(x=>x.DeadLine)
                 .ToListAsync();
             var model = this.Mapper.Map<IEnumerable<OverdueMontlyRentsListingModel>>(overdueRents);
             return model;

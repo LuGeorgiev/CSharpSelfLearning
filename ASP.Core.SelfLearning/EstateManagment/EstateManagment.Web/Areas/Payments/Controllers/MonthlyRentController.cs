@@ -88,7 +88,7 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
         [Authorize(Roles = ManagerRole)]
         public async Task<IActionResult> Terminate(int id)
         {
-            bool isTerminated = await this.monthlyRents.Terminate(id);
+            bool isTerminated = await this.monthlyRents.TerminateAsync(id);
             if (isTerminated)
             {
                 TempData.AddErrorMessage("Премахването на месечния наем не беше успешно!");
