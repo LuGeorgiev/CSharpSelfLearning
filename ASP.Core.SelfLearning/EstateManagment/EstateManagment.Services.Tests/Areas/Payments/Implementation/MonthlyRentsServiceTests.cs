@@ -119,15 +119,15 @@ namespace EstateManagment.Services.Tests.Areas.Payments.Implementation
         {
             var db = GetDatabase();
             var mapper = GetMapper();
-            var firstRent = new MonthlyPaymentRent { Id = 5, DeadLine = new DateTime(2018, 12, 12), TotalPayment = 200 };
-            var secndRent = new MonthlyPaymentRent { Id = 2, DeadLine = new DateTime(2017, 11, 6), TotalPayment = 300 };
-            var thirdRent = new MonthlyPaymentRent { Id = 3, DeadLine = new DateTime(2016, 11, 12), TotalPayment = 400 };
-            var forthRent = new MonthlyPaymentRent { Id = 4, DeadLine = new DateTime(2015, 12, 15), TotalPayment = 500 };
-            await db.MonthlyPaymentRents.AddRangeAsync(firstRent, secndRent, thirdRent, forthRent);
+            
+            var secndRent = new MonthlyPaymentRent { Id = 12, DeadLine = new DateTime(2017, 11, 6), TotalPayment = 300 };
+            var thirdRent = new MonthlyPaymentRent { Id = 13, DeadLine = new DateTime(2016, 11, 12), TotalPayment = 400 };
+            var forthRent = new MonthlyPaymentRent { Id = 14, DeadLine = new DateTime(2015, 12, 15), TotalPayment = 500 };
+            await db.MonthlyPaymentRents.AddRangeAsync( secndRent, thirdRent, forthRent);
             await db.SaveChangesAsync();
             var rentPaymentService = new MonthlyRentsService(mapper, db);
             //Act
-            var result = await rentPaymentService.CreateNextMonthPayment(2);
+            var result = await rentPaymentService.CreateNextMonthPayment(12);
             var createdRent = await db.MonthlyPaymentRents
                 .FirstOrDefaultAsync(x => x.DeadLine == new DateTime(2017, 12, 6) 
                     && x.TotalPayment==300);

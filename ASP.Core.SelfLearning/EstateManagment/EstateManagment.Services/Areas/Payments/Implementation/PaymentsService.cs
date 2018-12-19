@@ -16,6 +16,7 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
     public class PaymentsService : BaseService, IPaymentsService
     {
         private readonly IMonthlyRentsService monthlyRentService;
+
         public PaymentsService(IMapper mapper, EstateManagmentContext db, IMonthlyRentsService monthlyRentService)
             : base(mapper, db)
         {
