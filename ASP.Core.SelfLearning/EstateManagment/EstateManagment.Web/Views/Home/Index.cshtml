@@ -4,7 +4,7 @@
 }
 <h3>@ViewData["Title"]</h3>
 
-<a asp-controller="Dashboard" asp-action="GetPdf" class="btn btn-danger" target="_blank"> ТЕСТ ЗА ФАКТУРИ ПРОБА</a>
+@*<a asp-controller="Dashboard" asp-action="GetPdf" class="btn btn-danger" target="_blank"> ТЕСТ ЗА ФАКТУРИ ПРОБА</a>*@
 
 
 @if (User.IsInRole("Accountant") || User.IsInRole("Manager"))
@@ -129,6 +129,7 @@ else
     <script>
         $("#monthBtn").on('click', function () {
             var month = $("#month").val();
+
             $.ajax({
                 type: "GET",
                 url: "/Payments/Payments/MonthlyStatistic",

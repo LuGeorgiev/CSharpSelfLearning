@@ -7,7 +7,7 @@ namespace EstateManagment.Web.Common.Extensions
 {
     public static class ApplicationBuilderAuthExtensions
     {
-        private static string DefaultAdminPass = "adminpass";
+        private static string DefaultAdminPass = "admIn18";
         private static string DefaultAdminUsername = "1admin@admin.com";
         private static string DefaultAdminEmail = "1admin@admin.com";
 

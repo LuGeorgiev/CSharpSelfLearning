@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <UserSecretsId>aspnet-EstateManagment.Web-01C94BC1-EA7D-4D9F-A40C-32C47060AAB0</UserSecretsId>
+    <ApplicationInsightsResourceId>/subscriptions/90af82a4-af51-4f82-ac6a-14b25b597621/resourcegroups/Default-ApplicationInsights-EastUS/providers/microsoft.insights/components/EstateManagment.Web</ApplicationInsightsResourceId>
+    <ApplicationInsightsAnnotationResourceId>/subscriptions/90af82a4-af51-4f82-ac6a-14b25b597621/resourcegroups/Default-ApplicationInsights-EastUS/providers/microsoft.insights/components/EstateManagment.Web</ApplicationInsightsAnnotationResourceId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,6 +18,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="5.0.1" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.4">
       <PrivateAssets>all</PrivateAssets>
@@ -63,6 +66,10 @@
     <None Update="rasterize.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
   </ItemGroup>
 
 </Project>
