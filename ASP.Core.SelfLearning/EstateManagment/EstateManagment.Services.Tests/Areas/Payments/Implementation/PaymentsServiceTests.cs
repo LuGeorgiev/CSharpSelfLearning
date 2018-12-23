@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using EstateManagment.Data;
 using EstateManagment.Data.Models;
+using EstateManagment.Data.Models.Enums;
 using EstateManagment.Services.Areas.Payments;
 using EstateManagment.Services.Areas.Payments.Implementation;
 using EstateManagment.Services.Models.Areas.Payments.MonthlyRents;
@@ -729,6 +730,131 @@ namespace EstateManagment.Services.Tests.Areas.Payments.Implementation
             payment
                 .Should()
                 .BeNull();
+        }
+
+        [Fact]
+        public async Task MonthIncomeStatisctic_ShouldReturn_CorrectStatisctic()
+        {
+            var db = GetDatabase();
+            var mapper = GetMapper();
+
+            var firstRent = new RentAgreement
+            {
+                Id=1,
+                MonthlyPrice=100,
+                ParkingSlots = new List<ParkingSlot>
+                {
+                    new ParkingSlot {Id=1,Price=1,Quantity=10,Area = ParkingSlotArea.BackParking },
+                    new ParkingSlot {Id=2,Price=5,Quantity=11,Area = ParkingSlotArea.FrontParking },
+                    new ParkingSlot {Id=3,Price=10,Quantity=20,Area = ParkingSlotArea.NoReserved },
+                },
+                MonthlyConsumables = new List<MonthlyPaymentConsumable>
+                {
+                    new MonthlyPaymentConsumable
+                    {
+                        Id =1,
+                        PaymentForElectricity =250,
+                        PaymentForWater =150,
+                        Payment = new Payment {Id=1,Amount=400,PaidOn=new DateTime(2018,6,6),CashPayment = true} 
+                    },
+                     new MonthlyPaymentConsumable
+                    {
+                        Id =2,
+                        PaymentForElectricity =150,
+                        PaymentForWater =150,
+                        Payment = new Payment {Id=2,Amount=300,PaidOn=new DateTime(2018,7,6),CashPayment = false}
+                    },
+                },
+                MonthlyRents = new List<MonthlyPaymentRent>
+                {
+                    new MonthlyPaymentRent
+                    {
+                        Id=1,
+                        ApplyVAT=true,
+                        Payments = new List<Payment>
+                        {
+                            new Payment {Id=3,PaidOn = new DateTime(2018,6,6),Amount = 238, CashPayment=true },
+                            new Payment {Id=4,PaidOn = new DateTime(2018,6,10),Amount = 200, CashPayment=false },
+                        }
+                    },
+                    new MonthlyPaymentRent
+                    {
+                        Id=2,
+                        ApplyVAT=true,
+                        Payments = new List<Payment>
+                        {
+                            new Payment {Id=5,PaidOn = new DateTime(2018,7,6),Amount = 438, CashPayment=false },
+                        }
+                    }
+                }                
+            };
+            var secondRent = new RentAgreement
+            {
+                Id = 2,
+                MonthlyPrice = 1000,
+                ParkingSlots = new List<ParkingSlot>
+                {
+                    new ParkingSlot {Id=4,Price=1,Quantity=10,Area = ParkingSlotArea.BackParking },
+                    new ParkingSlot {Id=5,Price=5,Quantity=11,Area = ParkingSlotArea.FrontParking },
+                    new ParkingSlot {Id=6,Price=10,Quantity=20,Area = ParkingSlotArea.NoReserved },
+                },
+                MonthlyConsumables = new List<MonthlyPaymentConsumable>
+                {
+                    new MonthlyPaymentConsumable
+                    {
+                        Id =3,
+                        PaymentForElectricity =250,
+                        PaymentForWater =150,
+                        Payment = new Payment {Id=6,Amount=400,PaidOn=new DateTime(2018,8,6),CashPayment = true}
+                    },
+                     new MonthlyPaymentConsumable
+                    {
+                        Id =4,
+                        PaymentForElectricity =150,
+                        PaymentForWater =150,
+                        Payment = new Payment {Id=7,Amount=300,PaidOn=new DateTime(2018,9,6),CashPayment = false}
+                    },
+                },
+                MonthlyRents = new List<MonthlyPaymentRent>
+                {
+                    new MonthlyPaymentRent
+                    {
+                        Id=3,
+                        ApplyVAT=true,
+                        Payments = new List<Payment>
+                        {
+                            new Payment {Id=8,PaidOn = new DateTime(2018,8,6),Amount = 238, CashPayment=true },
+                            new Payment {Id=9,PaidOn = new DateTime(2018,8,10),Amount = 200, CashPayment=false },
+                        }
+                    },
+                    new MonthlyPaymentRent
+                    {
+                        Id=4,
+                        ApplyVAT=true,
+                        Payments = new List<Payment>
+                        {
+                            new Payment {Id=10,PaidOn = new DateTime(2018,9,6),Amount = 438, CashPayment=false },
+                        }
+                    }
+                }
+            };
+            await db.RentAgreements.AddRangeAsync(firstRent, secondRent);
+            await db.SaveChangesAsync();
+            var paymentService = new PaymentsService(mapper, db, null);
+            //Act
+            var result = await paymentService.MonthIncomeStatistic(new DateTime(2018, 6, 20));
+            //Assert
+            result
+                .Should()
+                .Match<MonthlyPaymentStatisticView>(x =>
+                x.ConsumablesInCash==400
+                && x.RentInCash==238
+                && x.TotalConsumablesPayment==400
+                && x.TotalRentPayment==438
+                && x.VAT==73
+                && x.IncomeBackParking==10
+                && x.IncomeFronParking==55
+                && x.IncomeNoReservedParking==200);
         }
 
         private EstateManagmentContext GetDatabase()

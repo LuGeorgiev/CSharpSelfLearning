@@ -212,45 +212,57 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
             var payments = await this.Db.Payments
                 .Where(x => x.PaidOn.Month == month.Month)
                 .ToListAsync();
+
+            var monthlyPaymentRentIds = payments
+                .Where(x=>x.MonthlyPaymentRent!=null)
+                .Select(x => x.MonthlyPaymentRent.Id)
+                .Distinct()
+                .ToList();
             var model = new MonthlyPaymentStatisticView()
             {
                 MonthToView = month,
+
                 ConsumablesInCash = payments
                     .Where(x => x.MonthlyPaymentConsumableId != null && x.CashPayment)
                     .Sum(x => x.Amount),
+
                 RentInCash = payments
                     .Where(x => x.MonthlyPaymentRentId != null && x.CashPayment)
                     .Sum(x => x.Amount),
+
                 TotalRentPayment = payments
                     .Where(x => x.MonthlyPaymentRentId != null)
                     .Sum(x => x.Amount),
+
                 TotalConsumablesPayment = payments
                     .Where(x => x.MonthlyPaymentConsumableId != null)
                     .Sum(x => x.Amount),
+
                 VAT = payments
                     .Where(x => x.MonthlyPaymentRentId != null && x.MonthlyPaymentRent.ApplyVAT == true)
-                    .Sum(x => (x.Amount - x.Amount / 1.2m)),
-                IncomeBackParking = payments
-                    .Where(x => x.MonthlyPaymentRentId != null)
-                    .Sum(x => x.MonthlyPaymentRent
-                         .RentAgreement
-                         .ParkingSlots
-                            .Where(y => y.Area == ParkingSlotArea.BackParking)
-                            .Sum(z => z.Price * z.Quantity)),
-                IncomeFronParking = payments
-                    .Where(x => x.MonthlyPaymentRentId != null)
-                    .Sum(x => x.MonthlyPaymentRent
-                         .RentAgreement
-                         .ParkingSlots
-                            .Where(y => y.Area == ParkingSlotArea.FrontParking)
-                            .Sum(z => z.Price * z.Quantity)),
-                IncomeNoReservedParking = payments
-                    .Where(x => x.MonthlyPaymentRentId != null)
-                    .Sum(x => x.MonthlyPaymentRent
-                         .RentAgreement
-                         .ParkingSlots
-                            .Where(y => y.Area == ParkingSlotArea.NoReserved)
-                            .Sum(z => z.Price * z.Quantity)),
+                    .Sum(x => (x.Amount - x.Amount / 1.2m)),   
+                
+                IncomeBackParking = Db.MonthlyPaymentRents
+                    .Where(x => monthlyPaymentRentIds.Contains(x.Id))
+                    .Sum(x => x.RentAgreement
+                        .ParkingSlots
+                        .Where(y => y.Area == ParkingSlotArea.BackParking)
+                        .Sum(y => y.Price * y.Quantity)),
+
+                
+                IncomeFronParking = Db.MonthlyPaymentRents
+                    .Where(x => monthlyPaymentRentIds.Contains(x.Id))
+                    .Sum(x => x.RentAgreement
+                        .ParkingSlots
+                        .Where(y => y.Area == ParkingSlotArea.FrontParking)
+                        .Sum(y => y.Price * y.Quantity)),
+                
+                IncomeNoReservedParking = Db.MonthlyPaymentRents
+                    .Where(x => monthlyPaymentRentIds.Contains(x.Id))
+                    .Sum(x => x.RentAgreement
+                        .ParkingSlots
+                        .Where(y => y.Area == ParkingSlotArea.NoReserved)
+                        .Sum(y => y.Price * y.Quantity)),
             };
 
             return model;

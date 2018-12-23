@@ -2,6 +2,7 @@
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using EstateManagment.Data.Models;
+using EstateManagment.Web.Common.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -94,6 +95,7 @@ namespace EstateManagment.Web.Areas.Identity.Pages.Account
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
+                    TempData.AddSuccessMessage("Посетете подаденият мейл да потвърдите валидността му!");
                     return LocalRedirect(returnUrl);
                 }
                 foreach (var error in result.Errors)

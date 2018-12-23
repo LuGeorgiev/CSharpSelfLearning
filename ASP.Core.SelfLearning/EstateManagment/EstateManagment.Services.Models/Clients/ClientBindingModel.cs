@@ -23,6 +23,7 @@ namespace EstateManagment.Services.Models.Clients
         [MinLength(PropertyAddressMinLength)]
         [MaxLength(PropertyAddressMaxLength)]
         [Display(Name = DisplayBulstat)]
+        [RegularExpression(RegexBulstat, ErrorMessage =ErrorMessageBulstat)]
         public string Bulstat { get; set; }
 
         [MaxLength(10)]
