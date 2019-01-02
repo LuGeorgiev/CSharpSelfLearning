@@ -91,7 +91,8 @@ namespace EstateManagment.Web.Common.Mapper
                 .ForMember(p => p.Username, opt => opt.MapFrom(p => p.User.Nickname ?? p.User.UserName));            
 
             CreateMap<MonthlyPaymentRent, OverdueMontlyRentsListingModel>()
-                .ForMember(mp => mp.MonthsOverdue, opt => opt.MapFrom(mp => DateTime.UtcNow.Month - mp.DeadLine.Month))
+                .ForMember(mp => mp.MonthsOverdue, opt => opt.
+                        MapFrom(mp => (DateTime.UtcNow.Year-mp.DeadLine.Year)*12 + DateTime.UtcNow.Month - mp.DeadLine.Month))
                 .ForMember(mp => mp.ParkingSlotsQty, opt => opt.MapFrom(mp => mp.RentAgreement.ParkingSlots.Sum(x => x.Quantity)))
                 .ForMember(mp=>mp.PropertyRentsNames, opt=>opt.MapFrom(mp=>mp.RentAgreement.PropertyRents.Select(x=>x.Property.Name+"/"+x.Property.Area)))
                 .ForMember(mp=>mp.ClientName, opt=>opt.MapFrom(mp=>mp.RentAgreement.Client.Name));
