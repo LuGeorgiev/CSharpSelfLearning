@@ -18,13 +18,13 @@
                     <span asp-validation-for="EndDate" class="text-danger"></span>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="form-group ">
                     <label asp-for="ActiveClients">Клиент</label>
                     <select asp-for="Client" asp-items="@Model.ActiveClients" class="form-control  "> </select>
                 </div>
                 <hr />
-                <div class="form-group ">
+                <div class="form-group">
                     <label asp-for="Properties">Имот</label>
                     <select asp-for="Property" asp-items="@Model.Properties" class="form-control  "> </select>
                 </div>
@@ -35,12 +35,16 @@
                     <select asp-for="ParkingArea" asp-items="@Model.ParkingAreas" class="form-control  "> </select>
                 </div>
                 <hr />
-                <div class="form-group ">
-                    <label asp-for="OnlyCash" >Само в брой</label>
-                    <input asp-for="OnlyCash" />
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label asp-for="OnlyCash">Само в брой</label>
+                        <input asp-for="OnlyCash" />
+                    </div>
+                    <div class="coll-md-6">
+                        <button asp-area="Payments" asp-action="FilterRents" asp-controller="Payments" type="submit" class=" btn btn-info "><strong>Филтър</strong></button>
+                    </div>
                 </div>
             </div>
-                <button asp-area="Payments" asp-action="FilterRents" asp-controller="Payments" type="submit" class=" btn btn-info "><strong>Филтър</strong></button>              
 
         </form>
     </div>
