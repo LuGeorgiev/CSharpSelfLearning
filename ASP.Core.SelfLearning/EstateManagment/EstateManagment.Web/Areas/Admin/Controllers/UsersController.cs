@@ -22,7 +22,7 @@ namespace EstateManagment.Web.Areas.Admin.Controllers
             this.mapper = mapper;
         }
 
-        //TODO create filter to check  that logged user is different than one that is to be promoted
+       
         public async Task<IActionResult> MakeAdmin(string id)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);

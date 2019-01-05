@@ -210,7 +210,7 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
         public async Task<MonthlyPaymentStatisticView> MonthIncomeStatistic(DateTime month)
         {
             var payments = await this.Db.Payments
-                .Where(x => x.PaidOn.Month == month.Month)
+                .Where(x => x.PaidOn.Month == month.Month && x.PaidOn.Year==month.Year)
                 .ToListAsync();
 
             var monthlyPaymentRentIds = payments
