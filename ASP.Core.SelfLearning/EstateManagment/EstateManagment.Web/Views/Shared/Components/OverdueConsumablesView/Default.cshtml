@@ -17,10 +17,10 @@
             {
                 <tr>
                     <td><a asp-controller="Clients" asp-action="DetailsByName" asp-route-name="@rent.ClientName">@rent.ClientName</a></td>
-                    <td>@rent.DeadLine.ToShortDateString()</td>
-                    <td>@rent.PaymentForElectricity ,лв</td>
-                    <td>@rent.PaymentForWater ,лв</td>
-                    <td>@((rent.PaymentForElectricity + rent.PaymentForWater).ToString("F2")), лв</td>
+                    <td>@rent.DeadLine.DateBgFormat()</td>
+                    <td>@rent.PaymentForElectricity</td>
+                    <td>@rent.PaymentForWater</td>
+                    <td>@((rent.PaymentForElectricity + rent.PaymentForWater).ToString("F2"))</td>
                     <td>@string.Join(", ", rent.PropertyRentsNames)</td>
                 </tr>
             }

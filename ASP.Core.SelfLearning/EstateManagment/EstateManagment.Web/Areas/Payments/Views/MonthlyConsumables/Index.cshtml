@@ -30,7 +30,7 @@
                     rowColor = "";
                 }
                 <tr class="@rowColor">
-                    <td>@monthlyConsumable.DeadLine.ToShortDateString()</td>
+                    <td>@monthlyConsumable.DeadLine.DateBgFormat()</td>
                     <td>
                         <a asp-area="" asp-controller="Clients" asp-action="DetailsByName" asp-route-name="@monthlyConsumable.Client"><strong>@monthlyConsumable.Client</strong></a>
                     </td>
@@ -59,7 +59,7 @@
                                 <input asp-for="@monthlyConsumable.IsCash" name="isCash" />
                             </div>
                             <input type="hidden" name="id" value="@monthlyConsumable.Id" />
-                            <input type="submit" value="Плати" class="btn btn-success" />
+                            <input type="submit" value="Платено" class="btn btn-success" />
                         </form>
                     </td>
                     @if (User.IsInRole("Manager"))

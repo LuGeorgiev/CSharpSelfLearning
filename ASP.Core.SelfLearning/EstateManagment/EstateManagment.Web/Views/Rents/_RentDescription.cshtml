@@ -42,14 +42,14 @@
 <div class="row">
     <div class="col-lg-5 col-md-5 col-lg-offset-1" ">
         <h4>Начална дата:</h4>
-        <p><strong>@Model.StartDate.ToShortDateString()</strong></p>
+        <p><strong>@Model.StartDate.DateBgFormat()</strong></p>
 
     </div>
     <div class="col-lg-5 col-md-5">
         @if (Model.EndDate != null)
         {
             <h4>Крайна дата:</h4>
-            <p>@Model.EndDate.Value.ToShortDateString()</p>
+            <p>@Model.EndDate.Value.DateBgFormat()</p>
         }
         else
         {

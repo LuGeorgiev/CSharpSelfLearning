@@ -30,7 +30,7 @@
                 rowColor = "";
             }
             <tr class="@rowColor">
-                <td>@rent.DeadLine.ToShortDateString()</td>
+                <td>@rent.DeadLine.DateBgFormat()</td>
                 <td>
                     <a asp-area="" asp-controller="Clients" asp-action="DetailsByName" asp-route-name="@rent.Client"><strong>@rent.Client</strong></a>
                 </td>
@@ -57,7 +57,7 @@
                         </div>
                         <input type="hidden" name="monthlyRentId" value="@rent.Id" />
                         <input type="hidden" name="totalLeft" value="@rent.TotalPayment" />
-                        <input type="submit" value="Плати" class="btn btn-success" />
+                        <input type="submit" value="Платено" class="btn btn-success" />
                     </form>
                 </td>
             </tr>

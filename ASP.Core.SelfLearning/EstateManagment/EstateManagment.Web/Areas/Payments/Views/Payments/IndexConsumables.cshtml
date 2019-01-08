@@ -32,8 +32,8 @@
                     {
                         <tr>
                             <td>@payment.Amount.ToString("F2")</td>
-                            <td>@payment.PaidOn.ToShortDateString()</td>
-                            <td>@payment.DeadLine.ToShortDateString()</td>
+                            <td>@payment.PaidOn.DateBgFormat()</td>
+                            <td>@payment.DeadLine.DateBgFormat()</td>
                             <td>@payment.PaymentForElectricity.ToString("F2")</td>
                             <td>@payment.PaymentForWater.ToString("F2")</td>
                             <td>@(payment.CashPayment == true ? "В брой" : "Банка")</td>

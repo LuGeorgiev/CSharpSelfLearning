@@ -74,7 +74,7 @@
         public const string DisplayBigTruckSlots = "Паркоместа голями камиони";
         public const string DisplayCarCageSlots = "Паркоместа авто-клетки";
         public const string DisplayOtherSlots = "Други";
-        public const string DisplaySlotPrice = "Еденична цена";
+        public const string DisplaySlotPrice = "Единична цена";
         public const string DisplayDeadLine = "Краен срок";
         public const string DisplayTotalPayment = "Оставащо плащане";
         public const string DisplayApplyVat = "Сложи ДДС";

@@ -62,10 +62,10 @@
                     <tr>
                         <td>@rent.TotalPrice.ToString("F2") лв</td>
 
-                        <td>@rent.StartDate.ToShortDateString()</td>
+                        <td>@rent.StartDate.DateBgFormat()</td>
 
                         <td>
-                            @(rent.EndDate==null ? "Няма дата" :                 rent.EndDate.Value.ToShortDateString())
+                            @(rent.EndDate==null ? "Няма дата" : rent.EndDate.Value.DateBgFormat())
                             </td>
 
                         <td>@rent.ParkingPlacesQuantity</td>

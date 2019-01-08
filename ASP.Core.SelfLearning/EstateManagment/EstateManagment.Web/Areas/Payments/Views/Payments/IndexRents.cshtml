@@ -35,8 +35,8 @@
                         <tr>
                             <td>@payment.Amount.ToString("F2")</td>
                             <td> @payment.TotalPayment.ToString("F2")</td>
-                            <td> @payment.PaidOn.ToShortDateString()</td>
-                            <td> @payment.DeadLine.ToShortDateString()</td>
+                            <td> @payment.PaidOn.DateBgFormat()</td>
+                            <td> @payment.DeadLine.DateBgFormat()</td>
                             <td>@(payment.CashPayment == true ? "В брой" : "Банка")</td>
                             <td>@payment.Username</td>
                             <td>@(payment.ApplyVAT == true ? "Включено" : "Без")</td>

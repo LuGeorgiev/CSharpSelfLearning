@@ -1,6 +1,6 @@
 ﻿@model FilterRentsViewModel
 @{
-    ViewData["Title"] = "Резултат от филтрирането на недвижимостите и парко местата";
+    ViewData["Title"] = "Резултат от филтрирането на недвижимите имоти и паркоместата";
 }
 
 <div class="panel panel-default">
@@ -11,26 +11,26 @@
         <div class="col-md-2">
 
             <div>
-                От:<strong> @Model.StartDate.ToShortDateString()</strong>
+                От:<strong> @Model.StartDate.DateBgFormat()</strong>
             </div>
             <div>
-                До:<strong> @Model.EndDate.ToShortDateString()</strong>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div>
-                Всички приходи:<strong>@Model.TotalIncome лв.</strong> 
-            </div>
-            <div>
-                &nbsp;&nbsp;Чисти приходи:<strong>@((Model.TotalIncome - Model.VAT).ToString("F2")) лв.</strong> 
+                До:<strong> @Model.EndDate.DateBgFormat()</strong>
             </div>
         </div>
         <div class="col-md-3">
             <div>
-                от тях: <strong>@Model.PaidInCash лв.</strong> в брой!
+               Общо приходи с ДДС: <strong>@Model.TotalIncome</strong> 
             </div>
             <div>
-                &nbsp;&nbsp;ДДС: <strong>@Model.VAT.ToString("F2") лв.</strong> за периода!
+                &nbsp;&nbsp;Сума без ДДС:<strong>@((Model.TotalIncome - Model.VAT).ToString("F2"))</strong> 
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div>
+                сума в брой: <strong>@Model.PaidInCash</strong>
+            </div>
+            <div>
+                &nbsp;&nbsp;ДДС: <strong>@Model.VAT.ToString("F2")</strong>
             </div>
         </div>
         <div class="pull-right">
@@ -58,9 +58,9 @@
                         @foreach (var payment in Model.Payments)
                         {
                             <tr>
-                                <td class="@(payment.Amount!=payment.TotalPayment?"text-danger":"")"><strong>@payment.Amount.ToString("F2")</strong></td>
-                                <td>@payment.PaidOn.ToShortDateString()</td>
-                                <td>@payment.DeadLine.ToShortDateString()</td>
+                                <td class="@(payment.Amount!=payment.TotalPayment?"text-danger":"")">@payment.Amount.ToString("F2")</td>
+                                <td>@payment.PaidOn.DateBgFormat()</td>
+                                <td>@payment.DeadLine.DateBgFormat()</td>
                                 <td>@payment.TotalPayment.ToString("F2")</td>
                                 <td>@(payment.CashPayment == true ? "В брой" : "Банка")</td>
                                 <td>@payment.Username</td>

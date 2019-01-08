@@ -9,10 +9,10 @@
     </div>
     <div class="panel-body">
         <div class="col-md-3">
-            Начална дата: @Model.StartDate.ToShortDateString()
+            Начална дата: @Model.StartDate.DateBgFormat()
         </div>
         <div class="col-md-3">
-            Крайна дата: @Model.EndDate.ToShortDateString()
+            Крайна дата: @Model.EndDate.DateBgFormat()
         </div>
         <div class="col-md-4">
             Всички приходи от периода:<strong>@Model.TotalIncome лв.</strong>
@@ -44,8 +44,8 @@
                         {
                             <tr>
                                 <td>@payment.Amount.ToString("F2")</td>
-                                <td>@payment.PaidOn.ToShortDateString()</td>
-                                <td>@payment.DeadLine.ToShortDateString()</td>
+                                <td>@payment.PaidOn.DateBgFormat()</td>
+                                <td>@payment.DeadLine.DateBgFormat()</td>
                                 <td>@payment.PaymentForElectricity.ToString("F2")</td>
                                 <td>@payment.PaymentForWater.ToString("F2")</td>
                                 <td>@(payment.CashPayment == true ? "В брой" : "Банка")</td>
