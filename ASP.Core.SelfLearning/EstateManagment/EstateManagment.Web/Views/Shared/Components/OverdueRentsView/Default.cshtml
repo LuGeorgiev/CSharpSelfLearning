@@ -20,8 +20,8 @@
                     <td><a asp-controller="Clients" asp-action="DetailsByName" asp-route-name="@rent.ClientName">@rent.ClientName</a></td>
                     <td>@rent.DeadLine.DateBgFormat()</td>
                     <td>@rent.MonthsOverdue</td>
-                    <td>@rent.TotalPayment</td>
-                    <td>@((rent.TotalPayment*rent.MonthsOverdue).ToString("F2"))</td>
+                    <td>@rent.TotalPayment.ThousandsSeparate()</td>
+                    <td>@((rent.TotalPayment*rent.MonthsOverdue).ThousandsSeparate())</td>
                     <td>@string.Join(", ",rent.PropertyRentsNames)</td>
                     <td>@rent.ParkingSlotsQty</td>
                 </tr>

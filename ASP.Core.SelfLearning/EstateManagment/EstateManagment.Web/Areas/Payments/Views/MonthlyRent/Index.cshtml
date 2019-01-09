@@ -34,7 +34,7 @@
                 <td>
                     <a asp-area="" asp-controller="Clients" asp-action="DetailsByName" asp-route-name="@rent.Client"><strong>@rent.Client</strong></a>
                 </td>
-                <td>@rent.TotalPayment.ToString("F2") лв</td>
+                <td>@rent.TotalPayment.ThousandsSeparate() лв</td>
                 <td>@String.Join(", ", rent.Properties)</td>
                 <td class="text-center">@rent.ParkingSlotQuantity</td>                
                 <td>

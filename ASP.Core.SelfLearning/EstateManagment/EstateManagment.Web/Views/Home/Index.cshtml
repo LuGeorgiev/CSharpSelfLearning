@@ -87,32 +87,32 @@
 
 
                         <div class="col-lg-3 col-md-3 text-right">Приходи от консумативи:</div>
-                        <div class="col-lg-1 col-md-1" id="consum">@Model.TotalConsumablesPayment</div>
+                        <div class="col-lg-1 col-md-1" id="consum">@Model.TotalConsumablesPayment.ThousandsSeparate()</div>
 
                         <div class="col-lg-3 col-md-3 text-right">В брой:</div>
-                        <div class="col-lg-1 col-md-1" id="cashConsum">@Model.ConsumablesInCash</div>
+                        <div class="col-lg-1 col-md-1" id="cashConsum">@Model.ConsumablesInCash.ThousandsSeparate()</div>
 
                         <div class="col-lg-2 col-md-2 text-right">Месец:</div>
                         <div class="col-lg-2 col-md-2" id="viewMonth">@Model.MonthToView.ToString("yyyy-MM")</div>
 
                         <div class="col-lg-3 col-md-3 text-right">Приходи от имоти:</div>
-                        <div class="col-lg-1 col-md-1" id="totalRent">@Model.TotalRentPayment</div>
+                        <div class="col-lg-1 col-md-1" id="totalRent">@Model.TotalRentPayment.ThousandsSeparate()</div>
 
                         <div class="col-lg-3 col-md-3 text-right">В борй:</div>
-                        <div class="col-lg-1 col-md-1" id="cashRent">@Model.RentInCash</div>
+                        <div class="col-lg-1 col-md-1" id="cashRent">@Model.RentInCash.ThousandsSeparate()</div>
 
                         <div class="col-lg-3 col-md-3 text-right">ДДС:</div>
-                        <div class="col-lg-1 col-md-1" id="vat">@Model.VAT.ToString("F2")</div>
+                        <div class="col-lg-1 col-md-1" id="vat">@Model.VAT.ThousandsSeparate()</div>
 
 
                         <div class="col-lg-3 col-md-3 text-right">Приходи преден паркинг:</div>
-                        <div class="col-lg-1 col-md-1" id="frontPark">@Model.IncomeFronParking</div>
+                        <div class="col-lg-1 col-md-1" id="frontPark">@Model.IncomeFronParking.ThousandsSeparate()</div>
 
                         <div class="col-lg-3 col-md-3 text-right">Приходи заден паркинг:</div>
-                        <div class="col-lg-1 col-md-1" id="backPark">@Model.IncomeBackParking</div>
+                        <div class="col-lg-1 col-md-1" id="backPark">@Model.IncomeBackParking.ThousandsSeparate()</div>
 
                         <div class="col-lg-3 col-md-3 text-right">Приходи без запазени:</div>
-                        <div class="col-lg-1 col-md-1" id="noPark">@Model.IncomeNoReservedParking</div>
+                        <div class="col-lg-1 col-md-1" id="noPark">@Model.IncomeNoReservedParking.ThousandsSeparate()</div>
                     </div>
                 </div>
             </div>

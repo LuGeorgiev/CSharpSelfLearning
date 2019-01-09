@@ -33,7 +33,7 @@
                             <td>
                                 <a asp-controller="Clients" asp-action="DetailsByName" asp-route-name="@rent.Client">@rent.Client</a>
                             </td>
-                            <td>@rent.TotalMonthlyPrice.ToString("F2")</td>
+                            <td>@rent.TotalMonthlyPrice.ThousandsSeparate()</td>
                             <td>
                                 @String.Join(", ", rent.Properties)
 

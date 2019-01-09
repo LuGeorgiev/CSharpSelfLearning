@@ -19,5 +19,21 @@ namespace EstateManagment.Services.Models.Areas.Payments.Payments
                 return this.Payments.Sum(x => x.Amount);
             }
         }
+
+        public decimal TotalWaterIncome
+        {
+            get
+            {
+                return this.Payments.Sum(x => x.PaymentForWater);
+            }
+        }
+
+        public decimal TotalElectricityIncome
+        {
+            get
+            {
+                return this.Payments.Sum(x => x.PaymentForElectricity);
+            }
+        }
     }
 }

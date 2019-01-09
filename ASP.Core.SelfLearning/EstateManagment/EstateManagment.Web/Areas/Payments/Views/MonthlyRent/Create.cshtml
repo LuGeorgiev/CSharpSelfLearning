@@ -10,7 +10,7 @@
         <div class="col-md-6">
             <h4>Клиент: <a asp-area="" asp-controller="Clients" asp-action="DetailsByName" asp-route-name="@Model.Client"><strong>@Model.Client</strong></a></h4>
             <h4>Брой паркоместа: <strong>@Model.ParkingSlotsQty</strong></h4>
-            <h4>Месечен наем: <strong>@Model.TotalPayment.ToString("F2")</strong> лв</h4>
+            <h4>Месечен наем: <strong>@Model.TotalPayment.ThousandsSeparate()</strong> лв</h4>
         </div>
         <div class="col-md-6 list-group">
             <h4>Наети площи:</h4>
@@ -29,7 +29,7 @@
         <div asp-validation-summary="All" class="text-danger"></div>
         <div class="form-group">
             <label asp-for="TotalPayment">Пълен месечен наем без ДДС</label>
-            <input asp-for="TotalPayment" class="form-control" value="@Model.TotalPayment" />
+            <input asp-for="TotalPayment" class="form-control" value="@Model.TotalPayment.ThousandsSeparate()" />
             <span asp-validation-for="TotalPayment" class="text-danger"></span>
         </div>
         <div class="form-group">

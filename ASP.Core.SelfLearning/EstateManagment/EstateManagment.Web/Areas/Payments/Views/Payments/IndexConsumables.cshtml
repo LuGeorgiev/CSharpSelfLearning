@@ -31,11 +31,11 @@
                     @foreach (var payment in Model)
                     {
                         <tr>
-                            <td>@payment.Amount.ToString("F2")</td>
+                            <td>@payment.Amount.ThousandsSeparate()</td>
                             <td>@payment.PaidOn.DateBgFormat()</td>
                             <td>@payment.DeadLine.DateBgFormat()</td>
-                            <td>@payment.PaymentForElectricity.ToString("F2")</td>
-                            <td>@payment.PaymentForWater.ToString("F2")</td>
+                            <td>@payment.PaymentForElectricity.ThousandsSeparate()</td>
+                            <td>@payment.PaymentForWater.ThousandsSeparate()</td>
                             <td>@(payment.CashPayment == true ? "В брой" : "Банка")</td>
                             <td>@payment.User</td>
                             <td>

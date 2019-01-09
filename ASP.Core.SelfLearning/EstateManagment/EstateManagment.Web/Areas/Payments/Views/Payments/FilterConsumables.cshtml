@@ -8,16 +8,22 @@
         <h2 class="panel-title">@ViewData["Title"]</h2>
     </div>
     <div class="panel-body">
-        <div class="col-md-3">
-            Начална дата: @Model.StartDate.DateBgFormat()
-        </div>
-        <div class="col-md-3">
-            Крайна дата: @Model.EndDate.DateBgFormat()
-        </div>
-        <div class="col-md-4">
-            Всички приходи от периода:<strong>@Model.TotalIncome лв.</strong>
+        <div class="col-md-2">
+            От: @Model.StartDate.DateBgFormat()
         </div>
         <div class="col-md-2">
+            До: @Model.EndDate.DateBgFormat()
+        </div>
+        <div class="col-md-3">
+            Всичко: <strong>@Model.TotalIncome.ThousandsSeparate() лв</strong>
+        </div>
+        <div class="col-md-2">
+            Ток: <strong>@Model.TotalElectricityIncome.ThousandsSeparate() лв</strong>
+        </div>
+        <div class="col-md-2">
+            Вода: <strong>@Model.TotalWaterIncome.ThousandsSeparate() лв</strong>
+        </div>
+        <div class="col-md-1 pull-right">
             <a href="javascript:window.history.back()" class="btn btn-default pull-right">Назад</a>
         </div>
     </div>
@@ -43,11 +49,11 @@
                         @foreach (var payment in Model.Payments)
                         {
                             <tr>
-                                <td>@payment.Amount.ToString("F2")</td>
+                                <td>@payment.Amount.ThousandsSeparate()</td>
                                 <td>@payment.PaidOn.DateBgFormat()</td>
                                 <td>@payment.DeadLine.DateBgFormat()</td>
-                                <td>@payment.PaymentForElectricity.ToString("F2")</td>
-                                <td>@payment.PaymentForWater.ToString("F2")</td>
+                                <td>@payment.PaymentForElectricity.ThousandsSeparate()</td>
+                                <td>@payment.PaymentForWater.ThousandsSeparate()</td>
                                 <td>@(payment.CashPayment == true ? "В брой" : "Банка")</td>
                                 <td>@payment.User</td>
                                 <td>

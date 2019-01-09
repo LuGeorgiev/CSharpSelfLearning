@@ -34,7 +34,7 @@
                     <td>
                         <a asp-area="" asp-controller="Clients" asp-action="DetailsByName" asp-route-name="@monthlyConsumable.Client"><strong>@monthlyConsumable.Client</strong></a>
                     </td>
-                    <td>@monthlyConsumable.TotalConsumablesMonthlyPrice.ToString("F2") лв</td>
+                    <td>@monthlyConsumable.TotalConsumablesMonthlyPrice.ThousandsSeparate() лв</td>
                     @if (monthlyConsumable.Properties.Count() > 0)
                     {
                         <td>

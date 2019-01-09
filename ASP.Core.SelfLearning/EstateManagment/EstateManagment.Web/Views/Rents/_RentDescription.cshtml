@@ -14,7 +14,7 @@
                 </li>
             }
         </ul>
-        <h4>Месечен наем без ДДС: @Model.MonthlyPrice.ToString("F2") лв</h4>
+        <h4>Месечен наем без ДДС: @Model.MonthlyPrice.ThousandsSeparate() лв</h4>
     </div>
     <div class="col-lg-5 col-md-5 ">
 
@@ -26,7 +26,7 @@
                 @foreach (var slot in Model.ParkingSlots)
                 {
                     <li>
-                        Тип : <strong>@slot.Type</strong>, брой: <strong>@slot.Quantity</strong>, цена:<strong> @slot.Price.ToString("F2")</strong>, част на паркинга: <strong>@slot.Area</strong>
+                        Тип : <strong>@slot.Type</strong>, брой: <strong>@slot.Quantity</strong>, цена:<strong> @slot.Price.ThousandsSeparate()</strong>, част на паркинга: <strong>@slot.Area</strong>
                     </li>
                 }
             </ul>

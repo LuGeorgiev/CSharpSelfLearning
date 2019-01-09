@@ -17,20 +17,41 @@
                 До:<strong> @Model.EndDate.DateBgFormat()</strong>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div>
-               Общо приходи с ДДС: <strong>@Model.TotalIncome</strong> 
+                <div class="col-md-8 text-right">
+                    Общо приходи с ДДС:
+                </div>
+                <div class="col-md-4 text-left">
+                    <strong>@Model.TotalIncome.ThousandsSeparate()</strong>
+                </div>
             </div>
             <div>
-                &nbsp;&nbsp;Сума без ДДС:<strong>@((Model.TotalIncome - Model.VAT).ToString("F2"))</strong> 
+                <div class="col-md-8 text-right">
+                    Сума без ДДС:
+                </div>
+                <div class="col-md-4 text-left">
+                    <strong>@((Model.TotalIncome - Model.VAT).ThousandsSeparate())</strong>
+                </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div>
-                сума в брой: <strong>@Model.PaidInCash</strong>
+                <div class="col-md-8 text-right">
+                    Сума в брой:
+                </div>
+                <div class="col-md-4 text-left">
+                    <strong>@Model.PaidInCash.ThousandsSeparate()</strong>
+                </div>
             </div>
             <div>
-                &nbsp;&nbsp;ДДС: <strong>@Model.VAT.ToString("F2")</strong>
+                <div class="col-md-8 text-right">
+                    ДДС:
+                </div>
+                <div class="col-md-4 text-left">
+                    <strong>@Model.VAT.ThousandsSeparate()</strong>
+                </div>
+
             </div>
         </div>
         <div class="pull-right">
@@ -58,10 +79,10 @@
                         @foreach (var payment in Model.Payments)
                         {
                             <tr>
-                                <td class="@(payment.Amount!=payment.TotalPayment?"text-danger":"")">@payment.Amount.ToString("F2")</td>
+                                <td class="@(payment.Amount!=payment.TotalPayment?"text-danger":"")">@payment.Amount.ThousandsSeparate()</td>
                                 <td>@payment.PaidOn.DateBgFormat()</td>
                                 <td>@payment.DeadLine.DateBgFormat()</td>
-                                <td>@payment.TotalPayment.ToString("F2")</td>
+                                <td>@payment.TotalPayment.ThousandsSeparate()</td>
                                 <td>@(payment.CashPayment == true ? "В брой" : "Банка")</td>
                                 <td>@payment.Username</td>
                                 <td>

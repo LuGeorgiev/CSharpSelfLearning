@@ -18,9 +18,9 @@
                 <tr>
                     <td><a asp-controller="Clients" asp-action="DetailsByName" asp-route-name="@rent.ClientName">@rent.ClientName</a></td>
                     <td>@rent.DeadLine.DateBgFormat()</td>
-                    <td>@rent.PaymentForElectricity</td>
-                    <td>@rent.PaymentForWater</td>
-                    <td>@((rent.PaymentForElectricity + rent.PaymentForWater).ToString("F2"))</td>
+                    <td>@rent.PaymentForElectricity.ThousandsSeparate()</td>
+                    <td>@rent.PaymentForWater.ThousandsSeparate()</td>
+                    <td>@((rent.PaymentForElectricity + rent.PaymentForWater).ThousandsSeparate())</td>
                     <td>@string.Join(", ", rent.PropertyRentsNames)</td>
                 </tr>
             }
