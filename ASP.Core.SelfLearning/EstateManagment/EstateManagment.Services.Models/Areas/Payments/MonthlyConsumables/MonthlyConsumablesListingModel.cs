@@ -31,5 +31,7 @@ namespace EstateManagment.Services.Models.Areas.Payments.MonthlyConsumables
 
         [Display(Name = DisplayCashPayment)]
         public bool IsCash { get; set; }
+
+        public int RentAgreementId { get; set; }
     }
 }

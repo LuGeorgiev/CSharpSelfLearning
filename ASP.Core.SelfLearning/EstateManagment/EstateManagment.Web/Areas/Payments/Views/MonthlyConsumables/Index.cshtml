@@ -12,7 +12,7 @@
                 <th scope="col">Краен срок</th>
                 <th scope="col">Клиент</th>
                 <th scope="col">Дължима сума</th>
-                <th scope="col">Имоти</th>
+                <th scope="col">Имоти/Детайли</th>
                 <th scope="col">Извършванен на плащане</th>
                 <th scope="col"></th>
             </tr>
@@ -34,19 +34,12 @@
                     <td>
                         <a asp-area="" asp-controller="Clients" asp-action="DetailsByName" asp-route-name="@monthlyConsumable.Client"><strong>@monthlyConsumable.Client</strong></a>
                     </td>
-                    <td>@monthlyConsumable.TotalConsumablesMonthlyPrice.ThousandsSeparate() лв</td>
-                    @if (monthlyConsumable.Properties.Count() > 0)
-                    {
-                        <td>
-                            @String.Join(", ", monthlyConsumable.Properties)
-                        </td>
-                    }
-                    else
-                    {
-                        <td>
-                            Само паркоместа
-                        </td>
-                    }
+                    <td>@monthlyConsumable.TotalConsumablesMonthlyPrice.ThousandsSeparate()</td>
+                    <td>
+                        <a asp-area="" asp-controller="Rents" asp-action="Details" asp-route-id="@monthlyConsumable.RentAgreementId">
+                            @(monthlyConsumable.Properties.Any() ? string.Join(", ", monthlyConsumable.Properties) : "Само паркоместа")
+                        </a>
+                    </td>
                     <td>
                         <form asp-area="Payments" asp-controller="Payments" asp-action="PayConsumables" method="post" class="form-inline">
                             <div asp-validation-summary="All" class="text-danger"></div>

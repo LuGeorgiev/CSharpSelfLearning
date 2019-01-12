@@ -9,12 +9,12 @@
 <table class="table table-condensed table-striped table-hover">
     <thead class="info">
         <tr>
-            <th scope="col">Краен срок</th>
-            <th scope="col">Клиент</th>
-            <th scope="col">Дължима сума</th>
-            <th scope="col">Имоти</th>
-            <th scope="col">Паркоместа</th>
-            <th scope="col">Плащане</th>
+            <th scope="col" class="col-md-1">Краен срок</th>
+            <th scope="col" class="col-md-1">Клиент</th>
+            <th scope="col" class="col-md-1">Наем</th>
+            <th scope="col" class="col-md-2">Имоти/Детайли</th>
+            <th scope="col" class="col-md-1">Паркоместа</th>
+            <th scope="col" class="col-md-6">Плащане</th>
         </tr>
     </thead>
     <tbody>
@@ -29,35 +29,38 @@
             {
                 rowColor = "";
             }
+            
             <tr class="@rowColor">
                 <td>@rent.DeadLine.DateBgFormat()</td>
                 <td>
                     <a asp-area="" asp-controller="Clients" asp-action="DetailsByName" asp-route-name="@rent.Client"><strong>@rent.Client</strong></a>
                 </td>
-                <td>@rent.TotalPayment.ThousandsSeparate() лв</td>
-                <td>@String.Join(", ", rent.Properties)</td>
-                <td class="text-center">@rent.ParkingSlotQuantity</td>                
+                <td>@rent.TotalPayment.ThousandsSeparate()</td>
+                <td>
+                    <a asp-area="" asp-controller="Rents" asp-action="Details" asp-route-id="@rent.RentAgreementId">
+                        @(rent.Properties.Any() ? string.Join(", ", rent.Properties) : "Само паркоместа")
+                    </a>
+                </td>
+                <td class="text-center">@rent.ParkingSlotQuantity</td>
                 <td>
                     <form asp-controller="Payments" asp-action="Pay" method="post" class="form-inline">
                         <div asp-validation-summary="All" class="text-danger"></div>
-                        <div class="form-group ">
+                        <div class="form-group">
                             <label asp-for="@rent.PaidOn">Дата:</label>
-                            <input asp-for="@rent.PaidOn" name="paidOn" class="form-control"/>
+                            <input asp-for="@rent.PaidOn" name="paidOn" class="form-control" style="width:150px" />
                         </div>
-                        <div class="form-group  col-md-4 col-lg-4">
-                            <div class="input-group">
-                                <div class="input-group-addon">BGN</div>
-                                <input asp-for="@rent.Payment" name="payment" value="@rent.TotalPayment" class="form-control" />
-                                <span asp-validation-for="@rent.Payment" class="text-danger"></span>
-                            </div>
+                        <div class="form-group">
+                            <label asp-for="@rent.Payment">Сума:</label>
+                            <input asp-for="@rent.Payment" name="payment" value="@rent.TotalPayment" class="form-control" style="width:90px" />
+                            <span asp-validation-for="@rent.Payment" class="text-danger"></span>
                         </div>
-                        <div class="form-group ">
+                        <div class="form-group">
                             <label asp-for="@rent.CashPayment"></label>
                             <input asp-for="@rent.CashPayment" name="cashPayment" />
                         </div>
+                        <input type="submit" value="Платено" class="btn btn-success input-sm" />
                         <input type="hidden" name="monthlyRentId" value="@rent.Id" />
                         <input type="hidden" name="totalLeft" value="@rent.TotalPayment" />
-                        <input type="submit" value="Платено" class="btn btn-success" />
                     </form>
                 </td>
             </tr>

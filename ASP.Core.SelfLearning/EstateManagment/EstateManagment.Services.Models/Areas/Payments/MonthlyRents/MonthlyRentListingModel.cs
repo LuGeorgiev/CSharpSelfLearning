@@ -36,5 +36,7 @@ namespace EstateManagment.Services.Models.Areas.Payments.MonthlyRents
         public bool CashPayment { get; set; } = false;
 
         public int ParkingSlotQuantity { get; set; }
+
+        public int RentAgreementId { get; set; }
     }
 }
