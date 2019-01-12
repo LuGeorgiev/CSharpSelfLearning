@@ -22,8 +22,14 @@
     }
     <hr class="col-xs-12">
 
-
-    <h2>@ViewData["Title"]</h2>
+    <div class="row">
+        <div class="col-md-8">
+            <h2>@ViewData["Title"] </h2>
+        </div>
+        <div class="pull-right col-md-4">
+            <a href="javascript:window.history.back()" class="btn btn-default">Назад</a>
+        </div>
+    </div>
 
 
     <partial name="_RentDescription" />
@@ -52,9 +58,7 @@
             <br />
             <input asp-action="UploadContract" asp-route-id="@Model.Id" enctype="form-data" type="submit" class="btn btn-primary" value="Upload Contract" />
         </form>*@
-    <div>
-        <a href="javascript:window.history.back()" class="btn btn-default">Назад</a>
-    </div>
+  
     <hr class="col-xs-12">
     @if (User.IsInRole("Manager"))
     {

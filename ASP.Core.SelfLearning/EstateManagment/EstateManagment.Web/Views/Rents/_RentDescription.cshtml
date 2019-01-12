@@ -26,7 +26,7 @@
                 @foreach (var slot in Model.ParkingSlots)
                 {
                     <li>
-                        Тип : <strong>@slot.Type</strong>, брой: <strong>@slot.Quantity</strong>, цена:<strong> @slot.Price.ThousandsSeparate()</strong>, част на паркинга: <strong>@slot.Area</strong>
+                        Тип : <strong>@slot.Type.GetDescription()</strong>, брой: <strong>@slot.Quantity</strong>, цена:<strong> @slot.Price.ThousandsSeparate()</strong>, място: <strong>@slot.Area.GetDescription()</strong>
                     </li>
                 }
             </ul>

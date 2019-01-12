@@ -7,14 +7,14 @@ namespace EstateManagment.Services.Models.Rents
 {
     public class ParkingSlotShortModel
     {
-        [Display(Name =DisplayParkingSlotType)]
+        //[Display(Name = DisplayParkingSlotType)]
         public ParkingSlotType Type { get; set; }
 
         public string Quantity { get; set; }
 
         public decimal Price { get; set; }
 
-        [Display(Name =DisplayParkingSoltArea)]
+        //[Display(Name = DisplayParkingSoltArea)]
         public ParkingSlotArea Area { get; set; }
     }
 }
