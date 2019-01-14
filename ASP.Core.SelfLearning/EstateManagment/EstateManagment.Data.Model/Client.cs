@@ -53,6 +53,8 @@
 
         public bool IsDeleted { get; set; } = false;
 
+        //public string Email { get; set; }
+
         public virtual ICollection<RentAgreement> RentAgreements { get; set; } = new HashSet<RentAgreement>();
     }
 }

@@ -22,6 +22,7 @@ namespace EstateManagment.Services.Implementation
         {
             var rentAgreements = await this.Db.RentAgreements
                 .Where(x => x.IsActual == isActual)
+                .OrderBy(x=>x.Client.Name)
                 .ToListAsync();
             var model = Mapper.Map<IEnumerable<RentListingViewModel>>(rentAgreements);
 

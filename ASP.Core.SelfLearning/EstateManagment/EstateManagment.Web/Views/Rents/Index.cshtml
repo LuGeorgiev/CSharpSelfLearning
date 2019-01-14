@@ -35,8 +35,7 @@
                             </td>
                             <td>@rent.TotalMonthlyPrice.ThousandsSeparate()</td>
                             <td>
-                                @String.Join(", ", rent.Properties)
-
+                                @(rent.Properties.Any() ? String.Join(", ", rent.Properties) :"Само паркоместа")
                             </td>
                             <td class="text-center"> @rent.ParkingSlotQuantity</td>
                             <td class="pull-right">

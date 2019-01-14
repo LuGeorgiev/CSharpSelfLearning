@@ -23,10 +23,10 @@ namespace EstateManagment.Services.Tests.Implementation
             var db = this.GetDatabase();
             var mapper = this.GetMapper();
 
-            var firstRent = new RentAgreement { Id = 1, MonthlyPrice = 800, IsActual = false };
-            var secondRent = new RentAgreement { Id = 2, MonthlyPrice = 900, IsActual = true };
-            var thirdRent = new RentAgreement { Id = 3, MonthlyPrice = 1900, IsActual = true };
-            var forthRent = new RentAgreement { Id = 4, MonthlyPrice = 2900, IsActual = true };
+            var firstRent = new RentAgreement { Id = 1, MonthlyPrice = 800, IsActual = false, Client= new Client { Id=1, Name = "Asen"} };
+            var secondRent = new RentAgreement { Id = 2, MonthlyPrice = 900, IsActual = true, Client= new Client { Id=2, Name = "Boris"} };
+            var thirdRent = new RentAgreement { Id = 3, MonthlyPrice = 1900, IsActual = true, Client= new Client { Id=3, Name = "Ceco"} };
+            var forthRent = new RentAgreement { Id = 4, MonthlyPrice = 2900, IsActual = true, Client = new Client { Id = 4, Name = "Asen" } };
             await db.RentAgreements.AddRangeAsync(firstRent, secondRent, thirdRent, forthRent);
             await db.SaveChangesAsync();
 
@@ -43,8 +43,8 @@ namespace EstateManagment.Services.Tests.Implementation
                 .HaveCount(3)
                 .And
                 .Match(c =>
-                    c.ElementAt(0).Id == 2
-                    && c.ElementAt(1).Id == 3);
+                    c.ElementAt(0).Id == 4
+                    && c.ElementAt(1).Id == 2);
         }
 
         [Fact]
@@ -54,10 +54,10 @@ namespace EstateManagment.Services.Tests.Implementation
             var db = this.GetDatabase();
             var mapper = this.GetMapper();
 
-            var firstRent = new RentAgreement { Id = 1, MonthlyPrice = 800, IsActual = false };
-            var secondRent = new RentAgreement { Id = 2, MonthlyPrice = 900, IsActual = true };
-            var thirdRent = new RentAgreement { Id = 3, MonthlyPrice = 1900, IsActual = true };
-            var forthRent = new RentAgreement { Id = 4, MonthlyPrice = 2900, IsActual = true };
+            var firstRent = new RentAgreement { Id = 1, MonthlyPrice = 800, IsActual = false, Client= new Client { Id=1, Name = "Asen"} };
+            var secondRent = new RentAgreement { Id = 2, MonthlyPrice = 900, IsActual = true, Client= new Client { Id=2, Name = "Boris"}};
+            var thirdRent = new RentAgreement { Id = 3, MonthlyPrice = 1900, IsActual = true, Client= new Client { Id=3, Name = "Ceco"} };
+            var forthRent = new RentAgreement { Id = 4, MonthlyPrice = 2900, IsActual = true, Client = new Client { Id = 4, Name = "Didi" } };
             await db.RentAgreements.AddRangeAsync(firstRent, secondRent, thirdRent, forthRent);
             await db.SaveChangesAsync();
 

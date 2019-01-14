@@ -63,7 +63,7 @@ namespace EstateManagment.Web.Controllers
                 .Select(x => new SelectListItem
                 {
                     Value = x.Id.ToString(),
-                    Text = x.Name+" "+x.Area+", m2"
+                    Text = x.Name+", "+x.Area+" m2"
                 })
                 .ToList();
 
