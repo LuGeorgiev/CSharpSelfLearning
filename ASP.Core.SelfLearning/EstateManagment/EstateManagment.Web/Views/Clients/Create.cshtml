@@ -33,6 +33,11 @@
                 <span asp-validation-for="AccountableName" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" placeholder="E-mail..."  type="email"/>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="EGN"></label>
                 <input asp-for="EGN" class="form-control" placeholder="ЕГН..." />
                 <span asp-validation-for="EGN" class="text-danger"></span>

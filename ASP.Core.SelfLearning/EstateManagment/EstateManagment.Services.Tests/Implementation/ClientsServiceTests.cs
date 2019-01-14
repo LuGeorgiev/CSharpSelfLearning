@@ -108,9 +108,10 @@ namespace EstateManagment.Services.Tests.Implementation
             const string contactName = "Иван Петров";
             const string telephone = "0895 69 32 14";
             const string notes = "без забележки";
+            const string email = "lupo-66@abv.bg";
 
             //Act
-            var result = await clientService.CreateAsync(name, address, bulstat, EGN, acountableName, contactName, telephone, notes);
+            var result = await clientService.CreateAsync(name, address, bulstat, EGN, acountableName, contactName, telephone, notes,email);
 
             var savedEntry = await db.Clients.FirstOrDefaultAsync(x => x.Name == "Петров 96");
 
@@ -141,13 +142,14 @@ namespace EstateManagment.Services.Tests.Implementation
                 ContactName = "Иван Петров",
                 Telephone = "0895 69 32 14",
                 Notes = "без забележки",
-                IsDeleted = false
+                IsDeleted = false,
+                Email = "lupi@gmail.bg"
             };
             await db.Clients.AddAsync(client);
             await db.SaveChangesAsync();
             var clientService = new ClientsService(db, mapper);
             //Act
-            var result = await clientService.EditAsync(1, "Иван NEW", "София 6 NEW", "Иван Петров", "9865321455", false, "Петров 96", "без забележки", "0895 69 32 14");
+            var result = await clientService.EditAsync(1, "Иван NEW", "София 6 NEW", "Иван Петров", "9865321455", false, "Петров 96", "без забележки", "0895 69 32 14","lupi@gmail.com");
 
             var savedEntry = await db.Clients.FirstOrDefaultAsync(x => x.Name == "Петров 96");
 
@@ -168,7 +170,8 @@ namespace EstateManagment.Services.Tests.Implementation
                 .Should()
                 .Match<Client>(x => x.AccountableName == "Иван NEW"
                     && x.Address == "София 6 NEW"
-                    && x.Telephone == "0895 69 32 14");
+                    && x.Telephone == "0895 69 32 14"
+                    && x.Email == "lupi@gmail.com");
 
         }
 
@@ -189,14 +192,15 @@ namespace EstateManagment.Services.Tests.Implementation
                 ContactName = "Иван Петров",
                 Telephone = "0895 69 32 14",
                 Notes = "без забележки",
-                IsDeleted = false
+                IsDeleted = false,
+                Email = "lupi@gmail.bg"
             };
             await db.Clients.AddAsync(client);
             await db.SaveChangesAsync();
             var clientService = new ClientsService(db, mapper);
             //Act
 
-            var result = await clientService.EditAsync(2, "Иван NEW", "София 6 NEW", "Иван Петров", "9865321455", false, "Петров 96", "без забележки", "0895 69 32 14");
+            var result = await clientService.EditAsync(2, "Иван NEW", "София 6 NEW", "Иван Петров", "9865321455", false, "Петров 96", "без забележки", "0895 69 32 14"," Greda");
 
             var savedEntry = await db.FindAsync<Client>(2);
 

@@ -8,7 +8,6 @@
     <div class="row">
         <div class="col-md-4 ">
             <h3>МОЛ: @Model.AccountableName</h3>
-
         </div>
         <div class="col-md-4">
 
@@ -28,6 +27,7 @@
         </div>
         <div class="col-md-4">
             <h4>Телефон: @Model.Telephone</h4>
+            <h4>Електронен адрес: @(Model.Email!=null?Model.Email:"липсва") </h4>
         </div>
         <div class="col-md-4">
             <p>Бележки: @Model.Notes</p>

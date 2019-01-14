@@ -28,7 +28,7 @@ namespace EstateManagment.Services.Implementation
             return model;
         }
 
-        public async Task<bool> CreateAsync(string name, string address, string bulstat, string egn, string accountableName, string contactName, string telephone, string notes)
+        public async Task<bool> CreateAsync(string name, string address, string bulstat, string egn, string accountableName, string contactName, string telephone, string notes, string email)
         {
             var client = new Client()
             {
@@ -39,7 +39,8 @@ namespace EstateManagment.Services.Implementation
                 AccountableName = accountableName,
                 ContactName = contactName,
                 Telephone = telephone,
-                Notes = notes
+                Notes = notes,
+                Email=email
             };
 
 
@@ -56,7 +57,7 @@ namespace EstateManagment.Services.Implementation
             return true;
         }
 
-        public async Task<bool> EditAsync(int id, string accountableName, string address, string contactName, string egn, bool isDeleted, string name, string notes, string telephone)
+        public async Task<bool> EditAsync(int id, string accountableName, string address, string contactName, string egn, bool isDeleted, string name, string notes, string telephone, string email)
         {
             var client = await this.Db.Clients.
                 FirstOrDefaultAsync(x => x.Id == id);
@@ -74,6 +75,7 @@ namespace EstateManagment.Services.Implementation
             client.Name = name;
             client.Notes = notes;
             client.Telephone = telephone;
+            client.Email = email;
 
             this.Db.Clients.Update(client);
             try

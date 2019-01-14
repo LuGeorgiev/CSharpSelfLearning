@@ -41,7 +41,7 @@ namespace EstateManagment.Web.Controllers
                 return View(model);
             }
             var result = await this.clients
-                .CreateAsync(model.Name, model.Address, model.Bulstat, model.EGN, model.AccountableName, model.ContactName, model.Telephone, model.Notes);
+                .CreateAsync(model.Name, model.Address, model.Bulstat, model.EGN, model.AccountableName, model.ContactName, model.Telephone, model.Notes,model.Email);
             if (!result)
             {
                 TempData.AddErrorMessage("Клиентът не беше създаден!");
@@ -83,7 +83,8 @@ namespace EstateManagment.Web.Controllers
                 model.IsDeleted,
                 model.Name,
                 model.Notes,
-                model.Telephone);
+                model.Telephone,
+                model.Email);
 
             if (!isEdited)
             {

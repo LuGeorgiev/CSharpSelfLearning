@@ -35,6 +35,11 @@
                 <span asp-validation-for="AccountableName" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" type="email" class="form-control" value="@Model.Email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="ContactName"></label>
                 <input asp-for="ContactName" type="text" class="form-control" value="@Model.ContactName" />
                 <span asp-validation-for="ContactName" class="text-danger"></span>

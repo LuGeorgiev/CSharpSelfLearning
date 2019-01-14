@@ -21,6 +21,8 @@ namespace EstateManagment.Services.Models.Clients
                 
         public string Notes { get; set; }
 
+        public string Email { get; set; }
+
         public IEnumerable<RentAgreementShortModel> RentAgreements { get; set; }
     }
 }

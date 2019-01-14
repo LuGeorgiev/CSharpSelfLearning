@@ -54,5 +54,9 @@ namespace EstateManagment.Services.Models.Clients
         [MaxLength(DescriptionMaxLength)]
         [Display(Name = DisplayNotes)]
         public string Notes { get; set; }
+
+        [RegularExpression(RegexEmail,ErrorMessage =ErrorMessageEmail)]
+        [Display(Name =DisplayEmail)]
+        public string Email { get; set; }
     }
 }

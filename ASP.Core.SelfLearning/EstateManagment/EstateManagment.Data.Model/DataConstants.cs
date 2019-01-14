@@ -43,6 +43,7 @@
         public const string RegexTelephone = @"^\+?[0-9\ -]{5,20}$";
         public const string RegexBulstat = @"^(BG|bg)?[0-9]{9,15}$";
         public const string RegexEGN = @"^[0-9]{10}$";
+        public const string RegexEmail = @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$";
 
         public const string DisplayCompanyName = "Име на фирма";
         public const string DisplayClientName = "Име на клиент";
@@ -95,6 +96,7 @@
         public const string DisplayFrontParking = "Преден паркинг";
         public const string DisplayBackParking = "Заден паркинг";
         public const string DisplayNoReserved = "Без запазено място";
+        public const string DisplayEmail = "Електронна поща";
 
 
 
@@ -104,5 +106,6 @@
         public const string ErrorMessageLatinNames = "Само букви на кирилица или латиница";
         public const string ErrorMessageTelephone = "С или без '+' в началото последван от цифри,интервали и тирета";
         public const string ErrorMessagePayment = "Плащането трябва да е положитено и НЕ по-голямо от дължимата сума";
+        public const string ErrorMessageEmail = "Невалиден адрес на електронната поща";
     }
 }

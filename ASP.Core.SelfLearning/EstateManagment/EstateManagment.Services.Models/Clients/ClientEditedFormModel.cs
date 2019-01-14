@@ -54,5 +54,8 @@ namespace EstateManagment.Services.Models.Clients
 
         [Display(Name = DisplayIsDeletedClient)]
         public bool IsDeleted { get; set; }
+
+        [RegularExpression(RegexEmail)]
+        public string Email { get; set; }
     }
 }
