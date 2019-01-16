@@ -143,8 +143,7 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
             {
                 return false;
             }
-            monthlyRent.IsPaid = true;
-            this.Db.MonthlyPaymentRents.Update(monthlyRent);
+            this.Db.MonthlyPaymentRents.Remove(monthlyRent);
 
             try
             {

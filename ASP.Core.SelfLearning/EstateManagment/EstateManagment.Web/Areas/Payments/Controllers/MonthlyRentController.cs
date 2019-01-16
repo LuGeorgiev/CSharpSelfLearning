@@ -89,14 +89,14 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
         public async Task<IActionResult> Terminate(int id)
         {
             bool isTerminated = await this.monthlyRents.TerminateAsync(id);
-            if (isTerminated)
+            if (!isTerminated)
             {
                 TempData.AddErrorMessage("Премахването на месечния наем не беше успешно!");
                 return RedirectToAction("Index");
             }
             TempData.AddSuccessMessage("Премахването на месечния наем беше успешно!");
             return RedirectToAction("Index"); ;
-        }
+        }      
 
     }
 }

@@ -377,7 +377,7 @@ namespace EstateManagment.Services.Tests.Areas.Payments.Implementation
                 .BeTrue();
             termnatedMontlyRent
                 .Should()
-                .Match<MonthlyPaymentRent>(x=>x.IsPaid==true);
+                .BeNull();
         }
 
         [Fact]
