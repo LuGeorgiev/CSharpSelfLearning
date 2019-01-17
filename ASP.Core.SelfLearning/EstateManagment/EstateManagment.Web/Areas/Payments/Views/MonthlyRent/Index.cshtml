@@ -57,7 +57,7 @@
                                 <label asp-for="@rent.CashPayment"></label>
                                 <input asp-for="@rent.CashPayment" name="cashPayment" />
                             </div>
-                            <input type="submit" value="Платено" class="btn btn-success" />
+                            <input type="submit" value="Плати" class="btn btn-success" />
                             <input type="hidden" name="monthlyRentId" value="@rent.Id" />
                             <input type="hidden" name="totalLeft" value="@rent.TotalPayment" />
                         </form>
@@ -66,11 +66,10 @@
                     {
                         <div class="col-md-1">
                             <form asp-area="Payments" asp-controller="MonthlyRent" asp-action="Edit" asp-route-id="@rent.Id" class="form-inline" method="get">
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary ">
-                                        <i class="fas fa-pencil-alt"></i>
-                                    </button>
-                                </div>
+                                @*<button type="submit" class="btn btn-primary ">
+                                        <i class="fas fa-pencil-alt">Редакитай</i>
+                                    </button>*@
+                                <input type="submit" value="Промени" class="btn btn-primary" />
                             </form>
                         </div>
                     }

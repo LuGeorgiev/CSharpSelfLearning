@@ -120,21 +120,29 @@ namespace EstateManagment.Services.Tests.Areas.Payments.Implementation
             var db = GetDatabase();
             var mapper = GetMapper();
             
-            var secndRent = new MonthlyPaymentRent { Id = 12, DeadLine = new DateTime(2017, 11, 6), TotalPayment = 300 };
+            var secndRent = new MonthlyPaymentRent
+            {
+                Id = 12,
+                DeadLine = new DateTime(2017, 11, 6),
+                TotalPayment = 240,
+                RentAgreement = new RentAgreement {MonthlyPrice=200, ParkingSlots = new List<ParkingSlot>() }
+            };
             var thirdRent = new MonthlyPaymentRent { Id = 13, DeadLine = new DateTime(2016, 11, 12), TotalPayment = 400 };
             var forthRent = new MonthlyPaymentRent { Id = 14, DeadLine = new DateTime(2015, 12, 15), TotalPayment = 500 };
             await db.MonthlyPaymentRents.AddRangeAsync( secndRent, thirdRent, forthRent);
             await db.SaveChangesAsync();
             var rentPaymentService = new MonthlyRentsService(mapper, db);
+
             //Act
             var result = await rentPaymentService.CreateNextMonthPayment(12);
             var createdRent = await db.MonthlyPaymentRents
                 .FirstOrDefaultAsync(x => x.DeadLine == new DateTime(2017, 12, 6) 
-                    && x.TotalPayment==300);
+                    && x.TotalPayment==240);
             //Assert
             result
                 .Should()
                 .BeTrue();
+
             createdRent
                 .Should()
                 .NotBeNull();

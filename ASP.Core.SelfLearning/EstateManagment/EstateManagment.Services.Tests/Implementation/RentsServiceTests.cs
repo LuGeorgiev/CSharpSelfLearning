@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
 using EstateManagment.Data;
 using EstateManagment.Data.Models;
+using EstateManagment.Services.Areas.Payments;
 using EstateManagment.Services.Implementation;
 using EstateManagment.Services.Models.Rents;
 using EstateManagment.Web.Common.Mapper;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +32,7 @@ namespace EstateManagment.Services.Tests.Implementation
             await db.RentAgreements.AddRangeAsync(firstRent, secondRent, thirdRent, forthRent);
             await db.SaveChangesAsync();
 
-            var rentService = new RentsService(mapper, db);
+            var rentService = new RentsService(mapper, db, null);
 
             var result = await rentService.AllAsync();
 
@@ -61,7 +63,7 @@ namespace EstateManagment.Services.Tests.Implementation
             await db.RentAgreements.AddRangeAsync(firstRent, secondRent, thirdRent, forthRent);
             await db.SaveChangesAsync();
 
-            var rentService = new RentsService(mapper, db);
+            var rentService = new RentsService(mapper, db, null);
 
             var result = await rentService.AllAsync(false);
 
@@ -115,7 +117,11 @@ namespace EstateManagment.Services.Tests.Implementation
                 OtherSlots = 6,
                 OtherMonthPrice = 6
             };
-            var rentService = new RentsService(mapper, db);
+            var monthlyRentMock = new Mock<IMonthlyRentsService>();
+            monthlyRentMock
+                .Setup(mr => mr.CreateAsync(It.IsAny<int>(), It.IsAny<decimal>(), It.IsAny<DateTime>()))
+                .ReturnsAsync ( true );
+            var rentService = new RentsService(mapper, db, monthlyRentMock.Object);
             //Act
             var result = await rentService.CreateAsync(createModel);
             var createdRent = await db.RentAgreements
@@ -152,7 +158,7 @@ namespace EstateManagment.Services.Tests.Implementation
             await db.RentAgreements.AddAsync(firstRent);
             await db.SaveChangesAsync();
 
-            var rentService = new RentsService(mapper, db);
+            var rentService = new RentsService(mapper, db,null);
 
             var result = await rentService.EditDescriptionsAsync("Property Description", "Parking description", 1);
             var editedRent = await db.RentAgreements.FindAsync(1);
@@ -179,7 +185,7 @@ namespace EstateManagment.Services.Tests.Implementation
             await db.RentAgreements.AddAsync(firstRent);
             await db.SaveChangesAsync();
 
-            var rentService = new RentsService(mapper, db);
+            var rentService = new RentsService(mapper, db, null);
 
             var result = await rentService.EditDescriptionsAsync("Property Description", "Parking description", 2);
             var editedRent = await db.RentAgreements.FindAsync(2);
@@ -216,7 +222,7 @@ namespace EstateManagment.Services.Tests.Implementation
             };
             await db.RentAgreements.AddAsync(firstRent);
             await db.SaveChangesAsync();
-            var rentService = new RentsService(mapper, db);
+            var rentService = new RentsService(mapper, db, null);
 
             var result = await rentService.GetDetailsAsync(1);
 
@@ -260,7 +266,7 @@ namespace EstateManagment.Services.Tests.Implementation
             };
             await db.RentAgreements.AddAsync(firstRent);
             await db.SaveChangesAsync();
-            var rentService = new RentsService(mapper, db);
+            var rentService = new RentsService(mapper, db, null);
 
             var result = await rentService.GetDetailsAsync(2);
 
@@ -287,7 +293,7 @@ namespace EstateManagment.Services.Tests.Implementation
             };
             await db.RentAgreements.AddAsync(firstRent);
             await db.SaveChangesAsync();
-            var rentService = new RentsService(mapper, db);
+            var rentService = new RentsService(mapper, db, null);
 
             var result = await rentService.TerminateAsync(1);
             var tereminatedRent = await db.RentAgreements.FindAsync(1);
@@ -318,7 +324,7 @@ namespace EstateManagment.Services.Tests.Implementation
             };
             await db.RentAgreements.AddAsync(firstRent);
             await db.SaveChangesAsync();
-            var rentService = new RentsService(mapper, db);
+            var rentService = new RentsService(mapper, db, null);
 
             var result = await rentService.TerminateAsync(2);
 
@@ -350,7 +356,7 @@ namespace EstateManagment.Services.Tests.Implementation
             };
             await db.RentAgreements.AddAsync(firstRent);
             await db.SaveChangesAsync();
-            var rentService = new RentsService(mapper, db);
+            var rentService = new RentsService(mapper, db, null);
             var contractContent = new byte[] { 121 };
             //Act
             var result = await rentService.UploadContractAsync(contractContent,1);
@@ -382,7 +388,7 @@ namespace EstateManagment.Services.Tests.Implementation
             };
             await db.RentAgreements.AddAsync(firstRent);
             await db.SaveChangesAsync();
-            var rentService = new RentsService(mapper, db);
+            var rentService = new RentsService(mapper, db, null);
             var contractContent = new byte[] { 121 };
             //Act
             var result = await rentService.UploadContractAsync(contractContent, 2);

@@ -72,7 +72,7 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
                 ApplyVAT = monthlyRent.ApplyVAT,
                 DeadLine = monthlyRent.DeadLine.AddMonths(1),
                 RentAgreementId = monthlyRent.RentAgreementId,
-                TotalPayment = monthlyRent.TotalPayment
+                TotalPayment = (monthlyRent.RentAgreement.MonthlyPrice+monthlyRent.RentAgreement.ParkingSlots.Sum(x=>x.Price*x.Quantity)) * 1.2m
             });
             try
             {

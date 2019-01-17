@@ -6,6 +6,7 @@ using AutoMapper;
 using EstateManagment.Data;
 using EstateManagment.Data.Models;
 using EstateManagment.Data.Models.Enums;
+using EstateManagment.Services.Areas.Payments;
 using EstateManagment.Services.Models.Rents;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,9 +14,12 @@ namespace EstateManagment.Services.Implementation
 {
     public class RentsService : BaseService, IRentsService
     {
-        public RentsService(IMapper mapper, EstateManagmentContext db) 
+        private readonly IMonthlyRentsService monthlyRents;
+
+        public RentsService(IMapper mapper, EstateManagmentContext db, IMonthlyRentsService monthlyRents) 
             : base(mapper, db)
         {
+            this.monthlyRents = monthlyRents;
         }
 
         public async Task<IEnumerable<RentListingViewModel>> AllAsync(bool isActual=true)
@@ -29,7 +33,7 @@ namespace EstateManagment.Services.Implementation
             return model;
         }
 
-        public async Task<bool> CreateAsync(CreateRentModel model)
+        public async Task<bool?> CreateAsync(CreateRentModel model)
         {
             var rentAgreement = new RentAgreement()
             {
@@ -114,7 +118,7 @@ namespace EstateManagment.Services.Implementation
             }
             rentAgreement.ParkingSlots = listParkingSlots;
 
-            await this.Db.RentAgreements.AddAsync(rentAgreement);
+            var result = await this.Db.RentAgreements.AddAsync(rentAgreement);
             try
             {
                 await this.Db.SaveChangesAsync();
@@ -122,6 +126,17 @@ namespace EstateManagment.Services.Implementation
             catch (Exception)
             {
                 return false;
+            }
+            int deadlineYear = DateTime.UtcNow.Year;
+            int deadlineMonth = DateTime.UtcNow.Month;
+            var deadline = new DateTime(deadlineYear, deadlineMonth, 5);
+
+            var totalPrice = result.Entity.MonthlyPrice + result.Entity.ParkingSlots.Sum(x => x.Price * x.Quantity);
+            var isPaymentCreated = await this.monthlyRents.CreateAsync(result.Entity.Id, totalPrice, deadline);
+
+            if (!isPaymentCreated)
+            {
+                return null;
             }
 
             return true;

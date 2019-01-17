@@ -85,14 +85,19 @@ namespace EstateManagment.Web.Controllers
                 return this.View(model);
             }
 
-            bool isCreated = await this.rents.CreateAsync(model);
-            if (!isCreated)
+            bool? isCreated = await this.rents.CreateAsync(model);
+            if (isCreated != null && !isCreated.Value)
             {
                 TempData.AddErrorMessage(WrongInput);
                 return this.RedirectToAction("Index");
             }
+            else if (isCreated == null)
+            {
+                TempData.AddErrorMessage("Договорът за наем беше въведен, но първото плащане НЕ беше генерирано");
+                return this.RedirectToAction("Index");
+            }
 
-            TempData.AddSuccessMessage("Договорът за наем беше успешно създаден!");
+            TempData.AddSuccessMessage("Договорът за наем беше успешно създаден! Първото плащане беше генерирано!");
             return this.RedirectToAction("Index");
         }
 

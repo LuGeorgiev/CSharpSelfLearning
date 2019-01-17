@@ -8,10 +8,12 @@ namespace EstateManagment.Services.Models.Areas.Payments.MonthlyRents
 {
     public class CreateMonthlyRentFormViewModel
     {
+        static int yearDeadLine = DateTime.UtcNow.AddMonths(1).Year;
+        static int monthDeadLine = DateTime.UtcNow.AddMonths(1).Month;
 
         [DataType(DataType.Date)]
         [Display(Name = DisplayDeadLine)]
-        public DateTime DeadLine { get; set; } = DateTime.UtcNow.AddMonths(1);
+        public DateTime DeadLine { get; set; } = new DateTime(yearDeadLine, monthDeadLine, 10);   //DateTime.UtcNow.AddMonths(1);
 
         [Required]
         [Range(typeof(decimal), MinPayment, MaxPayment)]

@@ -8,7 +8,7 @@ namespace EstateManagment.Services
     {
         Task<IEnumerable<RentListingViewModel>> AllAsync(bool isActual=true);
 
-        Task<bool> CreateAsync(CreateRentModel model);
+        Task<bool?> CreateAsync(CreateRentModel model);
 
         Task<RentDetailsModel> GetDetailsAsync(int id);
 
