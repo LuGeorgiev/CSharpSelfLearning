@@ -1,0 +1,54 @@
+﻿@model IEnumerable<RentListingViewModel>
+@{
+    ViewData["Title"] = "Прекратени договори за наем:";
+}
+
+<h2>@ViewData["Title"]</h2>
+<div>   
+    <a href="javascript:window.history.back()" class="btn btn-default">Назад</a>   
+</div>
+
+@if (Model != null && Model.Count() > 0)
+{
+    <div class="row">
+        <div class="col-md-12 col-lg-12">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col" class="col-md-2">Клиент</th>
+                        <th scope="col" class="col-md-2">Цена на наем без ДДС</th>
+                        <th scope="col" class="col-md-3">Имоти</th>
+                        <th scope="col" class="col-md-2">Паркоместа</th>
+                        <th scope="col" class="col-md-3"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var rent in Model)
+                    {
+                        <tr>
+                            <td>
+                                <a asp-controller="Clients" asp-action="DetailsByName" asp-route-name="@rent.Client">@rent.Client</a>
+                            </td>
+                            <td>@rent.TotalMonthlyPrice.ThousandsSeparate()</td>
+                            <td>
+                                @(rent.Properties.Any() ? String.Join(", ", rent.Properties) : "Само паркоместа")
+                            </td>
+                            <td > @rent.ParkingSlotQuantity броя</td>
+                            <td class="pull-right">
+                                <a asp-controller="Rents" asp-action="Details" asp-route-id="@rent.Id" class="btn btn-default">Детайли</a>
+                                @if (User.IsInRole("Manager"))
+                                {                                    
+                                    <a asp-controller="Rents" asp-action="ChangeActivStatus" asp-route-id="@rent.Id" class="btn btn-primary">Активиране</a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+else
+{
+    <h3>Няма неактивни договори</h3>
+}

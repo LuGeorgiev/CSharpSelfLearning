@@ -188,8 +188,15 @@ namespace EstateManagment.Services.Implementation
             {
                 return false;
             }
-            rentAgreement.IsActual = false;
-            rentAgreement.EndDate = DateTime.UtcNow;
+            if (rentAgreement.IsActual)
+            {
+                rentAgreement.IsActual = false;
+                rentAgreement.EndDate = DateTime.UtcNow;
+            }
+            else
+            {
+                rentAgreement.IsActual = true;
+            }
 
             this.Db.RentAgreements.Update(rentAgreement);
             try

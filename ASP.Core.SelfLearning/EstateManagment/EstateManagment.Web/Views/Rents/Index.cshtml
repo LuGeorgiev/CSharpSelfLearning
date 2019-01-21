@@ -10,6 +10,10 @@
         <a asp-controller="Rents" asp-action="Create" class="btn btn-success">Създаване на нов договор</a>
     }
     <a href="javascript:window.history.back()" class="btn btn-default">Назад</a>
+    @if (User.IsInRole("Manager"))
+    {
+        <a asp-action="Inactive" class="btn btn-default ">Прекратени договори</a>
+    }
 </div>
 
 @if (Model != null && Model.Count() > 0)
@@ -22,7 +26,7 @@
                         <th scope="col" class="col-lg-1 col-md-1">Клиент</th>
                         <th scope="col" class="col-lg-1 col-md-1">Цена без ДДС</th>
                         <th scope="col" class="col-lg-2 col-md-2">Имоти</th>
-                        <th scope="col" class="col-lg-1 col-md-1">Брой паркоместа</th>
+                        <th scope="col" class="col-lg-1 col-md-1">Паркоместа</th>
                         <th scope="col" class="col-lg-6 col-md-6"></th>
                     </tr>
                 </thead>
@@ -35,9 +39,9 @@
                             </td>
                             <td>@rent.TotalMonthlyPrice.ThousandsSeparate()</td>
                             <td>
-                                @(rent.Properties.Any() ? String.Join(", ", rent.Properties) :"Само паркоместа")
+                                @(rent.Properties.Any() ? String.Join(", ", rent.Properties) : "Само паркоместа")
                             </td>
-                            <td class="text-center"> @rent.ParkingSlotQuantity</td>
+                            <td class="text-center"> @rent.ParkingSlotQuantity броя</td>
                             <td class="pull-right">
                                 <a asp-controller="Rents" asp-action="Details" asp-route-id="@rent.Id" class="btn btn-default">Детайли</a>
                                 @if (User.IsInRole("Manager"))

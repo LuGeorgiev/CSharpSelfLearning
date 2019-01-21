@@ -101,7 +101,6 @@ namespace EstateManagment.Web.Controllers
             return this.RedirectToAction("Index");
         }
 
-
         [Authorize(Roles = ManagerRole)]
         public async Task<IActionResult> Terminate(int id)
         {
@@ -115,14 +114,14 @@ namespace EstateManagment.Web.Controllers
         }
           
         [Authorize(Roles = ManagerRole)]
-        public async Task<IActionResult> ConfirmTerminate(int id)
+        public async Task<IActionResult> ChangeActivStatus(int id)
         {
             var isTerminated = await this.rents.TerminateAsync(id);
             if (!isTerminated)
             {
                 return this.BadRequest();
             }
-            TempData.AddSuccessMessage("Добоворът беше успешно изтрит!");
+            TempData.AddSuccessMessage("Статусът на Добовора беше успешно променен!");
             return Redirect("/Rents/Index");
         }
 
@@ -168,6 +167,14 @@ namespace EstateManagment.Web.Controllers
             }
             TempData.AddSuccessMessage("Договорът беше качен успешно!");
             return Redirect("/Rents/Index");
+        }
+
+        [Authorize(Roles = ManagerRole)]
+        public async Task<IActionResult> Inactive()
+        {
+            var model = await this.rents.AllAsync(false);
+
+            return View(model);
         }
     }
 }
