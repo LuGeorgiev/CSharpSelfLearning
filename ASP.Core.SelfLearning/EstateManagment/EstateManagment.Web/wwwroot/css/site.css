@@ -35,4 +35,13 @@ body {
         display: none;
     }
 }
+/*My styles*/
+.btn.edit-rent-btn {
+    margin-top: 10px;
+    margin-left:0;
+}
+.form-rent {
+    margin-right:0;
+}
+
 

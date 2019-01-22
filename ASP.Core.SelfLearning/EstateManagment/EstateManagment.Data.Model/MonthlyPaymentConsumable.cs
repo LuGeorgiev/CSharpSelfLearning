@@ -43,6 +43,10 @@
         [Display(Name = DisplayDeadLine)]
         public DateTime DeadLine { get; set; } = DateTime.UtcNow.AddMonths(1);
 
+        [Range(InvoiceMinNumber, InvoiceMaxNumber)]
+        [Display(Name = DisplayInvoiceNumber)]
+        public int? InvoiceNumber { get; set; }
+
         [Required]
         public int RentAgreementId { get; set; }
 

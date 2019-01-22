@@ -165,5 +165,26 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
             var model = this.Mapper.Map<IEnumerable<OverdueMontlyRentsListingModel>>(overdueRents);
             return model;
         }
+
+        public async Task<int?> SentNumberAsync(InvoiceBindingModel model)
+        {
+            var monthlyRent = await this.Db.FindAsync<MonthlyPaymentRent>(model.Id);
+            if (monthlyRent ==null)
+            {
+                return null;
+            }
+            monthlyRent.InvoiceNumber = model.InvoiceNumber;
+            try
+            {
+                this.Db.MonthlyPaymentRents.Update(monthlyRent);
+                await this.Db.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+
+            return monthlyRent.InvoiceNumber;
+        }
     }
 }

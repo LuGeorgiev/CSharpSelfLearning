@@ -11,9 +11,9 @@
         <tr>
             <th scope="col" class="col-md-1">Краен срок</th>
             <th scope="col" class="col-md-1">Клиент</th>
-            <th scope="col" class="col-md-1">Наем</th>
-            <th scope="col" class="col-md-2">Имоти/Детайли</th>
-            <th scope="col" class="col-md-1">Паркоместа</th>
+            <th scope="col" class="col-md-2">Имоти и детайли</th>
+            <th scope="col" class="col-md-1">Паркоместа / Наем</th>
+            <th scope="col" class="col-md-1">Номер на фактура</th>
             <th scope="col" class="col-md-6">Дата на плащане сума и начин</th>
         </tr>
     </thead>
@@ -35,13 +35,24 @@
                 <td>
                     <a asp-area="" asp-controller="Clients" asp-action="DetailsByName" asp-route-name="@rent.Client"><strong>@rent.Client</strong></a>
                 </td>
-                <td>@rent.TotalPayment.ThousandsSeparate()</td>
                 <td>
                     <a asp-area="" asp-controller="Rents" asp-action="Details" asp-route-id="@rent.RentAgreementId">
                         @(rent.Properties.Any() ? string.Join(", ", rent.Properties) : "Само паркоместа")
                     </a>
                 </td>
-                <td class="text-center">@rent.ParkingSlotQuantity</td>
+                <td>
+                    <div>
+                        @rent.ParkingSlotQuantity места
+                    </div>
+                    <div>
+                        <strong> @rent.TotalPayment.ThousandsSeparate()</strong>
+                    </div>
+                </td>
+                <td>
+                    <a name="@rent.Id" value="@rent.Id" class="btn btn-default edit-rent-btn">
+                        @(rent.InvoiceNumber == null ? "Без номер" : @rent.InvoiceNumber.ToString())
+                    </a>
+                </td>
                 <td>
                     <div class="col-md-10">
                         <form asp-controller="Payments" asp-action="Pay" method="post" class="form-inline">
@@ -57,19 +68,23 @@
                                 <label asp-for="@rent.CashPayment"></label>
                                 <input asp-for="@rent.CashPayment" name="cashPayment" />
                             </div>
-                            <input type="submit" value="Плати" class="btn btn-success" />
+                            @*<input type="submit" value="Плати" class="btn btn-success" />*@
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-check"></i>
+                            </button>
                             <input type="hidden" name="monthlyRentId" value="@rent.Id" />
                             <input type="hidden" name="totalLeft" value="@rent.TotalPayment" />
                         </form>
+
                     </div>
                     @if (User.IsInRole("Manager"))
                     {
                         <div class="col-md-1">
-                            <form asp-area="Payments" asp-controller="MonthlyRent" asp-action="Edit" asp-route-id="@rent.Id" class="form-inline" method="get">
-                                @*<button type="submit" class="btn btn-primary ">
-                                        <i class="fas fa-pencil-alt">Редакитай</i>
-                                    </button>*@
-                                <input type="submit" value="Промени" class="btn btn-primary" />
+                            <form asp-area="Payments" asp-controller="MonthlyRent" asp-action="Edit" asp-route-id="@rent.Id" class="form-inline form-rent" method="get">
+                                <button type="submit" class="btn btn-primary edit-rent-btn">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </button>
+                                @*<input type="submit" value="Редактирай" class="btn btn-primary edit-rent-btn" id="edit-rent-btn"/>*@
                             </form>
                         </div>
                     }

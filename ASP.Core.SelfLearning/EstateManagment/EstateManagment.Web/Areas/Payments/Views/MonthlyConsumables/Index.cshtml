@@ -52,14 +52,21 @@
                                 <input asp-for="@monthlyConsumable.IsCash" name="isCash" />
                             </div>
                             <input type="hidden" name="id" value="@monthlyConsumable.Id" />
-                            <input type="submit" value="Платено" class="btn btn-success" />
+                            @*<input type="submit" value="Платено" class="btn btn-success" />*@
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-check"></i>
+                            </button>
                         </form>
                     </td>
                     @if (User.IsInRole("Manager"))
                     {
                         <td>
-                            <a asp-controller="MonthlyConsumables" asp-action="Edit" asp-route-id="@monthlyConsumable.Id" class="btn btn-primary ">Редакция</a>
-                            <a asp-controller="MonthlyConsumables" asp-action="Terminate" asp-route-id="@monthlyConsumable.Id" class="btn btn-danger ">Прекрати</a>
+                            <a asp-controller="MonthlyConsumables" asp-action="Edit" asp-route-id="@monthlyConsumable.Id" class="btn btn-primary edit-rent-btn">
+                                <i class="fas fa-pencil-alt"></i>
+                            </a>
+                            <a asp-controller="MonthlyConsumables" asp-action="Terminate" asp-route-id="@monthlyConsumable.Id" class="btn btn-danger edit-rent-btn">
+                                <i class="far fa-trash-alt"></i>
+                            </a>
                         </td>
                     }
                 </tr>

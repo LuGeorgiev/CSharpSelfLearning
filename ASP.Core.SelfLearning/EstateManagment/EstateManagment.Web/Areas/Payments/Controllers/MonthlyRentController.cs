@@ -96,7 +96,24 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
             }
             TempData.AddSuccessMessage("Премахването на месечния наем беше успешно!");
             return RedirectToAction("Index"); ;
-        }      
+        }
+
+        public async Task<int?> SetInvoiceNumber(InvoiceBindingModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                TempData.AddErrorMessage(WrongInput);
+                return null;
+            }
+            var invoiceNumber = await this.monthlyRents.SentNumberAsync(model);
+            if (invoiceNumber==null)
+            {
+                TempData.AddErrorMessage(WrongInput);
+                return null;
+            }
+
+            return invoiceNumber.Value;
+        }
 
     }
 }

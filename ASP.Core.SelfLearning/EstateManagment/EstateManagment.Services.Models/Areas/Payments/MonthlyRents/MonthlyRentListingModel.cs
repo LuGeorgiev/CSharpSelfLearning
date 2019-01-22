@@ -35,6 +35,10 @@ namespace EstateManagment.Services.Models.Areas.Payments.MonthlyRents
         [Display(Name = DisplayCashPayment)]
         public bool CashPayment { get; set; } = false;
 
+        [Range(InvoiceMinNumber, InvoiceMaxNumber)]
+        [Display(Name = DisplayInvoiceNumber)]
+        public int? InvoiceNumber { get; set; }
+
         public int ParkingSlotQuantity { get; set; }
 
         public int RentAgreementId { get; set; }

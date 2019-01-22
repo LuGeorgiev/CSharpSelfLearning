@@ -38,6 +38,9 @@
         public const string MinPayment = "0";
         public const string MaxPayment = "1000000";
 
+        public const int InvoiceMinNumber = 1;
+        public const int InvoiceMaxNumber = 999999;
+
         public const string RegexLatinNames = @"^[A-za-z\u0400-\u044F\ ]+$";
         public const string RegexLatinCompanyNames = @"^[A-za-z\u0400-\u044F\ 0-9\?\!\.""'\-\(\)\+,]+$";
         public const string RegexTelephone = @"^\+?[0-9\ -]{5,20}$";
@@ -97,6 +100,7 @@
         public const string DisplayBackParking = "Заден паркинг";
         public const string DisplayNoReserved = "Без запазено място";
         public const string DisplayEmail = "Електронна поща";
+        public const string DisplayInvoiceNumber = "Номер на фактура";
 
 
 

@@ -22,5 +22,7 @@ namespace EstateManagment.Services.Areas.Payments
         Task<bool> TerminateAsync(int id);
 
         Task<IEnumerable<OverdueMontlyRentsListingModel>> AllOverdueRentsAsync();
+
+        Task<int?> SentNumberAsync(InvoiceBindingModel model);
     }
 }

@@ -32,6 +32,10 @@ namespace EstateManagment.Services.Models.Areas.Payments.MonthlyConsumables
         [Display(Name = DisplayCashPayment)]
         public bool IsCash { get; set; }
 
+        [Range(InvoiceMinNumber, InvoiceMaxNumber)]
+        [Display(Name = DisplayInvoiceNumber)]
+        public int? InvoiceNumber { get; set; }
+
         public int RentAgreementId { get; set; }
     }
 }

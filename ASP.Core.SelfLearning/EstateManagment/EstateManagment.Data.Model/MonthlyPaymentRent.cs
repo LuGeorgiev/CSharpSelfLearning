@@ -27,6 +27,10 @@
         [Display(Name =DisplayApplyVat)]
         public bool ApplyVAT { get; set; }
 
+        [Range(InvoiceMinNumber,InvoiceMaxNumber)]
+        [Display(Name =DisplayInvoiceNumber)]
+        public int? InvoiceNumber { get; set; }
+
         public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
 
         [Required]
