@@ -12,5 +12,6 @@ namespace EstateManagment.Services.Models.Areas.Payments.MonthlyRents
         public int InvoiceNumber { get; set; }
 
         public int Id { get; set; }
+
     }
 }

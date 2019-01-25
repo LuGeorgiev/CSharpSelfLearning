@@ -98,21 +98,23 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
             return RedirectToAction("Index"); ;
         }
 
-        public async Task<int?> SetInvoiceNumber(InvoiceBindingModel model)
+        public async Task<InvoiceBindingModel> SetInvoiceNumber(InvoiceBindingModel model)
         {
             if (!ModelState.IsValid)
             {
                 TempData.AddErrorMessage(WrongInput);
-                return null;
+                model.Id = 0;
+                return model;
             }
-            var invoiceNumber = await this.monthlyRents.SentNumberAsync(model);
-            if (invoiceNumber==null)
+            var returnModel = await this.monthlyRents.SentNumberAsync(model);
+            if (returnModel == null)
             {
                 TempData.AddErrorMessage(WrongInput);
-                return null;
+                model.Id = 0;
+                return model;
             }
 
-            return invoiceNumber.Value;
+            return returnModel;
         }
 
     }

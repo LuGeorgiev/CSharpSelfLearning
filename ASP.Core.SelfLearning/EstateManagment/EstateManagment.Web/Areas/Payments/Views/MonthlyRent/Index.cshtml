@@ -13,8 +13,8 @@
             <th scope="col" class="col-md-1">Клиент</th>
             <th scope="col" class="col-md-2">Имоти и детайли</th>
             <th scope="col" class="col-md-1">Паркоместа / Наем</th>
-            <th scope="col" class="col-md-1">Номер на фактура</th>
-            <th scope="col" class="col-md-6">Дата на плащане сума и начин</th>
+            <th scope="col" class="col-md-2">Номер на фактура</th>
+            <th scope="col" class="col-md-5">Дата на плащане сума и начин</th>
         </tr>
     </thead>
     <tbody>
@@ -49,12 +49,26 @@
                     </div>
                 </td>
                 <td>
-                    <a name="@rent.Id" value="@rent.Id" class="btn btn-default edit-rent-btn">
+                    @if (User.IsInRole("Manager"))
+                    {
+                        <div>
+                            <div class="col-md-9">
+                                <input value="@(rent.InvoiceNumber == null ? "00000" : @rent.InvoiceNumber.ToString())"
+                                       type="text" style="width:90px"  class="form-control"/>
+                            </div>
+                            <button id="@rent.Id" class="btn btn-success btn-invoice">
+                                <i class="fas fa-check"></i>
+                            </button>
+
+                        </div>
+                    }
+                    else
+                    {
                         @(rent.InvoiceNumber == null ? "Без номер" : @rent.InvoiceNumber.ToString())
-                    </a>
+                    }
                 </td>
                 <td>
-                    <div class="col-md-10">
+                    <div class="col-md-11">
                         <form asp-controller="Payments" asp-action="Pay" method="post" class="form-inline">
                             <div asp-validation-summary="All" class="text-danger"></div>
                             <div class="form-group">
@@ -68,7 +82,6 @@
                                 <label asp-for="@rent.CashPayment"></label>
                                 <input asp-for="@rent.CashPayment" name="cashPayment" />
                             </div>
-                            @*<input type="submit" value="Плати" class="btn btn-success" />*@
                             <button type="submit" class="btn btn-success">
                                 <i class="fas fa-check"></i>
                             </button>
@@ -84,7 +97,6 @@
                                 <button type="submit" class="btn btn-primary edit-rent-btn">
                                     <i class="fas fa-pencil-alt"></i>
                                 </button>
-                                @*<input type="submit" value="Редактирай" class="btn btn-primary edit-rent-btn" id="edit-rent-btn"/>*@
                             </form>
                         </div>
                     }
@@ -97,4 +109,45 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+    <script type="text/javascript">
+
+        $('.btn-invoice').on('click', function () {
+            //console.log($(this));
+            const id = $(this).attr('id');
+            let invoiceNumber = $(this).prev().find('input').val();
+
+            if (isInt(invoiceNumber)) {
+                invoiceNumber = parseInt(invoiceNumber, 10);
+                $.ajax({
+                    method: "Get",
+                    url: "/Payments/MonthlyRent/SetInvoiceNumber",
+                    data: {
+                        id: id,
+                        invoiceNumber: invoiceNumber
+                    }
+                })
+                    .then(appendNumber)
+                    .catch(handleError);
+
+            } else {
+                handleError();
+            }
+        });
+
+        function handleError() {
+            alert("Деси въведи цяло число!")
+        }
+
+        function appendNumber(data) {
+            const number = data.invoiceNumber;
+            const id = data.id;
+            console.log("Успешно въведено!")
+        }
+
+        function isInt(value) {
+            var x = parseFloat(value);
+            return !isNaN(value) && (x | 0) === x;
+        }
+    </script>
 }
