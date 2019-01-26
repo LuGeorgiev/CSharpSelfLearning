@@ -6,6 +6,10 @@
 
 <h2>@ViewData["Title"]</h2>
 
+<section id="loadingBox" class="notification">Зареждане ...</section>
+
+<section id="infoBox" class="notification">Информация</section>
+
 <table class="table table-condensed table-striped table-hover">
     <thead class="info">
         <tr>
@@ -54,9 +58,9 @@
                         <div>
                             <div class="col-md-9">
                                 <input value="@(rent.InvoiceNumber == null ? "00000" : @rent.InvoiceNumber.ToString())"
-                                       type="text" style="width:90px"  class="form-control"/>
+                                       type="text" style="width:90px" class="form-control input-invoice" />
                             </div>
-                            <button id="@rent.Id" class="btn btn-success btn-invoice">
+                            <button id="@rent.Id" class="btn btn-success btn-invoice edit-rent-btn">
                                 <i class="fas fa-check"></i>
                             </button>
 
@@ -64,18 +68,25 @@
                     }
                     else
                     {
-                        @(rent.InvoiceNumber == null ? "Без номер" : @rent.InvoiceNumber.ToString())
+                        <div class="text-left">
+                            <strong>
+                                @(rent.InvoiceNumber == null ?
+                                    "Няма номер" :
+                                    "№ " + @rent.InvoiceNumber.ToString())
+
+                            </strong>
+                        </div>
                     }
                 </td>
                 <td>
-                    <div class="col-md-11">
-                        <form asp-controller="Payments" asp-action="Pay" method="post" class="form-inline">
+                    <div class="col-md-11 form-rent">
+                        <form asp-controller="Payments" asp-action="Pay" method="post" class="form-inline form-rent">
                             <div asp-validation-summary="All" class="text-danger"></div>
                             <div class="form-group">
-                                <input asp-for="@rent.PaidOn" name="paidOn" class="form-control" style="width:150px" />
+                                <input asp-for="@rent.PaidOn" name="paidOn" class="form-control formdate" />
                             </div>
                             <div class="form-group">
-                                <input asp-for="@rent.Payment" name="payment" value="@rent.TotalPayment" class="form-control" style="width:90px" />
+                                <input asp-for="@rent.Payment" name="payment" value="@rent.TotalPayment" class="form-control form-money" />
                                 <span asp-validation-for="@rent.Payment" class="text-danger"></span>
                             </div>
                             <div class="form-group">
@@ -92,8 +103,8 @@
                     </div>
                     @if (User.IsInRole("Manager"))
                     {
-                        <div class="col-md-1">
-                            <form asp-area="Payments" asp-controller="MonthlyRent" asp-action="Edit" asp-route-id="@rent.Id" class="form-inline form-rent" method="get">
+                        <div class="col-md-1 ">
+                            <form asp-area="Payments" asp-controller="MonthlyRent" asp-action="Edit" asp-route-id="@rent.Id" class="form-inline" method="get">
                                 <button type="submit" class="btn btn-primary edit-rent-btn">
                                     <i class="fas fa-pencil-alt"></i>
                                 </button>
@@ -113,7 +124,6 @@
     <script type="text/javascript">
 
         $('.btn-invoice').on('click', function () {
-            //console.log($(this));
             const id = $(this).attr('id');
             let invoiceNumber = $(this).prev().find('input').val();
 
@@ -127,8 +137,8 @@
                         invoiceNumber: invoiceNumber
                     }
                 })
-                    .then(appendNumber)
-                    .catch(handleError);
+                    .then(showInfo(`Успешно въведена фактура номер: ${invoiceNumber}`))
+                    .catch((err) => console.log(err));
 
             } else {
                 handleError();
@@ -139,15 +149,22 @@
             alert("Деси въведи цяло число!")
         }
 
-        function appendNumber(data) {
-            const number = data.invoiceNumber;
-            const id = data.id;
-            console.log("Успешно въведено!")
-        }
-
         function isInt(value) {
             var x = parseFloat(value);
             return !isNaN(value) && (x | 0) === x;
         }
+
+        $(document).on({
+            ajaxStart: () => $("#loadingBox").show(),
+            ajaxStop: () => $('#loadingBox').fadeOut()
+        });
+
+        function showInfo(message) {
+            let infoBox = $('#infoBox');
+            infoBox.text(message);
+            infoBox.show();
+            setTimeout(() => infoBox.fadeOut(), 3000);
+        }
+
     </script>
 }

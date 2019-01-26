@@ -40,8 +40,40 @@ body {
     margin-top: 10px;
     margin-left:0;
 }
-.form-rent {
-    margin-right:0;
+input.input-invoice {
+    margin-top: 10px;
+    margin-left: 0;
+}
+.form-group>input.formdate {
+    width:150px;
+}
+.form-group > input.form-money {
+    width: 90px;
+}
+td>div.form-rent {
+    width: 390px;
+}
+
+#loadingBox {
+    background: #7CB3E9;
+}
+
+#infoBox {
+    background: #393;
+}
+
+.notification {
+    font-size: 1.5em;
+    float: right;
+    color: #ffffff;
+    padding: 0.5em 2em 0.5em 2em;
+    margin: 1em;
+    display: none;
+    position: fixed;
+    top: 1em;
+    right: 0;
+    text-align: center;
+    border-radius: 3px;
 }
 
 
