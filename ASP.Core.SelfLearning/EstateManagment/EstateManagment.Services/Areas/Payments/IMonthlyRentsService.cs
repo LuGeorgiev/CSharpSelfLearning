@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace EstateManagment.Services.Areas.Payments
 {
-    public interface IMonthlyRentsService
+    public interface IMonthlyRentsService : IInvoiceNumberService
     {
         Task<CreateMonthlyRentFormViewModel> GetDetailsAsync(int rentAgreementId);
 
@@ -22,7 +22,5 @@ namespace EstateManagment.Services.Areas.Payments
         Task<bool> TerminateAsync(int id);
 
         Task<IEnumerable<OverdueMontlyRentsListingModel>> AllOverdueRentsAsync();
-
-        Task<InvoiceBindingModel> SentNumberAsync(InvoiceBindingModel model);
     }
 }

@@ -116,6 +116,5 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
 
             return returnModel;
         }
-
     }
 }

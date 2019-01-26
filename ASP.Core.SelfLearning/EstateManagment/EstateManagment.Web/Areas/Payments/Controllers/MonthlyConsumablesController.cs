@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using EstateManagment.Services.Areas.Payments;
 using EstateManagment.Services.Models.Areas.Payments.MonthlyConsumables;
+using EstateManagment.Services.Models.Areas.Payments.MonthlyRents;
 using EstateManagment.Web.Common.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -110,6 +111,25 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
             }
             TempData.AddErrorMessage("Редакцията беше успешна");
             return RedirectToAction("Index");
+        }
+
+        public async Task<InvoiceBindingModel> SetInvoiceNumber(InvoiceBindingModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                TempData.AddErrorMessage(WrongInput);
+                model.Id = 0;
+                return model;
+            }
+            var returnModel = await this.consumables.SentNumberAsync(model);
+            if (returnModel == null)
+            {
+                TempData.AddErrorMessage(WrongInput);
+                model.Id = 0;
+                return model;
+            }
+
+            return returnModel;
         }
     }
 }

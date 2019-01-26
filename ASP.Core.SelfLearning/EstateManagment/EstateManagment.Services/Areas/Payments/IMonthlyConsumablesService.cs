@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace EstateManagment.Services.Areas.Payments
 {
-    public interface IMonthlyConsumablesService
+    public interface IMonthlyConsumablesService:IInvoiceNumberService
     {
         Task<CreateMonthlyConsumablesModel> GetCreateInfoAsync(int rentId);
 
@@ -17,7 +17,6 @@ namespace EstateManagment.Services.Areas.Payments
         Task<bool> TerminateAsync(int id);
 
         Task<bool> EditAsync(EditMontlyConsumablesModel model);
-
 
         Task<IEnumerable<OverdueMonthlyConsumablesListingModel>> AllOverduConsumablesAsync();
     }

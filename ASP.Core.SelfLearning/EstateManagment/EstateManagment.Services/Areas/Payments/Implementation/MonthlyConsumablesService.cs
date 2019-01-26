@@ -3,6 +3,7 @@ using EstateManagment.Data;
 using EstateManagment.Data.Models;
 using EstateManagment.Services.Implementation;
 using EstateManagment.Services.Models.Areas.Payments.MonthlyConsumables;
+using EstateManagment.Services.Models.Areas.Payments.MonthlyRents;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -132,6 +133,27 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
                 .ToListAsync();
 
             var model = Mapper.Map<IEnumerable<OverdueMonthlyConsumablesListingModel>>(overduConsumables);
+            return model;
+        }
+
+        public async Task<InvoiceBindingModel> SentNumberAsync(InvoiceBindingModel model)
+        {
+            var monthlyConsumable = await this.Db.FindAsync<MonthlyPaymentConsumable>(model.Id);
+            if (monthlyConsumable == null)
+            {
+                return null;
+            }
+            monthlyConsumable.InvoiceNumber = model.InvoiceNumber;
+            this.Db.Update(monthlyConsumable);
+            try
+            {
+                await this.Db.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
             return model;
         }
     }
