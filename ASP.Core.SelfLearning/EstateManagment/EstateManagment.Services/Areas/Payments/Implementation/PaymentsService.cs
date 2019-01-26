@@ -47,26 +47,68 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
 
         public async Task<FilterConsumablesViewModel> FilterConsumablesAsync(FilterConsumablesBindingModel bindModel)
         {
-            var payments = await this.Db.Payments
-                .Where(x => x.MonthlyPaymentConsumableId!=null && x.PaidOn >= bindModel.StartDate && x.PaidOn <= bindModel.EndDate)
-                .OrderBy(x=>x.PaidOn)
+            var filterDetails = "Аргументите на филтъра са: ";
+            var payments = new List<Payment>();
+
+            //Filter by deadline or payment date
+            if (bindModel.FilterByDeadline)
+            {
+                payments = await this.Db.Payments
+                .Where(x => x.MonthlyPaymentConsumableId != null 
+                    && x.MonthlyPaymentConsumable.DeadLine >= bindModel.StartDate 
+                    && x.MonthlyPaymentConsumable.DeadLine <= bindModel.EndDate)
+                .OrderBy(x => x.MonthlyPaymentConsumable.DeadLine)
                 .ToListAsync();
-            if (payments==null)
+
+                filterDetails += "по крайна дата, ";
+            }
+            else
+            {
+                payments = await this.Db.Payments
+                    .Where(x => x.MonthlyPaymentConsumableId != null && x.PaidOn >= bindModel.StartDate && x.PaidOn <= bindModel.EndDate)
+                    .OrderBy(x => x.PaidOn)
+                    .ToListAsync();
+                filterDetails += "по дата на плащане, ";
+            }
+
+            if (payments == null)
             {
                 return null;
             }
-            if (bindModel.Client!=0)
+
+            //Filter By clinet
+            if (bindModel.Client != 0)
             {
-                payments =  payments
+                payments = payments
                     .Where(x => x.MonthlyPaymentConsumable.RentAgreement.ClientId == bindModel.Client)
                     .ToList();
+                var client = await this.Db.Clients.FirstOrDefaultAsync(x => x.Id == bindModel.Client);
+                if (client != null)
+                {
+                    filterDetails += $"само за клиент {client.Name}, ";
+                }
+                else
+                {
+                    filterDetails += "търсеният клиента няма такива плащания, ";
+                }
+            }
+            else
+            {
+                filterDetails += "всички клиенти, ";
+
             }
 
+            //Filter only money given in cash
             if (bindModel.OnlyCash)
             {
                 payments = payments
                     .Where(x => x.CashPayment == true)
                     .ToList();
+                filterDetails += "пари платени само в борй, ";
+            }
+            else
+            {
+                filterDetails += "всякакви плащания,  ";
             }
             var paymentsListingModel = Mapper.Map<IEnumerable<PaymentConsumablesListingModel>>(payments);
 
@@ -74,53 +116,133 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
             {
                 StartDate = bindModel.StartDate,
                 EndDate = bindModel.EndDate,
-                Payments = paymentsListingModel
+                Payments = paymentsListingModel,
+                FilterDetails=filterDetails
             };
             return model;
         }
 
         public async Task<FilterRentsViewModel> FilterRentsAsync(FilterRentBindingModel bindModel)
         {
-            var payments = await this.Db.Payments
-                .Where(x => x.MonthlyPaymentRentId != null && x.PaidOn >= bindModel.StartDate && x.PaidOn <= bindModel.EndDate)
-                .OrderBy(x=>x.PaidOn)
-                .ToListAsync();
-            if (payments==null)
+            string filteredDetails = "Аргументите на филтъра са: ";
+            var payments = new List<Payment>();
+            if (bindModel.FilterByDeadline)
+            {
+                payments = await this.Db.Payments
+                   .Where(x => x.MonthlyPaymentRentId != null
+                       && x.MonthlyPaymentRent.DeadLine >= bindModel.StartDate
+                       && x.MonthlyPaymentRent.DeadLine <= bindModel.EndDate)
+                   .OrderBy(x => x.MonthlyPaymentRent.DeadLine)
+                   .ToListAsync();
+                filteredDetails += "по крайна дата, ";
+            }
+            else
+            {
+                payments = await this.Db.Payments
+                   .Where(x => x.MonthlyPaymentRentId != null
+                       && x.PaidOn >= bindModel.StartDate
+                       && x.PaidOn <= bindModel.EndDate)
+                   .OrderBy(x => x.PaidOn)
+                   .ToListAsync();
+                filteredDetails += "по дата на плащане, ";
+
+            }
+
+
+            if (payments == null)
             {
                 return null;
             }
+            //Filter only chash
             if (bindModel.OnlyCash)
             {
                 payments = payments
                     .Where(x => x.CashPayment == true)
                     .ToList();
+                filteredDetails += "пари платени само в борй, ";
             }
-            if (bindModel.Client!=0)
+            else
+            {
+                filteredDetails += "всякакви плащания,  ";
+            }
+
+            // Filter by client if needed
+            if (bindModel.Client != 0)
             {
                 payments = payments
                     .Where(x => x.MonthlyPaymentRent.RentAgreement.ClientId == bindModel.Client)
                     .ToList();
+                var client = await this.Db.Clients.FirstOrDefaultAsync(x => x.Id == bindModel.Client);
+                if (client != null)
+                {
+                    filteredDetails += $"само за клиент {client.Name}, ";
+                }
+                else
+                {
+                    filteredDetails += "търсеният клиента няма такива плащания, ";
+                }
             }
-            if (bindModel.Property!=0)
+            else
+            {
+                filteredDetails += "всички клиенти, ";
+
+            }
+
+            // Filter by property if needed
+            if (bindModel.Property != 0)
             {
                 payments = payments
                     .Where(x => x.MonthlyPaymentRent.RentAgreement.PropertyRents.Any(p => p.PropertyId == bindModel.Property))
                     .ToList();
+                var filterProperty = await this.Db.Properties.FirstOrDefaultAsync(x => x.Id == bindModel.Property);
+                if (filterProperty != null)
+                {
+                    filteredDetails += $"само за имот {filterProperty.Name}, ";
+                }
+                else
+                {
+                    filteredDetails += "търсеният имот няма такива плащания, ";
+                }
             }
-            if (bindModel.ParkingArea!=0)
+            else
+            {
+                filteredDetails += "всички имоти, ";
+
+            }
+
+            // Filter by parking area if needed
+            if (bindModel.ParkingArea != 0)
             {
                 payments = payments
                     .Where(x => x.MonthlyPaymentRent.RentAgreement.ParkingSlots.All(y => (int)y.Area == bindModel.ParkingArea))
                     .ToList();
+                if (bindModel.ParkingArea == 1)
+                {
+                    filteredDetails += "на преден паркинг!";
+                }
+                else if (bindModel.ParkingArea == 2)
+                {
+                    filteredDetails += "на заден паркинг!";
+                }
+                else
+                {
+                    filteredDetails += "без запазена зона!";
+                }
+            }
+            else
+            {
+                filteredDetails += "всички зони за паркиране!";
             }
             var paymentsListingModel = Mapper.Map<IEnumerable<PaymentRentListingModel>>(payments);
 
             var model = new FilterRentsViewModel()
             {
-                StartDate=bindModel.StartDate,
+                StartDate = bindModel.StartDate,
                 EndDate = bindModel.EndDate,
-                Payments = paymentsListingModel
+                Payments = paymentsListingModel,
+                FilterDetails = filteredDetails
             };
+
             return model;
         }
 
@@ -140,7 +262,7 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
                 MonthlyPaymentConsumableId = monthlyConsumables.Id,
                 PaidOn = paidOn,
                 UserId = userId,
-                CreatedOn=DateTime.UtcNow
+                CreatedOn = DateTime.UtcNow
             });
             try
             {
@@ -210,11 +332,11 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
         public async Task<MonthlyPaymentStatisticView> MonthIncomeStatistic(DateTime month)
         {
             var payments = await this.Db.Payments
-                .Where(x => x.PaidOn.Month == month.Month && x.PaidOn.Year==month.Year)
+                .Where(x => x.PaidOn.Month == month.Month && x.PaidOn.Year == month.Year)
                 .ToListAsync();
 
             var monthlyPaymentRentIds = payments
-                .Where(x=>x.MonthlyPaymentRent!=null)
+                .Where(x => x.MonthlyPaymentRent != null)
                 .Select(x => x.MonthlyPaymentRent.Id)
                 .Distinct()
                 .ToList();
@@ -240,8 +362,8 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
 
                 VAT = payments
                     .Where(x => x.MonthlyPaymentRentId != null && x.MonthlyPaymentRent.ApplyVAT == true)
-                    .Sum(x => (x.Amount - x.Amount / 1.2m)),   
-                
+                    .Sum(x => (x.Amount - x.Amount / 1.2m)),
+
                 IncomeBackParking = Db.MonthlyPaymentRents
                     .Where(x => monthlyPaymentRentIds.Contains(x.Id))
                     .Sum(x => x.RentAgreement
@@ -249,14 +371,14 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
                         .Where(y => y.Area == ParkingSlotArea.BackParking)
                         .Sum(y => y.Price * y.Quantity)),
 
-                
+
                 IncomeFronParking = Db.MonthlyPaymentRents
                     .Where(x => monthlyPaymentRentIds.Contains(x.Id))
                     .Sum(x => x.RentAgreement
                         .ParkingSlots
                         .Where(y => y.Area == ParkingSlotArea.FrontParking)
                         .Sum(y => y.Price * y.Quantity)),
-                
+
                 IncomeNoReservedParking = Db.MonthlyPaymentRents
                     .Where(x => monthlyPaymentRentIds.Contains(x.Id))
                     .Sum(x => x.RentAgreement

@@ -130,6 +130,7 @@
             if (isInt(invoiceNumber)) {
                 invoiceNumber = parseInt(invoiceNumber, 10);
                 $.ajax({
+                    //TODO change to post
                     method: "Get",
                     url: "/Payments/MonthlyRent/SetInvoiceNumber",
                     data: {

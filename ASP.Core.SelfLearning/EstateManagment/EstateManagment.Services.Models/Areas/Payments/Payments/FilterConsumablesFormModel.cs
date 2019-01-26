@@ -26,6 +26,8 @@ namespace EstateManagment.Services.Models.Areas.Payments.Payments
 
         public bool OnlyCash { get; set; }
 
+        public bool FilterByDeadline { get; set; } = true;
+
         public SelectListItem Client { get; set; }
     }
 }

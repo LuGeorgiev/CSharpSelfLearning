@@ -5,12 +5,14 @@ using System.Linq;
 namespace EstateManagment.Services.Models.Areas.Payments.Payments
 {
     public class FilterRentsViewModel
-    {
+    {    
         public IEnumerable<PaymentRentListingModel> Payments { get; set; }
 
         public DateTime StartDate { get; set; }
 
         public DateTime EndDate { get; set; }
+
+        public string FilterDetails { get; set; }
 
         public decimal TotalIncome
         {

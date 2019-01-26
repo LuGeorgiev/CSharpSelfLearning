@@ -123,6 +123,7 @@ else
             if (isInt(invoiceNumber)) {
                 invoiceNumber = parseInt(invoiceNumber, 10);
                 $.ajax({
+                    //TODO change to post
                     method: "Get",
                     url: "/Payments/MonthlyConsumables/SetInvoiceNumber",
                     data: {
@@ -138,7 +139,7 @@ else
             }
         });
 
-        function handleError() {
+        function handleError() {1
             alert("Деси въведи цяло число!")
         }
 

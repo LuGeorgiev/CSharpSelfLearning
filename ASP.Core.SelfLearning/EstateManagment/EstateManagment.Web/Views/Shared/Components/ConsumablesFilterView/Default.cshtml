@@ -1,34 +1,42 @@
 ﻿@model FilterConsumablesFormModel
 
-<div class="panel panel-warning" >
+<div class="panel panel-warning">
     <div class="panel-heading">Филтриране по дата и клиент:</div>
     <div class="panel-body">
         <form method="get" class="form-inline">
             <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="StartDate"></label>
+            <div class="form-group col-md-3">
+                <label asp-for="StartDate">От</label>
                 <input asp-for="StartDate" class="form-control" />
                 <span asp-validation-for="StartDate" class="text-danger"></span>
             </div>
-            <div class="form-group ">
-                <label asp-for="EndDate"></label>
+            <div class="form-group col-md-3">
+                <label asp-for="EndDate">До</label>
                 <input asp-for="EndDate" class="form-control" />
                 <span asp-validation-for="EndDate" class="text-danger"></span>
             </div>
-            <div class="form-group ">
-                <label asp-for="ActiveClients"></label>
+            <div class="form-group col-md-3">
+                <label asp-for="ActiveClients">Клиент</label>
                 <select asp-for="Client" asp-items="@Model.ActiveClients" class="form-control"> </select>
             </div>
-            <div class="form-group ">
-                <label asp-for="OnlyCash">Само в брой</label>
-                <input asp-for="OnlyCash"/>
-            </div>
+            <div class="form-group col-md-2">
+                <div class="pull-right">
+                    <label asp-for="OnlyCash">Само в брой</label>
+                    <input asp-for="OnlyCash" />
 
-            <button asp-area="Payments" asp-action="FilterConsumables" asp-controller="Payments" type="submit" class="btn btn-info"><strong>Филтър</strong></button>
+                </div>
+                <div class="pull-right">
+                    <label asp-for="FilterByDeadline">По крайна дата</label>
+                    <input asp-for="FilterByDeadline" />
+                </div>
+            </div>
+            <div class="col-md-1">
+                <button asp-area="Payments" asp-action="FilterConsumables" asp-controller="Payments" type="submit" class="btn btn-info"><strong>Филтър</strong></button>
+            </div>
 
         </form>
     </div>
-</div>     
+</div>
 
 
 @section Scripts {

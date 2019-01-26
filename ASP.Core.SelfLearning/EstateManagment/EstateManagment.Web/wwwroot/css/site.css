@@ -53,15 +53,12 @@ input.input-invoice {
 td>div.form-rent {
     width: 390px;
 }
-
 #loadingBox {
     background: #7CB3E9;
 }
-
 #infoBox {
     background: #393;
 }
-
 .notification {
     font-size: 1.5em;
     float: right;

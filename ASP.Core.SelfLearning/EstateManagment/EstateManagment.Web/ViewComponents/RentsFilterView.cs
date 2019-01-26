@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using static EstateManagment.Data.Models.DataConstants;
+
 namespace EstateManagment.Web.ViewComponents
 {
     [ViewComponent(Name = "RentsFilterView")]
@@ -62,17 +64,17 @@ namespace EstateManagment.Web.ViewComponents
                 },
                 new SelectListItem
                 {
-                    Text =ParkingSlotArea.FrontParking.ToString(),
+                    Text =DisplayFrontParking,
                     Value = "1"
                 },
                  new SelectListItem
                 {
-                    Text =ParkingSlotArea.BackParking.ToString(),
+                    Text =DisplayBackParking,
                     Value = "2"
                 },
                   new SelectListItem
                 {
-                    Text =ParkingSlotArea.NoReserved.ToString(),
+                    Text =DisplayNoReserved,
                     Value = "3"
                 },
                  

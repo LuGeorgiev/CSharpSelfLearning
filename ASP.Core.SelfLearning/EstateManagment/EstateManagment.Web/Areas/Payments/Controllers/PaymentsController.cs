@@ -97,6 +97,7 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
             }
 
             var model = await this.payments.FilterConsumablesAsync(bindModel);
+            TempData.AddSuccessMessage(model.FilterDetails);
             return View(model);
         }
 
@@ -109,6 +110,7 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
             }
 
             var model = await this.payments.FilterRentsAsync(bindModel);
+            TempData.AddSuccessMessage(model.FilterDetails);
             return View(model);
         }
 

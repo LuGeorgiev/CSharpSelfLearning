@@ -17,9 +17,10 @@ namespace EstateManagment.Services.Models.Areas.Payments.Payments
         [Display(Name = DisplayEndDate)]
         [DataType(DataType.Date)]
         [AfterDate(nameof(StartDate))]
-        public DateTime EndDate { get; set; }               
+        public DateTime EndDate { get; set; }
 
-       
+        public bool FilterByDeadline { get; set; }
+
         public bool OnlyCash { get; set; } 
 
         [Required]

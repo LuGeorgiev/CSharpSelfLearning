@@ -12,6 +12,8 @@ namespace EstateManagment.Services.Models.Areas.Payments.Payments
 
         public DateTime EndDate { get; set; }
 
+        public string FilterDetails { get; set; }
+
         public decimal TotalIncome
         {
             get
