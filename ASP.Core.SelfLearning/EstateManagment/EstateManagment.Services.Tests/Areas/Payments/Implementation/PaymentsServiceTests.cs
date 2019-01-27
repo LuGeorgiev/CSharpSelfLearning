@@ -755,14 +755,16 @@ namespace EstateManagment.Services.Tests.Areas.Payments.Implementation
                         Id =1,
                         PaymentForElectricity =250,
                         PaymentForWater =150,
-                        Payment = new Payment {Id=1,Amount=400,PaidOn=new DateTime(2018,6,6),CashPayment = true} 
+                        Payment = new Payment {Id=1,Amount=400,PaidOn=new DateTime(2018,6,6),CashPayment = true}, //this payment to be include in statistic
+                        DeadLine = new DateTime(2018,6,3)                        
                     },
                      new MonthlyPaymentConsumable
                     {
                         Id =2,
                         PaymentForElectricity =150,
                         PaymentForWater =150,
-                        Payment = new Payment {Id=2,Amount=300,PaidOn=new DateTime(2018,7,6),CashPayment = false}
+                        Payment = new Payment {Id=2,Amount=300,PaidOn=new DateTime(2018,7,6),CashPayment = false},
+                        DeadLine = new DateTime(2018,7,3)
                     },
                 },
                 MonthlyRents = new List<MonthlyPaymentRent>
@@ -773,9 +775,11 @@ namespace EstateManagment.Services.Tests.Areas.Payments.Implementation
                         ApplyVAT=true,
                         Payments = new List<Payment>
                         {
-                            new Payment {Id=3,PaidOn = new DateTime(2018,6,6),Amount = 238, CashPayment=true },
-                            new Payment {Id=4,PaidOn = new DateTime(2018,6,10),Amount = 200, CashPayment=false },
-                        }
+                            new Payment {Id=3,PaidOn = new DateTime(2018,6,6),Amount = 238, CashPayment=true }, //this payment to be include in statistic
+                            new Payment {Id=4,PaidOn = new DateTime(2018,6,10),Amount = 200, CashPayment=false }, //this payment to be include in statistic
+                        },
+                        DeadLine = new DateTime(2018,6,3)
+
                     },
                     new MonthlyPaymentRent
                     {
@@ -784,7 +788,8 @@ namespace EstateManagment.Services.Tests.Areas.Payments.Implementation
                         Payments = new List<Payment>
                         {
                             new Payment {Id=5,PaidOn = new DateTime(2018,7,6),Amount = 438, CashPayment=false },
-                        }
+                        },
+                        DeadLine = new DateTime(2018,7,3)
                     }
                 }                
             };
@@ -805,14 +810,17 @@ namespace EstateManagment.Services.Tests.Areas.Payments.Implementation
                         Id =3,
                         PaymentForElectricity =250,
                         PaymentForWater =150,
-                        Payment = new Payment {Id=6,Amount=400,PaidOn=new DateTime(2018,8,6),CashPayment = true}
+                        Payment = new Payment {Id=6,Amount=400,PaidOn=new DateTime(2018,8,6),CashPayment = true}, 
+                        DeadLine = new DateTime(2018,8,3)
+
                     },
                      new MonthlyPaymentConsumable
                     {
                         Id =4,
                         PaymentForElectricity =150,
                         PaymentForWater =150,
-                        Payment = new Payment {Id=7,Amount=300,PaidOn=new DateTime(2018,9,6),CashPayment = false}
+                        Payment = new Payment {Id=7,Amount=300,PaidOn=new DateTime(2018,9,6),CashPayment = false},
+                        DeadLine = new DateTime(2018,9,3)
                     },
                 },
                 MonthlyRents = new List<MonthlyPaymentRent>
@@ -825,7 +833,10 @@ namespace EstateManagment.Services.Tests.Areas.Payments.Implementation
                         {
                             new Payment {Id=8,PaidOn = new DateTime(2018,8,6),Amount = 238, CashPayment=true },
                             new Payment {Id=9,PaidOn = new DateTime(2018,8,10),Amount = 200, CashPayment=false },
-                        }
+
+                        },
+                        DeadLine = new DateTime(2018,8,3)
+
                     },
                     new MonthlyPaymentRent
                     {
@@ -834,10 +845,13 @@ namespace EstateManagment.Services.Tests.Areas.Payments.Implementation
                         Payments = new List<Payment>
                         {
                             new Payment {Id=10,PaidOn = new DateTime(2018,9,6),Amount = 438, CashPayment=false },
-                        }
+                        },
+                        DeadLine = new DateTime(2018,9,3)
+
                     }
                 }
             };
+
             await db.RentAgreements.AddRangeAsync(firstRent, secondRent);
             await db.SaveChangesAsync();
             var paymentService = new PaymentsService(mapper, db, null);

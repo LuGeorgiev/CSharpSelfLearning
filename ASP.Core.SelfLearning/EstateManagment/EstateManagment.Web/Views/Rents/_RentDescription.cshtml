@@ -61,7 +61,7 @@
 <hr />
 
 <div class="col-lg-8 col-md-8 bg-info col-lg-offset-1" ">
-    <h4>Обща месечна сума без ДДС: <strong>@Model.TotalMonthlyPrice.ToString("F2")</strong> лв.</h4>
-
+    <h4>Обща месечна сума без ДДС: <strong>@Model.TotalMonthlyPrice.ThousandsSeparate()</strong> лв.</h4>
+    <h4>Обща месечна сума c ДДС: <strong>@((1.2m * Model.TotalMonthlyPrice).ThousandsSeparate())</strong> лв.</h4>
 </div>
 

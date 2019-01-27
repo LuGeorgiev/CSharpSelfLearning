@@ -54,8 +54,8 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
             if (bindModel.FilterByDeadline)
             {
                 payments = await this.Db.Payments
-                .Where(x => x.MonthlyPaymentConsumableId != null 
-                    && x.MonthlyPaymentConsumable.DeadLine >= bindModel.StartDate 
+                .Where(x => x.MonthlyPaymentConsumableId != null
+                    && x.MonthlyPaymentConsumable.DeadLine >= bindModel.StartDate
                     && x.MonthlyPaymentConsumable.DeadLine <= bindModel.EndDate)
                 .OrderBy(x => x.MonthlyPaymentConsumable.DeadLine)
                 .ToListAsync();
@@ -117,7 +117,7 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
                 StartDate = bindModel.StartDate,
                 EndDate = bindModel.EndDate,
                 Payments = paymentsListingModel,
-                FilterDetails=filterDetails
+                FilterDetails = filterDetails
             };
             return model;
         }
@@ -331,8 +331,14 @@ namespace EstateManagment.Services.Areas.Payments.Implementation
 
         public async Task<MonthlyPaymentStatisticView> MonthIncomeStatistic(DateTime month)
         {
+
             var payments = await this.Db.Payments
-                .Where(x => x.PaidOn.Month == month.Month && x.PaidOn.Year == month.Year)
+                .Where(x => (x.MonthlyPaymentConsumable != null
+                                && x.MonthlyPaymentConsumable.DeadLine.Month == month.Month
+                                && x.MonthlyPaymentConsumable.DeadLine.Year == month.Year)
+                         || (x.MonthlyPaymentRent != null
+                                && x.MonthlyPaymentRent.DeadLine.Month == month.Month
+                                && x.MonthlyPaymentRent.DeadLine.Year == month.Year))
                 .ToListAsync();
 
             var monthlyPaymentRentIds = payments

@@ -1,0 +1,125 @@
+﻿@model FilteredParkingInfo
+@{
+    ViewData["Title"] = $"{Model.FilterDetails}";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h2 class="panel-title">@ViewData["Title"]</h2>
+    </div>
+    <div class="panel-body">
+
+        <div class="col-md-6">
+            Всички приходи с ДДС: <strong>@Model.TotalIncome.ThousandsSeparate() лв</strong>
+        </div>
+        <div class="col-md-6">
+            В брой с ДДС: <strong>@Model.TotalIncomeCash.ThousandsSeparate() лв</strong>
+        </div>
+    </div>
+    @if (Model.InfoByMonths != null && Model.InfoByMonths.Count > 0)
+    {
+        <div class="row">
+            <div class="col-md-12 col-lg-12">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="col-md-2">Гидина и месец</th>
+                            <th scope="col" class="col-md-10 text-center">Данни от филтрирането</th>
+
+                    </thead>
+                    <tbody>
+                        @foreach (var kvp in Model.InfoByMonths)
+                        {
+                            <tr>
+                                <td>@kvp.Key.Substring(0, 4) / @kvp.Key.Substring(4)</td>
+                                <td>
+                                    <table class="table table-condensed table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Вид паркомясто</th>
+                                                <th scope="col">Бройки</th>
+                                                <th scope="col">Приход с ДДС</th>
+                                                <th scope="col">От тях в брой:@kvp.Value.CashTotal</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (kvp.Value.BigTrucksQty != 0)
+                                            {
+                                                <tr>
+                                                    <td>Голями камиони</td>
+                                                    <td>@kvp.Value.BigTrucksQty</td>
+                                                    <td>@kvp.Value.BigTrucksTotal</td>
+                                                    <td></td>
+                                                </tr>
+                                            }
+                                            @if (kvp.Value.BusesQty != 0)
+                                            {
+                                                <tr>
+                                                    <td>Рейсове</td>
+                                                    <td>@kvp.Value.BusesQty</td>
+                                                    <td>@kvp.Value.BusesTotal</td>
+                                                    <td></td>
+                                                </tr>
+                                            }
+                                            @if (kvp.Value.CarCagesQty != 0)
+                                            {
+                                                <tr>
+                                                    <td>Авто клетки</td>
+                                                    <td>@kvp.Value.CarCagesQty</td>
+                                                    <td>@kvp.Value.CarCagesTotal</td>
+                                                    <td></td>
+                                                </tr>
+                                            }
+                                            @if (kvp.Value.CarsQty != 0)
+                                            {
+                                                <tr>
+                                                    <td>Коли</td>
+                                                    <td>@kvp.Value.CarsQty</td>
+                                                    <td>@kvp.Value.CarsTotal</td>
+                                                    <td></td>
+                                                </tr>
+                                            }
+                                            @if (kvp.Value.OthersQty != 0)
+                                            {
+                                                <tr>
+                                                    <td>Други</td>
+                                                    <td>@kvp.Value.OthersQty</td>
+                                                    <td>@kvp.Value.OthersTotal</td>
+                                                    <td></td>
+                                                </tr>
+                                            }
+                                            @if (kvp.Value.TrucksQty != 0)
+                                            {
+                                                <tr>
+                                                    <td>Камиони</td>
+                                                    <td>@kvp.Value.TrucksQty</td>
+                                                    <td>@kvp.Value.TrucksTotal</td>
+                                                    <td></td>
+                                                </tr>
+                                            }
+                                            @if (kvp.Value.SingleTypeQty != 0)
+                                            {
+                                                <tr>
+                                                    <td>По филтър</td>
+                                                    <td>@kvp.Value.SingleTypeQty</td>
+                                                    <td>@kvp.Value.SingleTypeTotal</td>
+                                                    <td></td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+    else
+    {
+        <h3>Няма записи в зададения филтър</h3>
+    }
+
+
+</div>

@@ -116,5 +116,18 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
 
             return returnModel;
         }
+
+        public async Task<IActionResult> PrkingStatistic()
+        {
+            var model = await this.monthlyRents
+                    .ParkingStatisticAsync(DateTime.UtcNow.AddMonths(-3), DateTime.UtcNow);
+            if (model==null)
+            {
+                TempData.AddErrorMessage(WrongInput);
+                RedirectToAction("Index");
+            }
+
+            return View(model);
+        }
     }
 }
