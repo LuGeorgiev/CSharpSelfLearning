@@ -101,6 +101,7 @@
         public const string DisplayNoReserved = "Без запазено място";
         public const string DisplayEmail = "Електронна поща";
         public const string DisplayInvoiceNumber = "Номер на фактура";
+        public const string DisplayParkingSlotTypes = "Видове паркоместа";
 
 
 

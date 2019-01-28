@@ -117,10 +117,10 @@ namespace EstateManagment.Web.Areas.Payments.Controllers
             return returnModel;
         }
 
-        public async Task<IActionResult> PrkingStatistic()
+        public async Task<IActionResult> PrkingStatistic(FilterParkingBindingModel bindModel)
         {
             var model = await this.monthlyRents
-                    .ParkingStatisticAsync(DateTime.UtcNow.AddMonths(-3), DateTime.UtcNow);
+                    .ParkingStatisticAsync(bindModel.StartDate, bindModel.EndDate,bindModel.Client,bindModel.ParkingType);
             if (model==null)
             {
                 TempData.AddErrorMessage(WrongInput);

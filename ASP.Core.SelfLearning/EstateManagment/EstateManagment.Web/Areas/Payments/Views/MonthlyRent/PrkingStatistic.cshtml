@@ -2,14 +2,14 @@
 @{
     ViewData["Title"] = $"{Model.FilterDetails}";
 }
-
+@await Component.InvokeAsync("ParkingFilterView", new { })
 <div class="panel panel-default">
     <div class="panel-heading">
         <h2 class="panel-title">@ViewData["Title"]</h2>
     </div>
     <div class="panel-body">
 
-        <div class="col-md-6">
+        <div class="col-md-6 text-left">
             Всички приходи с ДДС: <strong>@Model.TotalIncome.ThousandsSeparate() лв</strong>
         </div>
         <div class="col-md-6">
@@ -36,19 +36,19 @@
                                     <table class="table table-condensed table-hover">
                                         <thead>
                                             <tr>
-                                                <th scope="col">Вид паркомясто</th>
-                                                <th scope="col">Бройки</th>
-                                                <th scope="col">Приход с ДДС</th>
-                                                <th scope="col">От тях в брой:@kvp.Value.CashTotal</th>
+                                                <th scope="col" class="col-md-3">Вид паркомясто</th>
+                                                <th scope="col" class="col-md-3">Бройки</th>
+                                                <th scope="col" class="col-md-3">Приход с ДДС</th>
+                                                <th scope="col" class="col-md-3">От тях в брой:@kvp.Value.CashTotal.ThousandsSeparate() лв</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @if (kvp.Value.BigTrucksQty != 0)
                                             {
                                                 <tr>
-                                                    <td>Голями камиони</td>
+                                                    <td>Големи камиони</td>
                                                     <td>@kvp.Value.BigTrucksQty</td>
-                                                    <td>@kvp.Value.BigTrucksTotal</td>
+                                                    <td>@kvp.Value.BigTrucksTotal.ThousandsSeparate() лв</td>
                                                     <td></td>
                                                 </tr>
                                             }
@@ -57,7 +57,7 @@
                                                 <tr>
                                                     <td>Рейсове</td>
                                                     <td>@kvp.Value.BusesQty</td>
-                                                    <td>@kvp.Value.BusesTotal</td>
+                                                    <td>@kvp.Value.BusesTotal.ThousandsSeparate() лв</td>
                                                     <td></td>
                                                 </tr>
                                             }
@@ -66,7 +66,7 @@
                                                 <tr>
                                                     <td>Авто клетки</td>
                                                     <td>@kvp.Value.CarCagesQty</td>
-                                                    <td>@kvp.Value.CarCagesTotal</td>
+                                                    <td>@kvp.Value.CarCagesTotal.ThousandsSeparate() лв</td>
                                                     <td></td>
                                                 </tr>
                                             }
@@ -75,7 +75,7 @@
                                                 <tr>
                                                     <td>Коли</td>
                                                     <td>@kvp.Value.CarsQty</td>
-                                                    <td>@kvp.Value.CarsTotal</td>
+                                                    <td>@kvp.Value.CarsTotal.ThousandsSeparate() лв</td>
                                                     <td></td>
                                                 </tr>
                                             }
@@ -84,7 +84,7 @@
                                                 <tr>
                                                     <td>Други</td>
                                                     <td>@kvp.Value.OthersQty</td>
-                                                    <td>@kvp.Value.OthersTotal</td>
+                                                    <td>@kvp.Value.OthersTotal.ThousandsSeparate() лв</td>
                                                     <td></td>
                                                 </tr>
                                             }
@@ -93,7 +93,7 @@
                                                 <tr>
                                                     <td>Камиони</td>
                                                     <td>@kvp.Value.TrucksQty</td>
-                                                    <td>@kvp.Value.TrucksTotal</td>
+                                                    <td>@kvp.Value.TrucksTotal.ThousandsSeparate() лв</td>
                                                     <td></td>
                                                 </tr>
                                             }
@@ -102,7 +102,7 @@
                                                 <tr>
                                                     <td>По филтър</td>
                                                     <td>@kvp.Value.SingleTypeQty</td>
-                                                    <td>@kvp.Value.SingleTypeTotal</td>
+                                                    <td>@kvp.Value.SingleTypeTotal.ThousandsSeparate() лв</td>
                                                     <td></td>
                                                 </tr>
                                             }

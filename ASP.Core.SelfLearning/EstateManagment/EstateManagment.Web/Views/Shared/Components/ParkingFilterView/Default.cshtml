@@ -1,0 +1,37 @@
+﻿@model FilterParkingFormModel
+
+<div class="panel panel-warning">
+    <div class="panel-heading">Филтриране по дата, клиент и тип паркомясто:</div>
+    <div class="panel-body">
+        <form method="get" class="form-inline">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group col-md-3">
+                <label asp-for="StartDate">От</label>
+                <input asp-for="StartDate" class="form-control" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-3">
+                <label asp-for="EndDate">До</label>
+                <input asp-for="EndDate" class="form-control" />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-3">
+                <label asp-for="ActiveClients">Клиент</label>
+                <select asp-for="Client" asp-items="@Model.ActiveClients" class="form-control"> </select>
+            </div>
+            <div class="form-group col-md-2 pull-left">
+                <select asp-for="ParkingType" asp-items="@Model.ParkingTypes" class="form-control"> </select>
+            </div>
+            <div class="col-md-1 pull-right">
+                <button asp-area="Payments" asp-controller="MonthlyRent" asp-action="PrkingStatistic"  type="submit" class="btn btn-info"><strong>Филтър</strong></button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
