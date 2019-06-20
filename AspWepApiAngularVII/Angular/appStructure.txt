@@ -1,0 +1,16 @@
+src
++--- app
+    +--payment-details
+        --payment-details.componnet.ts|.html|.css
+        +-- payment-detail
+            payment.detail.componnet.ts|.html.css
+        
+        +-- payment-detail-list
+            payment-detail-list.componnet.ts|.html|.css
+        
+        +-- shared
+            payment=details.services.ts
+            payment-detail.model.ts
+    --app.module.ts
+
+    -index.html (cdn path for boostrtarp  & fa ivons)

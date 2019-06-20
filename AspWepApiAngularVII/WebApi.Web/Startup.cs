@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json.Serialization;
 using WebApi.Web.Models;
 
 namespace WebApi.Web
@@ -26,7 +27,15 @@ namespace WebApi.Web
         
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddJsonOptions(opt=> 
+                {
+                    var resolver = opt.SerializerSettings.ContractResolver;
+                    if (resolver != null)
+                    {
+                        (resolver as DefaultContractResolver).NamingStrategy = null; //This way the JSON response will not be camel case
+                    }
+                });
 
             services.AddDbContext<PaymentDetailsContext>(opt =>
                 opt.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
