@@ -33,7 +33,8 @@ namespace WebApi.Web
                     var resolver = opt.SerializerSettings.ContractResolver;
                     if (resolver != null)
                     {
-                        (resolver as DefaultContractResolver).NamingStrategy = null; //This way the JSON response will not be camel case
+                        //This way the JSON response will not be camel case
+                        (resolver as DefaultContractResolver).NamingStrategy = null; 
                     }
                 });
 
