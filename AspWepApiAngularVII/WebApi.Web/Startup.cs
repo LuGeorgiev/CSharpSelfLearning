@@ -40,6 +40,7 @@ namespace WebApi.Web
 
             services.AddDbContext<PaymentDetailsContext>(opt =>
                 opt.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
+            services.AddCors();
         }
 
         
@@ -49,7 +50,10 @@ namespace WebApi.Web
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseCors(opt =>
+                opt.WithOrigins("http://localhost:4200")
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
             app.UseMvc();
         }
     }

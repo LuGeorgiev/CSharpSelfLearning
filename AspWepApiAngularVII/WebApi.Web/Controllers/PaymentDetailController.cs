@@ -28,7 +28,6 @@ namespace WebApi.Web.Controllers
         }
 
         // GET: api/PaymentDetail/5
-        //TODO Delete this action will not be needed
         [HttpGet("{id}")]
         public async Task<ActionResult<PaymentDetail>> GetPaymentDetail(int id)
         {
