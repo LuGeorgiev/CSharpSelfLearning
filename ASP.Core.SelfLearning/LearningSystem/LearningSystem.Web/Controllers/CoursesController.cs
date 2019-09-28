@@ -49,7 +49,7 @@ namespace LearningSystem.Web.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> SubmitExam(int id, IFormFile exam)//the name of the imput file have to be the same as in input html
+        public async Task<IActionResult> SubmitExam(int id, IFormFile exam) //the name of the imput file have to be the same as in input html
         {
             if (!exam.FileName.EndsWith(".zip")
                 || exam.Length > DataConstants.CourseExamSybmissionFileMaxLength)

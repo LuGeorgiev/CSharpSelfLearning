@@ -14,3 +14,11 @@ input.ng-valid{
 .red-icon{
     color:#dc3545;
 }
+
+#toast-container > div {
+    opacity:1;
+}
+
+table tr:hover{
+    cursor:pointer;
+}
