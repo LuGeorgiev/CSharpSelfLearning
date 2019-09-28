@@ -30,8 +30,14 @@ namespace EgnValidator.Services.Validations.Implementations
                 //Date is INVALID
                 return false;
             }
-                        
-            return ! this.futureServica.IsDateInFuture(egnDate.Value);                       
+
+            if (this.futureServica.IsDateInFuture(egnDate.Value))
+            {
+                //EGN date is in future
+                return false;
+            }
+
+            return true ;                       
         }
     }
 }

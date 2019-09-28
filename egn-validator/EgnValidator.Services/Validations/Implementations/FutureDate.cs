@@ -1,14 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using EgnValidator.Services.Infrastructure;
+using System;
 
 namespace EgnValidator.Services.Validations.Implementations
 {
     public class FutureDate : IFutureDate
     {
-        public bool IsDateInFuture(DateTime egnDate)
+        private readonly IDateTimeProvider dateProvider;
+
+        public FutureDate(IDateTimeProvider dateProvider)
         {
-            throw new NotImplementedException();
+            this.dateProvider = dateProvider;
         }
+
+        //It is needed to compare with next day because ot time difference 
+        public bool IsDateInFuture(DateTime egnDate)
+            => this.dateProvider.BgNow().AddDays(1).Date < egnDate.Date;
     }
 }

@@ -13,6 +13,7 @@ namespace EgnValidator.Constants
 
         public const string PATTERN = "^[0-9]{2}[0-5]{1}[0-9]{1}[0-3]{1}[0-9]{5}$";
         public const int EGN_DATE_LENGTH = 6;
+        public const string EGN_DATE_FORMAT = "yyyy-MM-dd hh:mm tt";
 
     }
 }

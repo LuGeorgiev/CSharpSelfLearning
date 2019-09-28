@@ -39,7 +39,7 @@ namespace EgnValidator.Implementations
                 {
                     this.writer.WriteLine($"Error 500 :) Please, try again!");
 
-                    //TODO implement logger but this is not part of teh task
+                    //TODO implement logger IF needed
                     //LOG ex.msg
                 }
             }
