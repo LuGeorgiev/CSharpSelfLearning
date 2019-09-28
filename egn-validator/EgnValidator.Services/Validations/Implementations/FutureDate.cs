@@ -6,7 +6,7 @@ namespace EgnValidator.Services.Validations.Implementations
 {
     public class FutureDate : IFutureDate
     {
-        public bool IsDateInFuture(string egn)
+        public bool IsDateInFuture(DateTime egnDate)
         {
             throw new NotImplementedException();
         }

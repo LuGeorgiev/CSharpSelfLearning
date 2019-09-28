@@ -2,6 +2,6 @@
 {
     public interface IDateService
     {
-        bool IsDateValid(string egn);
+        bool IsEgnDateValid(string egn);
     }
 }

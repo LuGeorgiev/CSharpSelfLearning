@@ -6,6 +6,6 @@ namespace EgnValidator.Services.Validations
 {
     public interface IFutureDate
     {
-        bool IsDateInFuture(string egn);
+        bool IsDateInFuture(DateTime date);
     }
 }

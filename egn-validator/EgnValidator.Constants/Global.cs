@@ -9,11 +9,10 @@ namespace EgnValidator.Constants
         public const string INVALID_CONTROL_SUM = "Please insert valid EGN";
         //public const string INVALID_IN_FUTURE = "This date if from future!";
         //public const string INVALID_LEAP = "Pay attention please, this year is not leap";
-
         public const string VALID_ID = "valid";
 
         public const string PATTERN = "^[0-9]{2}[0-5]{1}[0-9]{1}[0-3]{1}[0-9]{5}$";
-
+        public const int EGN_DATE_LENGTH = 6;
 
     }
 }

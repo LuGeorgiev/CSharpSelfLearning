@@ -24,7 +24,7 @@ namespace EgnValidator.Services
             {
                 return INVALID_REGEX;
             }
-            else if (!this.dateValidation.IsDateValid(egn))
+            else if (!this.dateValidation.IsEgnDateValid(egn))
             {
                 return INVALID_DATE;
             }

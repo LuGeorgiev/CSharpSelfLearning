@@ -13,8 +13,6 @@ namespace EgnValidator
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-
             IServiceCollection serviceCollection = CreateCollection();
             IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
 
@@ -31,6 +29,7 @@ namespace EgnValidator
             serviceCollection.AddTransient<IReader, ConsoleReader>();
             serviceCollection.AddTransient<IWriter, ConsoleWriter>();
             serviceCollection.AddTransient<IExtractDate, ExtractDate>();
+            serviceCollection.AddTransient<IDateTimeProvider, DateTimeProvider>();
 
             serviceCollection.AddTransient<IValidateEgn, ValidateEgn>();
             serviceCollection.AddTransient<IRegexService, RegexService>();
