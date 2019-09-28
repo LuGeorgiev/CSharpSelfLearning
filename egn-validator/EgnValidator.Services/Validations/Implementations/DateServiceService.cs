@@ -1,7 +1,4 @@
 ﻿using EgnValidator.Services.Infrastructure;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace EgnValidator.Services.Validations.Implementations
 {
