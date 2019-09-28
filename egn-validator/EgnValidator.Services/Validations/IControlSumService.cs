@@ -1,6 +1,6 @@
 ﻿namespace EgnValidator.Services.Validations
 {
-    public interface IControlSum
+    public interface IControlSumService
     {
         bool IsSumValid(string egn);
     }

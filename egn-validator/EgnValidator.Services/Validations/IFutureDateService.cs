@@ -4,8 +4,8 @@ using System.Text;
 
 namespace EgnValidator.Services.Validations
 {
-    public interface ILeapYear
+    public interface IFutureDateService
     {
-        bool IsYearLeap(string egn);
+        bool IsDateInFuture(DateTime date);
     }
 }

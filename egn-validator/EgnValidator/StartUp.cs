@@ -33,10 +33,10 @@ namespace EgnValidator
 
             serviceCollection.AddTransient<IValidateEgn, ValidateEgn>();
             serviceCollection.AddTransient<IRegexService, RegexService>();
-            serviceCollection.AddTransient<IControlSum, ControlSum>();
+            serviceCollection.AddTransient<IControlSumService, ControlSumService>();
             serviceCollection.AddTransient<IDateService, DateService>();
-            serviceCollection.AddTransient<IFutureDate, FutureDate>();
-            serviceCollection.AddTransient<ILeapYear, LeapYear>();
+            serviceCollection.AddTransient<IFutureDateService, FutureDateService>();
+            serviceCollection.AddTransient<ILeapYearService, LeapYearService>();
 
             return serviceCollection;
         }

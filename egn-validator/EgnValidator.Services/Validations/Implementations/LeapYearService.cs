@@ -2,7 +2,7 @@
 
 namespace EgnValidator.Services.Validations.Implementations
 {
-    public class LeapYear : ILeapYear
+    public class LeapYearService : ILeapYearService
     {
         public bool IsYearLeap(string egn)
         {

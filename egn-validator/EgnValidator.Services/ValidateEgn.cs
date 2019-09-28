@@ -1,5 +1,4 @@
 ﻿using EgnValidator.Services.Validations;
-using System;
 
 using static EgnValidator.Constants.Global;
 
@@ -9,9 +8,9 @@ namespace EgnValidator.Services
     {
         private readonly IRegexService regexValidate;
         private readonly IDateService dateValidation;
-        private readonly IControlSum controlSumService;
+        private readonly IControlSumService controlSumService;
 
-        public ValidateEgn(IRegexService regexValidate, IDateService dateValidation, IControlSum controlSumService)
+        public ValidateEgn(IRegexService regexValidate, IDateService dateValidation, IControlSumService controlSumService)
         {
             this.regexValidate = regexValidate;
             this.dateValidation = dateValidation;

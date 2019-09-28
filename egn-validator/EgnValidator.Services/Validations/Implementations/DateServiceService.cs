@@ -8,9 +8,9 @@ namespace EgnValidator.Services.Validations.Implementations
     public class DateService : IDateService
     {
         private readonly IExtractDate dateExtractor;
-        private readonly IFutureDate futureServica;
+        private readonly IFutureDateService futureServica;
 
-        public DateService(IExtractDate dateExtractor, IFutureDate futureServica)
+        public DateService(IExtractDate dateExtractor, IFutureDateService futureServica)
         {
             this.dateExtractor = dateExtractor;
             this.futureServica = futureServica;

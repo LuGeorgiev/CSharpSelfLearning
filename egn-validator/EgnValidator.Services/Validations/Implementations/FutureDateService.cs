@@ -3,11 +3,11 @@ using System;
 
 namespace EgnValidator.Services.Validations.Implementations
 {
-    public class FutureDate : IFutureDate
+    public class FutureDateService : IFutureDateService
     {
         private readonly IDateTimeProvider dateProvider;
 
-        public FutureDate(IDateTimeProvider dateProvider)
+        public FutureDateService(IDateTimeProvider dateProvider)
         {
             this.dateProvider = dateProvider;
         }
