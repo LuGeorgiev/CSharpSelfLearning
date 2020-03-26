@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Cities</title>
+
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"
+            asp-fallback-src-include="~/lib/jquery/dist/**/*.min.js"
+            asp-fallback-src-exclude="**.slim.**"
+            asp-fallback-test="window.jQuery">
+
+    </script>
+
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+
+
+</head>
+
+<environment names="development">
+
+    <div class="m-1 p-1 bg-info">
+        <h2>This is Development</h2>
+    </div>
+
+</environment>
+
+<environment names="production">
+
+    <div class="m-1 p-1 bg-danger">
+        <h2>This is Production</h2>
+    </div>
+
+</environment>
+
+<body class="m-1 p-1">
+
+    <img src="~/images/new-york.jpg" asp-append-version="true" />
+    <cache expires-sliding="@TimeSpan.FromSeconds(2)" 
+           vary-by="@ViewContext.RouteData.Values["action"]">
+        @await Component.InvokeAsync("Time")
+    </cache>
+
+    <div title="Cities">@RenderBody()</div>
+
+</body>
+
+</html>
