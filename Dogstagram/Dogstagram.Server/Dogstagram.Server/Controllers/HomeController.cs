@@ -5,7 +5,7 @@ namespace Dogstagram.Server.Controllers
 {
     public class HomeController : ApiController
     {
-        //[Authorize]
+        [Authorize]
         public ActionResult Get()
         {
             return Ok("works");

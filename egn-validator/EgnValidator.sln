@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EgnValidator.Services", "Eg
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EgnValidator.Constants", "EgnValidator.Constants\EgnValidator.Constants.csproj", "{7EE2A1B1-6EA4-459D-B44D-B1C04D8FC471}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EgnValidator.Tests", "EgnValidator.Tests\EgnValidator.Tests.csproj", "{05CAC7D5-4EED-4CCB-8916-B2D5F54D579E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EgnValidator.Tests", "EgnValidator.Tests\EgnValidator.Tests.csproj", "{05CAC7D5-4EED-4CCB-8916-B2D5F54D579E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SandBox", "SandBox\SandBox.csproj", "{A94B990F-1F30-4520-B487-53304DA1A4CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,10 @@ Global
 		{05CAC7D5-4EED-4CCB-8916-B2D5F54D579E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05CAC7D5-4EED-4CCB-8916-B2D5F54D579E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05CAC7D5-4EED-4CCB-8916-B2D5F54D579E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A94B990F-1F30-4520-B487-53304DA1A4CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A94B990F-1F30-4520-B487-53304DA1A4CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A94B990F-1F30-4520-B487-53304DA1A4CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A94B990F-1F30-4520-B487-53304DA1A4CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

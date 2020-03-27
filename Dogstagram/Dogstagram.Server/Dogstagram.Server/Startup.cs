@@ -10,6 +10,7 @@ using Dogstagram.Server.Data.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Dogstagram.Server.Infrastructure;
 
 namespace Dogstagram.Server
 {
@@ -70,6 +71,8 @@ namespace Dogstagram.Server
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseDeveloperExceptionPage();
+
             if (env.IsDevelopment())
             {
                 app.UseDatabaseErrorPage();
@@ -89,6 +92,8 @@ namespace Dogstagram.Server
             {
                 endpoints.MapControllers();
             });
+
+            app.ApplyMigrations();
         }
     }
 }
