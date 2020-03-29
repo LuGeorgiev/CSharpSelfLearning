@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29911.98
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dogstagram.Server", "Dogstagram.Server\Dogstagram.Server.csproj", "{9E094C02-F90C-46D0-9074-1E80B0425181}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NewFolder1", "NewFolder1", "{4351EA39-7F24-4E00-BCB8-3DD09D55E380}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dogstagram.Server", "Dogstagram.Server\Dogstagram.Server.csproj", "{9E094C02-F90C-46D0-9074-1E80B0425181}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
