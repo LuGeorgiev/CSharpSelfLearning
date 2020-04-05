@@ -8,5 +8,7 @@ namespace Dogstagram.Server.Data.Models
 {
     public class User : IdentityUser
     {
+
+        public IEnumerable<Dog> Dogs { get; set; } = new HashSet<Dog>();
     }
 }

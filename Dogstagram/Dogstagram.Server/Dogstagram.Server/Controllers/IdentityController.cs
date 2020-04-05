@@ -41,8 +41,8 @@ namespace Dogstagram.Server.Controllers
             return BadRequest(result.Errors);
         }
 
-        [Route(nameof(Ligin))]
-        public async Task<ActionResult<object>>Ligin(LoginRequestModel model)
+        [Route(nameof(Login))]
+        public async Task<ActionResult<object>>Login(LoginRequestModel model)
         {
             var user = await this.userManger.FindByNameAsync(model.Username);
             if (user == null)
@@ -56,15 +56,14 @@ namespace Dogstagram.Server.Controllers
                 return Unauthorized();
             }
 
-
-
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(this.appSettings.Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, model.Username)
+                    new Claim(ClaimTypes.Name, user.UserName),
+                    new Claim(ClaimTypes.NameIdentifier, user.Id)
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
