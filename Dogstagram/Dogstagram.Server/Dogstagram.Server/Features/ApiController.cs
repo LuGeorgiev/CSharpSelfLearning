@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Dogstagram.Server.Controllers
+namespace Dogstagram.Server.Features
 {
     [ApiController]
     [Route("[controller]")]

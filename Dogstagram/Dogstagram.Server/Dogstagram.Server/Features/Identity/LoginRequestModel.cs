@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Dogstagram.Server.Models.Identity
+namespace Dogstagram.Server.Features.Identity
 {
     public class LoginRequestModel
     {

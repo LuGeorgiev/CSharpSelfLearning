@@ -2,10 +2,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Dogstagram.Server.Infrastructure
 {
@@ -18,5 +14,13 @@ namespace Dogstagram.Server.Infrastructure
 
             dbContext.Database.Migrate();
         }
+
+        public static IApplicationBuilder UseSwaggerUi(this IApplicationBuilder app)
+            => app.UseSwagger()
+                .UseSwaggerUI(opt =>
+                {
+                    opt.SwaggerEndpoint("/swagger/v1/swagger.json", "My Dogstagram v1");
+                    opt.RoutePrefix = string.Empty;
+                });
     }
 }

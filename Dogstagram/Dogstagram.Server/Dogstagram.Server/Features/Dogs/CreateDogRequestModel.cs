@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 using static Dogstagram.Server.Data.Validation.Dog;
 
 
-namespace Dogstagram.Server.Models.Dogs
+namespace Dogstagram.Server.Features.Dogs
 {
     public class CreateDogRequestModel
     {
-        [Required]
         [MaxLength(MaxDescriptionLength)]
         public string Description { get; set; }
 
