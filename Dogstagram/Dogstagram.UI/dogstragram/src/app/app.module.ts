@@ -10,6 +10,7 @@ import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CreatepostComponent } from './createpost/createpost.component';
 import { DogService } from './services/dog.service';
+import { AuthGuardService } from './services/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { DogService } from './services/dog.service';
     ReactiveFormsModule,
     HttpClientModule    
   ],
-  providers: [AuthService, DogService],
+  providers: [AuthService, DogService,AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
