@@ -16,10 +16,7 @@ export class DogService {
   }
 
   create(data): Observable< Dog >{
-    let headers = new HttpHeaders();
-    headers = headers.set('Authorization', `Bearer ${this.authService.getToken()}`);
-    console.log(data);
 
-    return this.http.post<Dog>(this.dogPath, data,{ headers });
+    return this.http.post<Dog>(this.dogPath, data);
   }
 }
