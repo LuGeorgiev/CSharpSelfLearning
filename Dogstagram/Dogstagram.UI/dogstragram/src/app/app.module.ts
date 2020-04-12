@@ -8,12 +8,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
+import { CreatepostComponent } from './createpost/createpost.component';
+import { DogService } from './services/dog.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    CreatepostComponent
   ],
   imports: [
     BrowserModule,
@@ -21,7 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     HttpClientModule    
   ],
-  providers: [AuthService],
+  providers: [AuthService, DogService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

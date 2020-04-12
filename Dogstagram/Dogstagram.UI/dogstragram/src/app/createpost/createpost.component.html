@@ -1,0 +1,23 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-4">
+            <form [formGroup]='dogForm' (ngSubmit)="create()">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Image URL</label>
+                    <input type="text" class="form-control" formControlName="ImageUrl">
+                </div>
+                <div class="alert alert-danger" *ngIf="imageUrl.touched && imageUrl.errors?.required">
+                    This field is required
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputTextArea">Description</label>
+                    <textarea class="form-control" id="exampleInputTextArea" rows="3" formControlName="Description"></textarea>
+                </div>
+               
+                <button type="submit" class="btn btn-primary">Create</button>
+            </form>
+        </div>
+        <div class="col-lg-7"></div>
+    </div>
+</div>
