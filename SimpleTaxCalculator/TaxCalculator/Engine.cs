@@ -33,7 +33,7 @@ namespace TaxCalculator
 
                 if (netSalary == EngineConstants.INVALID_SALARY)
                 {
-                    this.writer.WriteLine(EngineConstants.INVALID_SALARY_MESSAGE);
+                    this.writer.WriteLine(EngineConstants.INVALID_SALARY_MESSAGE + Environment.NewLine);
                 }
                 else
                 {
@@ -41,13 +41,11 @@ namespace TaxCalculator
                                                             netSalary, 
                                                             this.dateService.Now() ));
 
-                    this.writer.WriteLine(EngineConstants.ANOTHER_SALARY_MESSAGE);
+                    this.writer.WriteLine(EngineConstants.ANOTHER_SALARY_MESSAGE + Environment.NewLine);
                 }
 
                 salaryString = this.reader.ReadLine();
             }
-
-
         }
     }
 }

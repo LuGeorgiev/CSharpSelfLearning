@@ -16,13 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TaxCalculator.BusinessLogic\TaxCalculator.BusinessLogic.csproj" />
     <ProjectReference Include="..\TaxCalculator.Constants\TaxCalculator.Constants.csproj" />
     <ProjectReference Include="..\TaxCalculator.Services\TaxCalculator.Services.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="BusinessLogic\" />
-    <Folder Include="Mocks\" />
   </ItemGroup>
 
 </Project>

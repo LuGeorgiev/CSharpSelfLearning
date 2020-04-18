@@ -1,13 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using TaxCalculator.BusinessLogic;
-using TaxCalculator.Services.Infrastructure;
-using TaxCalculator.Services.Infrastructure.Implementation;
+using TaxCalculator.Extensions;
 using TaxCalculator.Services.InputOutput;
 using TaxCalculator.Services.InputOutput.Implementation;
-using TaxCalculator.Services.TaxCalculation;
-using TaxCalculator.Services.TaxCalculation.Implementation;
-using TaxCalculator.Services.Validation;
-using TaxCalculator.Services.Validation.Implementation;
 
 namespace TaxCalculator
 {
@@ -30,11 +25,9 @@ namespace TaxCalculator
 
             serviceCollection.AddTransient<IWriter, ConsoleWriter>();
             serviceCollection.AddTransient<IReader, ConsoleReader>();
-            serviceCollection.AddTransient<IDateService, DateService>();
-
             serviceCollection.AddTransient<ISalaryCalculator, SalaryCalculator>();
-            serviceCollection.AddTransient<ITaxesCalculatorService, TaxesCalculatorService>();
-            serviceCollection.AddTransient<ISalaryValidationService, SalaryValidationService>();
+
+            serviceCollection.AddServicesByConvention();
 
             return serviceCollection;
         }
