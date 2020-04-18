@@ -2,7 +2,7 @@
 
 namespace TaxCalculator.Services.TaxCalculation.Implementation
 {
-    public class TaxesCalculator : ITaxesCalculator
+    public class TaxesCalculatorService : ITaxesCalculatorService
     {
         public decimal IncomeTax(decimal salary)
         {

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TaxCalculator.Services.TaxCalculation
 {
-    public interface ITaxesCalculator
+    public interface ITaxesCalculatorService
     {
         decimal IncomeTax(decimal salary);
 

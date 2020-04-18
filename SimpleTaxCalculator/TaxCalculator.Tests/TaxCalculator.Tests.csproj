@@ -20,4 +20,9 @@
     <ProjectReference Include="..\TaxCalculator.Services\TaxCalculator.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="BusinessLogic\" />
+    <Folder Include="Mocks\" />
+  </ItemGroup>
+
 </Project>

@@ -8,10 +8,10 @@ namespace TaxCalculator.BusinessLogic
 {
     public class SalaryCalculator : ISalaryCalculator
     {
-        private readonly ITaxesCalculator taxesCalculator;
-        private readonly ISalaryValidation salaryValidation;
+        private readonly ITaxesCalculatorService taxesCalculator;
+        private readonly ISalaryValidationService salaryValidation;
 
-        public SalaryCalculator(ITaxesCalculator taxesCalculator, ISalaryValidation salaryValidation)
+        public SalaryCalculator(ITaxesCalculatorService taxesCalculator, ISalaryValidationService salaryValidation)
         {
             this.taxesCalculator = taxesCalculator;
             this.salaryValidation = salaryValidation;

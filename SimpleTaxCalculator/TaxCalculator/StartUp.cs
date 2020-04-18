@@ -33,8 +33,8 @@ namespace TaxCalculator
             serviceCollection.AddTransient<IDateService, DateService>();
 
             serviceCollection.AddTransient<ISalaryCalculator, SalaryCalculator>();
-            serviceCollection.AddTransient<ITaxesCalculator, TaxesCalculator>();
-            serviceCollection.AddTransient<ISalaryValidation, SalaryValidation>();
+            serviceCollection.AddTransient<ITaxesCalculatorService, TaxesCalculatorService>();
+            serviceCollection.AddTransient<ISalaryValidationService, SalaryValidationService>();
 
             return serviceCollection;
         }

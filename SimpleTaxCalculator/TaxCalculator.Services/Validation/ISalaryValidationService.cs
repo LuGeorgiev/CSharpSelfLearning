@@ -1,7 +1,7 @@
 ﻿
 namespace TaxCalculator.Services.Validation
 {
-    public interface ISalaryValidation
+    public interface ISalaryValidationService
     {
         bool IsValid(string salary);
     }
