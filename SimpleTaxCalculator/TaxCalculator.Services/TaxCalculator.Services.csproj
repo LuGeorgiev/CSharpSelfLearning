@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TaxCalculator.Constants\TaxCalculator.Constants.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Infrastructure\Implementation\" />
+    <Folder Include="InputOutput\Implementation\" />
+    <Folder Include="TaxCalculation\Implementation\" />
+    <Folder Include="Validation\Implementation\" />
+  </ItemGroup>
+
+</Project>
