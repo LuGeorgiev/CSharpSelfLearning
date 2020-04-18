@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TaxCalculator.Constants
+namespace TaxCalculator.Services.Infrastructure
 {
     public interface IDateService
     {

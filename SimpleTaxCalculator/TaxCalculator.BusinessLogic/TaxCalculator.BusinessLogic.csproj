@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TaxCalculator.Constants\TaxCalculator.Constants.csproj" />
+    <ProjectReference Include="..\TaxCalculator.Services\TaxCalculator.Services.csproj" />
   </ItemGroup>
 
 </Project>
