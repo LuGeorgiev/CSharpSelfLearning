@@ -1,14 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+
+using static TaxCalculator.Constants.Constants;
 
 namespace TaxCalculator.Services.Validation.Implementation
 {
     public class SalaryValidation : ISalaryValidation
     {
-        public bool IsValid(decimal salary)
-        {
-            throw new NotImplementedException();
-        }
+        public bool IsValid(string salaryString)
+            => Decimal.TryParse(salaryString, out decimal salary) 
+                && salary > SalaryConstants.MINIMUM_SALARY ;
+       
     }
 }

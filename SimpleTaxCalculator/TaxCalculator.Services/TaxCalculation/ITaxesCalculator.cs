@@ -9,5 +9,6 @@ namespace TaxCalculator.Services.TaxCalculation
         decimal IncomeTax(decimal salary);
 
         decimal SocialTax(decimal salary);
+        bool ShouldApplyTax(decimal grossSalary);
     }
 }

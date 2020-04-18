@@ -3,6 +3,6 @@ namespace TaxCalculator.Services.Validation
 {
     public interface ISalaryValidation
     {
-        bool IsValid(decimal salary);
+        bool IsValid(string salary);
     }
 }
