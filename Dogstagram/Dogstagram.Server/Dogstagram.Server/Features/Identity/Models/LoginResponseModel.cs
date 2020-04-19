@@ -1,5 +1,5 @@
 ﻿
-namespace Dogstagram.Server.Features.Identity
+namespace Dogstagram.Server.Features.Identity.Models
 {
     public class LoginResponseModel
     {

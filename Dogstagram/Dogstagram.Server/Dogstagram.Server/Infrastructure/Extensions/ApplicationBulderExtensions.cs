@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Dogstagram.Server.Infrastructure
+namespace Dogstagram.Server.Infrastructure.Extensions
 {
     public static class ApplicationBulderExtensions
     {

@@ -1,7 +1,6 @@
 ﻿using Dogstagram.Server.Data.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System.Runtime.InteropServices.ComTypes;
 
 namespace Dogstagram.Server.Data
 {

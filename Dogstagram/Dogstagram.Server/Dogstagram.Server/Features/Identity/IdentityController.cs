@@ -1,4 +1,5 @@
 ﻿using Dogstagram.Server.Data.Models;
+using Dogstagram.Server.Features.Identity.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -21,7 +22,7 @@ namespace Dogstagram.Server.Features.Identity
 
         [HttpPost]
         [Route(nameof(Register))]
-        public async Task<ActionResult> Register(RegisterUserRequestModel model)
+        public async Task<ActionResult> Register(RegisterUserModel model)
         {
             var user = new User
             {

@@ -3,7 +3,7 @@
 using static Dogstagram.Server.Data.Validation.Dog;
 
 
-namespace Dogstagram.Server.Features.Dogs
+namespace Dogstagram.Server.Features.Dogs.Models
 {
     public class CreateDogRequestModel
     {

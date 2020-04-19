@@ -3,6 +3,7 @@ using Dogstagram.Server.Data;
 using Dogstagram.Server.Data.Models;
 using Dogstagram.Server.Features.Dogs;
 using Dogstagram.Server.Features.Identity;
+using Dogstagram.Server.Infrastructure.Filters;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -68,12 +69,12 @@ namespace Dogstagram.Server.Infrastructure.Extensions
                     .AddTransient<IDogService, DogService>();
 
         public static IServiceCollection AddSwagger(this IServiceCollection services)
-        =>  services.AddSwaggerGen(c =>
+            =>  services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My Dogstagram", Version = "v1" });
             });
 
-
-        
+        public static void AddApiControllers(this IServiceCollection services)
+            => services.AddControllers(opt => opt.Filters.Add<ModelOrNotFoundActionFilter>());
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Dogstagram.Server.Data;
 using Dogstagram.Server.Data.Models;
-using System;
+using Dogstagram.Server.Features.Dogs.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -30,6 +31,44 @@ namespace Dogstagram.Server.Features.Dogs
             await db.SaveChangesAsync();
 
             return dog.Id;
+        }
+
+        public async Task<IEnumerable<DogListingServiceModel>> ByUser(string userId)
+            => await this.db.Dogs
+                        .Where(x => x.UserId == userId)
+                        .Select(x => new DogListingServiceModel
+                        {
+                            Id = x.Id,
+                            ImageUrl = x.ImageUrl
+                        })
+                        .ToListAsync();
+
+        public async Task<DogDetailsServiceModel> DetailsByDogId(string dogId)
+            => await this.db.Dogs
+                         .Where(x => x.Id == dogId)
+                         .Select(x => new DogDetailsServiceModel
+                         {
+                             Id = x.Id,
+                             Description = x.Description,
+                             ImageUrl = x.ImageUrl,
+                             UserId = x.UserId,
+                             UserName = x.User.UserName
+                         })
+                        .FirstOrDefaultAsync();
+
+        public async Task<bool> Update(string dogId, string description, string userId)
+        {
+            var dog = await this.db.Dogs
+                .FirstOrDefaultAsync(x => x.Id == dogId && x.UserId == userId);
+
+            if (dog == null)
+            {
+                return false;
+            }
+            dog.Description = description;
+            await this.db.SaveChangesAsync();
+
+            return true;
         }
     }
 }

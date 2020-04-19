@@ -1,9 +1,9 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
 
-namespace Dogstagram.Server.Features.Identity
+namespace Dogstagram.Server.Features.Identity.Models
 {
-    public class RegisterUserRequestModel
+    public class RegisterUserModel
     {
         [Required]
         public string Username { get; set; }
