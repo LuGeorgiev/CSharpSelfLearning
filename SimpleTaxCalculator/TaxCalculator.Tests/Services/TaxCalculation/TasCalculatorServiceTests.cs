@@ -13,7 +13,7 @@ namespace TaxCalculator.Tests.Services.TaxCalculation
         {
             var taxCalculatorService = new TaxesCalculatorService();
             var salaryToTest = 1100m;
-            var incomeTax = (salaryToTest - SalaryConstants.NO_TAX_LIMIT) * SalaryConstants.INCOME_TAX;            
+            var incomeTax = (salaryToTest - SalaryConstants.NO_TAX_LIMIT) * SalaryConstants.INCOME_TAX;
 
             var result = taxCalculatorService.IncomeTax(salaryToTest);
 
@@ -36,6 +36,19 @@ namespace TaxCalculator.Tests.Services.TaxCalculation
         }
 
         [Fact]
+        public void ShouldApplyTaxShouldReturnFalseIfEqualToTaxLimit()
+        {
+            var taxCalculatorService = new TaxesCalculatorService();
+            var salaryToTest = SalaryConstants.NO_TAX_LIMIT;
+
+            var result = taxCalculatorService.ShouldApplyTax(salaryToTest);
+
+            result
+                .Should()
+                .BeFalse();
+        }
+
+        [Fact]
         public void ShouldApplyTaxShouldReturnFaseIfLowerThanTaxLimit()
         {
             var taxCalculatorService = new TaxesCalculatorService();
@@ -53,13 +66,13 @@ namespace TaxCalculator.Tests.Services.TaxCalculation
         {
             var taxCalculatorService = new TaxesCalculatorService();
             var salaryToTest = 1100m;
-            var incomeTax = (salaryToTest - SalaryConstants.NO_TAX_LIMIT) * SalaryConstants.Social_TAX;
+            var socialTax = (salaryToTest - SalaryConstants.NO_TAX_LIMIT) * SalaryConstants.Social_TAX;
 
             var result = taxCalculatorService.SocialTax(salaryToTest);
 
             result
                 .Should()
-                .Be(incomeTax);
+                .Be(socialTax);
         }
 
         [Fact]
@@ -67,13 +80,29 @@ namespace TaxCalculator.Tests.Services.TaxCalculation
         {
             var taxCalculatorService = new TaxesCalculatorService();
             var salaryToTest = 3400m;
-            var incomeTax = 300m;
+            var socialTax = 300m;
 
             var result = taxCalculatorService.SocialTax(salaryToTest);
 
             result
                 .Should()
-                .Be(incomeTax);
+                .Be(socialTax);
         }
+
+        [Fact]
+        public void SocialTaxShouldReturnCorrectIfEqualToSocialLimit()
+        {
+            var taxCalculatorService = new TaxesCalculatorService();
+            var salaryToTest = 3000m;
+            var socialTax = 300m;
+
+            var result = taxCalculatorService.SocialTax(salaryToTest);
+
+            result
+                .Should()
+                .Be(socialTax);
+        }
+             
+
     }
 }
