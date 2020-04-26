@@ -13,5 +13,7 @@ namespace Dogstagram.Server.Features.Dogs
         Task<DogDetailsServiceModel> DetailsByDogId(string dogId);
 
         Task<bool> Update(string dogId, string description, string userId);
+
+        Task<bool> Delete(string id, string userId);
     }
 }

@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
+using static Dogstagram.Server.Infrastructure.WebConstants;
+
 namespace Dogstagram.Server.Features.Dogs
 {
     [Authorize]
@@ -27,7 +29,7 @@ namespace Dogstagram.Server.Features.Dogs
         }
 
         [HttpGet]
-        [Route("{id}")]
+        [Route(Id)]
         public async Task<ActionResult<DogDetailsServiceModel>> Details(string id)
         {
             var dog = await this.dogService.DetailsByDogId(id);
@@ -57,6 +59,21 @@ namespace Dogstagram.Server.Features.Dogs
             var updated = await this.dogService.Update(model.Id, model.Description, userId);
 
             if (! updated)
+            {
+                return this.BadRequest();
+            }
+
+            return this.Ok();
+        }
+
+        [HttpDelete]
+        [Route(Id)]
+        public async Task<ActionResult> Delete(string id)
+        {
+            var userId = this.User.GetId();
+            var isDeleted = await this.dogService.Delete(id, userId);
+
+            if (! isDeleted)
             {
                 return this.BadRequest();
             }

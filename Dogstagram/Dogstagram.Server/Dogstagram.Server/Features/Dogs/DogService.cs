@@ -58,8 +58,7 @@ namespace Dogstagram.Server.Features.Dogs
 
         public async Task<bool> Update(string dogId, string description, string userId)
         {
-            var dog = await this.db.Dogs
-                .FirstOrDefaultAsync(x => x.Id == dogId && x.UserId == userId);
+            var dog = await GetDogByIdAndUser(dogId, userId);
 
             if (dog == null)
             {
@@ -70,5 +69,25 @@ namespace Dogstagram.Server.Features.Dogs
 
             return true;
         }
+
+        public async Task<bool> Delete(string id, string userId)
+        {
+            var dog = await GetDogByIdAndUser(id, userId);
+
+            if (dog == null)
+            {
+                return false;
+            }
+
+            this.db.Dogs.Remove(dog);
+            await this.db.SaveChangesAsync();
+            return true;
+        }
+
+        private async Task<Dog> GetDogByIdAndUser(string id, string userId)
+        => await this.db
+                .Dogs
+                .FirstOrDefaultAsync(x => x.Id == id && x.UserId == userId);
+        
     }
 }
