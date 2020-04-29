@@ -1,0 +1,15 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-3" *ngFor="let dog of dogs">
+            <div class="card" style="width: 18rem;">
+                <img [src]="dog.imageUrl" class="card-img-top" alt="dog image">
+                <div class="card-body">
+                    <h5 class="card-title">{{dog.id}}</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a (click)="routeToDog(dog.id)" class="btn btn-primary">Details</a>
+                </div>
+            </div>
+        </div>        
+    </div>
+</div>
+

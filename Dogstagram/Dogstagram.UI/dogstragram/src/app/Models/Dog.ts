@@ -1,5 +1,7 @@
 export interface Dog {
     id: string,
-    Description: string,
-    ImageUrl: string
+    description: string,
+    imageUrl: string,
+    userId: string,
+    userName: string
 }

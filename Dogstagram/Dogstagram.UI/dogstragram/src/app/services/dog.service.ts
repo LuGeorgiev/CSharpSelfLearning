@@ -16,7 +16,14 @@ export class DogService {
   }
 
   create(data): Observable< Dog >{
-
     return this.http.post<Dog>(this.dogPath, data);
+  }
+
+  getDogs():Observable<Array<Dog>> {    
+    return this.http.get<Array<Dog>>(this.dogPath);
+  }
+
+  getDog(id):Observable<Dog> {
+    return this.http.get<Dog>(this.dogPath + '/' + id);
   }
 }

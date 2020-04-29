@@ -23,7 +23,7 @@ export class CreatepostComponent {
 
   create(){
     this.dogService.create(this.dogForm.value).subscribe(res =>{
-      console.log(res);
+      //console.log(res);
     })
   }
 }
