@@ -6,6 +6,7 @@ import { CreatepostComponent } from './createpost/createpost.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { ListDogsComponent } from './list-dogs/list-dogs.component';
 import { DetailsDogComponent } from './details-dog/details-dog.component';
+import { EditDogComponent } from './edit-dog/edit-dog.component';
 
 
 const routes: Routes = [
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path:'register', component: RegisterComponent},
   { path:'create', component: CreatepostComponent , canActivate: [AuthGuardService] },
   { path:'dogs', component: ListDogsComponent, canActivate : [AuthGuardService]  },
-  { path:'dogs/:id',component: DetailsDogComponent, canActivate: [AuthGuardService] }
+  { path:'dogs/:id',component: DetailsDogComponent, canActivate: [AuthGuardService] },
+  { path:'dogs/:id/edit', component: EditDogComponent, canActivate:[AuthGuardService] }
 ];
 
 @NgModule({

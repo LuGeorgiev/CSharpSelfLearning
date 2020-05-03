@@ -14,6 +14,7 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { ListDogsComponent } from './list-dogs/list-dogs.component';
 import { DetailsDogComponent } from './details-dog/details-dog.component';
+import { EditDogComponent } from './edit-dog/edit-dog.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { DetailsDogComponent } from './details-dog/details-dog.component';
     RegisterComponent,
     CreatepostComponent,
     ListDogsComponent,
-    DetailsDogComponent
+    DetailsDogComponent,
+    EditDogComponent
   ],
   imports: [
     BrowserModule,

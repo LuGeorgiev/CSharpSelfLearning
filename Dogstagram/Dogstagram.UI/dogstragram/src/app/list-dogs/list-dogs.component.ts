@@ -14,13 +14,27 @@ export class ListDogsComponent implements OnInit {
   constructor(private dogService: DogService, private router: Router) { }
 
   ngOnInit(): void {
+    this.fetchDods();
+  }
+
+  fetchDods(){
     this.dogService.getDogs().subscribe(dogs =>{
       this.dogs = dogs;
-      //console.log(dogs)
+      console.log(dogs)
     })
   }
 
   routeToDog(id){
     this.router.navigate(["dogs", id]);
+  }
+
+  deleteDog(id){
+    this.dogService.deleteDog(id).subscribe(res => {
+      this.fetchDods();
+    });
+  }
+
+  editDog(id){
+    this.router.navigate(["dogs/" + id + "/edit"])
   }
 }

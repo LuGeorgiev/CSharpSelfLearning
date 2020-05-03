@@ -26,4 +26,12 @@ export class DogService {
   getDog(id):Observable<Dog> {
     return this.http.get<Dog>(this.dogPath + '/' + id);
   }
+
+  deleteDog(id){
+    return this.http.delete(this.dogPath + '/'+ id );
+  }
+
+  editDog(data){
+    return this.http.put(this.dogPath, data);
+  }
 }

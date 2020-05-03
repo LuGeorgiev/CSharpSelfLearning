@@ -10,7 +10,7 @@ import { Dog } from '../Models/Dog';
 })
 export class DetailsDogComponent implements OnInit {
   private id: string;
-  private dog: Dog;
+  dog: Dog;
 
   constructor(private route: ActivatedRoute, private dogService: DogService) {
     this.route.params.subscribe(res => {
