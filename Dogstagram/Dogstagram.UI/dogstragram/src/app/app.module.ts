@@ -15,6 +15,7 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
 import { ListDogsComponent } from './list-dogs/list-dogs.component';
 import { DetailsDogComponent } from './details-dog/details-dog.component';
 import { EditDogComponent } from './edit-dog/edit-dog.component';
+import { ErrorInterceptorService } from './services/error-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,11 @@ import { EditDogComponent } from './edit-dog/edit-dog.component';
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
       multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptorService,
+      multi:true
     }
     ],
   bootstrap: [AppComponent]
