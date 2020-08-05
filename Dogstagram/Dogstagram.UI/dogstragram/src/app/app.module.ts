@@ -16,6 +16,8 @@ import { ListDogsComponent } from './list-dogs/list-dogs.component';
 import { DetailsDogComponent } from './details-dog/details-dog.component';
 import { EditDogComponent } from './edit-dog/edit-dog.component';
 import { ErrorInterceptorService } from './services/error-interceptor.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -31,11 +33,13 @@ import { ErrorInterceptorService } from './services/error-interceptor.service';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule    
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
-  providers: [AuthService, 
-    DogService, 
-    AuthGuardService, 
+  providers: [AuthService,
+    DogService,
+    AuthGuardService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
