@@ -26,12 +26,12 @@ export class ErrorInterceptorService implements HttpInterceptor{
           message = '400';
         }
         else{
-          message = 'Unhanded error';
+          message = 'Unhandled error';
         }
 
         this.toastrService.error(message);
         return throwError(err);
       })
-    );
+    )
   }
 }

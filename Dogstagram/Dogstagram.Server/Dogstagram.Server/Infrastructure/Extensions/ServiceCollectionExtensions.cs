@@ -4,6 +4,7 @@ using Dogstagram.Server.Data.Models;
 using Dogstagram.Server.Features.Dogs;
 using Dogstagram.Server.Features.Identity;
 using Dogstagram.Server.Infrastructure.Filters;
+using Dogstagram.Server.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -66,6 +67,7 @@ namespace Dogstagram.Server.Infrastructure.Extensions
         public static IServiceCollection AddApplicationServices(this IServiceCollection sercices)
             => sercices
                     .AddTransient<IIdentityService, IdentityService>()
+                    .AddScoped<ICurrentUserService, CurrentUserService>()
                     .AddTransient<IDogService, DogService>();
 
         public static IServiceCollection AddSwagger(this IServiceCollection services)

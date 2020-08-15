@@ -9,15 +9,15 @@ namespace Dogstagram.Server.Features.Identity
 {
     public class IdentityController : ApiController
     {
-        private readonly UserManager<User> userManger;
+        private readonly UserManager<User> user;
         private readonly AppSettings appSettings;
-        private readonly IIdentityService identityService;
+        private readonly IIdentityService identity;
 
         public IdentityController(UserManager<User> userManger, IOptions<AppSettings> appSettings, IIdentityService identityService)
         { 
-            this.userManger = userManger;
+            this.user = userManger;
             this.appSettings = appSettings.Value;
-            this.identityService = identityService;
+            this.identity = identityService;
         } 
 
         [HttpPost]
@@ -29,7 +29,7 @@ namespace Dogstagram.Server.Features.Identity
                 Email = model.Email,
                 UserName = model.Username
             };
-            var result = await this.userManger.CreateAsync(user, model.Password);
+            var result = await this.user.CreateAsync(user, model.Password);
 
             if (result.Succeeded)
             {
@@ -43,19 +43,19 @@ namespace Dogstagram.Server.Features.Identity
         [Route(nameof(Login))]
         public async Task<ActionResult<object>>Login(LoginRequestModel model)
         {
-            var user = await this.userManger.FindByNameAsync(model.Username);
+            var user = await this.user.FindByNameAsync(model.Username);
             if (user == null)
             {
                 return Unauthorized();
             }
             
-            var passwordValid = await this.userManger.CheckPasswordAsync(user, model.Password);
+            var passwordValid = await this.user.CheckPasswordAsync(user, model.Password);
             if (! passwordValid)
             {
                 return Unauthorized();
             }
 
-            var encryptedToken = this.identityService.GenerateJwtToken(user.UserName, user.Id, appSettings.Secret);
+            var encryptedToken = this.identity.GenerateJwtToken(user.UserName, user.Id, appSettings.Secret);
 
             return new LoginResponseModel
             {
