@@ -7,7 +7,7 @@ namespace Dogstagram.Server.Features.Profiles
 {
     public interface IProfileService
     {
-        Task<ProfileServiceModel> ByUser(string id);
+        Task<ProfileServiceModel> ByUser(string id, bool allInformation = false);
 
         Task<Result> Update(
             string userId, 
@@ -19,5 +19,7 @@ namespace Dogstagram.Server.Features.Profiles
             string biography, 
             Gender gender, 
             bool isPrivate);
+
+        Task<bool> IsPublic(string userId);
     }
 }

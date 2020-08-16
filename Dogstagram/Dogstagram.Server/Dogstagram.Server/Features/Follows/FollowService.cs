@@ -40,5 +40,12 @@ namespace Dogstagram.Server.Features.Follows
 
             return true;
         }
+
+        public async Task<bool> IsFollower(string userId, string followerId)
+            => await this.db
+                .Follows
+                .AnyAsync(f => f.UserId == userId &&
+                    f.FollowerId == followerId &&
+                    f.IsApprove);
     }
 }

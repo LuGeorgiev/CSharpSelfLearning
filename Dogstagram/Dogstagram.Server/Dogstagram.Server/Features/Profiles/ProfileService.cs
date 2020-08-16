@@ -17,18 +17,33 @@ namespace Dogstagram.Server.Features.Profiles
             this.db = db;
         }
 
-        public async Task<ProfileServiceModel> ByUser(string id)
-            => await this.db.Users
-            .Where(u => u.Id == id)
-            .Select(u => new ProfileServiceModel
-            {
-                Name = u.Profile.Name,
-                Biography = u.Profile.Biography,
-                Gender = u.Profile.Gender.ToString(),
-                ProfilePhotoUrl = u.Profile.ManinPhotoUrl,
-                WebSite = u.Profile.WebSite,
-                IsPrivate = u.Profile.IsPrivate
-            })
+        public async Task<ProfileServiceModel> ByUser(string userId, bool allInformation = false)
+            => await this.db
+                .Users
+                .Where(u => u.Id == userId)
+                .Select(u => allInformation                 
+                    ? new PublicProfileServiceModel
+                    {
+                        Name = u.Profile.Name,
+                        Biography = u.Profile.Biography,
+                        Gender = u.Profile.Gender.ToString(),
+                        ProfilePhotoUrl = u.Profile.ManinPhotoUrl,
+                        WebSite = u.Profile.WebSite,
+                        IsPrivate = u.Profile.IsPrivate
+                    }
+                    : new ProfileServiceModel
+                    {
+                        Name = u.Profile.Name,
+                        ProfilePhotoUrl = u.Profile.ManinPhotoUrl,
+                        IsPrivate = u.Profile.IsPrivate
+                    })                    
+                .FirstOrDefaultAsync();
+
+        public async Task<bool> IsPublic(string userId)
+         => ! await this.db
+            .Profiles
+            .Where(x => x.UserId == userId)
+            .Select(x => x.IsPrivate)
             .FirstOrDefaultAsync();
 
         public async Task<Result> Update(
