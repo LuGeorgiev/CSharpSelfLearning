@@ -2,7 +2,10 @@
 using Dogstagram.Server.Data;
 using Dogstagram.Server.Data.Models;
 using Dogstagram.Server.Features.Dogs;
+using Dogstagram.Server.Features.Follows;
 using Dogstagram.Server.Features.Identity;
+using Dogstagram.Server.Features.Profiles;
+using Dogstagram.Server.Features.Search;
 using Dogstagram.Server.Infrastructure.Filters;
 using Dogstagram.Server.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -40,7 +43,7 @@ namespace Dogstagram.Server.Infrastructure.Extensions
         }
 
         public static IServiceCollection AddJwtAuthentication(this IServiceCollection services, AppSettings appSettings)
-        {    
+        {
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);
 
             services.AddAuthentication(x =>
@@ -68,13 +71,16 @@ namespace Dogstagram.Server.Infrastructure.Extensions
             => sercices
                     .AddTransient<IIdentityService, IdentityService>()
                     .AddScoped<ICurrentUserService, CurrentUserService>()
-                    .AddTransient<IDogService, DogService>();
+                    .AddTransient<IProfileService, ProfileService>()
+                    .AddTransient<IDogService, DogService>()
+                    .AddTransient<ISearchService, SearchService>()
+                    .AddTransient<IFollowService, FollowService>();
 
         public static IServiceCollection AddSwagger(this IServiceCollection services)
-            =>  services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My Dogstagram", Version = "v1" });
-            });
+            => services.AddSwaggerGen(c =>
+           {
+               c.SwaggerDoc("v1", new OpenApiInfo { Title = "My Dogstagram", Version = "v1" });
+           });
 
         public static void AddApiControllers(this IServiceCollection services)
             => services.AddControllers(opt => opt.Filters.Add<ModelOrNotFoundActionFilter>());

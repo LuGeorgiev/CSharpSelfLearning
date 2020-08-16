@@ -1,6 +1,5 @@
 ﻿using Dogstagram.Server.Features.Dogs.Models;
 using Dogstagram.Server.Infrastructure.Services;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -9,7 +8,6 @@ using static Dogstagram.Server.Infrastructure.WebConstants;
 
 namespace Dogstagram.Server.Features.Dogs
 {
-    [Authorize]
     public class DogsController : ApiController
     {
         private readonly IDogService dogs;
@@ -54,14 +52,15 @@ namespace Dogstagram.Server.Features.Dogs
         }
 
         [HttpPut]
-        public async Task<ActionResult> Update(UpdateDogRequestModel model)
+        [Route(Id)]
+        public async Task<ActionResult> Update(string id, UpdateDogRequestModel model)
         {
             var userId = this.currentUser.GetId();
-            var updated = await this.dogs.Update(model.Id, model.Description, userId);
+            var updated = await this.dogs.Update(id, model.Description, userId);
 
-            if (! updated)
+            if (updated.Failure)
             {
-                return this.BadRequest();
+                return this.BadRequest(updated.Error);
             }
 
             return this.Ok();
@@ -72,11 +71,11 @@ namespace Dogstagram.Server.Features.Dogs
         public async Task<ActionResult> Delete(string id)
         {
             var userId = this.currentUser.GetId();
-            var isDeleted = await this.dogs.Delete(id, userId);
+            var result = await this.dogs.Delete(id, userId);
 
-            if (! isDeleted)
+            if (result.Failure)
             {
-                return this.BadRequest();
+                return this.BadRequest(result.Error);
             }
 
             return this.Ok();

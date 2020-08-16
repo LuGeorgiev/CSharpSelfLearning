@@ -23,8 +23,11 @@ namespace Dogstagram.Server.Data
 
         public DbSet<Dog> Dogs { get; set; }
 
+        public DbSet<Profile> Profiles { get; set; }
 
-        
+        public DbSet<Follow> Follows { get; set; }
+
+
         public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
         {
             this.ApplyAuditInformation();
@@ -44,6 +47,27 @@ namespace Dogstagram.Server.Data
                 .HasOne(x => x.User)
                 .WithMany(u =>u.Dogs)
                 .HasForeignKey(c =>c.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Entity<User>()
+                .HasOne(u => u.Profile)
+                .WithOne()
+                .HasForeignKey<Profile>( p => p.UserId);
+
+            builder
+                .Entity<Follow>()
+                .HasOne(f => f.User)
+                .WithMany()
+                .HasForeignKey(f => f.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Entity<Follow>()
+                .HasOne(f => f.Follower)
+                .WithMany()
+                .HasForeignKey(f => f.FollowerId)
+                .HasForeignKey(f => f.FollowerId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             base.OnModelCreating(builder);

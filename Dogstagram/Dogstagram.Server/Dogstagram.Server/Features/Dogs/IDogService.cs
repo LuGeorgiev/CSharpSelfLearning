@@ -1,4 +1,5 @@
 ﻿using Dogstagram.Server.Features.Dogs.Models;
+using Dogstagram.Server.Infrastructure.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -12,8 +13,8 @@ namespace Dogstagram.Server.Features.Dogs
 
         Task<DogDetailsServiceModel> DetailsByDogId(string dogId);
 
-        Task<bool> Update(string dogId, string description, string userId);
+        Task<Result> Update(string dogId, string description, string userId);
 
-        Task<bool> Delete(string id, string userId);
+        Task<Result> Delete(string id, string userId);
     }
 }

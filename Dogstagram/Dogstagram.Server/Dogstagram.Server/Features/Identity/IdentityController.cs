@@ -1,5 +1,6 @@
 ﻿using Dogstagram.Server.Data.Models;
 using Dogstagram.Server.Features.Identity.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -14,14 +15,16 @@ namespace Dogstagram.Server.Features.Identity
         private readonly IIdentityService identity;
 
         public IdentityController(UserManager<User> userManger, IOptions<AppSettings> appSettings, IIdentityService identityService)
-        { 
+        {
             this.user = userManger;
             this.appSettings = appSettings.Value;
             this.identity = identityService;
-        } 
+        }
+
 
         [HttpPost]
         [Route(nameof(Register))]
+        [AllowAnonymous]
         public async Task<ActionResult> Register(RegisterUserModel model)
         {
             var user = new User
@@ -31,26 +34,27 @@ namespace Dogstagram.Server.Features.Identity
             };
             var result = await this.user.CreateAsync(user, model.Password);
 
-            if (result.Succeeded)
+            if (!result.Succeeded)
             {
-                return this.Ok();
+                return BadRequest(result.Errors);
             }
 
-            return BadRequest(result.Errors);
+            return this.Ok();
         }
 
         [HttpPost]
         [Route(nameof(Login))]
-        public async Task<ActionResult<object>>Login(LoginRequestModel model)
+        [AllowAnonymous]
+        public async Task<ActionResult<object>> Login(LoginRequestModel model)
         {
             var user = await this.user.FindByNameAsync(model.Username);
             if (user == null)
             {
                 return Unauthorized();
             }
-            
+
             var passwordValid = await this.user.CheckPasswordAsync(user, model.Password);
-            if (! passwordValid)
+            if (!passwordValid)
             {
                 return Unauthorized();
             }
@@ -59,7 +63,7 @@ namespace Dogstagram.Server.Features.Identity
 
             return new LoginResponseModel
             {
-                Token = encryptedToken 
+                Token = encryptedToken
             };
         }
     }

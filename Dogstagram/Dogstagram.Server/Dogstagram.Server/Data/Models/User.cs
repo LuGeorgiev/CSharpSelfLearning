@@ -7,6 +7,8 @@ namespace Dogstagram.Server.Data.Models
 {
     public class User : IdentityUser, IEntity
     {
+        public Profile Profile { get; set; }
+
         public string CreatedBy { get; set; }
 
         public DateTime CreatedOn { get; set; }
@@ -16,5 +18,7 @@ namespace Dogstagram.Server.Data.Models
         public DateTime? ModifiedOn { get; set; }
 
         public IEnumerable<Dog> Dogs { get; set; } = new HashSet<Dog>();
+
+        //public IEnumerable<Follow> Followers { get; set; }
     }
 }

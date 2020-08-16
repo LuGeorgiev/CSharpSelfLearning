@@ -1,6 +1,7 @@
 ﻿using Dogstagram.Server.Data;
 using Dogstagram.Server.Data.Models;
 using Dogstagram.Server.Features.Dogs.Models;
+using Dogstagram.Server.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +37,7 @@ namespace Dogstagram.Server.Features.Dogs
         public async Task<IEnumerable<DogListingServiceModel>> ByUser(string userId)
             => await this.db.Dogs
                         .Where(x => x.UserId == userId)
+                        .OrderByDescending(d => d.CreatedOn)
                         .Select(x => new DogListingServiceModel
                         {
                             Id = x.Id,
@@ -56,13 +58,13 @@ namespace Dogstagram.Server.Features.Dogs
                          })
                         .FirstOrDefaultAsync();
 
-        public async Task<bool> Update(string dogId, string description, string userId)
+        public async Task<Result> Update(string dogId, string description, string userId)
         {
             var dog = await GetDogByIdAndUser(dogId, userId);
 
             if (dog == null)
             {
-                return false;
+                return "This dog does not belongs to you!";
             }
             dog.Description = description;
             await this.db.SaveChangesAsync();
@@ -70,13 +72,13 @@ namespace Dogstagram.Server.Features.Dogs
             return true;
         }
 
-        public async Task<bool> Delete(string id, string userId)
+        public async Task<Result> Delete(string id, string userId)
         {
             var dog = await GetDogByIdAndUser(id, userId);
 
             if (dog == null)
             {
-                return false;
+                return "You cannot delete this dog!";
             }
 
             this.db.Dogs.Remove(dog);
