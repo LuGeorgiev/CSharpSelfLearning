@@ -1,0 +1,10 @@
+pipeline {
+    agent any
+    stages {
+        stage('Veify Branch') {
+            stepes {
+                echo "$GIT_BRANCH"
+            }
+        }
+    }
+}
